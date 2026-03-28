@@ -5,22 +5,13 @@ import { getAuth, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, c
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 // ─── FIREBASE CONFIG ──────────────────────────────────────────────────────────
-// As credenciais são lidas das variáveis de ambiente definidas na Vercel.
-// Configure em: Vercel → seu projeto → Settings → Environment Variables
-// Variáveis necessárias:
-//   REACT_APP_FIREBASE_API_KEY
-//   REACT_APP_FIREBASE_AUTH_DOMAIN
-//   REACT_APP_FIREBASE_PROJECT_ID
-//   REACT_APP_FIREBASE_STORAGE_BUCKET
-//   REACT_APP_FIREBASE_MESSAGING_SENDER_ID
-//   REACT_APP_FIREBASE_APP_ID
 const firebaseConfig = {
-  apiKey:            process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain:        process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId:         process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket:     process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId:             process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDHpwBoEK4nxTKrOb6O2nnytQjzTXiqfHg",
+  authDomain: "gestaodeservicos-a90a7.firebaseapp.com",
+  projectId: "gestaodeservicos-a90a7",
+  storageBucket: "gestaodeservicos-a90a7.firebasestorage.app",
+  messagingSenderId: "304108622678",
+  appId: "1:304108622678:web:b0953035d29b0779a43cf7"
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
