@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar tarefa no Microsoft To Do — GSC</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f0f6ff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .card{background:#fff;border-radius:16px;box-shadow:0 4px 32px rgba(0,120,212,.12);padding:32px;max-width:520px;width:100%}
+    .logo{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+    .logo-icon{width:40px;height:40px;background:#0078d4;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+    .logo-text{font-size:15px;font-weight:700;color:#1e3a5f}
+    .logo-sub{font-size:12px;color:#6b7280;margin-top:1px}
+    h1{font-size:18px;font-weight:700;color:#1e293b;margin-bottom:6px}
+    .desc{font-size:13px;color:#6b7280;margin-bottom:20px;line-height:1.5}
+    .field{margin-bottom:14px}
+    .field-label{font-size:11px;font-weight:700;color:#0078d4;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+    .field-value{background:#f8faff;border:1px solid #bdd7f5;border-radius:8px;padding:10px 12px;font-size:13px;color:#1e293b;white-space:pre-wrap;word-break:break-word;line-height:1.5;position:relative}
+    .copy-btn{font-size:11px;font-weight:600;color:#0078d4;background:#e3f2fd;border:1px solid #90caf9;border-radius:6px;padding:3px 10px;cursor:pointer;white-space:nowrap;transition:all .15s}
+    .copy-btn:hover{background:#0078d4;color:#fff;border-color:#0078d4}
+    .copy-btn.copied{background:#22c55e;color:#fff;border-color:#22c55e}
+    .divider{height:1px;background:#e2e8f0;margin:20px 0}
+    .steps{margin-bottom:20px}
+    .step{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+    .step-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#0078d4;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+    .step-text{font-size:13px;color:#374151;line-height:1.4;padding-top:2px}
+    .btn-main{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#0078d4;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s}
+    .btn-main:hover{background:#106ebe}
+    .btn-main svg{width:20px;height:20px;fill:#fff}
+    .info{font-size:11px;color:#9ca3af;text-align:center;margin-top:12px;line-height:1.5}
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="logo-icon">☑</div>
+    <div>
+      <div class="logo-text">Microsoft To Do</div>
+      <div class="logo-sub">GSC — Gestão de Serviços Consultores</div>
+    </div>
+  </div>
+
+  <h1>Criar tarefa no To Do</h1>
+  <p class="desc">Copie o título e as notas abaixo, depois clique em <strong>Abrir Microsoft To Do</strong> para criar a tarefa.</p>
+
+  <div class="field">
+    <div class="field-label">
+      Título da tarefa
+      <button class="copy-btn" onclick="copiar('titulo')">Copiar</button>
+    </div>
+    <div class="field-value" id="titulo-val">—</div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">
+      Notas
+      <button class="copy-btn" onclick="copiar('nota')">Copiar</button>
+    </div>
+    <div class="field-value" id="nota-val">—</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Clique em <strong>Copiar</strong> no campo <em>Título da tarefa</em> acima</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Clique em <strong>Abrir Microsoft To Do</strong> — o app ou site será aberto</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Cole o título no campo <em>Adicionar uma tarefa</em> e cole as notas no campo <em>Anotações</em></div>
+    </div>
+  </div>
+
+  <a href="https://todo.microsoft.com/tasks/" target="_blank" class="btn-main" id="todo-link">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    Abrir Microsoft To Do
+  </a>
+  <p class="info">Se o app estiver instalado no seu computador, clique <span id="app-link-span" style="display:none"><a id="app-link" href="#" style="color:#0078d4;text-decoration:none;font-weight:600">aqui para abrir direto no app</a>.</span></p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const titulo = params.get('t') || '';
+  const nota   = params.get('n') || '';
+
+  document.getElementById('titulo-val').textContent = titulo || '(sem título)';
+  document.getElementById('nota-val').textContent   = nota   || '(sem notas)';
+
+  // Link ms-todo:// para quem tem o app instalado
+  if (titulo) {
+    const appHref = 'ms-todo://tasks/new?title=' + encodeURIComponent(titulo) + (nota ? '&note=' + encodeURIComponent(nota) : '');
+    const appLink = document.getElementById('app-link');
+    appLink.href = appHref;
+    document.getElementById('app-link-span').style.display = 'inline';
+  }
+
+  function copiar(campo) {
+    const texto = campo === 'titulo' ? titulo : nota;
+    const btn = document.querySelectorAll('.copy-btn')[campo === 'titulo' ? 0 : 1];
+    navigator.clipboard.writeText(texto).then(() => {
+      btn.textContent = '✓ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      // fallback para browsers mais antigos
+      const ta = document.createElement('textarea');
+      ta.value = texto;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = '✓ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
