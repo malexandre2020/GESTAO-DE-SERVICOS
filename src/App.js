@@ -3636,7 +3636,8 @@ function LoginScreen({ onLogin }) {
         {/* Logo */}
         <div style={{ textAlign:"center", marginBottom:"40px" }}>
           <div style={{ display:"inline-flex",alignItems:"center",justifyContent:"center",width:"68px",height:"68px",borderRadius:"20px",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",marginBottom:"22px",boxShadow:"0 0 48px #6c63ff55",animation:"float 5s ease-in-out infinite",fontSize:"30px" }}>◈</div>
-          <h1 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"26px", fontWeight:900, color:"#f0f0fa", margin:"0 0 8px", letterSpacing:"-0.7px" }}>Agenda de Consultores</h1>
+          <h1 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"26px", fontWeight:900, color:"#f0f0fa", margin:"0 0 4px", letterSpacing:"-0.7px" }}>GSC</h1>
+          <p style={{ color:"#a78bfa", fontSize:"14px", margin:"0 0 8px", fontWeight:600, letterSpacing:"0.3px" }}>Gestão de Serviços</p>
           <p style={{ color:"#3e3e55", fontSize:"13px", margin:0, fontWeight:500 }}>Acesse sua conta para continuar</p>
         </div>
 
