@@ -802,7 +802,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
       {/* ─────────── GRADE DE CONHECIMENTO CONSULTORES ─────────── */}
       {tab==="grade" && (
-        <GradeAdminView consultores={consultores} isDark={isDark}/>
+        <GerenciarGrade consultores={consultores} isDark={isDark}/>
       )}
 
       {/* ─────────── E-MAIL ─────────── */}
@@ -1174,6 +1174,302 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
 // ─────────────────────────────────────────────────────────────────────────────
 // GRADE ADMIN VIEW — busca por produto/módulo + visualização por consultor
 // ─────────────────────────────────────────────────────────────────────────────
+
+// ─── GERENCIAR GRADE DE CONHECIMENTO ────────────────────────────────────────
+function GerenciarGrade({ consultores, isDark }) {
+  const S = {
+    card:    { background:isDark?"#111118":"#ffffff", borderRadius:"14px", padding:"20px", border:"1px solid "+(isDark?"#1f1f2e":"#d8d8d8"), marginBottom:"20px" },
+    inp:     { padding:"8px 12px", borderRadius:"8px", border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"), background:isDark?"#0d0d14":"#ffffff", color:isDark?"#c8c8d8":"#1a1a1a", fontSize:"13px", width:"100%", boxSizing:"border-box", fontFamily:"inherit" },
+    lbl:     { fontSize:"11px", color:isDark?"#8888a8":"#555555", fontWeight:700, display:"block", marginBottom:"5px", textTransform:"uppercase", letterSpacing:"0.5px" },
+    btn:     { padding:"8px 18px", borderRadius:"8px", border:"none", cursor:"pointer", fontWeight:700, fontSize:"13px", fontFamily:"inherit" },
+    tag:     { display:"inline-flex", alignItems:"center", gap:"6px", padding:"4px 10px", borderRadius:"99px", fontSize:"12px", fontWeight:600, border:"1px solid "+(isDark?"#2a2a3a":"#d0d0d0"), background:isDark?"#1a1a28":"#f5f5f5", color:isDark?"#c8c8d8":"#333" },
+    section: { fontSize:"13px", fontWeight:700, color:isDark?"#a0a0c0":"#444444", marginBottom:"12px", paddingBottom:"8px", borderBottom:"1px solid "+(isDark?"#1f1f2e":"#e0e0e0") },
+  };
+
+  // ── State ──
+  const [produtos, setProdutos] = React.useState([]);
+  const [modulos, setModulos] = React.useState({});   // { [produto]: [{ id, label, desc, grupo }] }
+  const [loading, setLoading] = React.useState(true);
+  const [saving, setSaving] = React.useState(false);
+  const [toast, setToast] = React.useState("");
+
+  // Form produto
+  const [novoProd, setNovoProd] = React.useState("");
+  const [editProd, setEditProd] = React.useState(null); // { old, new }
+
+  // Form módulo
+  const [selProd, setSelProd] = React.useState("");
+  const [novoMod, setNovoMod] = React.useState({ id:"", label:"", desc:"", grupo:"" });
+  const [editMod, setEditMod] = React.useState(null); // { prod, idx, data }
+
+  // Consultor view
+  const [viewConsultor, setViewConsultor] = React.useState("");
+  const [viewTab, setViewTab] = React.useState("produtos"); // "produtos" | "modulos" | "consultor"
+
+  const showToast = (msg) => { setToast(msg); setTimeout(()=>setToast(""),2500); };
+
+  // ── Load from Firestore ──
+  React.useEffect(()=>{
+    async function load() {
+      setLoading(true);
+      try {
+        const snap = await getDoc(doc(db,"app_data","grade_config"));
+        if (snap.exists()) {
+          const v = snap.data().value || {};
+          setProdutos(v.produtos || [...TOTVS_PRODUTOS]);
+          setModulos(v.modulos || buildDefaultModulos());
+        } else {
+          // Init from hardcoded defaults
+          const p = [...TOTVS_PRODUTOS];
+          const m = buildDefaultModulos();
+          setProdutos(p);
+          setModulos(m);
+        }
+      } catch(e) { console.error(e); }
+      setLoading(false);
+    }
+    load();
+  },[]);
+
+  function buildDefaultModulos() {
+    const m = {};
+    TOTVS_PRODUTOS.forEach(p => {
+      m[p] = (TOTVS_MODULOS[p]||[]).map(mod => ({
+        id: mod.id, label: mod.label, desc: mod.desc||"",
+        grupo: (TOTVS_GRUPOS[p]||{})[mod.id] || "Geral"
+      }));
+    });
+    return m;
+  }
+
+  const saveConfig = async (newProdutos, newModulos) => {
+    setSaving(true);
+    try {
+      await setDoc(doc(db,"app_data","grade_config"),{ value:{ produtos: newProdutos, modulos: newModulos, atualizadoEm: new Date().toISOString() } });
+      showToast("✅ Salvo com sucesso!");
+    } catch(e) { showToast("❌ Erro ao salvar: "+e.message); }
+    setSaving(false);
+  };
+
+  // ── PRODUTO CRUD ──
+  const addProduto = () => {
+    const nome = novoProd.trim();
+    if (!nome || produtos.includes(nome)) { showToast("⚠️ Nome inválido ou já existe."); return; }
+    const np = [...produtos, nome];
+    const nm = { ...modulos, [nome]: [] };
+    setProdutos(np); setModulos(nm); setNovoProd("");
+    saveConfig(np, nm);
+  };
+
+  const renameProduto = () => {
+    if (!editProd || !editProd.new.trim()) return;
+    const np = produtos.map(p => p===editProd.old ? editProd.new : p);
+    const nm = {};
+    Object.keys(modulos).forEach(p => { nm[p===editProd.old ? editProd.new : p] = modulos[p]; });
+    setProdutos(np); setModulos(nm); setEditProd(null);
+    saveConfig(np, nm);
+  };
+
+  const removeProduto = (nome) => {
+    if (!window.confirm("Remover produto ""+nome+"" e todos os seus módulos?")) return;
+    const np = produtos.filter(p=>p!==nome);
+    const nm = { ...modulos }; delete nm[nome];
+    setProdutos(np); setModulos(nm);
+    if (selProd===nome) setSelProd(np[0]||"");
+    saveConfig(np, nm);
+  };
+
+  // ── MÓDULO CRUD ──
+  const addModulo = () => {
+    if (!selProd) { showToast("⚠️ Selecione um produto."); return; }
+    if (!novoMod.id.trim() || !novoMod.label.trim()) { showToast("⚠️ ID e Nome são obrigatórios."); return; }
+    const exists = (modulos[selProd]||[]).some(m=>m.id===novoMod.id.trim());
+    if (exists) { showToast("⚠️ ID já existe neste produto."); return; }
+    const nm = { ...modulos, [selProd]: [...(modulos[selProd]||[]), { id:novoMod.id.trim(), label:novoMod.label.trim(), desc:novoMod.desc.trim(), grupo:novoMod.grupo.trim()||"Geral" }] };
+    setModulos(nm); setNovoMod({ id:"", label:"", desc:"", grupo:"" });
+    saveConfig(produtos, nm);
+  };
+
+  const saveModulo = () => {
+    if (!editMod) return;
+    const lista = [...(modulos[editMod.prod]||[])];
+    lista[editMod.idx] = editMod.data;
+    const nm = { ...modulos, [editMod.prod]: lista };
+    setModulos(nm); setEditMod(null);
+    saveConfig(produtos, nm);
+  };
+
+  const removeModulo = (prod, idx) => {
+    if (!window.confirm("Remover este módulo?")) return;
+    const lista = (modulos[prod]||[]).filter((_,i)=>i!==idx);
+    const nm = { ...modulos, [prod]: lista };
+    setModulos(nm);
+    saveConfig(produtos, nm);
+  };
+
+  if (loading) return <div style={{padding:"40px",textAlign:"center",color:isDark?"#6e6e88":"#888"}}>Carregando...</div>;
+
+  const tabBtnStyle = (active) => ({ padding:"8px 18px", borderRadius:"8px", border:"none", cursor:"pointer", fontWeight:600, fontSize:"13px", fontFamily:"inherit", background:active?"#2c2c2c":isDark?"#1a1a28":"#e8e8e8", color:active?"#fff":isDark?"#8888a8":"#666666", transition:"all .15s" });
+
+  return (
+    <div>
+      <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:700, color:isDark?"#f0f0fa":"#111111", marginBottom:"8px" }}>🎓 Grade de Conhecimento</h2>
+      <p style={{ fontSize:"12px", color:isDark?"#6e6e88":"#888888", marginBottom:"20px" }}>Gerencie produtos e módulos da grade de conhecimento dos consultores</p>
+
+      {/* Sub-tabs */}
+      <div style={{ display:"flex", gap:"6px", marginBottom:"24px", flexWrap:"wrap" }}>
+        {[["produtos","📦 Produtos"],["modulos","📋 Módulos"],["consultor","👤 Ver por Consultor"]].map(([id,label])=>(
+          <button key={id} onClick={()=>setViewTab(id)} style={tabBtnStyle(viewTab===id)}>{label}</button>
+        ))}
+      </div>
+
+      {/* ── PRODUTOS ── */}
+      {viewTab==="produtos" && (
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
+          <div style={S.card}>
+            <div style={S.section}>{editProd ? "✏️ Renomear Produto" : "➕ Novo Produto"}</div>
+            {editProd ? (
+              <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
+                <div><label style={S.lbl}>Novo nome</label>
+                  <input value={editProd.new} onChange={e=>setEditProd(p=>({...p,new:e.target.value}))} style={S.inp} placeholder="Nome do produto"/>
+                </div>
+                <div style={{ display:"flex", gap:"8px" }}>
+                  <button onClick={renameProduto} style={{ ...S.btn, background:"#2c2c2c", color:"#fff" }}>💾 Salvar</button>
+                  <button onClick={()=>setEditProd(null)} style={{ ...S.btn, background:isDark?"#2a2a3a":"#e0e0e0", color:isDark?"#aaa":"#444" }}>Cancelar</button>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
+                <div><label style={S.lbl}>Nome do produto</label>
+                  <input value={novoProd} onChange={e=>setNovoProd(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addProduto()} style={S.inp} placeholder="Ex: SAP, Oracle, Linx..."/>
+                </div>
+                <button onClick={addProduto} style={{ ...S.btn, background:"#2a7a5a", color:"#fff" }}>✅ Adicionar Produto</button>
+              </div>
+            )}
+          </div>
+
+          <div style={S.card}>
+            <div style={S.section}>📦 Produtos Cadastrados ({produtos.length})</div>
+            <div style={{ display:"flex", flexDirection:"column", gap:"8px", maxHeight:"340px", overflowY:"auto" }}>
+              {produtos.map(p=>(
+                <div key={p} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"10px 12px", background:isDark?"#0d0d14":"#f7f7f7", borderRadius:"8px", border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
+                  <div>
+                    <span style={{ fontSize:"13px", fontWeight:600, color:isDark?"#e0e0e0":"#222222" }}>{p}</span>
+                    <span style={{ fontSize:"11px", color:isDark?"#6e6e88":"#888888", marginLeft:"8px" }}>{(modulos[p]||[]).length} módulo{(modulos[p]||[]).length!==1?"s":""}</span>
+                  </div>
+                  <div style={{ display:"flex", gap:"6px" }}>
+                    <button onClick={()=>setEditProd({old:p,new:p})} style={{ padding:"4px 10px", borderRadius:"6px", border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"), background:isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)", color:isDark?"#a0a0c0":"#2c2c2c", cursor:"pointer", fontSize:"12px", fontWeight:600 }}>✏️</button>
+                    <button onClick={()=>removeProduto(p)} style={{ padding:"4px 10px", borderRadius:"6px", border:"1px solid #ef444444", background:"#ef444422", color:"#ef4444", cursor:"pointer", fontSize:"12px", fontWeight:600 }}>🗑</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── MÓDULOS ── */}
+      {viewTab==="modulos" && (
+        <div>
+          {/* Selector de produto */}
+          <div style={{ display:"flex", alignItems:"center", gap:"12px", marginBottom:"20px", flexWrap:"wrap" }}>
+            <span style={{ fontSize:"12px", fontWeight:600, color:isDark?"#8888a8":"#555555" }}>Produto:</span>
+            <div style={{ display:"flex", gap:"6px", flexWrap:"wrap" }}>
+              {produtos.map(p=>(
+                <button key={p} onClick={()=>setSelProd(p)} style={{ padding:"6px 14px", borderRadius:"8px", border:"1px solid "+(selProd===p?"#2c2c2c":isDark?"#2a2a3a":"#cccccc"), background:selProd===p?"#2c2c2c":isDark?"#1a1a28":"#f0f0f0", color:selProd===p?"#fff":isDark?"#a0a0c0":"#555555", cursor:"pointer", fontSize:"12px", fontWeight:600 }}>{p}</button>
+              ))}
+            </div>
+          </div>
+
+          {selProd && (
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px" }}>
+              {/* Form novo/editar módulo */}
+              <div style={S.card}>
+                <div style={S.section}>{editMod ? "✏️ Editar Módulo" : "➕ Novo Módulo — "+selProd}</div>
+                <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
+                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px" }}>
+                    <div><label style={S.lbl}>ID / Código *</label>
+                      <input value={editMod?editMod.data.id:novoMod.id} onChange={e=>editMod?setEditMod(m=>({...m,data:{...m.data,id:e.target.value}})):setNovoMod(m=>({...m,id:e.target.value}))} style={S.inp} placeholder="Ex: SIGAFIN" disabled={!!editMod}/>
+                    </div>
+                    <div><label style={S.lbl}>Nome *</label>
+                      <input value={editMod?editMod.data.label:novoMod.label} onChange={e=>editMod?setEditMod(m=>({...m,data:{...m.data,label:e.target.value}})):setNovoMod(m=>({...m,label:e.target.value}))} style={S.inp} placeholder="Ex: Financeiro"/>
+                    </div>
+                  </div>
+                  <div><label style={S.lbl}>Grupo / Área</label>
+                    <input value={editMod?editMod.data.grupo:novoMod.grupo} onChange={e=>editMod?setEditMod(m=>({...m,data:{...m.data,grupo:e.target.value}})):setNovoMod(m=>({...m,grupo:e.target.value}))} style={S.inp} placeholder="Ex: Financeiro, RH, Logística..."/>
+                  </div>
+                  <div><label style={S.lbl}>Descrição</label>
+                    <input value={editMod?editMod.data.desc:novoMod.desc} onChange={e=>editMod?setEditMod(m=>({...m,data:{...m.data,desc:e.target.value}})):setNovoMod(m=>({...m,desc:e.target.value}))} style={S.inp} placeholder="Breve descrição do módulo"/>
+                  </div>
+                  <div style={{ display:"flex", gap:"8px" }}>
+                    {editMod ? (
+                      <>
+                        <button onClick={saveModulo} style={{ ...S.btn, background:"#2c2c2c", color:"#fff", flex:1 }}>💾 Salvar</button>
+                        <button onClick={()=>setEditMod(null)} style={{ ...S.btn, background:isDark?"#2a2a3a":"#e0e0e0", color:isDark?"#aaa":"#444" }}>Cancelar</button>
+                      </>
+                    ) : (
+                      <button onClick={addModulo} style={{ ...S.btn, background:"#2a7a5a", color:"#fff", width:"100%" }}>✅ Adicionar Módulo</button>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Lista de módulos */}
+              <div style={S.card}>
+                <div style={S.section}>📋 Módulos de {selProd} ({(modulos[selProd]||[]).length})</div>
+                <div style={{ display:"flex", flexDirection:"column", gap:"6px", maxHeight:"380px", overflowY:"auto" }}>
+                  {(modulos[selProd]||[]).length===0 && <div style={{ fontSize:"13px", color:isDark?"#6e6e88":"#888888", textAlign:"center", padding:"20px" }}>Nenhum módulo cadastrado</div>}
+                  {(modulos[selProd]||[]).map((m,i)=>(
+                    <div key={m.id} style={{ padding:"8px 12px", background:isDark?"#0d0d14":"#f7f7f7", borderRadius:"8px", border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
+                      <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:"8px" }}>
+                        <div style={{ minWidth:0, flex:1 }}>
+                          <div style={{ display:"flex", alignItems:"center", gap:"6px", flexWrap:"wrap" }}>
+                            <span style={{ fontSize:"12px", fontWeight:700, color:isDark?"#e0e0e0":"#222222" }}>{m.label}</span>
+                            <span style={{ fontSize:"10px", background:isDark?"#2a2a3a":"#e0e0e0", color:isDark?"#8888a8":"#666666", padding:"1px 7px", borderRadius:"99px" }}>{m.id}</span>
+                            {m.grupo && <span style={{ fontSize:"10px", background:isDark?"#1a1a28":"#eef0ff", color:isDark?"#7070a0":"#4444aa", padding:"1px 7px", borderRadius:"99px" }}>{m.grupo}</span>}
+                          </div>
+                          {m.desc && <div style={{ fontSize:"11px", color:isDark?"#6e6e88":"#888888", marginTop:"2px" }}>{m.desc}</div>}
+                        </div>
+                        <div style={{ display:"flex", gap:"4px", flexShrink:0 }}>
+                          <button onClick={()=>setEditMod({prod:selProd,idx:i,data:{...m}})} style={{ padding:"3px 8px", borderRadius:"6px", border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"), background:isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)", color:isDark?"#a0a0c0":"#2c2c2c", cursor:"pointer", fontSize:"11px" }}>✏️</button>
+                          <button onClick={()=>removeModulo(selProd,i)} style={{ padding:"3px 8px", borderRadius:"6px", border:"1px solid #ef444444", background:"#ef444422", color:"#ef4444", cursor:"pointer", fontSize:"11px" }}>🗑</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+          {!selProd && <div style={{ ...S.card, textAlign:"center", color:isDark?"#6e6e88":"#888888", padding:"40px" }}>Selecione um produto acima para gerenciar seus módulos</div>}
+        </div>
+      )}
+
+      {/* ── VER POR CONSULTOR ── */}
+      {viewTab==="consultor" && (
+        <div>
+          <div style={{ display:"flex", alignItems:"center", gap:"12px", marginBottom:"20px" }}>
+            <span style={{ fontSize:"12px", fontWeight:600, color:isDark?"#8888a8":"#555555" }}>Consultor:</span>
+            <select value={viewConsultor} onChange={e=>setViewConsultor(e.target.value)} style={{ ...S.inp, width:"auto", minWidth:"200px" }}>
+              <option value="">Selecione...</option>
+              {consultores.map(c=><option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          {viewConsultor && <GradeConhecimento consultorName={viewConsultor} userId={null} readOnly={true} isDark={isDark}/>}
+          {!viewConsultor && <div style={{ ...S.card, textAlign:"center", color:isDark?"#6e6e88":"#888888", padding:"40px" }}>Selecione um consultor para visualizar sua grade</div>}
+        </div>
+      )}
+
+      {/* Toast */}
+      {toast && (
+        <div style={{ position:"fixed", bottom:"24px", right:"24px", background:isDark?"#18181f":"#ffffff", color:isDark?"#f0f0fa":"#111111", padding:"12px 18px", borderRadius:"14px", fontWeight:600, fontSize:"13px", zIndex:9999, boxShadow:"0 8px 40px rgba(0,0,0,0.2)", border:"1px solid "+(isDark?"#2a2a3a":"#d0d0d0"), display:"flex", alignItems:"center", gap:"8px" }}>
+          {toast}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function GradeAdminView({ consultores, scheduleData, onAbrirAgenda, isDark }) {
   const [modo, setModo] = React.useState("consultor"); // "consultor" | "busca"
   const [gradeConsultor, setGradeConsultor] = React.useState(consultores[0]||"");
@@ -2064,9 +2360,25 @@ function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
   const [loading, setLoading] = React.useState(true);
   const [saving, setSaving] = React.useState(false);
   const [saved, setSaved] = React.useState(false);
-  const [activeProd, setActiveProd] = React.useState("Protheus");
+  const [activeProd, setActiveProd] = React.useState("");
   const [search, setSearch] = React.useState("");
   const [erro, setErro] = React.useState(null);
+  const [dynProdutos, setDynProdutos] = React.useState([...TOTVS_PRODUTOS]);
+  const [dynModulos, setDynModulos] = React.useState(TOTVS_MODULOS);
+
+  // Load dynamic config from Firestore (grade_config)
+  React.useEffect(()=>{
+    getDoc(doc(db,"app_data","grade_config")).then(snap=>{
+      if (snap.exists()) {
+        const v = snap.data().value || {};
+        if (v.produtos) setDynProdutos(v.produtos);
+        if (v.modulos) setDynModulos(v.modulos);
+        if (v.produtos && v.produtos.length > 0) setActiveProd(p => p || v.produtos[0]);
+      } else {
+        setActiveProd(p => p || TOTVS_PRODUTOS[0]);
+      }
+    }).catch(()=>{ setActiveProd(p => p || TOTVS_PRODUTOS[0]); });
+  },[]);
 
   // Gera key segura para Firestore (só letras, números e underscore, max 100 chars)
   const makeKey = (name) =>
@@ -2122,7 +2434,7 @@ function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
       if (n.has(prod)) {
         n.delete(prod);
         // Remove módulos deste produto da grade
-        const mods = (TOTVS_MODULOS[prod]||[]).map(m=>m.id);
+        const mods = (dynModulos[prod]||[]).map(m=>m.id);
         setGrade(g => { const ng = {...g}; mods.forEach(id => delete ng[id]); return ng; });
       } else {
         n.add(prod);
@@ -2138,7 +2450,7 @@ function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
     });
   };
 
-  const modulos = (TOTVS_MODULOS[activeProd]||[]).filter(m =>
+  const modulos = (dynModulos[activeProd]||[]).filter(m =>
     !search || m.label.toLowerCase().includes(search.toLowerCase()) || m.desc.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -2192,9 +2504,9 @@ function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
       <div style={{ marginBottom:"20px" }}>
         <div style={{ fontSize:"11px",color:"#888888",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"10px" }}>Produtos com conhecimento</div>
         <div style={{ display:"flex",gap:"10px",flexWrap:"wrap" }}>
-          {TOTVS_PRODUTOS.map(prod => {
+          {dynProdutos.map(prod => {
             const sel = produtosSel.has(prod);
-            const count = (TOTVS_MODULOS[prod]||[]).filter(m=>grade[m.id]).length;
+            const count = (dynModulos[prod]||[]).filter(m=>grade[m.id]).length;
             return (
               <div key={prod}
                 onClick={()=>!readOnly && toggleProduto(prod)}
@@ -2227,7 +2539,7 @@ function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
                 <button key={prod} onClick={()=>{ setActiveProd(prod); setSearch(""); }}
                   style={{ padding:"12px 20px",border:"none",borderBottom:"2px solid "+(activeProd===prod?"#2c2c2c":"transparent"),background:"transparent",color:activeProd===prod?(isDark?"#f0f0fa":"#555555"):(isDark?"#6e6e88":"#888888"),fontWeight:activeProd===prod?700:400,fontSize:"13px",cursor:"pointer",whiteSpace:"nowrap",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"8px",transition:"all .15s" }}>
                   {prod}
-                  {count>0&&<span style={{ fontSize:"10px",background:"#6c63ff33",color:"#2c2c2c",padding:"1px 7px",borderRadius:"99px",fontWeight:700 }}>{count}</span>}
+                  {count>0&&<span style={{ fontSize:"10px",background:isDark?"#2a2a3a":"#e8e8e8",color:isDark?"#a0a0c0":"#444444",padding:"1px 7px",borderRadius:"99px",fontWeight:700 }}>{count}</span>}
                 </button>
               );
             })}
@@ -2241,7 +2553,7 @@ function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
                 style={{ width:"100%",padding:"7px 10px 7px 30px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none",boxSizing:"border-box" }}/>
             </div>
             <div style={{ fontSize:"11px",color:"#888888" }}>
-              {(TOTVS_MODULOS[activeProd]||[]).filter(m=>grade[m.id]).length} / {(TOTVS_MODULOS[activeProd]||[]).length} módulos preenchidos
+              {(dynModulos[activeProd]||[]).filter(m=>grade[m.id]).length} / {(dynModulos[activeProd]||[]).length} módulos preenchidos
             </div>
           </div>
 
