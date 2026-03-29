@@ -429,7 +429,7 @@ function EmailConfigTab({ emailConfig, onSave }) {
       {/* LEFT – form */}
       <div style={{ display:"flex", flexDirection:"column", gap:"16px" }}>
         <div style={card}>
-          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>⚙️ Credenciais EmailJS</h3>
+          <h3 style={{ fontSize:"14px",fontWeight:700,color:isDark?"#f0f0fa":"#111111",marginTop:0,marginBottom:"16px" }}>⚙️ Credenciais EmailJS</h3>
           <p style={{ fontSize:"12px",color:"#666666",marginTop:0,marginBottom:"16px",lineHeight:"1.6" }}>
             Configure sua conta em{" "}
             <a href="https://www.emailjs.com" target="_blank" rel="noreferrer" style={{ color:"#2c2c2c" }}>emailjs.com</a>{" "}
@@ -535,7 +535,7 @@ function EmailConfigTab({ emailConfig, onSave }) {
 // ─────────────────────────────────────────────────────────────────────────────
 // MÓDULO DE CADASTROS (Consultores, Clientes, Projetos)
 // ─────────────────────────────────────────────────────────────────────────────
-function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemoveConsultor, onUpdateConsultor, onAddClient, onRemoveClient, onUpdateClient, onAddProject, onRemoveProject, onUpdateProject, emailConfig, onSaveEmailConfig }) {
+function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemoveConsultor, onUpdateConsultor, onAddClient, onRemoveClient, onUpdateClient, onAddProject, onRemoveProject, onUpdateProject, emailConfig, onSaveEmailConfig, isDark }) {
   const [tab, setTab] = useState("consultores");
 
   // ── Consultor form ──
@@ -550,13 +550,13 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
   const [newP, setNewP] = useState({ name:"", codigo:"", client:"", codigoCliente:"", description:"" });
   const [editP, setEditP] = useState(null);
 
-  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box" };
-  const lbl = { fontSize:"12px",color:"#666666",fontWeight:600,display:"block",marginBottom:"6px" };
-  const card = { background:"#f0f0f0",borderRadius:"12px",padding:"20px",border:"1px solid #cccccc" };
+  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"),background:isDark?"#0d0d14":"#ffffff",color:isDark?"#c8c8d8":"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box" };
+  const lbl = { fontSize:"12px",color:isDark?"#8888a8":"#555555",fontWeight:600,display:"block",marginBottom:"6px" };
+  const card = { background:isDark?"#111118":"#ffffff",borderRadius:"12px",padding:"20px",border:"1px solid "+(isDark?"#1f1f2e":"#d8d8d8"),boxShadow:isDark?"0 2px 12px rgba(0,0,0,0.4)":"0 2px 8px rgba(0,0,0,0.06)" };
   const btnGreen = { padding:"10px",borderRadius:"8px",border:"none",background:"#2a7a5a",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
-  const btnBlue  = { padding:"10px",borderRadius:"8px",border:"none",background:"#2c2c2c",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
+  const btnBlue  = { padding:"10px",borderRadius:"8px",border:"none",background:isDark?"#2a2a3a":"#2c2c2c",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
   const btnRed   = { background:"#ef444422",border:"1px solid #ef444444",color:"#ef4444",borderRadius:"6px",padding:"5px 10px",cursor:"pointer",fontSize:"12px",fontWeight:600 };
-  const btnEdit  = { background:"rgba(0,0,0,0.06)",border:"1px solid #3b82f644",color:"#2c2c2c",borderRadius:"6px",padding:"5px 10px",cursor:"pointer",fontSize:"12px",fontWeight:600 };
+  const btnEdit  = { background:isDark?"rgba(255,255,255,0.06)":"rgba(0,0,0,0.06)",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"),color:isDark?"#a0a0c0":"#2c2c2c",borderRadius:"6px",padding:"5px 10px",cursor:"pointer",fontSize:"12px",fontWeight:600 };
 
   const tabs = [["consultores","👥 Consultores"],["clientes","🏢 Clientes"],["projetos","📋 Projetos"],["grade","🎓 Grade de Conhecimento"],["email","📧 E-mail"]];
   const [gradeConsultor, setGradeConsultor] = React.useState(consultores[0]||"");
@@ -567,10 +567,10 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
   return (
     <div>
-      <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#111111",marginBottom:"20px" }}>🗂 Cadastros</h2>
+      <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:isDark?"#f0f0fa":"#111111",marginBottom:"20px" }}>🗂 Cadastros</h2>
       <div style={{ display:"flex",gap:"8px",marginBottom:"24px",flexWrap:"wrap" }}>
         {tabs.map(([id,label])=>(
-          <button key={id} onClick={()=>setTab(id)} style={{ padding:"8px 20px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"13px",background:tab===id?"#3b82f6":"#e8e8e8",color:tab===id?"#fff":"#666666" }}>{label}</button>
+          <button key={id} onClick={()=>setTab(id)} style={{ padding:"8px 20px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"13px",background:tab===id?"#3b82f6":isDark?"#1f1f2e":"#e8e8e8",color:tab===id?"#fff":isDark?"#a0a0c0":"#666666" }}>{label}</button>
         ))}
       </div>
 
@@ -601,7 +601,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
                 {editC ? (
                   <>
                     <button onClick={()=>{ if(!editC.name.trim()) return; onUpdateConsultor(editC._orig, editC); setEditC(null); }} style={btnBlue}>💾 Salvar alterações</button>
-                    <button onClick={()=>setEditC(null)} style={{ ...btnBlue,background:"#e0e0e0",width:"auto",padding:"10px 16px" }}>Cancelar</button>
+                    <button onClick={()=>setEditC(null)} style={{ ...btnBlue,background:isDark?"#2a2a3a":"#e0e0e0",color:isDark?"#a0a0c0":"#444444",width:"auto",padding:"10px 16px" }}>Cancelar</button>
                   </>
                 ) : (
                   <button onClick={()=>{ if(!newC.name.trim()) return; onAddConsultor(newC); setNewC({name:"",codigo:"",email:""}); }} style={btnGreen}>✅ Cadastrar Consultor</button>
@@ -617,16 +617,16 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
               {consultores.map((c,i)=>{
                 const meta = getMeta(c);
                 return (
-                  <div key={c} style={{ padding:"10px 12px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #e0e0e0" }}>
+                  <div key={c} style={{ padding:"10px 12px",background:isDark?"#0d0d14":"#f7f7f7",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
                     <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                       <div style={{ display:"flex",alignItems:"center",gap:"10px",minWidth:0 }}>
                         <div style={{ width:"32px",height:"32px",borderRadius:"50%",background:"hsl("+(i*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(c)}</div>
                         <div style={{ minWidth:0 }}>
-                          <div style={{ fontSize:"13px",color:"#222222",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
+                          <div style={{ fontSize:"13px",color:isDark?"#e0e0e0":"#222222",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
                             {c}
-                            {meta.codigo && <span style={{ fontSize:"10px",background:"#e0e0e0",color:"#666666",padding:"1px 6px",borderRadius:"10px" }}>{meta.codigo}</span>}
+                            {meta.codigo && <span style={{ fontSize:"10px",background:isDark?"#2a2a3a":"#e0e0e0",color:isDark?"#a0a0c0":"#666666",padding:"1px 6px",borderRadius:"10px" }}>{meta.codigo}</span>}
                           </div>
-                          {meta.email && <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>✉️ {meta.email}</div>}
+                          {meta.email && <div style={{ fontSize:"11px",color:isDark?"#6e6e88":"#666666",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>✉️ {meta.email}</div>}
                         </div>
                       </div>
                       <div style={{ display:"flex",gap:"6px",flexShrink:0,marginLeft:"8px" }}>
@@ -698,7 +698,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
                     <div style={{ display:"flex",alignItems:"center",gap:"10px",minWidth:0 }}>
                       <div style={{ width:"14px",height:"14px",borderRadius:"3px",background:c.color,flexShrink:0 }}/>
                       <div style={{ minWidth:0 }}>
-                        <div style={{ fontSize:"13px",color:"#222222",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
+                        <div style={{ fontSize:"13px",color:isDark?"#e0e0e0":"#222222",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
                           {c.name}
                           {c.codigo && <span style={{ fontSize:"10px",background:"#e0e0e0",color:"#666666",padding:"1px 6px",borderRadius:"10px" }}>{c.codigo}</span>}
                         </div>
@@ -775,7 +775,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
             <div style={{ display:"flex",flexDirection:"column",gap:"8px",maxHeight:"380px",overflowY:"auto" }}>
               {projects.length===0 && <p style={{ color:"#666666",fontSize:"13px",textAlign:"center",padding:"20px" }}>Nenhum projeto cadastrado ainda.</p>}
               {projects.map((p,i)=>(
-                <div key={i} style={{ padding:"10px 14px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #e0e0e0" }}>
+                <div key={i} style={{ padding:"10px 14px",background:isDark?"#0d0d14":"#f7f7f7",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
                   <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px" }}>
                     <div style={{ minWidth:0 }}>
                       <div style={{ fontSize:"13px",color:"#111111",fontWeight:700,display:"flex",alignItems:"center",gap:"6px" }}>
@@ -9044,6 +9044,7 @@ function Dashboard({ currentUser, onLogout }) {
               onAddClient={handleAddClient} onRemoveClient={handleRemoveClient} onUpdateClient={handleUpdateClient}
               onAddProject={handleAddProject} onRemoveProject={handleRemoveProject} onUpdateProject={handleUpdateProject}
               emailConfig={emailConfig} onSaveEmailConfig={handleSaveEmailConfig}
+              isDark={isDark}
             />
           </div>
         )}
