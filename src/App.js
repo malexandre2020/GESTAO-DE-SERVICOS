@@ -2745,7 +2745,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
 // ─────────────────────────────────────────────────────────────────────────────
 // CALENDÁRIO MENSAL
 // ─────────────────────────────────────────────────────────────────────────────
-function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientColors, onEdit, onDelete, onNewEntry, onOsClick, readonly }) {
+function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientColors, onEdit, onDelete, onNewEntry, onOsClick, readonly, isDark }) {
   const [calMes, setCalMes] = React.useState(selectedMonth !== "Todos" ? selectedMonth : MONTHS_ORDER[new Date().getMonth()]);
   const [calAno, setCalAno] = React.useState(new Date().getFullYear());
   const [popup, setPopup] = React.useState(null);
@@ -3014,27 +3014,27 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
         <table style={{ borderCollapse:"collapse",width:"100%",minWidth:(daysInMonth*34+160)+"px" }}>
           <thead>
             {/* Weekday row */}
-            <tr style={{ background:"#f0f0f0" }}>
-              <th style={{ padding:"8px 16px",textAlign:"left",fontSize:"11px",fontWeight:700,color:"#666666",position:"sticky",left:0,background:"#f0f0f0",zIndex:2,minWidth:"150px",borderBottom:"1px solid #0d0d14" }}>Consultor</th>
+            <tr style={{ background:isDark?"#28283a":"#f0f0f0" }}>
+              <th style={{ padding:"8px 16px",textAlign:"left",fontSize:"11px",fontWeight:700,color:isDark?"#aaaaaa":"#666666",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:2,minWidth:"150px",borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0") }}>Consultor</th>
               {allDays.map(d=>{
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 return (
-                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"68px",maxWidth:"68px",background:isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
+                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"68px",maxWidth:"68px",background:isDark?(isWeekend?"#242435":"#2e2e40"):(isWeekend?"#e8e8e8":"#f0f0f0"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8") }}>
                     {WEEKDAY_LABELS[dow]}
                   </th>
                 );
               })}
             </tr>
             {/* Day number row */}
-            <tr style={{ background:"#f0f0f0" }}>
-              <th style={{ padding:"4px 16px",position:"sticky",left:0,background:"#f0f0f0",zIndex:2,borderBottom:"1px solid #2a2a3a" }}></th>
+            <tr style={{ background:isDark?"#28283a":"#f0f0f0" }}>
+              <th style={{ padding:"4px 16px",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:2,borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0") }}></th>
               {allDays.map(d=>{
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#999999":"#555555",minWidth:"68px",background:ferNac?"#f59e0b18":isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
+                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#999999":"#555555",minWidth:"68px",background:ferNac?"#f59e0b18":isDark?(isWeekend?"#242435":"#2e2e40"):(isWeekend?"#e8e8e8":"#f0f0f0"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),position:"relative" }}>
                     {ferNac && <span style={{ position:"absolute",top:"1px",left:"50%",transform:"translateX(-50%)",fontSize:"6px",color:"#f59e0b" }}>★</span>}
                     {d}
                   </th>
@@ -3042,8 +3042,8 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
               })}
             </tr>
             {/* Feriados nacionais row */}
-            <tr style={{ background:"#f0f0f0" }}>
-              <th style={{ padding:"3px 16px",position:"sticky",left:0,background:"#f0f0f0",zIndex:2,borderBottom:"1px solid #2a2a3a",fontSize:"9px",color:"#f59e0b",fontWeight:700 }}>🇧🇷 Feriados</th>
+            <tr style={{ background:isDark?"#28283a":"#f0f0f0" }}>
+              <th style={{ padding:"3px 16px",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:2,borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0")",fontSize:"9px",color:"#f59e0b",fontWeight:700 }}>🇧🇷 Feriados</th>
               {allDays.map(d=>{
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
@@ -3056,8 +3056,8 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
           </thead>
           <tbody>
             {activeConsultores.map((name)=>(
-              <tr key={name} style={{ borderTop:"1px solid #18181f" }}>
-                <td style={{ padding:"6px 16px",fontSize:"12px",fontWeight:600,color:"#111111",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap",borderRight:"1px solid #cccccc" }}>
+              <tr key={name} style={{ borderTop:"1px solid "+(isDark?"#3a3a4e":"#e0e0e0") }}>
+                <td style={{ padding:"6px 16px",fontSize:"12px",fontWeight:600,color:isDark?"#dddddd":"#111111",position:"sticky",left:0,background:isDark?"#28283a":"#f7f7f7",zIndex:1,whiteSpace:"nowrap",borderRight:"1px solid "+(isDark?"#3a3a4e":"#cccccc") }}>
                   <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                     <div style={{ width:"22px",height:"22px",borderRadius:"50%",background:"hsl("+(consultores.indexOf(name)*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"8px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                     {name.trim().split(" ").slice(0,2).join(" ")}
@@ -3067,7 +3067,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const dow = getDayOfWeek(d);
                   const isWeekend = dow === 0 || dow === 6;
                   const entry = lookup[name]?.[d];
-                  const colBg = isWeekend ? "#ebebeb" : "#f7f7f7";
+                  const colBg = isDark ? (isWeekend ? "#2a2a35" : "#323240") : (isWeekend ? "#ebebeb" : "#f7f7f7");
 
                   const dayEntries = lookup[name]?.[d] || [];
                   if (dayEntries.length === 0) return (
@@ -7901,8 +7901,8 @@ function Dashboard({ currentUser, onLogout }) {
     success:         isDark ? "#2a7a5a"   : "#2a7a5a",
     warning:         isDark ? "#f5a623"   : "#b07800",
     danger:          isDark ? "#c0392b"   : "#c0392b",
-    headerBg:        isDark ? "#0c0c14"   : "#ffffff",
-    headerBorder:    isDark ? "#1a1a28"   : "#d0d0d0",
+    headerBg:        isDark ? "#0c0c14"   : "#d8d8d8",
+    headerBorder:    isDark ? "#1a1a28"   : "#b8b8b8",
     btnInactive:     isDark ? "#ffffff"   : "#ebebeb",
     btnInactiveText: isDark ? "#666666"   : "#555555",
     filterBg:        isDark ? "#ffffff"   : "#ffffff",
@@ -8891,7 +8891,7 @@ function Dashboard({ currentUser, onLogout }) {
                     ? selectedMonth!=="Todos"&&calendarData
                       ? <CalendarView consultant={selectedConsultor} month={selectedMonth} byDay={calendarData}/>
                       : <div style={{ textAlign:"center",padding:"60px 20px",color:T.text2,fontSize:"14px" }}><div style={{ fontSize:"36px",marginBottom:"12px" }}>📅</div>Selecione um mês específico para ver a visualização semanal</div>
-                    : <CalendarioMensal key={"grid-"+selectedConsultor} data={{[selectedConsultor]: scheduleData[selectedConsultor]||[]}} selectedMonth={selectedMonth} allMonths={allMonths} consultores={[selectedConsultor]} clientColors={clientColorMap} readonly={!canEdit} onEdit={canEdit?(entry)=>{setEditEntry(entry);setShowModal(true);}:null} onDelete={canEdit?handleDeleteEntry:null} onNewEntry={canEdit?({consultor,month,day})=>{ setEditEntry({consultor,month,day,prefill:true}); setShowModal(true); }:null} onOsClick={isConsultor?(e)=>setOsEntry(e):null}/>
+                    : <CalendarioMensal key={"grid-"+selectedConsultor} data={{[selectedConsultor]: scheduleData[selectedConsultor]||[]}} selectedMonth={selectedMonth} allMonths={allMonths} consultores={[selectedConsultor]} clientColors={clientColorMap} readonly={!canEdit} onEdit={canEdit?(entry)=>{setEditEntry(entry);setShowModal(true);}:null} onDelete={canEdit?handleDeleteEntry:null} onNewEntry={canEdit?({consultor,month,day})=>{ setEditEntry({consultor,month,day,prefill:true}); setShowModal(true); }:null} onOsClick={isConsultor?(e)=>setOsEntry(e):null} isDark={isDark}/>
                   : <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))",gap:"16px" }}>
                       {Object.entries(filteredData).filter(([,e])=>e.length>0).map(([name,entries])=>(
                         <ConsultorCard key={name} name={name} entries={entries} idx={consultores.indexOf(name)} onClick={()=>!isConsultor&&setSelectedConsultor(selectedConsultor===name?null:name)} selected={selectedConsultor===name}/>
@@ -8915,6 +8915,7 @@ function Dashboard({ currentUser, onLogout }) {
                       onDelete={canEdit?handleDeleteEntry:null}
                       onNewEntry={canEdit?({consultor,month,day})=>{ setEditEntry({consultor,month,day,prefill:true}); setShowModal(true); }:null}
                       onOsClick={isConsultor?(e)=>setOsEntry(e):null}
+                      isDark={isDark}
                     />
               )}
               {view==="semanal" && <WeeklyGlobalView key={"weekly"} weeklyData={weeklyData} offset={selectedWeekOffset} setOffset={setSelectedWeekOffset} clientColorMap={clientColorMap} canEdit={canEdit} onEdit={(entry,name)=>{setEditEntry({...entry,consultor:name});setShowModal(true);}} onNewEntry={canEdit?({consultor,month,day,year})=>{setEditEntry({consultor,month,day,year,prefill:true});setShowModal(true);}:null} onOsClick={isConsultor?(e)=>setOsEntry(e):null} theme={T}/>}
