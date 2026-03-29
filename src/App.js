@@ -3020,7 +3020,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 return (
-                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"34px",maxWidth:"34px",background:isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
+                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"68px",maxWidth:"68px",background:isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
                     {WEEKDAY_LABELS[dow]}
                   </th>
                 );
@@ -3034,7 +3034,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                 const isWeekend = dow === 0 || dow === 6;
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#999999":"#555555",minWidth:"34px",background:ferNac?"#f59e0b18":isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
+                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#999999":"#555555",minWidth:"68px",background:ferNac?"#f59e0b18":isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
                     {ferNac && <span style={{ position:"absolute",top:"1px",left:"50%",transform:"translateX(-50%)",fontSize:"6px",color:"#f59e0b" }}>★</span>}
                     {d}
                   </th>
@@ -3057,7 +3057,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
           <tbody>
             {activeConsultores.map((name)=>(
               <tr key={name} style={{ borderTop:"1px solid #18181f" }}>
-                <td style={{ padding:"6px 16px",fontSize:"12px",fontWeight:600,color:"#cccccc",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap",borderRight:"1px solid #2a2a3a" }}>
+                <td style={{ padding:"6px 16px",fontSize:"12px",fontWeight:600,color:"#111111",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap",borderRight:"1px solid #cccccc" }}>
                   <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                     <div style={{ width:"22px",height:"22px",borderRadius:"50%",background:"hsl("+(consultores.indexOf(name)*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"8px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                     {name.trim().split(" ").slice(0,2).join(" ")}
@@ -3073,7 +3073,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   if (dayEntries.length === 0) return (
                     <td key={d} style={{ padding:"3px",borderLeft:"1px solid #18181f",background:colBg }}
                       onClick={e=>{ if(readonly) return; e.stopPropagation(); onNewEntry({ consultor:name, month:calMes, day:d }); }}>
-                      <div style={{ width:"28px",height:"28px",borderRadius:"4px",background:"transparent",border:"1px dashed transparent",margin:"0 auto",cursor:readonly?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s" }}
+                      <div style={{ width:"56px",height:"28px",borderRadius:"4px",background:"transparent",border:"1px dashed transparent",margin:"0 auto",cursor:readonly?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s" }}
                         onMouseEnter={e=>{ if(readonly) return; e.currentTarget.style.background="#e6f4ee"; e.currentTarget.style.borderColor="#22c55e55"; e.currentTarget.querySelector("span").style.opacity="1"; }}
                         onMouseLeave={e=>{ if(readonly) return; e.currentTarget.style.background="transparent"; e.currentTarget.style.borderColor="transparent"; e.currentTarget.querySelector("span").style.opacity="0"; }}>
                         <span style={{ fontSize:"13px",opacity:0,transition:"opacity 0.15s",userSelect:"none",color:"#2a7a5a" }}>＋</span>
@@ -3083,7 +3083,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const allFiltered = dayEntries.every(e=>e.type==="client"&&clientFilterActive&&!selectedClients.has(normalizeClient(e.client)));
                   return (
                     <td key={d} style={{ padding:"2px",borderLeft:"1px solid #18181f",background:colBg,verticalAlign:"top" }} onClick={e=>{e.stopPropagation();if(!allFiltered)openPopup({name,day:d,entries:dayEntries},e.clientX,e.clientY);}}>
-                      <div style={{ width:"28px",minHeight:"28px",borderRadius:"4px",overflow:"hidden",margin:"0 auto",cursor:allFiltered?"default":"pointer",display:"flex",flexDirection:"column",gap:"1px" }}>
+                      <div style={{ width:"56px",minHeight:"28px",borderRadius:"4px",overflow:"hidden",margin:"0 auto",cursor:allFiltered?"default":"pointer",display:"flex",flexDirection:"column",gap:"1px" }}>
                         {dayEntries.slice(0,3).map((entry,ei)=>{
                           const color=getColor(entry);
                           const label=entry.type==="vacation"?"FÉR":entry.type==="holiday"?"FER":entry.type==="blocked"?"BLQ":entry.type==="reserved"?"RES":normalizeClient(entry.client).slice(0,3);
@@ -3332,7 +3332,7 @@ function CalendarView({ consultant, month, byDay }) {
         {wd.map((d,i)=>(
           <div key={d} style={{ textAlign:"center",fontSize:"11px",fontWeight:700,color:"#666666",padding:"8px 0",borderBottom:"1px solid #18181f" }}>
             <div>{d}</div>
-            <div style={{ fontSize:"10px",fontWeight:400,color:"#cccccc",marginTop:"2px" }}>{WD_FULL[i]}</div>
+            <div style={{ fontSize:"10px",fontWeight:400,color:"#888888",marginTop:"2px" }}>{WD_FULL[i]}</div>
           </div>
         ))}
         {currentWeek.map((day,i)=>{
@@ -3344,7 +3344,7 @@ function CalendarView({ consultant, month, byDay }) {
             <div key={day} onClick={e=>e.stopPropagation()} style={{ minHeight:"140px",borderRadius:"10px",background:ferNac?"#1a1408":isToday?"#16102a":"#e8e8e8",border:"1px solid "+(ferNac?"#f59e0b44":isToday?"#3b82f6":"#cccccc"),padding:"10px",display:"flex",flexDirection:"column",gap:"6px" }}>
               <div style={{ fontSize:"18px",fontWeight:700,color:ferNac?"#f59e0b":isToday?"#60a5fa":"#111111",marginBottom:"2px" }}>{day}</div>
               {ferNac && <div style={{ fontSize:"9px",fontWeight:700,color:"#f59e0b",background:"#f59e0b18",borderRadius:"4px",padding:"2px 6px",marginBottom:"2px" }}>🎉 {ferNac}</div>}
-              {entries.length===0 && <div style={{ fontSize:"11px",color:"#cccccc",fontStyle:"italic" }}>—</div>}
+              {entries.length===0 && <div style={{ fontSize:"11px",color:"#bbbbbb",fontStyle:"italic" }}>—</div>}
               {entries.map((entry,ei)=>{
                 const color = getColor(entry);
                 return (
@@ -3480,7 +3480,7 @@ function TimelineView({ data, months }) {
         <tbody>
           {consultores.map((name,idx)=>(
             <tr key={name} style={{ borderTop:"1px solid #18181f" }}>
-              <td style={{ padding:"10px 16px",fontSize:"13px",fontWeight:600,color:"#cccccc",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap" }}>
+              <td style={{ padding:"10px 16px",fontSize:"13px",fontWeight:600,color:"#111111",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap" }}>
                 <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                   <div style={{ width:"28px",height:"28px",borderRadius:"50%",background:"hsl("+(idx*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                   {name.trim().split(" ").slice(0,2).join(" ")}
@@ -3538,7 +3538,7 @@ function StatsView({ stats }) {
             return (
               <div key={c.name}>
                 <div style={{ display:"flex",justifyContent:"space-between",marginBottom:"3px" }}>
-                  <span style={{ fontSize:"12px",color:"#cccccc" }}>{c.name.trim().split(" ").slice(0,2).join(" ")}</span>
+                  <span style={{ fontSize:"12px",color:"#111111" }}>{c.name.trim().split(" ").slice(0,2).join(" ")}</span>
                   <div style={{ display:"flex",gap:"8px" }}>
                     <span style={{ fontSize:"12px",color:"#666666" }}>{c.working}d</span>
                     {c.vacation>0&&<span style={{ fontSize:"12px",color:"#2a7a5a" }}>🏖 {c.vacation}d</span>}
