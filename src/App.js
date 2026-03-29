@@ -693,7 +693,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
             <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>🏢 Clientes Cadastrados ({clients.length})</h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"8px",maxHeight:"380px",overflowY:"auto" }}>
               {clients.map(c=>(
-                <div key={c.name} style={{ padding:"10px 12px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #e0e0e0" }}>
+                <div key={c.name} style={{ padding:"10px 12px",background:isDark?"#0d0d14":"#f7f7f7",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
                   <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                     <div style={{ display:"flex",alignItems:"center",gap:"10px",minWidth:0 }}>
                       <div style={{ width:"14px",height:"14px",borderRadius:"3px",background:c.color,flexShrink:0 }}/>
@@ -802,7 +802,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
       {/* ─────────── GRADE DE CONHECIMENTO CONSULTORES ─────────── */}
       {tab==="grade" && (
-        <GradeAdminView consultores={consultores}/>
+        <GradeAdminView consultores={consultores} isDark={isDark}/>
       )}
 
       {/* ─────────── E-MAIL ─────────── */}
@@ -1174,7 +1174,7 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
 // ─────────────────────────────────────────────────────────────────────────────
 // GRADE ADMIN VIEW — busca por produto/módulo + visualização por consultor
 // ─────────────────────────────────────────────────────────────────────────────
-function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
+function GradeAdminView({ consultores, scheduleData, onAbrirAgenda, isDark }) {
   const [modo, setModo] = React.useState("consultor"); // "consultor" | "busca"
   const [gradeConsultor, setGradeConsultor] = React.useState(consultores[0]||"");
 
@@ -1254,7 +1254,7 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
   const nivelInfo = (id) => NIVEIS.find(n => n.id === id) || { label: id, color: "#666666", bg: "#6e6e8822" };
   const nivelOrder = { especialista: 0, senior: 1, pleno: 2, junior: 3 };
 
-  const inp  = { padding:"8px 14px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",fontFamily:"inherit",cursor:"pointer",outline:"none" };
+  const inp  = { padding:"8px 14px",borderRadius:"10px",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"),background:isDark?"#0d0d14":"#f7f7f7",color:isDark?"#c8c8d8":"#222222",fontSize:"13px",fontFamily:"inherit",cursor:"pointer",outline:"none" };
 
   const totalConsultores = resultados ? new Set(
     Object.values(resultados).flatMap(mods => Object.values(mods).flatMap(m => m.consultores.map(c => c.nome)))
@@ -1266,12 +1266,12 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
       {/* Header + toggle modo */}
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:isDark?"#f0f0fa":"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>
             🎓 Grade de Conhecimento — Consultores
           </h2>
           <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>Visualize a grade individual ou pesquise por produto/módulo</p>
         </div>
-        <div style={{ display:"flex",gap:"2px",background:"#f7f7f7",borderRadius:"10px",padding:"3px",border:"1px solid #cccccc" }}>
+        <div style={{ display:"flex",gap:"2px",background:isDark?"#1a1a28":"#f7f7f7",borderRadius:"10px",padding:"3px",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc") }}>
           <button onClick={()=>setModo("consultor")} style={{ padding:"7px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:modo==="consultor"?"#2c2c2c":"transparent",color:modo==="consultor"?"#fff":"#666666" }}>
             👤 Por consultor
           </button>
@@ -1290,7 +1290,7 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
               {consultores.map(c=><option key={c} value={c}>{c}</option>)}
             </select>
           </div>
-          <GradeConhecimento consultorName={gradeConsultor} userId={null} readOnly={true}/>
+          <GradeConhecimento consultorName={gradeConsultor} userId={null} readOnly={true} isDark={isDark}/>
         </div>
       )}
 
@@ -2058,7 +2058,7 @@ const NIVEIS = [
   { id:"junior",       label:"Júnior",       color:"#666666", bg:"#6e6e8822" },
 ];
 
-function GradeConhecimento({ consultorName, userId, readOnly }) {
+function GradeConhecimento({ consultorName, userId, readOnly, isDark }) {
   const [grade, setGrade] = React.useState({});
   const [produtosSel, setProdutosSel] = React.useState(new Set());
   const [loading, setLoading] = React.useState(true);
@@ -2198,10 +2198,10 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
             return (
               <div key={prod}
                 onClick={()=>!readOnly && toggleProduto(prod)}
-                style={{ padding:"10px 18px",borderRadius:"12px",border:"1px solid "+(sel?"#2c2c2c":"#cccccc"),background:sel?"rgba(0,0,0,0.05)":"#ffffff",cursor:readOnly?"default":"pointer",transition:"all .2s",display:"flex",alignItems:"center",gap:"10px" }}>
+                style={{ padding:"10px 18px",borderRadius:"12px",border:"1px solid "+(sel?"#2c2c2c":"#cccccc"),background:sel?(isDark?"rgba(255,255,255,0.08)":"rgba(0,0,0,0.05)"):isDark?"#18181f":"#ffffff",cursor:readOnly?"default":"pointer",transition:"all .2s",display:"flex",alignItems:"center",gap:"10px" }}>
                 <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:sel?"#2c2c2c":"#cccccc",transition:"background .2s" }}/>
                 <div>
-                  <div style={{ fontSize:"13px",fontWeight:700,color:sel?"#555555":"#666666" }}>{prod}</div>
+                  <div style={{ fontSize:"13px",fontWeight:700,color:sel?(isDark?"#f0f0fa":"#555555"):(isDark?"#8888a8":"#666666") }}>{prod}</div>
                   {count>0 && <div style={{ fontSize:"10px",color:"#2c2c2c",marginTop:"1px" }}>{count} módulo{count>1?"s":""}</div>}
                 </div>
               </div>
@@ -2211,21 +2211,21 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
       </div>
 
       {produtosSel.size === 0 && (
-        <div style={{ textAlign:"center",padding:"48px 20px",background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8" }}>
+        <div style={{ textAlign:"center",padding:"48px 20px",background:isDark?"#111118":"#ffffff",borderRadius:"16px",border:"1px solid "+(isDark?"#1f1f2e":"#d8d8d8") }}>
           <div style={{ fontSize:"40px",marginBottom:"12px" }}>🎯</div>
           <div style={{ fontSize:"14px",color:"#888888" }}>Selecione os produtos TOTVS que você conhece para definir seus módulos</div>
         </div>
       )}
 
       {produtosSel.size > 0 && (
-        <div style={{ background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8",overflow:"hidden" }}>
+        <div style={{ background:isDark?"#111118":"#ffffff",borderRadius:"16px",border:"1px solid "+(isDark?"#1f1f2e":"#d8d8d8"),overflow:"hidden" }}>
           {/* Tabs de produto */}
-          <div style={{ display:"flex",borderBottom:"1px solid #1f1f2e",background:"#f7f7f7",overflowX:"auto" }}>
+          <div style={{ display:"flex",borderBottom:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0"),background:isDark?"#18181f":"#f7f7f7",overflowX:"auto" }}>
             {[...produtosSel].map(prod => {
               const count = (TOTVS_MODULOS[prod]||[]).filter(m=>grade[m.id]).length;
               return (
                 <button key={prod} onClick={()=>{ setActiveProd(prod); setSearch(""); }}
-                  style={{ padding:"12px 20px",border:"none",borderBottom:"2px solid "+(activeProd===prod?"#2c2c2c":"transparent"),background:"transparent",color:activeProd===prod?"#555555":"#888888",fontWeight:activeProd===prod?700:400,fontSize:"13px",cursor:"pointer",whiteSpace:"nowrap",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"8px",transition:"all .15s" }}>
+                  style={{ padding:"12px 20px",border:"none",borderBottom:"2px solid "+(activeProd===prod?"#2c2c2c":"transparent"),background:"transparent",color:activeProd===prod?(isDark?"#f0f0fa":"#555555"):(isDark?"#6e6e88":"#888888"),fontWeight:activeProd===prod?700:400,fontSize:"13px",cursor:"pointer",whiteSpace:"nowrap",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"8px",transition:"all .15s" }}>
                   {prod}
                   {count>0&&<span style={{ fontSize:"10px",background:"#6c63ff33",color:"#2c2c2c",padding:"1px 7px",borderRadius:"99px",fontWeight:700 }}>{count}</span>}
                 </button>
@@ -8948,8 +8948,8 @@ function Dashboard({ currentUser, onLogout }) {
         {activeModule==="grade" && (
           <div style={{ padding:"28px 32px",flex:1 }}>
             {isConsultor
-              ? <GradeConhecimento consultorName={currentUser.consultorName||currentUser.nome||currentUser.username||""} userId={currentUser.uid} readOnly={false}/>
-              : <GradeAdminView consultores={consultores} scheduleData={scheduleData}
+              ? <GradeConhecimento consultorName={currentUser.consultorName||currentUser.nome||currentUser.username||""} userId={currentUser.uid} readOnly={false} isDark={isDark}/>
+              : <GradeAdminView consultores={consultores} scheduleData={scheduleData} isDark={isDark}
                   onAbrirAgenda={(consultorNome, mes) => {
                     setSelectedConsultor(consultorNome);
                     setSelectedMonth(mes);
