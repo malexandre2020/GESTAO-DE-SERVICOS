@@ -2547,10 +2547,10 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                 const isToday = d.getTime()===today.getTime();
                 const isWknd = i>=5;
                 return (
-                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isDarkT?(isWknd?"#242435":"#28283a"):(isWknd?"#e8e8e8":"#f7f7f7"),borderBottom:"2px solid "+(isToday?"#2c2c2c":isDarkT?"#3a3a4e":"#cccccc"),color:isToday?(isDarkT?"#eeeeee":"#2c2c2c"):isWknd?"#aaaaaa":isDarkT?"#cccccc":"#555555",minWidth:"90px" }}>
+                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isDarkT?(isWknd?"#242435":"#28283a"):(isWknd?"#e8e8e8":"#f7f7f7"),borderBottom:"2px solid "+(isToday?"#2c2c2c":isDarkT?"#3a3a4e":"#cccccc"),color:isToday?(isDarkT?"#ffffff":"#2c2c2c"):isWknd?"#aaaaaa":isDarkT?"#e0e0e0":"#555555",minWidth:"90px" }}>
                     <div style={{ letterSpacing:"0.5px" }}>{WD_SHORT[i]}</div>
-                    <div style={{ fontSize:"18px",fontWeight:800,color:isToday?"#111111":isWknd?"#aaaaaa":"#111111",marginTop:"2px" }}>{d.getDate()}</div>
-                    <div style={{ fontSize:"10px",color:isWknd?"#bbbbbb":"#888888",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
+                    <div style={{ fontSize:"18px",fontWeight:800,color:isToday?(isDarkT?"#ffffff":"#111111"):isWknd?"#aaaaaa":isDarkT?"#ffffff":"#111111",marginTop:"2px" }}>{d.getDate()}</div>
+                    <div style={{ fontSize:"10px",color:isWknd?(isDarkT?"#888888":"#bbbbbb"):isDarkT?"#aaaaaa":"#888888",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
                   </th>
                 );
               })}
