@@ -1206,7 +1206,85 @@ function GerenciarGrade({ consultores, isDark }) {
   const [viewConsultor, setViewConsultor] = React.useState("");
   const [viewTab, setViewTab] = React.useState("produtos"); // "produtos" | "modulos" | "consultor"
 
-  const showToast = (msg) => { setToast(msg); setTimeout(()=>setToast(""),2500); };
+  const showToast = (msg) => { setToast(msg); setTimeout(()=>setToast(""),3000); };
+  const [importing, setImporting] = React.useState(false);
+  const importRef = React.useRef(null);
+
+  // ── Import from Excel ──
+  const handleImport = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImporting(true);
+    try {
+      // Dynamically load SheetJS
+      if (!window.XLSX) {
+        await new Promise((res, rej) => {
+          const s = document.createElement("script");
+          s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+          s.onload = res; s.onerror = rej;
+          document.head.appendChild(s);
+        });
+      }
+      const buf = await file.arrayBuffer();
+      const wb = window.XLSX.read(buf, { type:"array" });
+
+      // Parse aba Produtos
+      let newProdutos = [...produtos];
+      const wsProd = wb.Sheets["Produtos"];
+      if (wsProd) {
+        const rows = window.XLSX.utils.sheet_to_json(wsProd, { header:1, defval:"" });
+        // skip rows 0,1,2 (title, subtitle, header)
+        for (let i = 3; i < rows.length; i++) {
+          const [nome,,ativo] = rows[i];
+          if (!nome || String(nome).trim()==="") continue;
+          const n = String(nome).trim();
+          const a = String(ativo||"sim").trim().toLowerCase();
+          if (a !== "não" && a !== "nao" && !newProdutos.includes(n)) {
+            newProdutos.push(n);
+          }
+        }
+      }
+
+      // Parse aba Módulos
+      const wsMod = wb.Sheets["Módulos"];
+      if (!wsMod) { showToast("⚠️ Aba 'Módulos' não encontrada no arquivo."); setImporting(false); return; }
+      const rows = window.XLSX.utils.sheet_to_json(wsMod, { header:1, defval:"" });
+      const newModulos = JSON.parse(JSON.stringify(modulos));
+      let adicionados = 0, ignorados = 0;
+
+      for (let i = 3; i < rows.length; i++) {
+        const [produto, grupo, id, label, desc, nivel] = rows[i];
+        if (!produto || !id || !label) continue;
+        const p = String(produto).trim();
+        const modId = String(id).trim();
+        const modLabel = String(label).trim();
+        const modGrupo = String(grupo||"Geral").trim();
+        const modDesc = String(desc||"").trim();
+        if (!p || !modId || !modLabel) continue;
+        if (!newProdutos.includes(p)) newProdutos.push(p);
+        if (!newModulos[p]) newModulos[p] = [];
+        const existe = newModulos[p].find(m => m.id === modId);
+        if (existe) {
+          // Atualiza
+          Object.assign(existe, { label:modLabel, grupo:modGrupo, desc:modDesc });
+          ignorados++;
+        } else {
+          newModulos[p].push({ id:modId, label:modLabel, desc:modDesc, grupo:modGrupo });
+          adicionados++;
+        }
+      }
+
+      setProdutos(newProdutos);
+      setModulos(newModulos);
+      await saveConfig(newProdutos, newModulos);
+      showToast(`✅ Importado! ${adicionados} módulo(s) adicionado(s), ${ignorados} atualizado(s).`);
+    } catch(err) {
+      console.error(err);
+      showToast("❌ Erro ao importar: " + err.message);
+    }
+    setImporting(false);
+    e.target.value = "";
+  };
 
   // ── Load from Firestore ──
   React.useEffect(()=>{
@@ -1314,13 +1392,39 @@ function GerenciarGrade({ consultores, isDark }) {
   return (
     <div>
       <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:700, color:isDark?"#f0f0fa":"#111111", marginBottom:"8px" }}>🎓 Grade de Conhecimento</h2>
-      <p style={{ fontSize:"12px", color:isDark?"#6e6e88":"#888888", marginBottom:"20px" }}>Gerencie produtos e módulos da grade de conhecimento dos consultores</p>
+      <p style={{ fontSize:"12px", color:isDark?"#6e6e88":"#888888", marginBottom:"16px" }}>Gerencie produtos e módulos da grade de conhecimento dos consultores</p>
 
-      {/* Sub-tabs */}
-      <div style={{ display:"flex", gap:"6px", marginBottom:"24px", flexWrap:"wrap" }}>
-        {[["produtos","📦 Produtos"],["modulos","📋 Módulos"],["consultor","👤 Ver por Consultor"]].map(([id,label])=>(
-          <button key={id} onClick={()=>setViewTab(id)} style={tabBtnStyle(viewTab===id)}>{label}</button>
-        ))}
+      {/* Sub-tabs + Ações */}
+      <div style={{ display:"flex", gap:"6px", marginBottom:"24px", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between" }}>
+        <div style={{ display:"flex", gap:"6px", flexWrap:"wrap" }}>
+          {[["produtos","📦 Produtos"],["modulos","📋 Módulos"],["consultor","👤 Ver por Consultor"]].map(([id,label])=>(
+            <button key={id} onClick={()=>setViewTab(id)} style={tabBtnStyle(viewTab===id)}>{label}</button>
+          ))}
+        </div>
+        <div style={{ display:"flex", gap:"8px", alignItems:"center", flexWrap:"wrap" }}>
+          {/* Baixar template */}
+          <a
+            href="https://docs.google.com/spreadsheets/d/template"
+            download
+            onClick={e=>{ e.preventDefault(); showToast("⬇️ Faça o download pelo botão disponibilizado pelo administrador."); }}
+            style={{ padding:"7px 14px", borderRadius:"8px", border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"), background:isDark?"#1a1a28":"#f0f0f0", color:isDark?"#a0a0c0":"#555555", fontSize:"12px", fontWeight:600, cursor:"pointer", textDecoration:"none", display:"flex", alignItems:"center", gap:"6px" }}>
+            📥 Baixar Template Excel
+          </a>
+          {/* Importar Excel */}
+          <input
+            ref={importRef}
+            type="file"
+            accept=".xlsx,.xls"
+            style={{ display:"none" }}
+            onChange={handleImport}
+          />
+          <button
+            onClick={()=>importRef.current && importRef.current.click()}
+            disabled={importing}
+            style={{ padding:"7px 14px", borderRadius:"8px", border:"none", background:importing?"#888888":"#2a7a5a", color:"#fff", fontSize:"12px", fontWeight:700, cursor:importing?"not-allowed":"pointer", display:"flex", alignItems:"center", gap:"6px" }}>
+            {importing ? "⏳ Importando..." : "📤 Importar Excel"}
+          </button>
+        </div>
       </div>
 
       {/* ── PRODUTOS ── */}
