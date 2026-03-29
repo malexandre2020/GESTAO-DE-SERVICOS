@@ -3083,24 +3083,24 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const allFiltered = dayEntries.every(e=>e.type==="client"&&clientFilterActive&&!selectedClients.has(normalizeClient(e.client)));
                   return (
                     <td key={d} style={{ padding:"2px",borderLeft:"1px solid #18181f",background:colBg,verticalAlign:"top" }} onClick={e=>{e.stopPropagation();if(!allFiltered)openPopup({name,day:d,entries:dayEntries},e.clientX,e.clientY);}}>
-                      <div style={{ width:"56px",minHeight:"28px",borderRadius:"4px",overflow:"hidden",margin:"0 auto",cursor:allFiltered?"default":"pointer",display:"flex",flexDirection:"column",gap:"1px" }}>
+                      <div style={{ width:"68px",minHeight:"28px",borderRadius:"6px",overflow:"hidden",margin:"0 auto",cursor:allFiltered?"default":"pointer",display:"flex",flexDirection:"column",gap:"2px" }}>
                         {dayEntries.slice(0,3).map((entry,ei)=>{
                           const color=getColor(entry);
-                          const label=entry.type==="vacation"?"FÉR":entry.type==="holiday"?"FER":entry.type==="blocked"?"BLQ":entry.type==="reserved"?"RES":normalizeClient(entry.client).slice(0,3);
+                          const label=entry.type==="vacation"?"Férias":entry.type==="holiday"?"Feriado":entry.type==="blocked"?"Bloqueado":entry.type==="reserved"?"Reservado":(entry.client||"");
                           const filtered=entry.type==="client"&&clientFilterActive&&!selectedClients.has(normalizeClient(entry.client));
                           const osAprov = entry.osStatus==="aprovada" && !!entry.osAvaliadoPor;
                           const temOS = !!entry.osNumero;
                           return (
                             <div key={entry.id||ei}
                               title={temOS ? `${entry.client} · ${entry.osNumero}${osAprov?" ✅ Aprovada":""}` : entry.client}
-                              style={{ flex:1,background:filtered?"#e8e8e8":color,display:"flex",alignItems:"center",justifyContent:"center",minHeight:"8px",opacity:filtered?0.2:osAprov?0.45:1,position:"relative" }}>
-                              {!filtered&&dayEntries.length<=2&&<span style={{ fontSize:"6px",fontWeight:800,color:"#fff",letterSpacing:"-0.5px" }}>{label}</span>}
-                              {temOS&&!filtered&&<span style={{ position:"absolute",top:0,left:0,width:"5px",height:"5px",borderRadius:"50%",background:osAprov?"#2a7a5a":"#fff",opacity:0.9 }}/>}
-                              {osAprov&&!filtered&&<span style={{ position:"absolute",bottom:0,right:0,fontSize:"5px",lineHeight:1 }}>🔒</span>}
+                              style={{ flex:1,background:filtered?"#e8e8e8":color,display:"flex",alignItems:"center",justifyContent:"flex-start",minHeight:"22px",opacity:filtered?0.2:osAprov?0.7:1,position:"relative",padding:"2px 5px",borderRadius:"4px" }}>
+                              {!filtered&&<span style={{ fontSize:"9px",fontWeight:700,color:"#111111",letterSpacing:"0px",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",maxWidth:"58px",display:"block",lineHeight:1.3 }}>{label}</span>}
+                              {temOS&&!filtered&&<span style={{ position:"absolute",top:"2px",right:"3px",width:"5px",height:"5px",borderRadius:"50%",background:osAprov?"#2a7a5a":"#555555",opacity:0.9 }}/>}
+                              {osAprov&&!filtered&&<span style={{ position:"absolute",bottom:"1px",right:"2px",fontSize:"6px",lineHeight:1 }}>🔒</span>}
                             </div>
                           );
                         })}
-                        {dayEntries.length>3&&<div style={{ background:"#f7f7f7",display:"flex",alignItems:"center",justifyContent:"center",minHeight:"7px" }}><span style={{ fontSize:"6px",color:"#666666",fontWeight:700 }}>+{dayEntries.length-3}</span></div>}
+                        {dayEntries.length>3&&<div style={{ background:"#e8e8e8",display:"flex",alignItems:"center",justifyContent:"center",minHeight:"10px",borderRadius:"4px" }}><span style={{ fontSize:"8px",color:"#444444",fontWeight:700 }}>+{dayEntries.length-3}</span></div>}
                       </div>
                     </td>
                   );
