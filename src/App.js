@@ -2546,10 +2546,10 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                 const isToday = d.getTime()===today.getTime();
                 const isWknd = i>=5;
                 return (
-                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isWknd?"#0a0a12":"#f7f7f7",borderBottom:"2px solid "+(isToday?"#2c2c2c":"#cccccc"),color:isToday?"#555555":isWknd?"#cccccc":"#666666",minWidth:"90px" }}>
+                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isWknd?"#e8e8e8":"#f7f7f7",borderBottom:"2px solid "+(isToday?"#2c2c2c":"#cccccc"),color:isToday?"#2c2c2c":isWknd?"#aaaaaa":"#555555",minWidth:"90px" }}>
                     <div style={{ letterSpacing:"0.5px" }}>{WD_SHORT[i]}</div>
-                    <div style={{ fontSize:"18px",fontWeight:800,color:isToday?"#555555":isWknd?"#cccccc":"#222222",marginTop:"2px" }}>{d.getDate()}</div>
-                    <div style={{ fontSize:"10px",color:isWknd?"#d8d8d8":"#888888",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
+                    <div style={{ fontSize:"18px",fontWeight:800,color:isToday?"#111111":isWknd?"#aaaaaa":"#111111",marginTop:"2px" }}>{d.getDate()}</div>
+                    <div style={{ fontSize:"10px",color:isWknd?"#bbbbbb":"#888888",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
                   </th>
                 );
               })}
@@ -2582,7 +2582,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                     return (
                       <td key={ci}
                         onClick={()=>{ if(canEdit&&onNewEntry&&entries.length===0) onNewEntry({consultor:name,month:mName,day:d.getDate(),year:yr}); }}
-                        style={{ padding:"4px",verticalAlign:"top",background:isToday?"#16102a18":isWknd?"#0a0a12":"transparent",borderLeft:"1px solid #18181f",cursor:(canEdit&&entries.length===0)?"pointer":"default",minHeight:"64px" }}>
+                        style={{ padding:"4px",verticalAlign:"top",background:isToday?"rgba(0,0,0,0.04)":isWknd?"#ececec":"transparent",borderLeft:"1px solid #18181f",cursor:(canEdit&&entries.length===0)?"pointer":"default",minHeight:"64px" }}>
                         {entries.length===0 && canEdit && (
                           <div style={{ display:"flex",alignItems:"center",justifyContent:"center",height:"56px",opacity:0.1,fontSize:"20px",color:"#666666" }}>+</div>
                         )}
@@ -3020,7 +3020,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 return (
-                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"34px",maxWidth:"34px",background:isWeekend?"#0d1a30":"#e8e8e8",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
+                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"34px",maxWidth:"34px",background:isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
                     {WEEKDAY_LABELS[dow]}
                   </th>
                 );
@@ -3034,7 +3034,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                 const isWeekend = dow === 0 || dow === 6;
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#374151":"#666666",minWidth:"34px",background:ferNac?"#f59e0b18":isWeekend?"#0d1a30":"#e8e8e8",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
+                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#999999":"#555555",minWidth:"34px",background:ferNac?"#f59e0b18":isWeekend?"#e8e8e8":"#f0f0f0",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
                     {ferNac && <span style={{ position:"absolute",top:"1px",left:"50%",transform:"translateX(-50%)",fontSize:"6px",color:"#f59e0b" }}>★</span>}
                     {d}
                   </th>
@@ -3067,7 +3067,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const dow = getDayOfWeek(d);
                   const isWeekend = dow === 0 || dow === 6;
                   const entry = lookup[name]?.[d];
-                  const colBg = isWeekend ? "#0d1a30" : "#f7f7f7";
+                  const colBg = isWeekend ? "#ebebeb" : "#f7f7f7";
 
                   const dayEntries = lookup[name]?.[d] || [];
                   if (dayEntries.length === 0) return (
@@ -7310,8 +7310,8 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                         const isWknd = d.getDay()===0||d.getDay()===6;
                         const isHoje = d.getTime()===hoje.getTime();
                         return (
-                          <div key={i} style={{ width:PX,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",background:isHoje?"#22d3a022":isWknd?"#06060d":"transparent",borderRight:"1px solid #1a1a28" }}>
-                            <span style={{ fontSize:9,color:isHoje?"#2a7a5a":isWknd?"#cccccc":"#888888",fontWeight:isHoje?800:400 }}>{d.getDate()}</span>
+                          <div key={i} style={{ width:PX,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",background:isHoje?"#e6f4ee":isWknd?"#ebebeb":"transparent",borderRight:"1px solid #1a1a28" }}>
+                            <span style={{ fontSize:9,color:isHoje?"#2a7a5a":isWknd?"#aaaaaa":"#888888",fontWeight:isHoje?800:400 }}>{d.getDate()}</span>
                           </div>
                         );
                       })}
