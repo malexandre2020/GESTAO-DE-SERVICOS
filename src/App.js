@@ -1271,7 +1271,7 @@ function GerenciarGrade({ consultores, isDark }) {
   };
 
   const removeProduto = (nome) => {
-    if (!window.confirm("Remover produto ""+nome+"" e todos os seus módulos?")) return;
+    if (!window.confirm("Remover produto \"" + nome + "\" e todos os seus módulos?")) return;
     const np = produtos.filter(p=>p!==nome);
     const nm = { ...modulos }; delete nm[nome];
     setProdutos(np); setModulos(nm);
