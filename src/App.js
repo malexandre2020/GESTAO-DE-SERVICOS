@@ -8571,8 +8571,11 @@ function Dashboard({ currentUser, onLogout }) {
     <div style={{ fontFamily:"'Outfit',sans-serif", background:"#f0f0f0", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"20px" }}>
       <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Cabinet+Grotesk:wght@900&display=swap" rel="stylesheet"/>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}} @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}`}</style>
-      <div style={{ width:"54px",height:"54px",borderRadius:"16px",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"26px",boxShadow:"0 0 40px #6c63ff55" }}>◈</div>
-      <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:900, color:"#111111", letterSpacing:"-0.5px" }}>Agenda de Consultores</div>
+      <div style={{ width:"64px",height:"64px",borderRadius:"18px",background:"#1a1a1a",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"28px",boxShadow:"0 8px 24px rgba(0,0,0,0.15)" }}>◈</div>
+      <div>
+        <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"28px", fontWeight:900, color:"#111111", letterSpacing:"-1px", textAlign:"center" }}>GSC</div>
+        <div style={{ fontSize:"13px", fontWeight:600, color:"#666666", letterSpacing:"0.5px", textTransform:"uppercase", textAlign:"center", marginTop:"4px" }}>Gestão de Serviços</div>
+      </div>
       <div style={{ display:"flex", alignItems:"center", gap:"10px", color:"#888888", fontSize:"13px" }}>
         <div style={{ width:"16px", height:"16px", border:"2px solid #1f1f2e", borderTop:"2px solid #6c63ff", borderRadius:"50%", animation:"spin 0.7s linear infinite" }}/>
         Carregando dados...
