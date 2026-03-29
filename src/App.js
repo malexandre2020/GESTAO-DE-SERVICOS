@@ -3021,7 +3021,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 return (
-                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"68px",maxWidth:"68px",background:isDark?(isWeekend?"#242435":"#2e2e40"):(isWeekend?"#e8e8e8":"#f0f0f0"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8") }}>
+                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isDark?(isWeekend?"#aaaaaa":"#e0e0e0"):(isWeekend?"#999999":"#666666"),minWidth:"68px",maxWidth:"68px",background:isDark?(isWeekend?"#242435":"#2e2e40"):(isWeekend?"#e8e8e8":"#f0f0f0"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8") }}>
                     {WEEKDAY_LABELS[dow]}
                   </th>
                 );
@@ -3035,7 +3035,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                 const isWeekend = dow === 0 || dow === 6;
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#999999":"#555555",minWidth:"68px",background:ferNac?"#f59e0b18":isDark?(isWeekend?"#242435":"#2e2e40"):(isWeekend?"#e8e8e8":"#f0f0f0"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),position:"relative" }}>
+                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isDark?(isWeekend?"#aaaaaa":"#ffffff"):(isWeekend?"#999999":"#555555"),minWidth:"68px",background:ferNac?"#f59e0b18":isDark?(isWeekend?"#242435":"#2e2e40"):(isWeekend?"#e8e8e8":"#f0f0f0"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),position:"relative" }}>
                     {ferNac && <span style={{ position:"absolute",top:"1px",left:"50%",transform:"translateX(-50%)",fontSize:"6px",color:"#f59e0b" }}>★</span>}
                     {d}
                   </th>
@@ -7886,34 +7886,34 @@ function Dashboard({ currentUser, onLogout }) {
   const isDark = theme === "dark";
   const T = {
     bg:              isDark ? "#09090f"   : "#f0f0f0",
-    surface:         isDark ? "#ffffff"   : "#ffffff",
-    surface2:        isDark ? "#f7f7f7"   : "#f7f7f7",
-    surfaceHover:    isDark ? "#e8e8e8"   : "#ececec",
-    border:          isDark ? "#d8d8d8"   : "#d0d0d0",
-    border2:         isDark ? "#cccccc"   : "#bbbbbb",
-    text:            isDark ? "#222222"   : "#1a1a1a",
-    text2:           isDark ? "#666666"   : "#444444",
-    text3:           isDark ? "#888888"   : "#888888",
-    heading:         isDark ? "#111111"   : "#000000",
-    accent:          isDark ? "#2c2c2c"   : "#2c2c2c",
-    accentAlt:       isDark ? "#555555"   : "#555555",
+    surface:         isDark ? "#111118"   : "#ffffff",
+    surface2:        isDark ? "#0d0d14"   : "#f7f7f7",
+    surfaceHover:    isDark ? "#18181f"   : "#ececec",
+    border:          isDark ? "#1f1f2e"   : "#d0d0d0",
+    border2:         isDark ? "#2a2a3a"   : "#bbbbbb",
+    text:            isDark ? "#c8c8d8"   : "#1a1a1a",
+    text2:           isDark ? "#6e6e88"   : "#444444",
+    text3:           isDark ? "#3e3e55"   : "#888888",
+    heading:         isDark ? "#f0f0fa"   : "#000000",
+    accent:          isDark ? "#6c63ff"   : "#2c2c2c",
+    accentAlt:       isDark ? "#a78bfa"   : "#555555",
     accentHover:     isDark ? "#5a52ee"   : "#111111",
     accentGlow:      isDark ? "0 0 28px #6c63ff44" : "0 4px 12px rgba(0,0,0,0.15)",
-    success:         isDark ? "#2a7a5a"   : "#2a7a5a",
+    success:         isDark ? "#22d3a0"   : "#2a7a5a",
     warning:         isDark ? "#f5a623"   : "#b07800",
-    danger:          isDark ? "#c0392b"   : "#c0392b",
+    danger:          isDark ? "#f04f5e"   : "#c0392b",
     headerBg:        isDark ? "#0c0c14"   : "#d8d8d8",
     headerBorder:    isDark ? "#1a1a28"   : "#b8b8b8",
-    btnInactive:     isDark ? "#ffffff"   : "#ebebeb",
-    btnInactiveText: isDark ? "#666666"   : "#555555",
-    filterBg:        isDark ? "#ffffff"   : "#ffffff",
-    inputBg:         isDark ? "#f7f7f7"   : "#ffffff",
-    inputBorder:     isDark ? "#cccccc"   : "#c0c0c0",
-    inputColor:      isDark ? "#222222"   : "#1a1a1a",
-    cardBg:          isDark ? "#ffffff"   : "#ffffff",
-    cardBorder:      isDark ? "#d8d8d8"   : "#d8d8d8",
-    shadow:          isDark ? "0 2px 16px rgba(0,0,0,0.08)" : "0 2px 12px rgba(0,0,0,0.08)",
-    shadowLg:        isDark ? "0 8px 48px rgba(0,0,0,0.12)" : "0 8px 32px rgba(0,0,0,0.12)",
+    btnInactive:     isDark ? "#111118"   : "#ebebeb",
+    btnInactiveText: isDark ? "#6e6e88"   : "#555555",
+    filterBg:        isDark ? "#111118"   : "#ffffff",
+    inputBg:         isDark ? "#0d0d14"   : "#ffffff",
+    inputBorder:     isDark ? "#2a2a3a"   : "#c0c0c0",
+    inputColor:      isDark ? "#c8c8d8"   : "#1a1a1a",
+    cardBg:          isDark ? "#111118"   : "#ffffff",
+    cardBorder:      isDark ? "#1f1f2e"   : "#d8d8d8",
+    shadow:          isDark ? "0 2px 16px rgba(0,0,0,0.6)" : "0 2px 12px rgba(0,0,0,0.08)",
+    shadowLg:        isDark ? "0 8px 48px rgba(0,0,0,0.8)" : "0 8px 32px rgba(0,0,0,0.12)",
   };
 
   // ── Carregar dados do Firestore na inicialização ──
