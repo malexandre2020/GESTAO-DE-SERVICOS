@@ -124,7 +124,7 @@ function getFeriadoNacional(dia, mes, ano) {
   return f ? f.nome : null;
 }
 const INITIAL_CLIENTS = ["VEDACIT","TIROLEZ","MAZZAFERRO","TSJC","TSUL","GHT4","UNIMOL","TEJOFRAN","TSM","TOYOBO","PARTICULAR","CABOVEL","GOBEAUTE"];
-const CLIENT_COLORS = { VEDACIT:"#3b82f6",TIROLEZ:"#f59e0b",MAZZAFERRO:"#8b5cf6",TSJC:"#10b981",TSUL:"#06b6d4",GHT4:"#f97316",UNIMOL:"#ec4899",TEJOFRAN:"#6366f1",TSM:"#84cc16",TOYOBO:"#a855f7",PARTICULAR:"#6e6e88",CABOVEL:"#14b8a6",GOBEAUTE:"#f43f5e",RESERVADO:"#6e6e88",default:"#6b7280" };
+const CLIENT_COLORS = { VEDACIT:"#3b82f6",TIROLEZ:"#f59e0b",MAZZAFERRO:"#8b5cf6",TSJC:"#10b981",TSUL:"#06b6d4",GHT4:"#f97316",UNIMOL:"#ec4899",TEJOFRAN:"#6366f1",TSM:"#84cc16",TOYOBO:"#a855f7",PARTICULAR:"#666666",CABOVEL:"#14b8a6",GOBEAUTE:"#f43f5e",RESERVADO:"#666666",default:"#6b7280" };
 
 function getClientColor(client) {
   if (!client) return "#e5e7eb";
@@ -211,20 +211,20 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
     onSave({ id: editEntry?.id, consultor, month, year: Number(year), days, client: client.trim(), type, modalidade, horaInicio, horaFim, intervalo, atividades: atividades.trim(), notifyEmail });
   };
 
-  const inp = { padding:"9px 13px", borderRadius:"10px", border:"1px solid #2a2a3a", background:"#0d0d14", color:"#c8c8d8", fontSize:"13px", width:"100%", boxSizing:"border-box", fontFamily:"inherit" };
-  const lbl = { fontSize:"11px", color:"#3e3e55", fontWeight:700, marginBottom:"7px", display:"block", letterSpacing:"0.5px", textTransform:"uppercase" };
+  const inp = { padding:"9px 13px", borderRadius:"10px", border:"1px solid #cccccc", background:"#f7f7f7", color:"#222222", fontSize:"13px", width:"100%", boxSizing:"border-box", fontFamily:"inherit" };
+  const lbl = { fontSize:"11px", color:"#888888", fontWeight:700, marginBottom:"7px", display:"block", letterSpacing:"0.5px", textTransform:"uppercase" };
 
   return (
-    <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.8)",backdropFilter:"blur(6px)",WebkitBackdropFilter:"blur(6px)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px" }}>
-      <div style={{ background:"#111118",borderRadius:"20px",padding:"30px",width:"100%",maxWidth:"520px",border:"1px solid #1f1f2e",maxHeight:"90vh",overflowY:"auto",boxShadow:"0 32px 80px rgba(0,0,0,0.8)",animation:"fadeUp .25s cubic-bezier(.4,0,.2,1)" }}>
+    <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.45)",backdropFilter:"blur(6px)",WebkitBackdropFilter:"blur(6px)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px" }}>
+      <div style={{ background:"#ffffff",borderRadius:"20px",padding:"30px",width:"100%",maxWidth:"520px",border:"1px solid #d8d8d8",maxHeight:"90vh",overflowY:"auto",boxShadow:"0 32px 80px rgba(0,0,0,0.12)",animation:"fadeUp .25s cubic-bezier(.4,0,.2,1)" }}>
         <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"24px" }}>
           <div>
-            <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"18px",fontWeight:900,color:"#f0f0fa",margin:0,letterSpacing:"-0.3px" }}>{isEdit?"Editar Agenda":"Nova Agenda"}</h2>
-            {isPrefill && <p style={{ margin:"4px 0 0",fontSize:"12px",color:"#3e3e55" }}>📅 {editEntry.consultor.split(" ")[0]} · {editEntry.month} · Dia {editEntry.day}</p>}
+            <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"18px",fontWeight:900,color:"#111111",margin:0,letterSpacing:"-0.3px" }}>{isEdit?"Editar Agenda":"Nova Agenda"}</h2>
+            {isPrefill && <p style={{ margin:"4px 0 0",fontSize:"12px",color:"#888888" }}>📅 {editEntry.consultor.split(" ")[0]} · {editEntry.month} · Dia {editEntry.day}</p>}
           </div>
-          <button onClick={onClose} style={{ background:"#1f1f2e",border:"1px solid #2a2a3a",color:"#6e6e88",borderRadius:"10px",width:"32px",height:"32px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
+          <button onClick={onClose} style={{ background:"#e8e8e8",border:"1px solid #cccccc",color:"#666666",borderRadius:"10px",width:"32px",height:"32px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
         </div>
-        {error && <div style={{ background:"#f04f5e15",border:"1px solid #f04f5e40",borderRadius:"10px",padding:"10px 14px",color:"#f87171",fontSize:"13px",marginBottom:"16px" }}>⚠️ {error}</div>}
+        {error && <div style={{ background:"#fff0f0",border:"1px solid #f04f5e40",borderRadius:"10px",padding:"10px 14px",color:"#c0392b",fontSize:"13px",marginBottom:"16px" }}>⚠️ {error}</div>}
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 80px",gap:"16px",marginBottom:"16px" }}>
           <div><label style={lbl}>Consultor</label>
             <select value={consultor} onChange={e=>setConsultor(e.target.value)} style={{...inp, opacity:(isEdit||isPrefill)?0.6:1}} disabled={isEdit||isPrefill}>
@@ -248,7 +248,7 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
           <label style={lbl}>Tipo de lançamento</label>
           <div style={{ display:"flex",gap:"5px",flexWrap:"wrap" }}>
             {[["client","👤 Cliente"],["vacation","🏖 Férias"],["absence","🤒 Afastamento"],["holiday","🎉 Feriado"],["reserved","🔒 Reservado"],["blocked","⛔ Bloqueado"]].map(([val,lab])=>(
-              <button key={val} onClick={()=>setType(val)} style={{ padding:"6px 13px",borderRadius:"99px",border:"1px solid",cursor:"pointer",fontSize:"12px",fontWeight:600,transition:"all .15s",borderColor:type===val?"#6c63ff":"#2a2a3a",background:type===val?"#6c63ff22":"transparent",color:type===val?"#a78bfa":"#3e3e55" }}>{lab}</button>
+              <button key={val} onClick={()=>setType(val)} style={{ padding:"6px 13px",borderRadius:"99px",border:"1px solid",cursor:"pointer",fontSize:"12px",fontWeight:600,transition:"all .15s",borderColor:type===val?"#2c2c2c":"#cccccc",background:type===val?"rgba(0,0,0,0.06)":"transparent",color:type===val?"#555555":"#888888" }}>{lab}</button>
             ))}
           </div>
         </div>
@@ -257,9 +257,9 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
           <div style={{ display:"flex", gap:"8px" }}>
             {[["presencial","🏢 Presencial"],["remoto","💻 Remoto"]].map(([val,lab])=>(
               <button key={val} onClick={()=>setModalidade(val)} style={{ flex:1, padding:"10px 16px", borderRadius:"12px", border:"1px solid", cursor:"pointer", fontSize:"13px", fontWeight:600, transition:"all .15s",
-                borderColor: modalidade===val ? (val==="presencial"?"#22d3a0":"#6c63ff") : "#2a2a3a",
-                background: modalidade===val ? (val==="presencial"?"#22d3a015":"#6c63ff15") : "transparent",
-                color: modalidade===val ? (val==="presencial"?"#22d3a0":"#a78bfa") : "#3e3e55"
+                borderColor: modalidade===val ? (val==="presencial"?"#2a7a5a":"#2c2c2c") : "#cccccc",
+                background: modalidade===val ? (val==="presencial"?"#e6f4ee":"rgba(0,0,0,0.05)") : "transparent",
+                color: modalidade===val ? (val==="presencial"?"#2a7a5a":"#555555") : "#888888"
               }}>{lab}</button>
             ))}
           </div>
@@ -288,7 +288,7 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
             </div>
           </div>
           {horaInicio && horaFim && horaInicio < horaFim && (
-            <div style={{ fontSize:"11px", color:"#6e6e88", marginTop:"6px" }}>
+            <div style={{ fontSize:"11px", color:"#666666", marginTop:"6px" }}>
               {(() => {
                 const [hi,mi] = horaInicio.split(":").map(Number);
                 const [hf,mf] = horaFim.split(":").map(Number);
@@ -315,24 +315,24 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
           <div style={{ marginBottom:"20px" }}>
             <label style={lbl}>Seleção de dias</label>
             <div style={{ display:"flex",gap:"8px",marginBottom:"12px" }}>
-              <button onClick={()=>setDayMode("range")} style={{ padding:"6px 14px",borderRadius:"20px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:dayMode==="range"?"#6366f1":"#2a2a3a",color:dayMode==="range"?"#fff":"#6e6e88" }}>📅 Período</button>
-              <button onClick={()=>setDayMode("individual")} style={{ padding:"6px 14px",borderRadius:"20px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:dayMode==="individual"?"#6366f1":"#2a2a3a",color:dayMode==="individual"?"#fff":"#6e6e88" }}>🔢 Individuais</button>
+              <button onClick={()=>setDayMode("range")} style={{ padding:"6px 14px",borderRadius:"20px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:dayMode==="range"?"#6366f1":"#cccccc",color:dayMode==="range"?"#fff":"#666666" }}>📅 Período</button>
+              <button onClick={()=>setDayMode("individual")} style={{ padding:"6px 14px",borderRadius:"20px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:dayMode==="individual"?"#6366f1":"#cccccc",color:dayMode==="individual"?"#fff":"#666666" }}>🔢 Individuais</button>
             </div>
             {dayMode==="range" ? (
               <div style={{ display:"flex",gap:"12px",alignItems:"flex-end" }}>
                 <div style={{ flex:1 }}><label style={{...lbl,fontSize:"11px"}}>Dia inicial</label><input type="number" min="1" max="31" value={dayFrom} onChange={e=>setDayFrom(e.target.value)} style={inp}/></div>
-                <div style={{ color:"#6e6e88",paddingBottom:"10px",fontSize:"18px" }}>→</div>
+                <div style={{ color:"#666666",paddingBottom:"10px",fontSize:"18px" }}>→</div>
                 <div style={{ flex:1 }}><label style={{...lbl,fontSize:"11px"}}>Dia final</label><input type="number" min="1" max="31" value={dayTo} onChange={e=>setDayTo(e.target.value)} style={inp}/></div>
-                {dayFrom && dayTo && Number(dayFrom)<=Number(dayTo) && <div style={{ paddingBottom:"10px",color:"#22d3a0",fontWeight:700,fontSize:"13px" }}>{Number(dayTo)-Number(dayFrom)+1}d</div>}
+                {dayFrom && dayTo && Number(dayFrom)<=Number(dayTo) && <div style={{ paddingBottom:"10px",color:"#2a7a5a",fontWeight:700,fontSize:"13px" }}>{Number(dayTo)-Number(dayFrom)+1}d</div>}
               </div>
             ) : (
               <div>
                 <div style={{ display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"4px" }}>
                   {Array.from({length:31},(_,i)=>i+1).map(d=>(
-                    <button key={d} onClick={()=>toggleDay(d)} style={{ padding:"6px 2px",borderRadius:"6px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:700,background:selectedDays.includes(d)?"#3b82f6":"#2a2a3a",color:selectedDays.includes(d)?"#fff":"#6e6e88" }}>{d}</button>
+                    <button key={d} onClick={()=>toggleDay(d)} style={{ padding:"6px 2px",borderRadius:"6px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:700,background:selectedDays.includes(d)?"#3b82f6":"#cccccc",color:selectedDays.includes(d)?"#fff":"#666666" }}>{d}</button>
                   ))}
                 </div>
-                <p style={{ fontSize:"11px",color:"#6e6e88",margin:"8px 0 0" }}>{selectedDays.length} dia(s) selecionado(s)</p>
+                <p style={{ fontSize:"11px",color:"#666666",margin:"8px 0 0" }}>{selectedDays.length} dia(s) selecionado(s)</p>
               </div>
             )}
           </div>
@@ -341,17 +341,17 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
         {(isEdit || isPrefill) && (
           <div style={{ marginBottom:"20px" }}>
             <label style={lbl}>Dia</label>
-            <div style={{ display:"flex",alignItems:"center",gap:"10px",padding:"10px 14px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #2a2a3a" }}>
+            <div style={{ display:"flex",alignItems:"center",gap:"10px",padding:"10px 14px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc" }}>
               <span style={{ fontSize:"20px" }}>📅</span>
               <div>
-                <div style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa" }}>Dia {editEntry.day} de {editEntry.month}{editEntry.year ? " " + editEntry.year : ""}</div>
-                <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"1px" }}>{editEntry.consultor}</div>
+                <div style={{ fontSize:"14px",fontWeight:700,color:"#111111" }}>Dia {editEntry.day} de {editEntry.month}{editEntry.year ? " " + editEntry.year : ""}</div>
+                <div style={{ fontSize:"11px",color:"#666666",marginTop:"1px" }}>{editEntry.consultor}</div>
               </div>
             </div>
           </div>
         )}
         {/* Notificação por e-mail */}
-        <div style={{ display:"flex",alignItems:"center",gap:"10px",padding:"10px 14px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #2a2a3a",marginBottom:"16px" }}>
+        <div style={{ display:"flex",alignItems:"center",gap:"10px",padding:"10px 14px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",marginBottom:"16px" }}>
           <input
             type="checkbox"
             id="notifyEmailChk"
@@ -359,16 +359,16 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
             onChange={e=>setNotifyEmail(e.target.checked)}
             style={{ width:"16px",height:"16px",cursor:"pointer",accentColor:"#3b82f6" }}
           />
-          <label htmlFor="notifyEmailChk" style={{ fontSize:"13px",color:"#6e6e88",cursor:"pointer",userSelect:"none" }}>
+          <label htmlFor="notifyEmailChk" style={{ fontSize:"13px",color:"#666666",cursor:"pointer",userSelect:"none" }}>
             📧 Notificar por e-mail
             {isEdit
-              ? <span style={{ fontSize:"11px",color:"#6e6e88",marginLeft:"6px" }}>(consultor + quem incluiu, se diferente)</span>
-              : <span style={{ fontSize:"11px",color:"#6e6e88",marginLeft:"6px" }}>(consultor + você)</span>
+              ? <span style={{ fontSize:"11px",color:"#666666",marginLeft:"6px" }}>(consultor + quem incluiu, se diferente)</span>
+              : <span style={{ fontSize:"11px",color:"#666666",marginLeft:"6px" }}>(consultor + você)</span>
             }
           </label>
         </div>
         <div style={{ display:"flex",gap:"10px",justifyContent:"flex-end",paddingTop:"4px" }}>
-          <button onClick={onClose} style={{ padding:"10px 20px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
+          <button onClick={onClose} style={{ padding:"10px 20px",borderRadius:"10px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
           <button onClick={handleSave} style={{ padding:"10px 24px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44" }}>{isEdit?"Salvar alterações":"Adicionar agenda"}</button>
         </div>
       </div>
@@ -387,9 +387,9 @@ function EmailConfigTab({ emailConfig, onSave }) {
   const [fromName,   setFromName]   = useState(emailConfig.fromName   || "GSC - Gestão Serviço Consultor");
   const [testStatus, setTestStatus] = useState(null); // null | "sending" | "ok" | "err"
 
-  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"monospace" };
-  const lbl = { fontSize:"12px",color:"#6e6e88",fontWeight:600,display:"block",marginBottom:"6px" };
-  const card = { background:"#18181f",borderRadius:"12px",padding:"20px",border:"1px solid #2a2a3a" };
+  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"monospace" };
+  const lbl = { fontSize:"12px",color:"#666666",fontWeight:600,display:"block",marginBottom:"6px" };
+  const card = { background:"#f0f0f0",borderRadius:"12px",padding:"20px",border:"1px solid #cccccc" };
 
   const isConfigured = publicKey.trim() && serviceId.trim() && templateId.trim();
 
@@ -429,56 +429,56 @@ function EmailConfigTab({ emailConfig, onSave }) {
       {/* LEFT – form */}
       <div style={{ display:"flex", flexDirection:"column", gap:"16px" }}>
         <div style={card}>
-          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>⚙️ Credenciais EmailJS</h3>
-          <p style={{ fontSize:"12px",color:"#6e6e88",marginTop:0,marginBottom:"16px",lineHeight:"1.6" }}>
+          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>⚙️ Credenciais EmailJS</h3>
+          <p style={{ fontSize:"12px",color:"#666666",marginTop:0,marginBottom:"16px",lineHeight:"1.6" }}>
             Configure sua conta em{" "}
-            <a href="https://www.emailjs.com" target="_blank" rel="noreferrer" style={{ color:"#6c63ff" }}>emailjs.com</a>{" "}
+            <a href="https://www.emailjs.com" target="_blank" rel="noreferrer" style={{ color:"#2c2c2c" }}>emailjs.com</a>{" "}
             (plano gratuito inclui 200 e-mails/mês).
           </p>
 
           {/* Enable toggle */}
-          <div style={{ display:"flex",alignItems:"center",gap:"12px",padding:"10px 14px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #2a2a3a",marginBottom:"16px",cursor:"pointer" }} onClick={()=>setEnabled(e=>!e)}>
-            <div style={{ width:"40px",height:"22px",borderRadius:"11px",background:enabled?"#22c55e":"#2a2a3a",position:"relative",transition:"background .2s",flexShrink:0 }}>
+          <div style={{ display:"flex",alignItems:"center",gap:"12px",padding:"10px 14px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",marginBottom:"16px",cursor:"pointer" }} onClick={()=>setEnabled(e=>!e)}>
+            <div style={{ width:"40px",height:"22px",borderRadius:"11px",background:enabled?"#22c55e":"#cccccc",position:"relative",transition:"background .2s",flexShrink:0 }}>
               <div style={{ position:"absolute",top:"3px",left:enabled?"21px":"3px",width:"16px",height:"16px",borderRadius:"50%",background:"#fff",transition:"left .2s" }}/>
             </div>
-            <span style={{ fontSize:"13px",fontWeight:600,color:enabled?"#22c55e":"#6e6e88" }}>
+            <span style={{ fontSize:"13px",fontWeight:600,color:enabled?"#22c55e":"#666666" }}>
               {enabled ? "✅ Envio de e-mails ativado" : "⭕ Envio de e-mails desativado"}
             </span>
           </div>
 
           <div style={{ display:"flex",flexDirection:"column",gap:"14px" }}>
             <div>
-              <label style={lbl}>🔑 Public Key <span style={{ color:"#6e6e88",fontWeight:400 }}>(Account → API Keys)</span></label>
+              <label style={lbl}>🔑 Public Key <span style={{ color:"#666666",fontWeight:400 }}>(Account → API Keys)</span></label>
               <input value={publicKey} onChange={e=>setPublicKey(e.target.value)} placeholder="ex: aBcDeFgHiJkLmNoP" style={inp}/>
             </div>
             <div>
-              <label style={lbl}>📡 Service ID <span style={{ color:"#6e6e88",fontWeight:400 }}>(Email Services)</span></label>
+              <label style={lbl}>📡 Service ID <span style={{ color:"#666666",fontWeight:400 }}>(Email Services)</span></label>
               <input value={serviceId} onChange={e=>setServiceId(e.target.value)} placeholder="ex: service_xxxxxxx" style={inp}/>
             </div>
             <div>
-              <label style={lbl}>📄 Template ID <span style={{ color:"#6e6e88",fontWeight:400 }}>(Email Templates)</span></label>
+              <label style={lbl}>📄 Template ID <span style={{ color:"#666666",fontWeight:400 }}>(Email Templates)</span></label>
               <input value={templateId} onChange={e=>setTemplateId(e.target.value)} placeholder="ex: template_xxxxxxx" style={inp}/>
             </div>
             <div>
-              <label style={lbl}>✉️ Nome do Remetente <span style={{ color:"#6e6e88",fontWeight:400 }}>(aparece no campo "De:" do e-mail)</span></label>
+              <label style={lbl}>✉️ Nome do Remetente <span style={{ color:"#666666",fontWeight:400 }}>(aparece no campo "De:" do e-mail)</span></label>
               <input value={fromName} onChange={e=>setFromName(e.target.value)} placeholder="ex: GSC - Gestão Serviço Consultor" style={{...inp, fontFamily:"inherit"}}/>
-              <span style={{ fontSize:"11px",color:"#3e3e55",marginTop:"4px",display:"block" }}>Este nome aparecerá como remetente em todos os e-mails enviados pelo sistema.</span>
+              <span style={{ fontSize:"11px",color:"#888888",marginTop:"4px",display:"block" }}>Este nome aparecerá como remetente em todos os e-mails enviados pelo sistema.</span>
             </div>
           </div>
 
           <div style={{ display:"flex",gap:"10px",marginTop:"20px",alignItems:"center",flexWrap:"wrap" }}>
             <button
               onClick={()=>onSave({ enabled, publicKey:publicKey.trim(), serviceId:serviceId.trim(), templateId:templateId.trim(), fromName:fromName.trim()||"GSC - Gestão Serviço Consultor" })}
-              style={{ padding:"10px 24px",borderRadius:"8px",border:"none",background:"#6c63ff",color:"#fff",fontWeight:700,fontSize:"13px",cursor:"pointer" }}>
+              style={{ padding:"10px 24px",borderRadius:"8px",border:"none",background:"#2c2c2c",color:"#fff",fontWeight:700,fontSize:"13px",cursor:"pointer" }}>
               💾 Salvar configuração
             </button>
             <button
               onClick={handleTestSend}
               disabled={!isConfigured || testStatus==="sending"}
-              style={{ padding:"10px 20px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"transparent",color:isConfigured?"#6e6e88":"#2a2a3a",fontWeight:600,fontSize:"13px",cursor:isConfigured?"pointer":"default" }}>
+              style={{ padding:"10px 20px",borderRadius:"8px",border:"1px solid #cccccc",background:"transparent",color:isConfigured?"#666666":"#cccccc",fontWeight:600,fontSize:"13px",cursor:isConfigured?"pointer":"default" }}>
               {testStatus==="sending"?"⏳ Enviando...":"📧 Enviar e-mail de teste"}
             </button>
-            {testStatus==="ok"  && <span style={{ fontSize:"12px",color:"#22d3a0",fontWeight:600 }}>✅ E-mail de teste enviado!</span>}
+            {testStatus==="ok"  && <span style={{ fontSize:"12px",color:"#2a7a5a",fontWeight:600 }}>✅ E-mail de teste enviado!</span>}
             {testStatus==="err" && <span style={{ fontSize:"12px",color:"#ef4444",fontWeight:600 }}>❌ Falha — verifique as credenciais</span>}
           </div>
         </div>
@@ -487,23 +487,23 @@ function EmailConfigTab({ emailConfig, onSave }) {
       {/* RIGHT – instructions */}
       <div style={{ display:"flex",flexDirection:"column",gap:"16px" }}>
         <div style={card}>
-          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"12px" }}>📋 Como configurar (passo a passo)</h3>
+          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"12px" }}>📋 Como configurar (passo a passo)</h3>
           <ol style={{ margin:0,paddingLeft:"18px",display:"flex",flexDirection:"column",gap:"10px" }}>
             {[
-              <>Acesse <a href="https://www.emailjs.com" target="_blank" rel="noreferrer" style={{color:"#6c63ff"}}>emailjs.com</a> e crie uma conta grátis.</>,
-              <>Vá em <strong style={{color:"#f0f0fa"}}>Email Services</strong> → conecte seu Gmail ou Outlook → copie o <code style={{color:"#f59e0b",background:"#18181f",padding:"1px 5px",borderRadius:"4px"}}>Service ID</code>.</>,
-              <>Vá em <strong style={{color:"#f0f0fa"}}>Email Templates</strong> → crie um novo template com as variáveis ao lado → copie o <code style={{color:"#f59e0b",background:"#18181f",padding:"1px 5px",borderRadius:"4px"}}>Template ID</code>.</>,
-              <>Vá em <strong style={{color:"#f0f0fa"}}>Account → API Keys</strong> → copie a <code style={{color:"#f59e0b",background:"#18181f",padding:"1px 5px",borderRadius:"4px"}}>Public Key</code>.</>,
-              <>Preencha os campos ao lado, ative o envio e clique em <strong style={{color:"#f0f0fa"}}>Salvar</strong>.</>,
+              <>Acesse <a href="https://www.emailjs.com" target="_blank" rel="noreferrer" style={{color:"#2c2c2c"}}>emailjs.com</a> e crie uma conta grátis.</>,
+              <>Vá em <strong style={{color:"#111111"}}>Email Services</strong> → conecte seu Gmail ou Outlook → copie o <code style={{color:"#f59e0b",background:"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Service ID</code>.</>,
+              <>Vá em <strong style={{color:"#111111"}}>Email Templates</strong> → crie um novo template com as variáveis ao lado → copie o <code style={{color:"#f59e0b",background:"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Template ID</code>.</>,
+              <>Vá em <strong style={{color:"#111111"}}>Account → API Keys</strong> → copie a <code style={{color:"#f59e0b",background:"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Public Key</code>.</>,
+              <>Preencha os campos ao lado, ative o envio e clique em <strong style={{color:"#111111"}}>Salvar</strong>.</>,
             ].map((step,i)=>(
-              <li key={i} style={{ fontSize:"12px",color:"#6e6e88",lineHeight:"1.6" }}>{step}</li>
+              <li key={i} style={{ fontSize:"12px",color:"#666666",lineHeight:"1.6" }}>{step}</li>
             ))}
           </ol>
         </div>
 
         <div style={card}>
-          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"12px" }}>📄 Template sugerido no EmailJS</h3>
-          <p style={{ fontSize:"11px",color:"#6e6e88",marginTop:0,marginBottom:"10px" }}>Configure seu template com estes campos:</p>
+          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"12px" }}>📄 Template sugerido no EmailJS</h3>
+          <p style={{ fontSize:"11px",color:"#666666",marginTop:0,marginBottom:"10px" }}>Configure seu template com estes campos:</p>
           <div style={{ display:"flex",flexDirection:"column",gap:"8px" }}>
             {[
               ["To Email",  "{{to_email}}",  "E-mail do destinatário (obrigatório)"],
@@ -511,17 +511,17 @@ function EmailConfigTab({ emailConfig, onSave }) {
               ["Subject",   "{{assunto}}",   "Assunto gerado automaticamente pelo sistema"],
               ["Content",   "{{corpo}}",     "Corpo HTML gerado automaticamente"],
             ].map(([field,variable,desc])=>(
-              <div key={field} style={{ padding:"8px 10px",background:"#0d0d14",borderRadius:"6px",border:"1px solid #18181f" }}>
+              <div key={field} style={{ padding:"8px 10px",background:"#f7f7f7",borderRadius:"6px",border:"1px solid #e0e0e0" }}>
                 <div style={{ display:"flex",justifyContent:"space-between",marginBottom:"2px" }}>
-                  <span style={{ fontSize:"11px",fontWeight:700,color:"#f0f0fa" }}>{field}</span>
-                  <code style={{ fontSize:"11px",color:"#f59e0b",background:"#18181f",padding:"1px 6px",borderRadius:"4px" }}>{variable}</code>
+                  <span style={{ fontSize:"11px",fontWeight:700,color:"#111111" }}>{field}</span>
+                  <code style={{ fontSize:"11px",color:"#f59e0b",background:"#f0f0f0",padding:"1px 6px",borderRadius:"4px" }}>{variable}</code>
                 </div>
-                <span style={{ fontSize:"10px",color:"#6e6e88" }}>{desc}</span>
+                <span style={{ fontSize:"10px",color:"#666666" }}>{desc}</span>
               </div>
             ))}
           </div>
-          <div style={{ marginTop:"12px",padding:"8px 10px",background:"#0d0d14",borderRadius:"6px",border:"1px solid #18181f" }}>
-            <p style={{ fontSize:"11px",color:"#6e6e88",margin:0,lineHeight:"1.6" }}>
+          <div style={{ marginTop:"12px",padding:"8px 10px",background:"#f7f7f7",borderRadius:"6px",border:"1px solid #e0e0e0" }}>
+            <p style={{ fontSize:"11px",color:"#666666",margin:0,lineHeight:"1.6" }}>
               <strong style={{color:"#f59e0b"}}>Assunto gerado:</strong> "Agenda incluída: Dia 17 — VEDACIT (Março 2026)"<br/>
               <strong style={{color:"#f59e0b"}}>Corpo:</strong> tabela HTML com dia, horário, cliente e atividades.
             </p>
@@ -543,20 +543,20 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
   const [editC, setEditC] = useState(null); // { idx, name, codigo, email }
 
   // ── Cliente form ──
-  const [newCl, setNewCl] = useState({ name:"", codigo:"", email:"", emailOS:"", color:"#6c63ff" });
+  const [newCl, setNewCl] = useState({ name:"", codigo:"", email:"", emailOS:"", color:"#2c2c2c" });
   const [editCl, setEditCl] = useState(null);
 
   // ── Projeto form ──
   const [newP, setNewP] = useState({ name:"", codigo:"", client:"", codigoCliente:"", description:"" });
   const [editP, setEditP] = useState(null);
 
-  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box" };
-  const lbl = { fontSize:"12px",color:"#6e6e88",fontWeight:600,display:"block",marginBottom:"6px" };
-  const card = { background:"#18181f",borderRadius:"12px",padding:"20px",border:"1px solid #2a2a3a" };
-  const btnGreen = { padding:"10px",borderRadius:"8px",border:"none",background:"#22d3a0",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
-  const btnBlue  = { padding:"10px",borderRadius:"8px",border:"none",background:"#6c63ff",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
+  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box" };
+  const lbl = { fontSize:"12px",color:"#666666",fontWeight:600,display:"block",marginBottom:"6px" };
+  const card = { background:"#f0f0f0",borderRadius:"12px",padding:"20px",border:"1px solid #cccccc" };
+  const btnGreen = { padding:"10px",borderRadius:"8px",border:"none",background:"#2a7a5a",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
+  const btnBlue  = { padding:"10px",borderRadius:"8px",border:"none",background:"#2c2c2c",color:"#fff",fontWeight:700,cursor:"pointer",fontSize:"13px",width:"100%" };
   const btnRed   = { background:"#ef444422",border:"1px solid #ef444444",color:"#ef4444",borderRadius:"6px",padding:"5px 10px",cursor:"pointer",fontSize:"12px",fontWeight:600 };
-  const btnEdit  = { background:"#6c63ff22",border:"1px solid #3b82f644",color:"#6c63ff",borderRadius:"6px",padding:"5px 10px",cursor:"pointer",fontSize:"12px",fontWeight:600 };
+  const btnEdit  = { background:"rgba(0,0,0,0.06)",border:"1px solid #3b82f644",color:"#2c2c2c",borderRadius:"6px",padding:"5px 10px",cursor:"pointer",fontSize:"12px",fontWeight:600 };
 
   const tabs = [["consultores","👥 Consultores"],["clientes","🏢 Clientes"],["projetos","📋 Projetos"],["grade","🎓 Grade de Conhecimento"],["email","📧 E-mail"]];
   const [gradeConsultor, setGradeConsultor] = React.useState(consultores[0]||"");
@@ -567,10 +567,10 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
   return (
     <div>
-      <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#f0f0fa",marginBottom:"20px" }}>🗂 Cadastros</h2>
+      <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#111111",marginBottom:"20px" }}>🗂 Cadastros</h2>
       <div style={{ display:"flex",gap:"8px",marginBottom:"24px",flexWrap:"wrap" }}>
         {tabs.map(([id,label])=>(
-          <button key={id} onClick={()=>setTab(id)} style={{ padding:"8px 20px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"13px",background:tab===id?"#3b82f6":"#18181f",color:tab===id?"#fff":"#6e6e88" }}>{label}</button>
+          <button key={id} onClick={()=>setTab(id)} style={{ padding:"8px 20px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"13px",background:tab===id?"#3b82f6":"#e8e8e8",color:tab===id?"#fff":"#666666" }}>{label}</button>
         ))}
       </div>
 
@@ -579,7 +579,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"24px" }}>
           {/* Formulário */}
           <div style={card}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>
               {editC ? "✏️ Editar Consultor" : "➕ Novo Consultor"}
             </h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"12px" }}>
@@ -601,7 +601,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
                 {editC ? (
                   <>
                     <button onClick={()=>{ if(!editC.name.trim()) return; onUpdateConsultor(editC._orig, editC); setEditC(null); }} style={btnBlue}>💾 Salvar alterações</button>
-                    <button onClick={()=>setEditC(null)} style={{ ...btnBlue,background:"#2a2a3a",width:"auto",padding:"10px 16px" }}>Cancelar</button>
+                    <button onClick={()=>setEditC(null)} style={{ ...btnBlue,background:"#e0e0e0",width:"auto",padding:"10px 16px" }}>Cancelar</button>
                   </>
                 ) : (
                   <button onClick={()=>{ if(!newC.name.trim()) return; onAddConsultor(newC); setNewC({name:"",codigo:"",email:""}); }} style={btnGreen}>✅ Cadastrar Consultor</button>
@@ -612,21 +612,21 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
           {/* Lista */}
           <div style={card}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>👥 Consultores Cadastrados ({consultores.length})</h3>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>👥 Consultores Cadastrados ({consultores.length})</h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"8px",maxHeight:"360px",overflowY:"auto" }}>
               {consultores.map((c,i)=>{
                 const meta = getMeta(c);
                 return (
-                  <div key={c} style={{ padding:"10px 12px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #18181f" }}>
+                  <div key={c} style={{ padding:"10px 12px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #e0e0e0" }}>
                     <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                       <div style={{ display:"flex",alignItems:"center",gap:"10px",minWidth:0 }}>
                         <div style={{ width:"32px",height:"32px",borderRadius:"50%",background:"hsl("+(i*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(c)}</div>
                         <div style={{ minWidth:0 }}>
-                          <div style={{ fontSize:"13px",color:"#c8c8d8",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
+                          <div style={{ fontSize:"13px",color:"#222222",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
                             {c}
-                            {meta.codigo && <span style={{ fontSize:"10px",background:"#2a2a3a",color:"#6e6e88",padding:"1px 6px",borderRadius:"10px" }}>{meta.codigo}</span>}
+                            {meta.codigo && <span style={{ fontSize:"10px",background:"#e0e0e0",color:"#666666",padding:"1px 6px",borderRadius:"10px" }}>{meta.codigo}</span>}
                           </div>
-                          {meta.email && <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>✉️ {meta.email}</div>}
+                          {meta.email && <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>✉️ {meta.email}</div>}
                         </div>
                       </div>
                       <div style={{ display:"flex",gap:"6px",flexShrink:0,marginLeft:"8px" }}>
@@ -647,7 +647,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"24px" }}>
           {/* Formulário */}
           <div style={card}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>
               {editCl ? "✏️ Editar Cliente" : "➕ Novo Cliente"}
             </h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"12px" }}>
@@ -664,14 +664,14 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
               <div>
                 <label style={lbl}>E-mail — Responsável por receber OS</label>
                 <input value={editCl?editCl.emailOS||editCl.email||"":newCl.emailOS||""} onChange={e=>editCl?setEditCl(x=>({...x,emailOS:e.target.value})):setNewCl(x=>({...x,emailOS:e.target.value}))} placeholder="responsavel@cliente.com" style={inp}/>
-                <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"5px" }}>Para múltiplos e-mails, separe por vírgula: email1@a.com, email2@b.com</div>
+                <div style={{ fontSize:"10px",color:"#888888",marginTop:"5px" }}>Para múltiplos e-mails, separe por vírgula: email1@a.com, email2@b.com</div>
               </div>
               <div>
                 <label style={lbl}>Cor identificadora</label>
                 <div style={{ display:"flex",alignItems:"center",gap:"12px" }}>
-                  <input type="color" value={editCl?editCl.color:newCl.color} onChange={e=>editCl?setEditCl(x=>({...x,color:e.target.value})):setNewCl(x=>({...x,color:e.target.value}))} style={{ width:"48px",height:"36px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#0d0d14",cursor:"pointer" }}/>
+                  <input type="color" value={editCl?editCl.color:newCl.color} onChange={e=>editCl?setEditCl(x=>({...x,color:e.target.value})):setNewCl(x=>({...x,color:e.target.value}))} style={{ width:"48px",height:"36px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",cursor:"pointer" }}/>
                   <div style={{ flex:1,height:"36px",borderRadius:"8px",background:editCl?editCl.color:newCl.color,display:"flex",alignItems:"center",justifyContent:"center" }}>
-                    <span style={{ fontSize:"12px",fontWeight:700,color:"#fff",textShadow:"0 1px 3px rgba(0,0,0,0.5)" }}>{(editCl?editCl.name:newCl.name)||"PRÉVIA"}</span>
+                    <span style={{ fontSize:"12px",fontWeight:700,color:"#fff",textShadow:"0 1px 3px rgba(0,0,0,0.08)" }}>{(editCl?editCl.name:newCl.name)||"PRÉVIA"}</span>
                   </div>
                 </div>
               </div>
@@ -679,10 +679,10 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
                 {editCl ? (
                   <>
                     <button onClick={()=>{ if(!editCl.name.trim()) return; onUpdateClient(editCl._orig, editCl); setEditCl(null); }} style={btnBlue}>💾 Salvar alterações</button>
-                    <button onClick={()=>setEditCl(null)} style={{ ...btnBlue,background:"#2a2a3a",width:"auto",padding:"10px 16px" }}>Cancelar</button>
+                    <button onClick={()=>setEditCl(null)} style={{ ...btnBlue,background:"#e0e0e0",width:"auto",padding:"10px 16px" }}>Cancelar</button>
                   </>
                 ) : (
-                  <button onClick={()=>{ if(!newCl.name.trim()) return; onAddClient(newCl); setNewCl({name:"",codigo:"",email:"",emailOS:"",color:"#6c63ff"}); }} style={btnGreen}>✅ Cadastrar Cliente</button>
+                  <button onClick={()=>{ if(!newCl.name.trim()) return; onAddClient(newCl); setNewCl({name:"",codigo:"",email:"",emailOS:"",color:"#2c2c2c"}); }} style={btnGreen}>✅ Cadastrar Cliente</button>
                 )}
               </div>
             </div>
@@ -690,19 +690,19 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
           {/* Lista */}
           <div style={card}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>🏢 Clientes Cadastrados ({clients.length})</h3>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>🏢 Clientes Cadastrados ({clients.length})</h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"8px",maxHeight:"380px",overflowY:"auto" }}>
               {clients.map(c=>(
-                <div key={c.name} style={{ padding:"10px 12px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #18181f" }}>
+                <div key={c.name} style={{ padding:"10px 12px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #e0e0e0" }}>
                   <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                     <div style={{ display:"flex",alignItems:"center",gap:"10px",minWidth:0 }}>
                       <div style={{ width:"14px",height:"14px",borderRadius:"3px",background:c.color,flexShrink:0 }}/>
                       <div style={{ minWidth:0 }}>
-                        <div style={{ fontSize:"13px",color:"#c8c8d8",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
+                        <div style={{ fontSize:"13px",color:"#222222",fontWeight:600,display:"flex",alignItems:"center",gap:"6px" }}>
                           {c.name}
-                          {c.codigo && <span style={{ fontSize:"10px",background:"#2a2a3a",color:"#6e6e88",padding:"1px 6px",borderRadius:"10px" }}>{c.codigo}</span>}
+                          {c.codigo && <span style={{ fontSize:"10px",background:"#e0e0e0",color:"#666666",padding:"1px 6px",borderRadius:"10px" }}>{c.codigo}</span>}
                         </div>
-                        {(c.emailOS||c.email) && <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>✉️ OS: {c.emailOS||c.email}</div>}
+                        {(c.emailOS||c.email) && <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>✉️ OS: {c.emailOS||c.email}</div>}
                       </div>
                     </div>
                     <div style={{ display:"flex",gap:"6px",flexShrink:0,marginLeft:"8px" }}>
@@ -722,7 +722,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"24px" }}>
           {/* Formulário */}
           <div style={card}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>
               {editP ? "✏️ Editar Projeto" : "➕ Novo Projeto"}
             </h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"12px" }}>
@@ -760,7 +760,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
                 {editP ? (
                   <>
                     <button onClick={()=>{ if(!editP.name.trim()||!editP.client) return; onUpdateProject(editP._idx,editP); setEditP(null); }} style={btnBlue}>💾 Salvar alterações</button>
-                    <button onClick={()=>setEditP(null)} style={{ ...btnBlue,background:"#2a2a3a",width:"auto",padding:"10px 16px" }}>Cancelar</button>
+                    <button onClick={()=>setEditP(null)} style={{ ...btnBlue,background:"#e0e0e0",width:"auto",padding:"10px 16px" }}>Cancelar</button>
                   </>
                 ) : (
                   <button onClick={()=>{ if(!newP.name.trim()||!newP.client) return; onAddProject({...newP}); setNewP({name:"",codigo:"",client:"",codigoCliente:"",description:""}); }} style={btnGreen}>✅ Cadastrar Projeto</button>
@@ -771,22 +771,22 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
           {/* Lista */}
           <div style={card}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"16px" }}>📋 Projetos Cadastrados ({projects.length})</h3>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"16px" }}>📋 Projetos Cadastrados ({projects.length})</h3>
             <div style={{ display:"flex",flexDirection:"column",gap:"8px",maxHeight:"380px",overflowY:"auto" }}>
-              {projects.length===0 && <p style={{ color:"#6e6e88",fontSize:"13px",textAlign:"center",padding:"20px" }}>Nenhum projeto cadastrado ainda.</p>}
+              {projects.length===0 && <p style={{ color:"#666666",fontSize:"13px",textAlign:"center",padding:"20px" }}>Nenhum projeto cadastrado ainda.</p>}
               {projects.map((p,i)=>(
-                <div key={i} style={{ padding:"10px 14px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #18181f" }}>
+                <div key={i} style={{ padding:"10px 14px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #e0e0e0" }}>
                   <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"8px" }}>
                     <div style={{ minWidth:0 }}>
-                      <div style={{ fontSize:"13px",color:"#f0f0fa",fontWeight:700,display:"flex",alignItems:"center",gap:"6px" }}>
+                      <div style={{ fontSize:"13px",color:"#111111",fontWeight:700,display:"flex",alignItems:"center",gap:"6px" }}>
                         {p.name}
-                        {p.codigo && <span style={{ fontSize:"10px",background:"#2a2a3a",color:"#6e6e88",padding:"1px 6px",borderRadius:"10px" }}>{p.codigo}</span>}
+                        {p.codigo && <span style={{ fontSize:"10px",background:"#e0e0e0",color:"#666666",padding:"1px 6px",borderRadius:"10px" }}>{p.codigo}</span>}
                       </div>
                       <div style={{ fontSize:"11px",color:getClientColor(p.client),fontWeight:600,marginTop:"3px" }}>
                         {p.client}
-                        {p.codigoCliente && <span style={{ color:"#6e6e88",fontWeight:400,marginLeft:"6px" }}>cod. {p.codigoCliente}</span>}
+                        {p.codigoCliente && <span style={{ color:"#666666",fontWeight:400,marginLeft:"6px" }}>cod. {p.codigoCliente}</span>}
                       </div>
-                      {p.description && <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"4px" }}>{p.description}</div>}
+                      {p.description && <div style={{ fontSize:"11px",color:"#666666",marginTop:"4px" }}>{p.description}</div>}
                     </div>
                     <div style={{ display:"flex",gap:"6px",flexShrink:0 }}>
                       <button onClick={()=>setEditP({...p,_idx:i})} style={btnEdit}>✏️</button>
@@ -840,10 +840,10 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
   const [emailDest, setEmailDest] = useState(entry.osEmailDest || emailClienteOS);
 
   const OS_STATUS = {
-    em_andamento: { label:"Em andamento", color:"#6c63ff", bg:"#6c63ff18" },
-    concluida:    { label:"Concluída",    color:"#22d3a0", bg:"#22d3a018" },
+    em_andamento: { label:"Em andamento", color:"#2c2c2c", bg:"rgba(0,0,0,0.05)" },
+    concluida:    { label:"Concluída",    color:"#2a7a5a", bg:"#e6f4ee" },
     pendente:     { label:"Pendente",     color:"#f5a623", bg:"#f5a62318" },
-    cancelada:    { label:"Cancelada",    color:"#f04f5e", bg:"#f04f5e18" },
+    cancelada:    { label:"Cancelada",    color:"#c0392b", bg:"#fff0f0" },
   };
 
   // Gerar número sequencial ao abrir (somente se não tiver ainda)
@@ -977,45 +977,45 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
     }
   };
 
-  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit" };
-  const lbl = { fontSize:"11px",color:"#3e3e55",fontWeight:700,marginBottom:"6px",display:"block",letterSpacing:"0.5px",textTransform:"uppercase" };
+  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit" };
+  const lbl = { fontSize:"11px",color:"#888888",fontWeight:700,marginBottom:"6px",display:"block",letterSpacing:"0.5px",textTransform:"uppercase" };
 
   return (
     <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.82)",backdropFilter:"blur(6px)",zIndex:2000,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px" }}>
-      <div style={{ background:"#111118",borderRadius:"20px",width:"100%",maxWidth:"540px",maxHeight:"92vh",overflowY:"auto",border:"1px solid #1f1f2e",boxShadow:"0 32px 80px rgba(0,0,0,0.8)",animation:"fadeUp .2s cubic-bezier(.4,0,.2,1)" }}>
+      <div style={{ background:"#ffffff",borderRadius:"20px",width:"100%",maxWidth:"540px",maxHeight:"92vh",overflowY:"auto",border:"1px solid #d8d8d8",boxShadow:"0 32px 80px rgba(0,0,0,0.12)",animation:"fadeUp .2s cubic-bezier(.4,0,.2,1)" }}>
 
         {/* Header */}
         <div style={{ padding:"22px 24px 16px",borderBottom:"1px solid #1f1f2e",display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px" }}>
           <div>
             <div style={{ display:"flex",alignItems:"center",gap:"10px",marginBottom:"4px" }}>
-              <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#f0f0fa",margin:0,letterSpacing:"-0.3px" }}>📋 Ordem de Serviço</h2>
+              <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#111111",margin:0,letterSpacing:"-0.3px" }}>📋 Ordem de Serviço</h2>
               {osNumero
-                ? <span style={{ padding:"3px 10px",borderRadius:"99px",background:"#6c63ff22",border:"1px solid #6c63ff44",fontSize:"12px",fontWeight:700,color:"#a78bfa" }}>{osNumero}</span>
-                : <span style={{ padding:"3px 10px",borderRadius:"99px",background:"#1f1f2e",fontSize:"11px",color:"#3e3e55" }}>Gerando nº...</span>
+                ? <span style={{ padding:"3px 10px",borderRadius:"99px",background:"rgba(0,0,0,0.06)",border:"1px solid #6c63ff44",fontSize:"12px",fontWeight:700,color:"#555555" }}>{osNumero}</span>
+                : <span style={{ padding:"3px 10px",borderRadius:"99px",background:"#e8e8e8",fontSize:"11px",color:"#888888" }}>Gerando nº...</span>
               }
             </div>
-            <div style={{ fontSize:"12px",color:"#3e3e55",display:"flex",gap:"10px",flexWrap:"wrap" }}>
+            <div style={{ fontSize:"12px",color:"#888888",display:"flex",gap:"10px",flexWrap:"wrap" }}>
               <span>🏢 {entry.client||entry.type}</span>
               <span>📅 Dia {entry.day} · {entry.month} {entry.year||""}</span>
-              <span style={{ color:entry.modalidade==="remoto"?"#a78bfa":"#22d3a0" }}>
+              <span style={{ color:entry.modalidade==="remoto"?"#555555":"#2a7a5a" }}>
                 {entry.modalidade==="remoto"?"💻 Remoto":"🏢 Presencial"}
               </span>
             </div>
           </div>
-          <button onClick={onClose} style={{ background:"#1f1f2e",border:"1px solid #2a2a3a",color:"#6e6e88",borderRadius:"10px",width:"32px",height:"32px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
+          <button onClick={onClose} style={{ background:"#e8e8e8",border:"1px solid #cccccc",color:"#666666",borderRadius:"10px",width:"32px",height:"32px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
         </div>
 
         <div style={{ padding:"20px 24px",display:"flex",flexDirection:"column",gap:"16px" }}>
 
           {/* Dados da OS */}
-          <div style={{ background:"#0d0d14",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"14px 16px" }}>
-            <div style={{ fontSize:"11px",color:"#6c63ff",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>Dados da OS</div>
+          <div style={{ background:"#f7f7f7",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"14px 16px" }}>
+            <div style={{ fontSize:"11px",color:"#2c2c2c",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>Dados da OS</div>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px" }}>
               <div>
                 <label style={lbl}>Nº da OS</label>
-                <div style={{ ...inp, background:"#18181f", color:"#6e6e88", display:"flex", alignItems:"center", gap:"8px", userSelect:"text" }}>
+                <div style={{ ...inp, background:"#f0f0f0", color:"#666666", display:"flex", alignItems:"center", gap:"8px", userSelect:"text" }}>
                   <span style={{ fontSize:"12px" }}>🔒</span>
-                  <span style={{ fontWeight:700, color:"#a78bfa" }}>{osNumero || "Gerando..."}</span>
+                  <span style={{ fontWeight:700, color:"#555555" }}>{osNumero || "Gerando..."}</span>
                 </div>
               </div>
               <div>
@@ -1033,7 +1033,7 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
                 <div style={{ display:"flex",gap:"6px",flexWrap:"wrap" }}>
                   {Object.entries(OS_STATUS).map(([k,v])=>(
                     <button key={k} onClick={()=>setOsStatus(k)}
-                      style={{ padding:"6px 14px",borderRadius:"99px",border:"1px solid "+(osStatus===k?v.color:"#2a2a3a"),background:osStatus===k?v.bg:"transparent",color:osStatus===k?v.color:"#6e6e88",fontSize:"12px",fontWeight:osStatus===k?700:400,cursor:"pointer",fontFamily:"inherit",transition:"all .15s" }}>
+                      style={{ padding:"6px 14px",borderRadius:"99px",border:"1px solid "+(osStatus===k?v.color:"#cccccc"),background:osStatus===k?v.bg:"transparent",color:osStatus===k?v.color:"#666666",fontSize:"12px",fontWeight:osStatus===k?700:400,cursor:"pointer",fontFamily:"inherit",transition:"all .15s" }}>
                       {v.label}
                     </button>
                   ))}
@@ -1043,8 +1043,8 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
           </div>
 
           {/* Horários */}
-          <div style={{ background:"#0d0d14",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"14px 16px" }}>
-            <div style={{ fontSize:"11px",color:"#22d3a0",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>⏰ Controle de Tempo</div>
+          <div style={{ background:"#f7f7f7",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"14px 16px" }}>
+            <div style={{ fontSize:"11px",color:"#2a7a5a",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>⏰ Controle de Tempo</div>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px" }}>
               <div>
                 <label style={lbl}>Início</label>
@@ -1060,9 +1060,9 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
               </div>
             </div>
             {duracaoUtil() && (
-              <div style={{ marginTop:"10px",padding:"8px 12px",borderRadius:"8px",background:"#22d3a010",border:"1px solid #22d3a030",fontSize:"12px",color:"#22d3a0",fontWeight:600 }}>
+              <div style={{ marginTop:"10px",padding:"8px 12px",borderRadius:"8px",background:"#22d3a010",border:"1px solid #22d3a030",fontSize:"12px",color:"#2a7a5a",fontWeight:600 }}>
                 ⏱ Tempo útil: <strong>{duracaoUtil()}</strong>
-                {intervalo && <span style={{ color:"#6e6e88",fontWeight:400 }}> (descontando {intervalo}min de intervalo)</span>}
+                {intervalo && <span style={{ color:"#666666",fontWeight:400 }}> (descontando {intervalo}min de intervalo)</span>}
               </div>
             )}
           </div>
@@ -1076,11 +1076,11 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
           </div>
 
           {/* Envio de e-mail */}
-          <div style={{ background:"#0d0d14",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"14px 16px" }}>
+          <div style={{ background:"#f7f7f7",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"14px 16px" }}>
             <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:showEmailForm?"12px":"0" }}>
               <div style={{ fontSize:"11px",color:"#f5a623",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase" }}>✉️ Enviar por E-mail</div>
               <button onClick={()=>setShowEmailForm(v=>!v)}
-                style={{ fontSize:"11px",background:"none",border:"none",color:"#6c63ff",cursor:"pointer",fontWeight:600,fontFamily:"inherit" }}>
+                style={{ fontSize:"11px",background:"none",border:"none",color:"#2c2c2c",cursor:"pointer",fontWeight:600,fontFamily:"inherit" }}>
                 {showEmailForm?"▴ Ocultar":"▾ Expandir"}
               </button>
             </div>
@@ -1091,7 +1091,7 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
                   <label style={lbl}>Destinatário(s)</label>
                   {emailClienteOS && emailDest !== emailClienteOS && (
                     <button onClick={()=>setEmailDest(emailClienteOS)}
-                      style={{ fontSize:"10px",background:"none",border:"none",color:"#6c63ff",cursor:"pointer",fontWeight:600,fontFamily:"inherit" }}>
+                      style={{ fontSize:"10px",background:"none",border:"none",color:"#2c2c2c",cursor:"pointer",fontWeight:600,fontFamily:"inherit" }}>
                       ↩ Usar e-mail do cliente
                     </button>
                   )}
@@ -1101,28 +1101,28 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
                     placeholder="responsavel@cliente.com"
                     style={{...inp, paddingRight: emailClienteOS?"110px":"13px"}}/>
                   {emailClienteOS && emailDest === emailClienteOS && (
-                    <span style={{ position:"absolute",right:"10px",top:"50%",transform:"translateY(-50%)",fontSize:"9px",color:"#22d3a0",fontWeight:700,background:"#22d3a015",padding:"2px 6px",borderRadius:"99px",pointerEvents:"none",whiteSpace:"nowrap" }}>
+                    <span style={{ position:"absolute",right:"10px",top:"50%",transform:"translateY(-50%)",fontSize:"9px",color:"#2a7a5a",fontWeight:700,background:"#e6f4ee",padding:"2px 6px",borderRadius:"99px",pointerEvents:"none",whiteSpace:"nowrap" }}>
                       📋 do cadastro
                     </span>
                   )}
                 </div>
-                <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"5px",lineHeight:1.5 }}>
-                  Para múltiplos destinatários, separe por <strong style={{ color:"#6e6e88" }}>vírgula</strong>: <span style={{ color:"#6e6e88" }}>email1@a.com, email2@b.com</span>
+                <div style={{ fontSize:"10px",color:"#888888",marginTop:"5px",lineHeight:1.5 }}>
+                  Para múltiplos destinatários, separe por <strong style={{ color:"#666666" }}>vírgula</strong>: <span style={{ color:"#666666" }}>email1@a.com, email2@b.com</span>
                 </div>
               </div>
                 <div style={{ marginTop:"10px" }}>
                   <button onClick={handleEnviarEmail} disabled={sendingEmail||!osNumero}
-                    style={{ width:"100%",padding:"10px",borderRadius:"10px",border:"none",background:sendingEmail?"#2a2a3a":"linear-gradient(135deg,#f5a623,#f59e0b)",color:"#fff",fontWeight:700,fontSize:"13px",cursor:sendingEmail||!osNumero?"not-allowed":"pointer",fontFamily:"inherit",opacity:!osNumero?0.5:1 }}>
+                    style={{ width:"100%",padding:"10px",borderRadius:"10px",border:"none",background:sendingEmail?"#cccccc":"linear-gradient(135deg,#f5a623,#f59e0b)",color:"#fff",fontWeight:700,fontSize:"13px",cursor:sendingEmail||!osNumero?"not-allowed":"pointer",fontFamily:"inherit",opacity:!osNumero?0.5:1 }}>
                     {sendingEmail?"⏳ Enviando...":"📧 Enviar OS por e-mail"}
                   </button>
                 </div>
                 {emailStatus==="ok" && (
-                  <div style={{ marginTop:"8px",padding:"8px 12px",borderRadius:"8px",background:"#22d3a015",border:"1px solid #22d3a044",fontSize:"12px",color:"#22d3a0",fontWeight:600 }}>
+                  <div style={{ marginTop:"8px",padding:"8px 12px",borderRadius:"8px",background:"#e6f4ee",border:"1px solid #22d3a044",fontSize:"12px",color:"#2a7a5a",fontWeight:600 }}>
                     ✅ E-mail enviado com sucesso!
                   </div>
                 )}
                 {emailStatus==="erro" && (
-                  <div style={{ marginTop:"8px",padding:"8px 12px",borderRadius:"8px",background:"#f04f5e15",border:"1px solid #f04f5e44",fontSize:"12px",color:"#f04f5e" }}>
+                  <div style={{ marginTop:"8px",padding:"8px 12px",borderRadius:"8px",background:"#fff0f0",border:"1px solid #f04f5e44",fontSize:"12px",color:"#c0392b" }}>
                     ❌ Falha ao enviar. Verifique as configurações de e-mail em Cadastros.
                   </div>
                 )}
@@ -1152,14 +1152,14 @@ function OrdemServicoModal({ entry, consultorName, emailConfig, clientList, onSa
 
           {/* Última atualização */}
           {entry.osPreenchidaEm && (
-            <div style={{ fontSize:"10px",color:"#3e3e55",textAlign:"right" }}>
+            <div style={{ fontSize:"10px",color:"#888888",textAlign:"right" }}>
               Última atualização: {new Date(entry.osPreenchidaEm).toLocaleString("pt-BR")} por {entry.osPreenchidaPor}
             </div>
           )}
 
           {/* Ações */}
           <div style={{ display:"flex",gap:"10px",justifyContent:"flex-end",paddingTop:"4px" }}>
-            <button onClick={onClose} style={{ padding:"10px 20px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
+            <button onClick={onClose} style={{ padding:"10px 20px",borderRadius:"10px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
             <button onClick={handleSave} disabled={saving||!osNumero}
               style={{ padding:"10px 24px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44",opacity:saving||!osNumero?0.7:1 }}>
               {saving?"⏳ Salvando...":"💾 Salvar OS"}
@@ -1251,10 +1251,10 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
     }
   };
 
-  const nivelInfo = (id) => NIVEIS.find(n => n.id === id) || { label: id, color: "#6e6e88", bg: "#6e6e8822" };
+  const nivelInfo = (id) => NIVEIS.find(n => n.id === id) || { label: id, color: "#666666", bg: "#6e6e8822" };
   const nivelOrder = { especialista: 0, senior: 1, pleno: 2, junior: 3 };
 
-  const inp  = { padding:"8px 14px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",fontFamily:"inherit",cursor:"pointer",outline:"none" };
+  const inp  = { padding:"8px 14px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",fontFamily:"inherit",cursor:"pointer",outline:"none" };
 
   const totalConsultores = resultados ? new Set(
     Object.values(resultados).flatMap(mods => Object.values(mods).flatMap(m => m.consultores.map(c => c.nome)))
@@ -1266,16 +1266,16 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
       {/* Header + toggle modo */}
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 4px",letterSpacing:"-0.3px" }}>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>
             🎓 Grade de Conhecimento — Consultores
           </h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0 }}>Visualize a grade individual ou pesquise por produto/módulo</p>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>Visualize a grade individual ou pesquise por produto/módulo</p>
         </div>
-        <div style={{ display:"flex",gap:"2px",background:"#0d0d14",borderRadius:"10px",padding:"3px",border:"1px solid #2a2a3a" }}>
-          <button onClick={()=>setModo("consultor")} style={{ padding:"7px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:modo==="consultor"?"#6c63ff":"transparent",color:modo==="consultor"?"#fff":"#6e6e88" }}>
+        <div style={{ display:"flex",gap:"2px",background:"#f7f7f7",borderRadius:"10px",padding:"3px",border:"1px solid #cccccc" }}>
+          <button onClick={()=>setModo("consultor")} style={{ padding:"7px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:modo==="consultor"?"#2c2c2c":"transparent",color:modo==="consultor"?"#fff":"#666666" }}>
             👤 Por consultor
           </button>
-          <button onClick={()=>setModo("busca")} style={{ padding:"7px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:modo==="busca"?"#6c63ff":"transparent",color:modo==="busca"?"#fff":"#6e6e88" }}>
+          <button onClick={()=>setModo("busca")} style={{ padding:"7px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:modo==="busca"?"#2c2c2c":"transparent",color:modo==="busca"?"#fff":"#666666" }}>
             🔍 Buscar por produto/módulo
           </button>
         </div>
@@ -1285,7 +1285,7 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
       {modo==="consultor" && (
         <div>
           <div style={{ display:"flex",alignItems:"center",gap:"12px",marginBottom:"20px",flexWrap:"wrap" }}>
-            <span style={{ fontSize:"12px",color:"#6e6e88",fontWeight:600 }}>Visualizar grade de:</span>
+            <span style={{ fontSize:"12px",color:"#666666",fontWeight:600 }}>Visualizar grade de:</span>
             <select value={gradeConsultor} onChange={e=>setGradeConsultor(e.target.value)} style={inp}>
               {consultores.map(c=><option key={c} value={c}>{c}</option>)}
             </select>
@@ -1298,12 +1298,12 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
       {modo==="busca" && (
         <div>
           {/* Filtros */}
-          <div style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",padding:"20px",marginBottom:"20px" }}>
-            <div style={{ fontSize:"11px",color:"#3e3e55",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"14px" }}>Filtros de busca</div>
+          <div style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",padding:"20px",marginBottom:"20px" }}>
+            <div style={{ fontSize:"11px",color:"#888888",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"14px" }}>Filtros de busca</div>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr auto",gap:"12px",alignItems:"end",flexWrap:"wrap" }}>
               {/* Produto */}
               <div>
-                <label style={{ fontSize:"11px",color:"#6e6e88",fontWeight:600,display:"block",marginBottom:"6px",letterSpacing:"0.3px" }}>Produto TOTVS</label>
+                <label style={{ fontSize:"11px",color:"#666666",fontWeight:600,display:"block",marginBottom:"6px",letterSpacing:"0.3px" }}>Produto TOTVS</label>
                 <select value={filtroProduto} onChange={e=>{ setFiltroProduto(e.target.value); setFiltroModulo(""); setResultados(null); }} style={{...inp, width:"100%"}}>
                   <option value="">Todos os produtos</option>
                   {TOTVS_PRODUTOS.map(p=><option key={p} value={p}>{p}</option>)}
@@ -1311,7 +1311,7 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
               </div>
               {/* Módulo */}
               <div>
-                <label style={{ fontSize:"11px",color:"#6e6e88",fontWeight:600,display:"block",marginBottom:"6px",letterSpacing:"0.3px" }}>Módulo específico</label>
+                <label style={{ fontSize:"11px",color:"#666666",fontWeight:600,display:"block",marginBottom:"6px",letterSpacing:"0.3px" }}>Módulo específico</label>
                 <select value={filtroModulo} onChange={e=>{ setFiltroModulo(e.target.value); setResultados(null); }} style={{...inp, width:"100%"}}>
                   <option value="">Todos os módulos</option>
                   {modulosDoProduto.map(m=>(
@@ -1329,16 +1329,16 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
 
           {/* Resultados */}
           {buscando && (
-            <div style={{ textAlign:"center",padding:"48px",color:"#3e3e55" }}>
+            <div style={{ textAlign:"center",padding:"48px",color:"#888888" }}>
               <div style={{ width:"32px",height:"32px",border:"3px solid #1f1f2e",borderTop:"3px solid #6c63ff",borderRadius:"50%",animation:"spin .7s linear infinite",margin:"0 auto 14px" }}/>
               <div style={{ fontSize:"13px" }}>Carregando grades de todos os consultores...</div>
             </div>
           )}
 
           {!buscando && resultados !== null && totalModulos === 0 && (
-            <div style={{ textAlign:"center",padding:"48px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+            <div style={{ textAlign:"center",padding:"48px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
               <div style={{ fontSize:"36px",marginBottom:"12px" }}>🔍</div>
-              <div style={{ fontSize:"14px",color:"#3e3e55" }}>Nenhum consultor cadastrou conhecimento neste produto/módulo ainda.</div>
+              <div style={{ fontSize:"14px",color:"#888888" }}>Nenhum consultor cadastrou conhecimento neste produto/módulo ainda.</div>
             </div>
           )}
 
@@ -1346,18 +1346,18 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
             <div>
               {/* Resumo */}
               <div style={{ display:"flex",gap:"16px",marginBottom:"16px",flexWrap:"wrap" }}>
-                <div style={{ padding:"8px 16px",borderRadius:"10px",background:"#6c63ff18",border:"1px solid #6c63ff33",display:"flex",alignItems:"center",gap:"8px" }}>
+                <div style={{ padding:"8px 16px",borderRadius:"10px",background:"rgba(0,0,0,0.05)",border:"1px solid #6c63ff33",display:"flex",alignItems:"center",gap:"8px" }}>
                   <span style={{ fontSize:"18px" }}>👥</span>
                   <div>
-                    <div style={{ fontSize:"18px",fontWeight:800,color:"#a78bfa" }}>{totalConsultores}</div>
-                    <div style={{ fontSize:"10px",color:"#6e6e88" }}>consultor{totalConsultores!==1?"es":""}</div>
+                    <div style={{ fontSize:"18px",fontWeight:800,color:"#555555" }}>{totalConsultores}</div>
+                    <div style={{ fontSize:"10px",color:"#666666" }}>consultor{totalConsultores!==1?"es":""}</div>
                   </div>
                 </div>
-                <div style={{ padding:"8px 16px",borderRadius:"10px",background:"#22d3a018",border:"1px solid #22d3a033",display:"flex",alignItems:"center",gap:"8px" }}>
+                <div style={{ padding:"8px 16px",borderRadius:"10px",background:"#e6f4ee",border:"1px solid #22d3a033",display:"flex",alignItems:"center",gap:"8px" }}>
                   <span style={{ fontSize:"18px" }}>📋</span>
                   <div>
-                    <div style={{ fontSize:"18px",fontWeight:800,color:"#22d3a0" }}>{totalModulos}</div>
-                    <div style={{ fontSize:"10px",color:"#6e6e88" }}>módulo{totalModulos!==1?"s":""} encontrado{totalModulos!==1?"s":""}</div>
+                    <div style={{ fontSize:"18px",fontWeight:800,color:"#2a7a5a" }}>{totalModulos}</div>
+                    <div style={{ fontSize:"10px",color:"#666666" }}>módulo{totalModulos!==1?"s":""} encontrado{totalModulos!==1?"s":""}</div>
                   </div>
                 </div>
               </div>
@@ -1366,21 +1366,21 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
               {Object.entries(resultados).map(([produto, mods])=>(
                 <div key={produto} style={{ marginBottom:"20px" }}>
                   <div style={{ display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px" }}>
-                    <div style={{ padding:"4px 12px",borderRadius:"99px",background:"#6c63ff22",border:"1px solid #6c63ff44" }}>
-                      <span style={{ fontSize:"12px",fontWeight:700,color:"#a78bfa" }}>{produto}</span>
+                    <div style={{ padding:"4px 12px",borderRadius:"99px",background:"rgba(0,0,0,0.06)",border:"1px solid #6c63ff44" }}>
+                      <span style={{ fontSize:"12px",fontWeight:700,color:"#555555" }}>{produto}</span>
                     </div>
-                    <span style={{ fontSize:"11px",color:"#3e3e55" }}>{Object.keys(mods).length} módulo{Object.keys(mods).length!==1?"s":""}</span>
+                    <span style={{ fontSize:"11px",color:"#888888" }}>{Object.keys(mods).length} módulo{Object.keys(mods).length!==1?"s":""}</span>
                   </div>
 
                   <div style={{ display:"flex",flexDirection:"column",gap:"8px" }}>
                     {Object.entries(mods).map(([modId, info])=>{
                       const sorted = [...info.consultores].sort((a,b) => (nivelOrder[a.nivel]??9)-(nivelOrder[b.nivel]??9));
                       return (
-                        <div key={modId} style={{ background:"#111118",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"14px 16px" }}>
+                        <div key={modId} style={{ background:"#ffffff",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"14px 16px" }}>
                           <div style={{ display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:"12px",flexWrap:"wrap" }}>
                             <div>
-                              <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{info.label}</div>
-                              <div style={{ fontSize:"11px",color:"#3e3e55",marginTop:"2px" }}>{info.desc}</div>
+                              <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{info.label}</div>
+                              <div style={{ fontSize:"11px",color:"#888888",marginTop:"2px" }}>{info.desc}</div>
                             </div>
                             <div style={{ display:"flex",gap:"6px",flexWrap:"wrap",justifyContent:"flex-end" }}>
                               {sorted.map(({nome,nivel})=>{
@@ -1389,11 +1389,11 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
                                   <div key={nome}
                                     onClick={()=>setConsultorDisp(consultorDisp===nome?null:nome)}
                                     title="Clique para ver disponibilidade"
-                                    style={{ display:"flex",alignItems:"center",gap:"6px",padding:"5px 10px",borderRadius:"8px",background:consultorDisp===nome?"#6c63ff33":nv.bg,border:"1px solid "+(consultorDisp===nome?"#6c63ff":nv.color+"44"),cursor:"pointer",transition:"all .15s" }}>
+                                    style={{ display:"flex",alignItems:"center",gap:"6px",padding:"5px 10px",borderRadius:"8px",background:consultorDisp===nome?"#6c63ff33":nv.bg,border:"1px solid "+(consultorDisp===nome?"#2c2c2c":nv.color+"44"),cursor:"pointer",transition:"all .15s" }}>
                                     <div style={{ width:"20px",height:"20px",borderRadius:"6px",background:`hsl(${(consultores.indexOf(nome)*37)%360},55%,48%)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"8px",fontWeight:800,color:"#fff",flexShrink:0 }}>
                                       {nome.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase()}
                                     </div>
-                                    <span style={{ fontSize:"11px",fontWeight:600,color:"#c8c8d8" }}>{nome.split(" ")[0]}</span>
+                                    <span style={{ fontSize:"11px",fontWeight:600,color:"#222222" }}>{nome.split(" ")[0]}</span>
                                     <span style={{ fontSize:"10px",fontWeight:700,color:nv.color,padding:"1px 6px",borderRadius:"99px",background:nv.bg }}>{nv.label}</span>
                                     <span style={{ fontSize:"9px",color:"#454560" }}>📅</span>
                                   </div>
@@ -1411,9 +1411,9 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
           )}
 
           {resultados === null && !buscando && (
-            <div style={{ textAlign:"center",padding:"48px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+            <div style={{ textAlign:"center",padding:"48px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
               <div style={{ fontSize:"36px",marginBottom:"12px" }}>🎯</div>
-              <div style={{ fontSize:"14px",color:"#3e3e55" }}>Selecione os filtros e clique em <strong style={{ color:"#a78bfa" }}>Buscar</strong> para ver quais consultores possuem o conhecimento</div>
+              <div style={{ fontSize:"14px",color:"#888888" }}>Selecione os filtros e clique em <strong style={{ color:"#555555" }}>Buscar</strong> para ver quais consultores possuem o conhecimento</div>
             </div>
           )}
 
@@ -1467,29 +1467,29 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
             }
 
             return (
-              <div style={{ marginTop:"20px", background:"#0d0d14", borderRadius:"14px", border:"1px solid #6c63ff33", padding:"20px" }}>
+              <div style={{ marginTop:"20px", background:"#f7f7f7", borderRadius:"14px", border:"1px solid #6c63ff33", padding:"20px" }}>
                 <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"16px", flexWrap:"wrap", gap:"10px" }}>
                   <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
                     <div style={{ width:"36px", height:"36px", borderRadius:"10px", background:`hsl(${(consultores.indexOf(consultorDisp)*37)%360},55%,48%)`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"13px", fontWeight:800, color:"#fff" }}>
                       {consultorDisp.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase()}
                     </div>
                     <div>
-                      <div style={{ fontSize:"14px", fontWeight:700, color:"#f0f0fa" }}>📅 Disponibilidade — {consultorDisp}</div>
-                      <div style={{ fontSize:"11px", color:"#6e6e88" }}>Próximos 6 meses a partir de {MONTHS_ORDER[mesAtualIdx]}/{anoAtual}</div>
+                      <div style={{ fontSize:"14px", fontWeight:700, color:"#111111" }}>📅 Disponibilidade — {consultorDisp}</div>
+                      <div style={{ fontSize:"11px", color:"#666666" }}>Próximos 6 meses a partir de {MONTHS_ORDER[mesAtualIdx]}/{anoAtual}</div>
                     </div>
                   </div>
-                  <button onClick={()=>setConsultorDisp(null)} style={{ background:"none", border:"none", color:"#6e6e88", cursor:"pointer", fontSize:"18px", lineHeight:1 }}>✕</button>
+                  <button onClick={()=>setConsultorDisp(null)} style={{ background:"none", border:"none", color:"#666666", cursor:"pointer", fontSize:"18px", lineHeight:1 }}>✕</button>
                 </div>
 
                 {/* Próximos dias livres */}
                 {proxDisponiveis.length > 0 && (
                   <div style={{ marginBottom:"16px" }}>
-                    <div style={{ fontSize:"11px", color:"#22d3a0", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"8px" }}>
+                    <div style={{ fontSize:"11px", color:"#2a7a5a", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"8px" }}>
                       ✅ Próximos dias livres em {MONTHS_ORDER[mesAtualIdx]}
                     </div>
                     <div style={{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
                       {proxDisponiveis.map(dia => (
-                        <span key={dia} style={{ padding:"5px 14px", borderRadius:"8px", background:"#22d3a018", border:"1px solid #22d3a044", fontSize:"12px", fontWeight:700, color:"#22d3a0" }}>
+                        <span key={dia} style={{ padding:"5px 14px", borderRadius:"8px", background:"#e6f4ee", border:"1px solid #22d3a044", fontSize:"12px", fontWeight:700, color:"#2a7a5a" }}>
                           Dia {dia}
                         </span>
                       ))}
@@ -1497,13 +1497,13 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
                   </div>
                 )}
                 {proxDisponiveis.length === 0 && (
-                  <div style={{ padding:"10px 14px", borderRadius:"10px", background:"#f04f5e18", border:"1px solid #f04f5e33", fontSize:"12px", color:"#f04f5e", marginBottom:"16px" }}>
+                  <div style={{ padding:"10px 14px", borderRadius:"10px", background:"#fff0f0", border:"1px solid #f04f5e33", fontSize:"12px", color:"#c0392b", marginBottom:"16px" }}>
                     ⚠️ Sem dias livres identificados para o restante do mês atual
                   </div>
                 )}
 
                 {/* Resumo por mês — janela de 6 meses */}
-                <div style={{ fontSize:"11px", color:"#6e6e88", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"10px" }}>Resumo por mês</div>
+                <div style={{ fontSize:"11px", color:"#666666", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"10px" }}>Resumo por mês</div>
                 <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(160px,1fr))", gap:"8px" }}>
                   {janela.map(({ mIdx, ano, mesNome, label }) => {
                     const chave = mesNome + ano;
@@ -1515,25 +1515,25 @@ function GradeAdminView({ consultores, scheduleData, onAbrirAgenda }) {
                       <div key={chave}
                         onClick={() => podeAbrir && onAbrirAgenda(consultorDisp, mesNome)}
                         title={podeAbrir ? `Abrir agenda de ${consultorDisp} em ${label}` : undefined}
-                        style={{ background: isAtual?"#6c63ff18":"#111118", borderRadius:"10px", border:"1px solid "+(isAtual?"#6c63ff44":"#1f1f2e"), padding:"10px 12px", cursor: podeAbrir?"pointer":"default", transition:"all .15s" }}
+                        style={{ background: isAtual?"rgba(0,0,0,0.05)":"#ffffff", borderRadius:"10px", border:"1px solid "+(isAtual?"rgba(0,0,0,0.12)":"#d8d8d8"), padding:"10px 12px", cursor: podeAbrir?"pointer":"default", transition:"all .15s" }}
                         onMouseEnter={e=>{ if(podeAbrir) e.currentTarget.style.borderColor="#6c63ff88"; }}
-                        onMouseLeave={e=>{ if(podeAbrir) e.currentTarget.style.borderColor=isAtual?"#6c63ff44":"#1f1f2e"; }}
+                        onMouseLeave={e=>{ if(podeAbrir) e.currentTarget.style.borderColor=isAtual?"rgba(0,0,0,0.12)":"#d8d8d8"; }}
                       >
-                        <div style={{ fontSize:"12px", fontWeight:700, color: isAtual?"#a78bfa": isOutroAno?"#60a5fa":"#c8c8d8", marginBottom:"6px", display:"flex", alignItems:"center", gap:"5px" }}>
+                        <div style={{ fontSize:"12px", fontWeight:700, color: isAtual?"#555555": isOutroAno?"#60a5fa":"#222222", marginBottom:"6px", display:"flex", alignItems:"center", gap:"5px" }}>
                           {label}
-                          {isAtual && <span style={{ fontSize:"9px", background:"#6c63ff44", borderRadius:"4px", padding:"1px 4px" }}>atual</span>}
+                          {isAtual && <span style={{ fontSize:"9px", background:"rgba(0,0,0,0.12)", borderRadius:"4px", padding:"1px 4px" }}>atual</span>}
                           {isOutroAno && !isAtual && <span style={{ fontSize:"9px", background:"#60a5fa22", borderRadius:"4px", padding:"1px 4px", color:"#60a5fa" }}>{ano}</span>}
-                          {podeAbrir && <span style={{ marginLeft:"auto", fontSize:"9px", color:"#3e3e55" }}>📋 abrir</span>}
+                          {podeAbrir && <span style={{ marginLeft:"auto", fontSize:"9px", color:"#888888" }}>📋 abrir</span>}
                         </div>
                         {d ? (
                           <div style={{ display:"flex", flexDirection:"column", gap:"3px" }}>
-                            {d.cliente>0    && <div style={{ fontSize:"10px", color:"#6e6e88" }}>🏢 {d.cliente} dia{d.cliente!==1?"s":""} c/ cliente</div>}
+                            {d.cliente>0    && <div style={{ fontSize:"10px", color:"#666666" }}>🏢 {d.cliente} dia{d.cliente!==1?"s":""} c/ cliente</div>}
                             {d.ferias>0     && <div style={{ fontSize:"10px", color:"#f5a623" }}>🏖️ {d.ferias} dia{d.ferias!==1?"s":""} de férias</div>}
-                            {d.afastamento>0 && <div style={{ fontSize:"10px", color:"#f04f5e" }}>🏥 {d.afastamento} dia{d.afastamento!==1?"s":""} afastado</div>}
-                            {d.reservado>0  && <div style={{ fontSize:"10px", color:"#a78bfa" }}>📌 {d.reservado} reservado{d.reservado!==1?"s":""}</div>}
+                            {d.afastamento>0 && <div style={{ fontSize:"10px", color:"#c0392b" }}>🏥 {d.afastamento} dia{d.afastamento!==1?"s":""} afastado</div>}
+                            {d.reservado>0  && <div style={{ fontSize:"10px", color:"#555555" }}>📌 {d.reservado} reservado{d.reservado!==1?"s":""}</div>}
                           </div>
                         ) : (
-                          <div style={{ fontSize:"10px", color:"#22d3a0" }}>✅ Sem lançamentos</div>
+                          <div style={{ fontSize:"10px", color:"#2a7a5a" }}>✅ Sem lançamentos</div>
                         )}
                       </div>
                     );
@@ -2052,10 +2052,10 @@ const TOTVS_MODULOS = {
 };
 
 const NIVEIS = [
-  { id:"especialista", label:"Especialista", color:"#a78bfa", bg:"#a78bfa22" },
-  { id:"senior",       label:"Sênior",       color:"#22d3a0", bg:"#22d3a022" },
+  { id:"especialista", label:"Especialista", color:"#555555", bg:"#a78bfa22" },
+  { id:"senior",       label:"Sênior",       color:"#2a7a5a", bg:"#22d3a022" },
   { id:"pleno",        label:"Pleno",        color:"#f5a623", bg:"#f5a62322" },
-  { id:"junior",       label:"Júnior",       color:"#6e6e88", bg:"#6e6e8822" },
+  { id:"junior",       label:"Júnior",       color:"#666666", bg:"#6e6e8822" },
 ];
 
 function GradeConhecimento({ consultorName, userId, readOnly }) {
@@ -2146,14 +2146,14 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
   const nivelCounts = NIVEIS.map(n => ({ ...n, count: Object.values(grade).filter(v=>v===n.id).length }));
 
   if (loading) return (
-    <div style={{ textAlign:"center",padding:"60px",color:"#3e3e55" }}>
+    <div style={{ textAlign:"center",padding:"60px",color:"#888888" }}>
       <div style={{ width:"32px",height:"32px",border:"3px solid #1f1f2e",borderTop:"3px solid #6c63ff",borderRadius:"50%",animation:"spin .7s linear infinite",margin:"0 auto 16px" }}/>
       <div style={{ fontSize:"13px" }}>Carregando grade de conhecimento...</div>
     </div>
   );
 
   if (erro) return (
-    <div style={{ textAlign:"center",padding:"60px",color:"#f04f5e",background:"#f04f5e10",borderRadius:"16px",border:"1px solid #f04f5e30" }}>
+    <div style={{ textAlign:"center",padding:"60px",color:"#c0392b",background:"#f04f5e10",borderRadius:"16px",border:"1px solid #f04f5e30" }}>
       <div style={{ fontSize:"32px",marginBottom:"12px" }}>⚠️</div>
       <div style={{ fontSize:"13px" }}>{erro}</div>
     </div>
@@ -2164,10 +2164,10 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
       {/* Header */}
       <div style={{ display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:"24px",gap:"16px",flexWrap:"wrap" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 6px",letterSpacing:"-0.3px" }}>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 6px",letterSpacing:"-0.3px" }}>
             🎓 Grade de Conhecimento TOTVS
           </h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0 }}>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>
             {readOnly ? `Conhecimentos declarados por ${consultorName}` : "Selecione seus produtos e defina o nível em cada módulo"}
           </p>
         </div>
@@ -2181,7 +2181,7 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
           ))}
           {!readOnly && (
             <button onClick={handleSave} disabled={saving}
-              style={{ padding:"9px 20px",borderRadius:"10px",border:"none",background:saved?"#22d3a0":"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",fontWeight:700,fontSize:"13px",cursor:"pointer",fontFamily:"inherit",boxShadow:saved?"0 4px 16px #22d3a044":"0 4px 16px #6c63ff44",transition:"all .2s" }}>
+              style={{ padding:"9px 20px",borderRadius:"10px",border:"none",background:saved?"#2a7a5a":"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",fontWeight:700,fontSize:"13px",cursor:"pointer",fontFamily:"inherit",boxShadow:saved?"0 4px 16px #22d3a044":"0 4px 16px #6c63ff44",transition:"all .2s" }}>
               {saving?"⏳ Salvando...":saved?"✅ Salvo!":"💾 Salvar grade"}
             </button>
           )}
@@ -2190,7 +2190,7 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
 
       {/* Seleção de produtos */}
       <div style={{ marginBottom:"20px" }}>
-        <div style={{ fontSize:"11px",color:"#3e3e55",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"10px" }}>Produtos com conhecimento</div>
+        <div style={{ fontSize:"11px",color:"#888888",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"10px" }}>Produtos com conhecimento</div>
         <div style={{ display:"flex",gap:"10px",flexWrap:"wrap" }}>
           {TOTVS_PRODUTOS.map(prod => {
             const sel = produtosSel.has(prod);
@@ -2198,11 +2198,11 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
             return (
               <div key={prod}
                 onClick={()=>!readOnly && toggleProduto(prod)}
-                style={{ padding:"10px 18px",borderRadius:"12px",border:"1px solid "+(sel?"#6c63ff":"#2a2a3a"),background:sel?"#6c63ff18":"#111118",cursor:readOnly?"default":"pointer",transition:"all .2s",display:"flex",alignItems:"center",gap:"10px" }}>
-                <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:sel?"#6c63ff":"#2a2a3a",transition:"background .2s" }}/>
+                style={{ padding:"10px 18px",borderRadius:"12px",border:"1px solid "+(sel?"#2c2c2c":"#cccccc"),background:sel?"rgba(0,0,0,0.05)":"#ffffff",cursor:readOnly?"default":"pointer",transition:"all .2s",display:"flex",alignItems:"center",gap:"10px" }}>
+                <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:sel?"#2c2c2c":"#cccccc",transition:"background .2s" }}/>
                 <div>
-                  <div style={{ fontSize:"13px",fontWeight:700,color:sel?"#a78bfa":"#6e6e88" }}>{prod}</div>
-                  {count>0 && <div style={{ fontSize:"10px",color:"#6c63ff",marginTop:"1px" }}>{count} módulo{count>1?"s":""}</div>}
+                  <div style={{ fontSize:"13px",fontWeight:700,color:sel?"#555555":"#666666" }}>{prod}</div>
+                  {count>0 && <div style={{ fontSize:"10px",color:"#2c2c2c",marginTop:"1px" }}>{count} módulo{count>1?"s":""}</div>}
                 </div>
               </div>
             );
@@ -2211,23 +2211,23 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
       </div>
 
       {produtosSel.size === 0 && (
-        <div style={{ textAlign:"center",padding:"48px 20px",background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e" }}>
+        <div style={{ textAlign:"center",padding:"48px 20px",background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8" }}>
           <div style={{ fontSize:"40px",marginBottom:"12px" }}>🎯</div>
-          <div style={{ fontSize:"14px",color:"#3e3e55" }}>Selecione os produtos TOTVS que você conhece para definir seus módulos</div>
+          <div style={{ fontSize:"14px",color:"#888888" }}>Selecione os produtos TOTVS que você conhece para definir seus módulos</div>
         </div>
       )}
 
       {produtosSel.size > 0 && (
-        <div style={{ background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e",overflow:"hidden" }}>
+        <div style={{ background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8",overflow:"hidden" }}>
           {/* Tabs de produto */}
-          <div style={{ display:"flex",borderBottom:"1px solid #1f1f2e",background:"#0d0d14",overflowX:"auto" }}>
+          <div style={{ display:"flex",borderBottom:"1px solid #1f1f2e",background:"#f7f7f7",overflowX:"auto" }}>
             {[...produtosSel].map(prod => {
               const count = (TOTVS_MODULOS[prod]||[]).filter(m=>grade[m.id]).length;
               return (
                 <button key={prod} onClick={()=>{ setActiveProd(prod); setSearch(""); }}
-                  style={{ padding:"12px 20px",border:"none",borderBottom:"2px solid "+(activeProd===prod?"#6c63ff":"transparent"),background:"transparent",color:activeProd===prod?"#a78bfa":"#3e3e55",fontWeight:activeProd===prod?700:400,fontSize:"13px",cursor:"pointer",whiteSpace:"nowrap",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"8px",transition:"all .15s" }}>
+                  style={{ padding:"12px 20px",border:"none",borderBottom:"2px solid "+(activeProd===prod?"#2c2c2c":"transparent"),background:"transparent",color:activeProd===prod?"#555555":"#888888",fontWeight:activeProd===prod?700:400,fontSize:"13px",cursor:"pointer",whiteSpace:"nowrap",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"8px",transition:"all .15s" }}>
                   {prod}
-                  {count>0&&<span style={{ fontSize:"10px",background:"#6c63ff33",color:"#6c63ff",padding:"1px 7px",borderRadius:"99px",fontWeight:700 }}>{count}</span>}
+                  {count>0&&<span style={{ fontSize:"10px",background:"#6c63ff33",color:"#2c2c2c",padding:"1px 7px",borderRadius:"99px",fontWeight:700 }}>{count}</span>}
                 </button>
               );
             })}
@@ -2236,18 +2236,18 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
           {/* Busca módulo */}
           <div style={{ padding:"12px 16px",borderBottom:"1px solid #1f1f2e",display:"flex",alignItems:"center",gap:"8px" }}>
             <div style={{ position:"relative",flex:1,maxWidth:"280px" }}>
-              <span style={{ position:"absolute",left:"10px",top:"50%",transform:"translateY(-50%)",fontSize:"12px",color:"#3e3e55",pointerEvents:"none" }}>🔍</span>
+              <span style={{ position:"absolute",left:"10px",top:"50%",transform:"translateY(-50%)",fontSize:"12px",color:"#888888",pointerEvents:"none" }}>🔍</span>
               <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar módulo..."
-                style={{ width:"100%",padding:"7px 10px 7px 30px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"12px",fontFamily:"inherit",outline:"none",boxSizing:"border-box" }}/>
+                style={{ width:"100%",padding:"7px 10px 7px 30px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none",boxSizing:"border-box" }}/>
             </div>
-            <div style={{ fontSize:"11px",color:"#3e3e55" }}>
+            <div style={{ fontSize:"11px",color:"#888888" }}>
               {(TOTVS_MODULOS[activeProd]||[]).filter(m=>grade[m.id]).length} / {(TOTVS_MODULOS[activeProd]||[]).length} módulos preenchidos
             </div>
           </div>
 
           {/* Legenda de níveis */}
           <div style={{ padding:"10px 16px",borderBottom:"1px solid #1f1f2e",display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center" }}>
-            <span style={{ fontSize:"10px",color:"#3e3e55",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",marginRight:"4px" }}>Níveis:</span>
+            <span style={{ fontSize:"10px",color:"#888888",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",marginRight:"4px" }}>Níveis:</span>
             {NIVEIS.map(n=>(
               <div key={n.id} style={{ display:"flex",alignItems:"center",gap:"4px" }}>
                 <div style={{ width:"8px",height:"8px",borderRadius:"2px",background:n.color }}/>
@@ -2260,8 +2260,8 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
           <div style={{ overflowY:"auto",maxHeight:"480px" }}>
             <table style={{ width:"100%",borderCollapse:"collapse" }}>
               <thead style={{ position:"sticky",top:0,zIndex:2 }}>
-                <tr style={{ background:"#0d0d14" }}>
-                  <th style={{ padding:"10px 16px",textAlign:"left",fontSize:"10px",color:"#3e3e55",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",width:"40%" }}>Módulo</th>
+                <tr style={{ background:"#f7f7f7" }}>
+                  <th style={{ padding:"10px 16px",textAlign:"left",fontSize:"10px",color:"#888888",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",width:"40%" }}>Módulo</th>
                   {NIVEIS.map(n=>(
                     <th key={n.id} style={{ padding:"10px 8px",textAlign:"center",fontSize:"10px",color:n.color,fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase" }}>{n.label}</th>
                   ))}
@@ -2278,8 +2278,8 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
                     <React.Fragment key={mod.id}>
                       {showGrupoHeader && (
                         <tr>
-                          <td colSpan={5} style={{ padding:"10px 16px 6px",background:"#0d0d14",borderBottom:"1px solid #1f1f2e" }}>
-                            <span style={{ fontSize:"10px",fontWeight:700,color:"#6c63ff",letterSpacing:"1px",textTransform:"uppercase" }}>
+                          <td colSpan={5} style={{ padding:"10px 16px 6px",background:"#f7f7f7",borderBottom:"1px solid #1f1f2e" }}>
+                            <span style={{ fontSize:"10px",fontWeight:700,color:"#2c2c2c",letterSpacing:"1px",textTransform:"uppercase" }}>
                               {grupoAtual}
                             </span>
                           </td>
@@ -2287,8 +2287,8 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
                       )}
                     <tr style={{ borderBottom:"1px solid #18181f",background:nivelAtual?(NIVEIS.find(n=>n.id===nivelAtual)?.bg||"transparent"):"transparent",transition:"background .15s" }}>
                       <td style={{ padding:"11px 16px" }}>
-                        <div style={{ fontSize:"12px",fontWeight:700,color:nivelAtual?"#f0f0fa":"#c8c8d8" }}>{mod.label}</div>
-                        <div style={{ fontSize:"11px",color:"#3e3e55",marginTop:"2px" }}>{mod.desc}</div>
+                        <div style={{ fontSize:"12px",fontWeight:700,color:nivelAtual?"#111111":"#222222" }}>{mod.label}</div>
+                        <div style={{ fontSize:"11px",color:"#888888",marginTop:"2px" }}>{mod.desc}</div>
                       </td>
                       {NIVEIS.map(n=>{
                         const sel = nivelAtual === n.id;
@@ -2296,11 +2296,11 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
                           <td key={n.id} style={{ padding:"8px",textAlign:"center" }}>
                             <button
                               onClick={()=>!readOnly && setNivel(mod.id, n.id)}
-                              style={{ width:"36px",height:"36px",borderRadius:"10px",border:"1px solid "+(sel?n.color:"#2a2a3a"),background:sel?n.bg:"transparent",cursor:readOnly?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto",transition:"all .15s" }}
+                              style={{ width:"36px",height:"36px",borderRadius:"10px",border:"1px solid "+(sel?n.color:"#cccccc"),background:sel?n.bg:"transparent",cursor:readOnly?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto",transition:"all .15s" }}
                               title={n.label}>
                               {sel
                                 ? <span style={{ fontSize:"16px",color:n.color }}>●</span>
-                                : <span style={{ fontSize:"14px",color:"#2a2a3a" }}>○</span>
+                                : <span style={{ fontSize:"14px",color:"#cccccc" }}>○</span>
                               }
                             </button>
                           </td>
@@ -2311,7 +2311,7 @@ function GradeConhecimento({ consultorName, userId, readOnly }) {
                   );
                 })}
                 {modulos.length===0&&(
-                  <tr><td colSpan={5} style={{ textAlign:"center",padding:"32px",fontSize:"12px",color:"#3e3e55" }}>Nenhum módulo encontrado</td></tr>
+                  <tr><td colSpan={5} style={{ textAlign:"center",padding:"32px",fontSize:"12px",color:"#888888" }}>Nenhum módulo encontrado</td></tr>
                 )}
               </tbody>
             </table>
@@ -2391,7 +2391,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
   const getColor = (entry) => {
     if (!entry) return "#6b7280";
     if (entry.type==="vacation") return "#0891b2";
-    if (entry.type==="absence") return "#f04f5e";
+    if (entry.type==="absence") return "#c0392b";
     if (entry.type==="holiday") return "#d97706";
     if (entry.type==="blocked") return "#374151";
     if (entry.type==="reserved") return "#6366f1";
@@ -2405,9 +2405,9 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
     return n;
   });
 
-  const dropStyle = { position:"absolute",top:"calc(100% + 6px)",left:0,zIndex:500,background:"#111118",border:"1px solid #2a2a3a",borderRadius:"12px",boxShadow:"0 8px 32px rgba(0,0,0,0.6)",minWidth:"200px",maxHeight:"260px",overflowY:"auto",padding:"6px" };
-  const chipActive = { padding:"5px 12px",borderRadius:"99px",border:"1px solid #6c63ff",background:"#6c63ff22",color:"#a78bfa",fontSize:"12px",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap" };
-  const chipInactive = { padding:"5px 12px",borderRadius:"99px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",fontSize:"12px",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap" };
+  const dropStyle = { position:"absolute",top:"calc(100% + 6px)",left:0,zIndex:500,background:"#ffffff",border:"1px solid #cccccc",borderRadius:"12px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",minWidth:"200px",maxHeight:"260px",overflowY:"auto",padding:"6px" };
+  const chipActive = { padding:"5px 12px",borderRadius:"99px",border:"1px solid #6c63ff",background:"rgba(0,0,0,0.06)",color:"#555555",fontSize:"12px",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap" };
+  const chipInactive = { padding:"5px 12px",borderRadius:"99px",border:"1px solid #cccccc",background:"transparent",color:"#666666",fontSize:"12px",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap" };
 
   // Popup de detalhe (para visualização e edição)
   const [popup, setPopup] = React.useState(null); // { entry, name, x, y }
@@ -2422,7 +2422,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
   }, [popupPos]);
 
   const TIPO_LABEL = { client:"👤 Cliente", vacation:"🏖 Férias", holiday:"🎉 Feriado", reserved:"🔒 Reservado", blocked:"⛔ Bloqueado" };
-  const NIVEL_MODAL = { especialista:{label:"Especialista",color:"#a78bfa"}, senior:{label:"Sênior",color:"#22d3a0"}, pleno:{label:"Pleno",color:"#f5a623"}, junior:{label:"Júnior",color:"#6e6e88"} };
+  const NIVEL_MODAL = { especialista:{label:"Especialista",color:"#555555"}, senior:{label:"Sênior",color:"#2a7a5a"}, pleno:{label:"Pleno",color:"#f5a623"}, junior:{label:"Júnior",color:"#666666"} };
 
   return (
     <div>
@@ -2430,13 +2430,13 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
       <div style={{ display:"flex",alignItems:"center",gap:"8px",marginBottom:"16px",flexWrap:"wrap" }}>
         {/* Busca */}
         <div style={{ position:"relative",display:"flex",alignItems:"center",flex:"1",minWidth:"180px",maxWidth:"260px" }}>
-          <span style={{ position:"absolute",left:"10px",fontSize:"13px",color:"#3e3e55",pointerEvents:"none" }}>🔍</span>
+          <span style={{ position:"absolute",left:"10px",fontSize:"13px",color:"#888888",pointerEvents:"none" }}>🔍</span>
           <input
             value={search} onChange={e=>setSearch(e.target.value)}
             placeholder="Buscar consultor ou cliente..."
-            style={{ width:"100%",padding:"8px 12px 8px 32px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"12px",fontFamily:"inherit",outline:"none" }}
+            style={{ width:"100%",padding:"8px 12px 8px 32px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none" }}
           />
-          {search && <button onClick={()=>setSearch("")} style={{ position:"absolute",right:"8px",background:"none",border:"none",color:"#3e3e55",cursor:"pointer",fontSize:"14px",lineHeight:1 }}>✕</button>}
+          {search && <button onClick={()=>setSearch("")} style={{ position:"absolute",right:"8px",background:"none",border:"none",color:"#888888",cursor:"pointer",fontSize:"14px",lineHeight:1 }}>✕</button>}
         </div>
 
         {/* Filtro consultores */}
@@ -2449,21 +2449,21 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           {showConsFilter && (
             <div style={dropStyle}>
               <div style={{ padding:"6px 8px 8px",borderBottom:"1px solid #1f1f2e",marginBottom:"4px",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
-                <span style={{ fontSize:"11px",color:"#6e6e88",fontWeight:700 }}>CONSULTORES</span>
-                {selConsultores.size>0 && <button onClick={()=>setSelConsultores(new Set())} style={{ background:"none",border:"none",color:"#6c63ff",fontSize:"11px",cursor:"pointer",fontWeight:600 }}>Limpar</button>}
+                <span style={{ fontSize:"11px",color:"#666666",fontWeight:700 }}>CONSULTORES</span>
+                {selConsultores.size>0 && <button onClick={()=>setSelConsultores(new Set())} style={{ background:"none",border:"none",color:"#2c2c2c",fontSize:"11px",cursor:"pointer",fontWeight:600 }}>Limpar</button>}
               </div>
               {allConsultores.map(({name},i)=>{
                 const sel = selConsultores.has(name);
                 return (
                   <div key={name} onClick={()=>toggleSet(selConsultores,setSelConsultores,name)}
-                    style={{ display:"flex",alignItems:"center",gap:"8px",padding:"7px 10px",borderRadius:"8px",cursor:"pointer",background:sel?"#6c63ff15":"transparent" }}
-                    onMouseEnter={e=>!sel&&(e.currentTarget.style.background="#18181f")}
+                    style={{ display:"flex",alignItems:"center",gap:"8px",padding:"7px 10px",borderRadius:"8px",cursor:"pointer",background:sel?"rgba(0,0,0,0.05)":"transparent" }}
+                    onMouseEnter={e=>!sel&&(e.currentTarget.style.background="#e8e8e8")}
                     onMouseLeave={e=>!sel&&(e.currentTarget.style.background="transparent")}>
                     <div style={{ width:"22px",height:"22px",borderRadius:"50%",background:`hsl(${i*37%360},55%,48%)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px",fontWeight:800,color:"#fff",flexShrink:0 }}>
                       {name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase()}
                     </div>
-                    <span style={{ fontSize:"12px",color:sel?"#a78bfa":"#c8c8d8",fontWeight:sel?600:400,flex:1 }}>{name.split(" ")[0]}</span>
-                    {sel && <span style={{ color:"#6c63ff",fontSize:"14px" }}>✓</span>}
+                    <span style={{ fontSize:"12px",color:sel?"#555555":"#222222",fontWeight:sel?600:400,flex:1 }}>{name.split(" ")[0]}</span>
+                    {sel && <span style={{ color:"#2c2c2c",fontSize:"14px" }}>✓</span>}
                   </div>
                 );
               })}
@@ -2481,22 +2481,22 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           {showCliFilter && (
             <div style={dropStyle}>
               <div style={{ padding:"6px 8px 8px",borderBottom:"1px solid #1f1f2e",marginBottom:"4px",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
-                <span style={{ fontSize:"11px",color:"#6e6e88",fontWeight:700 }}>CLIENTES</span>
-                {selClientes.size>0 && <button onClick={()=>setSelClientes(new Set())} style={{ background:"none",border:"none",color:"#6c63ff",fontSize:"11px",cursor:"pointer",fontWeight:600 }}>Limpar</button>}
+                <span style={{ fontSize:"11px",color:"#666666",fontWeight:700 }}>CLIENTES</span>
+                {selClientes.size>0 && <button onClick={()=>setSelClientes(new Set())} style={{ background:"none",border:"none",color:"#2c2c2c",fontSize:"11px",cursor:"pointer",fontWeight:600 }}>Limpar</button>}
               </div>
-              {allClientes.length===0 && <div style={{ padding:"12px",fontSize:"12px",color:"#3e3e55",textAlign:"center" }}>Nenhum cliente nesta semana</div>}
+              {allClientes.length===0 && <div style={{ padding:"12px",fontSize:"12px",color:"#888888",textAlign:"center" }}>Nenhum cliente nesta semana</div>}
               {allClientes.map(cli=>{
                 const sel = selClientes.has(cli);
                 const color = clientColorMap && Object.keys(clientColorMap).find(k=>cli.toUpperCase().includes(k));
-                const dot = color ? clientColorMap[color] : "#6e6e88";
+                const dot = color ? clientColorMap[color] : "#666666";
                 return (
                   <div key={cli} onClick={()=>toggleSet(selClientes,setSelClientes,cli)}
-                    style={{ display:"flex",alignItems:"center",gap:"8px",padding:"7px 10px",borderRadius:"8px",cursor:"pointer",background:sel?"#6c63ff15":"transparent" }}
-                    onMouseEnter={e=>!sel&&(e.currentTarget.style.background="#18181f")}
+                    style={{ display:"flex",alignItems:"center",gap:"8px",padding:"7px 10px",borderRadius:"8px",cursor:"pointer",background:sel?"rgba(0,0,0,0.05)":"transparent" }}
+                    onMouseEnter={e=>!sel&&(e.currentTarget.style.background="#e8e8e8")}
                     onMouseLeave={e=>!sel&&(e.currentTarget.style.background="transparent")}>
                     <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:dot,flexShrink:0 }}/>
-                    <span style={{ fontSize:"12px",color:sel?"#a78bfa":"#c8c8d8",fontWeight:sel?600:400,flex:1 }}>{cli}</span>
-                    {sel && <span style={{ color:"#6c63ff",fontSize:"14px" }}>✓</span>}
+                    <span style={{ fontSize:"12px",color:sel?"#555555":"#222222",fontWeight:sel?600:400,flex:1 }}>{cli}</span>
+                    {sel && <span style={{ color:"#2c2c2c",fontSize:"14px" }}>✓</span>}
                   </div>
                 );
               })}
@@ -2506,27 +2506,27 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
 
         {/* Tags de filtros ativos */}
         {[...selConsultores].map(name=>(
-          <span key={name} style={{ display:"inline-flex",alignItems:"center",gap:"5px",padding:"4px 10px",borderRadius:"99px",background:"#6c63ff22",border:"1px solid #6c63ff44",color:"#a78bfa",fontSize:"11px",fontWeight:600 }}>
+          <span key={name} style={{ display:"inline-flex",alignItems:"center",gap:"5px",padding:"4px 10px",borderRadius:"99px",background:"rgba(0,0,0,0.06)",border:"1px solid #6c63ff44",color:"#555555",fontSize:"11px",fontWeight:600 }}>
             {name.split(" ")[0]}
-            <button onClick={()=>toggleSet(selConsultores,setSelConsultores,name)} style={{ background:"none",border:"none",color:"#6c63ff",cursor:"pointer",fontSize:"12px",lineHeight:1,padding:0 }}>✕</button>
+            <button onClick={()=>toggleSet(selConsultores,setSelConsultores,name)} style={{ background:"none",border:"none",color:"#2c2c2c",cursor:"pointer",fontSize:"12px",lineHeight:1,padding:0 }}>✕</button>
           </span>
         ))}
         {[...selClientes].map(cli=>(
-          <span key={cli} style={{ display:"inline-flex",alignItems:"center",gap:"5px",padding:"4px 10px",borderRadius:"99px",background:"#22d3a015",border:"1px solid #22d3a040",color:"#22d3a0",fontSize:"11px",fontWeight:600 }}>
+          <span key={cli} style={{ display:"inline-flex",alignItems:"center",gap:"5px",padding:"4px 10px",borderRadius:"99px",background:"#e6f4ee",border:"1px solid #22d3a040",color:"#2a7a5a",fontSize:"11px",fontWeight:600 }}>
             {cli}
-            <button onClick={()=>toggleSet(selClientes,setSelClientes,cli)} style={{ background:"none",border:"none",color:"#22d3a0",cursor:"pointer",fontSize:"12px",lineHeight:1,padding:0 }}>✕</button>
+            <button onClick={()=>toggleSet(selClientes,setSelClientes,cli)} style={{ background:"none",border:"none",color:"#2a7a5a",cursor:"pointer",fontSize:"12px",lineHeight:1,padding:0 }}>✕</button>
           </span>
         ))}
 
         {/* Spacer + navegação semana */}
         <div style={{ marginLeft:"auto",display:"flex",alignItems:"center",gap:"8px" }}>
-          <button onClick={()=>setOffset(o=>o-1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#18181f",color:"#6e6e88",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>‹</button>
+          <button onClick={()=>setOffset(o=>o-1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>‹</button>
           <div style={{ textAlign:"center",minWidth:"200px" }}>
-            <div style={{ fontSize:"15px",fontWeight:700,color:"#f0f0fa" }}>{fmtRange()}</div>
-            {offset!==0 && <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"1px" }}>{offset>0?`+${offset}`:`${offset}`} semana{Math.abs(offset)>1?"s":""} da atual</div>}
+            <div style={{ fontSize:"15px",fontWeight:700,color:"#111111" }}>{fmtRange()}</div>
+            {offset!==0 && <div style={{ fontSize:"10px",color:"#888888",marginTop:"1px" }}>{offset>0?`+${offset}`:`${offset}`} semana{Math.abs(offset)>1?"s":""} da atual</div>}
           </div>
-          <button onClick={()=>setOffset(o=>o+1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#18181f",color:"#6e6e88",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>›</button>
-          <button onClick={()=>setOffset(0)} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"11px",fontWeight:700,opacity:offset===0?0.35:1,whiteSpace:"nowrap" }} disabled={offset===0}>
+          <button onClick={()=>setOffset(o=>o+1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>›</button>
+          <button onClick={()=>setOffset(0)} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"11px",fontWeight:700,opacity:offset===0?0.35:1,whiteSpace:"nowrap" }} disabled={offset===0}>
             📍 Hoje
           </button>
         </div>
@@ -2541,15 +2541,15 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           </colgroup>
           <thead>
             <tr>
-              <th style={{ padding:"8px 12px",textAlign:"left",fontSize:"11px",color:"#6e6e88",fontWeight:700,background:"#0d0d14",borderBottom:"2px solid #2a2a3a",letterSpacing:"0.5px" }}>CONSULTOR</th>
+              <th style={{ padding:"8px 12px",textAlign:"left",fontSize:"11px",color:"#666666",fontWeight:700,background:"#f7f7f7",borderBottom:"2px solid #2a2a3a",letterSpacing:"0.5px" }}>CONSULTOR</th>
               {days.map((d,i)=>{
                 const isToday = d.getTime()===today.getTime();
                 const isWknd = i>=5;
                 return (
-                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isWknd?"#0a0a12":"#0d0d14",borderBottom:"2px solid "+(isToday?"#6c63ff":"#2a2a3a"),color:isToday?"#a78bfa":isWknd?"#2a2a3a":"#6e6e88",minWidth:"90px" }}>
+                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isWknd?"#0a0a12":"#f7f7f7",borderBottom:"2px solid "+(isToday?"#2c2c2c":"#cccccc"),color:isToday?"#555555":isWknd?"#cccccc":"#666666",minWidth:"90px" }}>
                     <div style={{ letterSpacing:"0.5px" }}>{WD_SHORT[i]}</div>
-                    <div style={{ fontSize:"18px",fontWeight:800,color:isToday?"#a78bfa":isWknd?"#2a2a3a":"#c8c8d8",marginTop:"2px" }}>{d.getDate()}</div>
-                    <div style={{ fontSize:"10px",color:isWknd?"#1f1f2e":"#3e3e55",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
+                    <div style={{ fontSize:"18px",fontWeight:800,color:isToday?"#555555":isWknd?"#cccccc":"#222222",marginTop:"2px" }}>{d.getDate()}</div>
+                    <div style={{ fontSize:"10px",color:isWknd?"#d8d8d8":"#888888",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
                   </th>
                 );
               })}
@@ -2557,7 +2557,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           </thead>
           <tbody>
             {consultores.length===0 && (
-              <tr><td colSpan={8} style={{ textAlign:"center",padding:"48px",color:"#3e3e55",fontSize:"13px" }}>
+              <tr><td colSpan={8} style={{ textAlign:"center",padding:"48px",color:"#888888",fontSize:"13px" }}>
                 Nenhum consultor encontrado para os filtros selecionados
               </td></tr>
             )}
@@ -2565,12 +2565,12 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
               const origIdx = allConsultores.findIndex(c=>c.name===name);
               return (
                 <tr key={name} style={{ borderBottom:"1px solid #18181f" }}>
-                  <td style={{ padding:"8px 10px",verticalAlign:"middle",background:"#0d0d14",borderRight:"2px solid #18181f" }}>
+                  <td style={{ padding:"8px 10px",verticalAlign:"middle",background:"#f7f7f7",borderRight:"2px solid #18181f" }}>
                     <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                       <div style={{ width:"28px",height:"28px",borderRadius:"9px",background:`hsl(${origIdx*37%360},55%,48%)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",fontWeight:800,color:"#fff",flexShrink:0 }}>
                         {name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase()}
                       </div>
-                      <span style={{ fontSize:"12px",fontWeight:600,color:"#c8c8d8" }}>{name.split(" ")[0]}</span>
+                      <span style={{ fontSize:"12px",fontWeight:600,color:"#222222" }}>{name.split(" ")[0]}</span>
                     </div>
                   </td>
                   {cells.map((entries,ci)=>{
@@ -2584,7 +2584,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                         onClick={()=>{ if(canEdit&&onNewEntry&&entries.length===0) onNewEntry({consultor:name,month:mName,day:d.getDate(),year:yr}); }}
                         style={{ padding:"4px",verticalAlign:"top",background:isToday?"#16102a18":isWknd?"#0a0a12":"transparent",borderLeft:"1px solid #18181f",cursor:(canEdit&&entries.length===0)?"pointer":"default",minHeight:"64px" }}>
                         {entries.length===0 && canEdit && (
-                          <div style={{ display:"flex",alignItems:"center",justifyContent:"center",height:"56px",opacity:0.1,fontSize:"20px",color:"#6e6e88" }}>+</div>
+                          <div style={{ display:"flex",alignItems:"center",justifyContent:"center",height:"56px",opacity:0.1,fontSize:"20px",color:"#666666" }}>+</div>
                         )}
                         {entries.map((entry,ei)=>{
                           const color = getColor(entry);
@@ -2626,24 +2626,24 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           </tbody>
         </table>
       </div>
-      <p style={{ fontSize:"11px",color:"#3e3e55",marginTop:"10px" }}>💡 Clique em agenda para ver detalhes{canEdit?" · Clique em célula vazia para adicionar":""} · Colunas escuras = fim de semana</p>
+      <p style={{ fontSize:"11px",color:"#888888",marginTop:"10px" }}>💡 Clique em agenda para ver detalhes{canEdit?" · Clique em célula vazia para adicionar":""} · Colunas escuras = fim de semana</p>
 
       {/* Popup de detalhe da entrada */}
       {popup && (
         <div onClick={e=>e.stopPropagation()}
-          style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#111118",border:"1px solid #2a2a3a",borderRadius:"14px",zIndex:9000,width:"280px",boxShadow:"0 8px 40px rgba(0,0,0,0.7)",display:"flex",flexDirection:"column",maxHeight:"80vh" }}>
+          style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#ffffff",border:"1px solid #cccccc",borderRadius:"14px",zIndex:9000,width:"280px",boxShadow:"0 8px 40px rgba(0,0,0,0.10)",display:"flex",flexDirection:"column",maxHeight:"80vh" }}>
           {/* Header arrastável */}
           <div onMouseDown={startDragPopup}
             style={{ padding:"13px 16px 11px",borderBottom:"1px solid #1f1f2e",flexShrink:0,cursor:"grab",userSelect:"none" }}>
             <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start" }}>
               <div>
-                <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{popup.name.split(" ")[0]}</div>
-                <div style={{ fontSize:"11px",color:"#3e3e55",marginTop:"2px" }}>
+                <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{popup.name.split(" ")[0]}</div>
+                <div style={{ fontSize:"11px",color:"#888888",marginTop:"2px" }}>
                   {popup.entry.day && `Dia ${popup.entry.day}`}{popup.entry.month ? ` · ${popup.entry.month}` : ""}{popup.entry.year ? ` ${popup.entry.year}` : ""}
                 </div>
               </div>
               <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setPopup(null)}
-                style={{ background:"#1f1f2e",border:"1px solid #2a2a3a",color:"#6e6e88",borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"13px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
+                style={{ background:"#e8e8e8",border:"1px solid #cccccc",color:"#666666",borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"13px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
             </div>
           </div>
 
@@ -2662,37 +2662,37 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
             </div>
 
             {/* Tipo */}
-            <div style={{ fontSize:"11px",color:"#6e6e88",marginBottom:"10px" }}>
+            <div style={{ fontSize:"11px",color:"#666666",marginBottom:"10px" }}>
               {TIPO_LABEL[popup.entry.type]||popup.entry.type}
             </div>
 
             {/* Horários */}
             {(popup.entry.horaInicio||popup.entry.horaFim) && (
-              <div style={{ background:"#18181f",borderRadius:"8px",padding:"9px 12px",marginBottom:"10px",display:"flex",gap:"14px",flexWrap:"wrap",fontSize:"12px" }}>
-                {popup.entry.horaInicio && <span>🕐 <strong style={{ color:"#f0f0fa" }}>{popup.entry.horaInicio}</strong></span>}
-                {popup.entry.horaFim    && <span>🕔 <strong style={{ color:"#f0f0fa" }}>{popup.entry.horaFim}</strong></span>}
-                {popup.entry.intervalo  && <span>☕ <strong style={{ color:"#f0f0fa" }}>{popup.entry.intervalo}min</strong></span>}
+              <div style={{ background:"#f0f0f0",borderRadius:"8px",padding:"9px 12px",marginBottom:"10px",display:"flex",gap:"14px",flexWrap:"wrap",fontSize:"12px" }}>
+                {popup.entry.horaInicio && <span>🕐 <strong style={{ color:"#111111" }}>{popup.entry.horaInicio}</strong></span>}
+                {popup.entry.horaFim    && <span>🕔 <strong style={{ color:"#111111" }}>{popup.entry.horaFim}</strong></span>}
+                {popup.entry.intervalo  && <span>☕ <strong style={{ color:"#111111" }}>{popup.entry.intervalo}min</strong></span>}
               </div>
             )}
 
             {/* Atividades */}
             {popup.entry.atividades && (
-              <div style={{ background:"#18181f",borderRadius:"8px",padding:"9px 12px",marginBottom:"10px" }}>
-                <div style={{ fontSize:"10px",color:"#3e3e55",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",marginBottom:"5px" }}>Atividades</div>
-                <div style={{ fontSize:"12px",color:"#c8c8d8",lineHeight:1.6,whiteSpace:"pre-wrap" }}>{popup.entry.atividades}</div>
+              <div style={{ background:"#f0f0f0",borderRadius:"8px",padding:"9px 12px",marginBottom:"10px" }}>
+                <div style={{ fontSize:"10px",color:"#888888",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",marginBottom:"5px" }}>Atividades</div>
+                <div style={{ fontSize:"12px",color:"#222222",lineHeight:1.6,whiteSpace:"pre-wrap" }}>{popup.entry.atividades}</div>
               </div>
             )}
 
             {/* Histórico */}
             {popup.entry.criadoPor && (
-              <div style={{ fontSize:"10px",color:"#3e3e55",marginBottom:"4px" }}>
-                ✏️ Criado por <strong style={{ color:"#6e6e88" }}>{popup.entry.criadoPor}</strong>
+              <div style={{ fontSize:"10px",color:"#888888",marginBottom:"4px" }}>
+                ✏️ Criado por <strong style={{ color:"#666666" }}>{popup.entry.criadoPor}</strong>
                 {popup.entry.criadoEm && <span> em {new Date(popup.entry.criadoEm).toLocaleDateString("pt-BR")}</span>}
               </div>
             )}
             {popup.entry.alteradoPor && (
-              <div style={{ fontSize:"10px",color:"#3e3e55" }}>
-                🔄 Alterado por <strong style={{ color:"#6e6e88" }}>{popup.entry.alteradoPor}</strong>
+              <div style={{ fontSize:"10px",color:"#888888" }}>
+                🔄 Alterado por <strong style={{ color:"#666666" }}>{popup.entry.alteradoPor}</strong>
                 {popup.entry.alteradoEm && <span> em {new Date(popup.entry.alteradoEm).toLocaleDateString("pt-BR")}</span>}
               </div>
             )}
@@ -2706,12 +2706,12 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                   <>
                     {popup.entry.osNumero && (
                       <div style={{ display:"flex",alignItems:"center",gap:"6px",padding:"6px 8px",background:"#22d3a00a",borderRadius:"8px",border:"1px solid #22d3a020" }}>
-                        <span style={{ fontSize:"11px",fontWeight:700,color:"#22d3a0" }}>📋 OS {popup.entry.osNumero}</span>
-                        {osAprov && <span style={{ fontSize:"9px",padding:"1px 7px",borderRadius:"99px",background:"#22d3a018",color:"#22d3a0",fontWeight:700 }}>✅ Aprovada</span>}
+                        <span style={{ fontSize:"11px",fontWeight:700,color:"#2a7a5a" }}>📋 OS {popup.entry.osNumero}</span>
+                        {osAprov && <span style={{ fontSize:"9px",padding:"1px 7px",borderRadius:"99px",background:"#e6f4ee",color:"#2a7a5a",fontWeight:700 }}>✅ Aprovada</span>}
                       </div>
                     )}
                     {osAprov ? (
-                      <div style={{ fontSize:"10px",color:"#6e6e88",padding:"6px 8px",background:"#1f1f2e",borderRadius:"8px",textAlign:"center" }}>
+                      <div style={{ fontSize:"10px",color:"#666666",padding:"6px 8px",background:"#e8e8e8",borderRadius:"8px",textAlign:"center" }}>
                         🔒 Aprovada por <strong style={{ color:"#a0a0b0" }}>{popup.entry.osAvaliadoPor}</strong> — somente leitura
                       </div>
                     ) : (
@@ -2719,7 +2719,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                         {onOsClick && (
                           <button onMouseDown={e=>e.stopPropagation()}
                             onClick={()=>{ onOsClick({...popup.entry, consultor:popup.name}); setPopup(null); }}
-                            style={{ width:"100%",padding:"9px",borderRadius:"9px",border:"1px solid #22d3a044",background:"#22d3a015",color:"#22d3a0",fontWeight:700,fontSize:"12px",cursor:"pointer",fontFamily:"inherit" }}>
+                            style={{ width:"100%",padding:"9px",borderRadius:"9px",border:"1px solid #22d3a044",background:"#e6f4ee",color:"#2a7a5a",fontWeight:700,fontSize:"12px",cursor:"pointer",fontFamily:"inherit" }}>
                             📋 Preencher Ordem de Serviço
                           </button>
                         )}
@@ -2883,10 +2883,10 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
   const getColor = (entry) => {
     if (!entry) return null;
     if (entry.type==="vacation") return "#22c55e";
-    if (entry.type==="absence") return "#f04f5e";
+    if (entry.type==="absence") return "#c0392b";
     if (entry.type==="holiday") return "#ef4444";
-    if (entry.type==="reserved") return "#6e6e88";
-    if (entry.type==="blocked") return "#6e6e88";
+    if (entry.type==="reserved") return "#666666";
+    if (entry.type==="blocked") return "#666666";
     const cname = normalizeClient(entry.client);
     return clientColors[cname] || getClientColor(entry.client);
   };
@@ -2897,16 +2897,16 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
     <div onClick={closeAll}>
       {/* MONTH SELECTOR */}
       <div style={{ display:"flex",alignItems:"center",gap:"16px",marginBottom:"16px",flexWrap:"wrap" }}>
-        <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#f0f0fa",margin:0 }}>📆 Calendário Mensal</h2>
+        <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#111111",margin:0 }}>📆 Calendário Mensal</h2>
         <div style={{ display:"flex",gap:"6px",flexWrap:"wrap" }}>
           {monthsAvail.map(m=>(
-            <button key={m} onClick={()=>setCalMes(m)} style={{ padding:"5px 12px",borderRadius:"16px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:calMes===m?"#3b82f6":"#18181f",color:calMes===m?"#fff":"#6e6e88" }}>{m.slice(0,3)}</button>
+            <button key={m} onClick={()=>setCalMes(m)} style={{ padding:"5px 12px",borderRadius:"16px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:calMes===m?"#3b82f6":"#e8e8e8",color:calMes===m?"#fff":"#666666" }}>{m.slice(0,3)}</button>
           ))}
         </div>
         <div style={{ display:"flex",alignItems:"center",gap:"4px" }}>
-          <button onClick={()=>setCalAno(a=>a-1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#18181f",color:"#6e6e88",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>‹</button>
-          <span style={{ padding:"4px 14px",borderRadius:"8px",background:"#18181f",border:"1px solid #2a2a3a",fontSize:"13px",fontWeight:700,color:"#f0f0fa",minWidth:"62px",textAlign:"center" }}>{calAno}</span>
-          <button onClick={()=>setCalAno(a=>a+1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#18181f",color:"#6e6e88",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>›</button>
+          <button onClick={()=>setCalAno(a=>a-1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>‹</button>
+          <span style={{ padding:"4px 14px",borderRadius:"8px",background:"#f0f0f0",border:"1px solid #cccccc",fontSize:"13px",fontWeight:700,color:"#111111",minWidth:"62px",textAlign:"center" }}>{calAno}</span>
+          <button onClick={()=>setCalAno(a=>a+1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>›</button>
         </div>
       </div>
 
@@ -2915,18 +2915,18 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
 
         {/* ── CONSULTOR FILTER ── */}
         <div style={{ position:"relative" }}>
-          <button onClick={()=>{ setShowFilter(!showFilter); setShowClientFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showFilter?"#3b82f6":"#2a2a3a"),background:showFilter?"#16102a":"#18181f",color:showFilter?"#60a5fa":"#6e6e88",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
+          <button onClick={()=>{ setShowFilter(!showFilter); setShowClientFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showFilter?"#3b82f6":"#cccccc"),background:showFilter?"#16102a":"#e8e8e8",color:showFilter?"#60a5fa":"#666666",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
             👥 Consultores
             <span style={{ background:selectedConsultores.size<consultores.length?"#f59e0b":"#3b82f6",color:"#fff",borderRadius:"12px",padding:"1px 8px",fontSize:"11px",fontWeight:700 }}>{selectedConsultores.size}/{consultores.length}</span>
             <span style={{ fontSize:"10px" }}>{showFilter?"▲":"▼"}</span>
           </button>
           {showFilter && (
-            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:"#18181f",border:"1px solid #2a2a3a",borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"300px",maxWidth:"440px",boxShadow:"0 12px 40px rgba(0,0,0,0.5)" }}>
+            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:"#f0f0f0",border:"1px solid #cccccc",borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"300px",maxWidth:"440px",boxShadow:"0 12px 40px rgba(0,0,0,0.08)" }}>
               <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"12px" }}>
-                <span style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>Filtrar consultores</span>
+                <span style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>Filtrar consultores</span>
                 <div style={{ display:"flex",gap:"6px" }}>
-                  <button onClick={selectAllConsultores} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"#6c63ff22",color:"#60a5fa",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Todos</button>
-                  <button onClick={clearAllConsultores} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"#2a2a3a22",color:"#6e6e88",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Limpar</button>
+                  <button onClick={selectAllConsultores} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"rgba(0,0,0,0.06)",color:"#60a5fa",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Todos</button>
+                  <button onClick={clearAllConsultores} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"#2a2a3a22",color:"#666666",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Limpar</button>
                 </div>
               </div>
               <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"6px" }}>
@@ -2934,13 +2934,13 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const isSelected = selectedConsultores.has(name);
                   const hasData = allConsultoresWithData.includes(name);
                   return (
-                    <button key={name} onClick={()=>toggleConsultor(name)} style={{ display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?"#6c63ff":"#2a2a3a"),background:isSelected?"#16102a":"#0d0d14",cursor:"pointer",textAlign:"left",opacity:hasData?1:0.45 }}>
+                    <button key={name} onClick={()=>toggleConsultor(name)} style={{ display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?"#2c2c2c":"#cccccc"),background:isSelected?"#16102a":"#f7f7f7",cursor:"pointer",textAlign:"left",opacity:hasData?1:0.45 }}>
                       <div style={{ width:"26px",height:"26px",borderRadius:"50%",background:"hsl("+(i*29%360)+",65%,"+(isSelected?"55%":"30%")+")",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                       <div style={{ flex:1,minWidth:0 }}>
-                        <div style={{ fontSize:"12px",fontWeight:600,color:isSelected?"#f0f0fa":"#6e6e88",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{name.trim().split(" ")[0]}</div>
-                        {!hasData && <div style={{ fontSize:"10px",color:"#6e6e88" }}>sem dados</div>}
+                        <div style={{ fontSize:"12px",fontWeight:600,color:isSelected?"#111111":"#666666",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{name.trim().split(" ")[0]}</div>
+                        {!hasData && <div style={{ fontSize:"10px",color:"#666666" }}>sem dados</div>}
                       </div>
-                      {isSelected && <span style={{ color:"#6c63ff",fontSize:"14px",flexShrink:0 }}>✓</span>}
+                      {isSelected && <span style={{ color:"#2c2c2c",fontSize:"14px",flexShrink:0 }}>✓</span>}
                     </button>
                   );
                 })}
@@ -2951,29 +2951,29 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
 
         {/* ── CLIENT FILTER ── */}
         <div style={{ position:"relative" }}>
-          <button onClick={()=>{ setShowClientFilter(!showClientFilter); setShowFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showClientFilter?"#f59e0b":clientFilterActive?"#f59e0b44":"#2a2a3a"),background:showClientFilter?"#1f1a0e":clientFilterActive?"#1f1a0e":"#18181f",color:showClientFilter||clientFilterActive?"#f59e0b":"#6e6e88",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
+          <button onClick={()=>{ setShowClientFilter(!showClientFilter); setShowFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showClientFilter?"#f59e0b":clientFilterActive?"#f59e0b44":"#cccccc"),background:showClientFilter?"#1f1a0e":clientFilterActive?"#1f1a0e":"#e8e8e8",color:showClientFilter||clientFilterActive?"#f59e0b":"#666666",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
             🏢 Clientes
-            <span style={{ background:clientFilterActive?"#f59e0b":"#2a2a3a",color:clientFilterActive?"#000":"#6e6e88",borderRadius:"12px",padding:"1px 8px",fontSize:"11px",fontWeight:700 }}>{selectedClients.size}/{allClientsInMonth.length}</span>
+            <span style={{ background:clientFilterActive?"#f59e0b":"#cccccc",color:clientFilterActive?"#000":"#666666",borderRadius:"12px",padding:"1px 8px",fontSize:"11px",fontWeight:700 }}>{selectedClients.size}/{allClientsInMonth.length}</span>
             <span style={{ fontSize:"10px" }}>{showClientFilter?"▲":"▼"}</span>
           </button>
           {showClientFilter && (
-            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:"#18181f",border:"1px solid #2a2a3a",borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"280px",maxWidth:"400px",boxShadow:"0 12px 40px rgba(0,0,0,0.5)" }}>
+            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:"#f0f0f0",border:"1px solid #cccccc",borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"280px",maxWidth:"400px",boxShadow:"0 12px 40px rgba(0,0,0,0.08)" }}>
               <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"12px" }}>
-                <span style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>Filtrar por cliente</span>
+                <span style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>Filtrar por cliente</span>
                 <div style={{ display:"flex",gap:"6px" }}>
                   <button onClick={selectAllClients} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"#f59e0b22",color:"#f59e0b",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Todos</button>
-                  <button onClick={clearAllClients} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"#2a2a3a22",color:"#6e6e88",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Limpar</button>
+                  <button onClick={clearAllClients} style={{ padding:"4px 10px",borderRadius:"6px",border:"none",background:"#2a2a3a22",color:"#666666",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>Limpar</button>
                 </div>
               </div>
               <div style={{ display:"flex",flexDirection:"column",gap:"5px",maxHeight:"280px",overflowY:"auto" }}>
-                {allClientsInMonth.length === 0 && <p style={{ color:"#6e6e88",fontSize:"12px",textAlign:"center",padding:"12px 0" }}>Nenhum cliente neste mês</p>}
+                {allClientsInMonth.length === 0 && <p style={{ color:"#666666",fontSize:"12px",textAlign:"center",padding:"12px 0" }}>Nenhum cliente neste mês</p>}
                 {allClientsInMonth.map(clientName=>{
                   const isSelected = selectedClients.has(clientName);
                   const color = getClientColor(clientName);
                   return (
-                    <button key={clientName} onClick={()=>toggleClient(clientName)} style={{ display:"flex",alignItems:"center",gap:"10px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?color+"66":"#2a2a3a"),background:isSelected?color+"18":"#0d0d14",cursor:"pointer",textAlign:"left" }}>
-                      <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:isSelected?color:"#6e6e88",flexShrink:0,transition:"background 0.2s" }}/>
-                      <span style={{ fontSize:"13px",fontWeight:600,color:isSelected?color:"#6e6e88",flex:1 }}>{clientName}</span>
+                    <button key={clientName} onClick={()=>toggleClient(clientName)} style={{ display:"flex",alignItems:"center",gap:"10px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?color+"66":"#cccccc"),background:isSelected?color+"18":"#f7f7f7",cursor:"pointer",textAlign:"left" }}>
+                      <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:isSelected?color:"#666666",flexShrink:0,transition:"background 0.2s" }}/>
+                      <span style={{ fontSize:"13px",fontWeight:600,color:isSelected?color:"#666666",flex:1 }}>{clientName}</span>
                       {isSelected && <span style={{ color:color,fontSize:"14px" }}>✓</span>}
                     </button>
                   );
@@ -3002,39 +3002,39 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
 
       {/* LEGEND */}
       <div style={{ display:"flex",gap:"16px",marginBottom:"12px",flexWrap:"wrap",alignItems:"center" }}>
-        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"24px",height:"10px",borderRadius:"3px",background:"#1a2744" }}/><span style={{ fontSize:"11px",color:"#6e6e88" }}>Fim de semana</span></div>
-        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#ef4444" }}/><span style={{ fontSize:"11px",color:"#6e6e88" }}>Feriado</span></div>
-        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#22d3a0" }}/><span style={{ fontSize:"11px",color:"#6e6e88" }}>Férias</span></div>
-        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#6e6e88" }}/><span style={{ fontSize:"11px",color:"#6e6e88" }}>Reservado</span></div>
-        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#6e6e88" }}/><span style={{ fontSize:"11px",color:"#6e6e88" }}>Bloqueado</span></div>
+        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"24px",height:"10px",borderRadius:"3px",background:"#1a2744" }}/><span style={{ fontSize:"11px",color:"#666666" }}>Fim de semana</span></div>
+        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#ef4444" }}/><span style={{ fontSize:"11px",color:"#666666" }}>Feriado</span></div>
+        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#2a7a5a" }}/><span style={{ fontSize:"11px",color:"#666666" }}>Férias</span></div>
+        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#666666" }}/><span style={{ fontSize:"11px",color:"#666666" }}>Reservado</span></div>
+        <div style={{ display:"flex",alignItems:"center",gap:"5px" }}><div style={{ width:"10px",height:"10px",borderRadius:"3px",background:"#666666" }}/><span style={{ fontSize:"11px",color:"#666666" }}>Bloqueado</span></div>
       </div>
 
       {/* TABLE */}
-      <div style={{ overflowX:"auto",borderRadius:"12px",border:"1px solid #2a2a3a" }}>
+      <div style={{ overflowX:"auto",borderRadius:"12px",border:"1px solid #cccccc" }}>
         <table style={{ borderCollapse:"collapse",width:"100%",minWidth:(daysInMonth*34+160)+"px" }}>
           <thead>
             {/* Weekday row */}
-            <tr style={{ background:"#18181f" }}>
-              <th style={{ padding:"8px 16px",textAlign:"left",fontSize:"11px",fontWeight:700,color:"#6e6e88",position:"sticky",left:0,background:"#18181f",zIndex:2,minWidth:"150px",borderBottom:"1px solid #0d0d14" }}>Consultor</th>
+            <tr style={{ background:"#f0f0f0" }}>
+              <th style={{ padding:"8px 16px",textAlign:"left",fontSize:"11px",fontWeight:700,color:"#666666",position:"sticky",left:0,background:"#f0f0f0",zIndex:2,minWidth:"150px",borderBottom:"1px solid #0d0d14" }}>Consultor</th>
               {allDays.map(d=>{
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 return (
-                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#6e6e88":"#6e6e88",minWidth:"34px",maxWidth:"34px",background:isWeekend?"#0d1a30":"#18181f",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
+                  <th key={d} style={{ padding:"3px 2px",textAlign:"center",fontSize:"9px",fontWeight:600,color:isWeekend?"#666666":"#666666",minWidth:"34px",maxWidth:"34px",background:isWeekend?"#0d1a30":"#e8e8e8",borderBottom:"1px solid #0d0d14",borderLeft:"1px solid #0d0d14" }}>
                     {WEEKDAY_LABELS[dow]}
                   </th>
                 );
               })}
             </tr>
             {/* Day number row */}
-            <tr style={{ background:"#18181f" }}>
-              <th style={{ padding:"4px 16px",position:"sticky",left:0,background:"#18181f",zIndex:2,borderBottom:"1px solid #2a2a3a" }}></th>
+            <tr style={{ background:"#f0f0f0" }}>
+              <th style={{ padding:"4px 16px",position:"sticky",left:0,background:"#f0f0f0",zIndex:2,borderBottom:"1px solid #2a2a3a" }}></th>
               {allDays.map(d=>{
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#374151":"#6e6e88",minWidth:"34px",background:ferNac?"#f59e0b18":isWeekend?"#0d1a30":"#18181f",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
+                  <th key={d} title={ferNac||undefined} style={{ padding:"4px 2px",textAlign:"center",fontSize:"11px",fontWeight:700,color:ferNac?"#f59e0b":isWeekend?"#374151":"#666666",minWidth:"34px",background:ferNac?"#f59e0b18":isWeekend?"#0d1a30":"#e8e8e8",borderBottom:"1px solid #2a2a3a",borderLeft:"1px solid #0d0d14",position:"relative" }}>
                     {ferNac && <span style={{ position:"absolute",top:"1px",left:"50%",transform:"translateX(-50%)",fontSize:"6px",color:"#f59e0b" }}>★</span>}
                     {d}
                   </th>
@@ -3042,12 +3042,12 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
               })}
             </tr>
             {/* Feriados nacionais row */}
-            <tr style={{ background:"#18181f" }}>
-              <th style={{ padding:"3px 16px",position:"sticky",left:0,background:"#18181f",zIndex:2,borderBottom:"1px solid #2a2a3a",fontSize:"9px",color:"#f59e0b",fontWeight:700 }}>🇧🇷 Feriados</th>
+            <tr style={{ background:"#f0f0f0" }}>
+              <th style={{ padding:"3px 16px",position:"sticky",left:0,background:"#f0f0f0",zIndex:2,borderBottom:"1px solid #2a2a3a",fontSize:"9px",color:"#f59e0b",fontWeight:700 }}>🇧🇷 Feriados</th>
               {allDays.map(d=>{
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <td key={d} title={ferNac||undefined} style={{ padding:"2px",textAlign:"center",background:ferNac?"#f59e0b15":"#18181f",borderLeft:"1px solid #0d0d14",borderBottom:"1px solid #2a2a3a" }}>
+                  <td key={d} title={ferNac||undefined} style={{ padding:"2px",textAlign:"center",background:ferNac?"#f59e0b15":"#e8e8e8",borderLeft:"1px solid #0d0d14",borderBottom:"1px solid #2a2a3a" }}>
                     {ferNac && <div style={{ fontSize:"7px",fontWeight:700,color:"#f59e0b",lineHeight:1.2,maxWidth:"32px",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis",margin:"0 auto" }} title={ferNac}>🎉</div>}
                   </td>
                 );
@@ -3057,7 +3057,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
           <tbody>
             {activeConsultores.map((name)=>(
               <tr key={name} style={{ borderTop:"1px solid #18181f" }}>
-                <td style={{ padding:"6px 16px",fontSize:"12px",fontWeight:600,color:"#2a2a3a",position:"sticky",left:0,background:"#0d0d14",zIndex:1,whiteSpace:"nowrap",borderRight:"1px solid #2a2a3a" }}>
+                <td style={{ padding:"6px 16px",fontSize:"12px",fontWeight:600,color:"#cccccc",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap",borderRight:"1px solid #2a2a3a" }}>
                   <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                     <div style={{ width:"22px",height:"22px",borderRadius:"50%",background:"hsl("+(consultores.indexOf(name)*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"8px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                     {name.trim().split(" ").slice(0,2).join(" ")}
@@ -3067,16 +3067,16 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const dow = getDayOfWeek(d);
                   const isWeekend = dow === 0 || dow === 6;
                   const entry = lookup[name]?.[d];
-                  const colBg = isWeekend ? "#0d1a30" : "#0d0d14";
+                  const colBg = isWeekend ? "#0d1a30" : "#f7f7f7";
 
                   const dayEntries = lookup[name]?.[d] || [];
                   if (dayEntries.length === 0) return (
                     <td key={d} style={{ padding:"3px",borderLeft:"1px solid #18181f",background:colBg }}
                       onClick={e=>{ if(readonly) return; e.stopPropagation(); onNewEntry({ consultor:name, month:calMes, day:d }); }}>
                       <div style={{ width:"28px",height:"28px",borderRadius:"4px",background:"transparent",border:"1px dashed transparent",margin:"0 auto",cursor:readonly?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s" }}
-                        onMouseEnter={e=>{ if(readonly) return; e.currentTarget.style.background="#22d3a018"; e.currentTarget.style.borderColor="#22c55e55"; e.currentTarget.querySelector("span").style.opacity="1"; }}
+                        onMouseEnter={e=>{ if(readonly) return; e.currentTarget.style.background="#e6f4ee"; e.currentTarget.style.borderColor="#22c55e55"; e.currentTarget.querySelector("span").style.opacity="1"; }}
                         onMouseLeave={e=>{ if(readonly) return; e.currentTarget.style.background="transparent"; e.currentTarget.style.borderColor="transparent"; e.currentTarget.querySelector("span").style.opacity="0"; }}>
-                        <span style={{ fontSize:"13px",opacity:0,transition:"opacity 0.15s",userSelect:"none",color:"#22d3a0" }}>＋</span>
+                        <span style={{ fontSize:"13px",opacity:0,transition:"opacity 0.15s",userSelect:"none",color:"#2a7a5a" }}>＋</span>
                       </div>
                     </td>
                   );
@@ -3093,14 +3093,14 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                           return (
                             <div key={entry.id||ei}
                               title={temOS ? `${entry.client} · ${entry.osNumero}${osAprov?" ✅ Aprovada":""}` : entry.client}
-                              style={{ flex:1,background:filtered?"#18181f":color,display:"flex",alignItems:"center",justifyContent:"center",minHeight:"8px",opacity:filtered?0.2:osAprov?0.45:1,position:"relative" }}>
+                              style={{ flex:1,background:filtered?"#e8e8e8":color,display:"flex",alignItems:"center",justifyContent:"center",minHeight:"8px",opacity:filtered?0.2:osAprov?0.45:1,position:"relative" }}>
                               {!filtered&&dayEntries.length<=2&&<span style={{ fontSize:"6px",fontWeight:800,color:"#fff",letterSpacing:"-0.5px" }}>{label}</span>}
-                              {temOS&&!filtered&&<span style={{ position:"absolute",top:0,left:0,width:"5px",height:"5px",borderRadius:"50%",background:osAprov?"#22d3a0":"#fff",opacity:0.9 }}/>}
+                              {temOS&&!filtered&&<span style={{ position:"absolute",top:0,left:0,width:"5px",height:"5px",borderRadius:"50%",background:osAprov?"#2a7a5a":"#fff",opacity:0.9 }}/>}
                               {osAprov&&!filtered&&<span style={{ position:"absolute",bottom:0,right:0,fontSize:"5px",lineHeight:1 }}>🔒</span>}
                             </div>
                           );
                         })}
-                        {dayEntries.length>3&&<div style={{ background:"#0d0d14",display:"flex",alignItems:"center",justifyContent:"center",minHeight:"7px" }}><span style={{ fontSize:"6px",color:"#6e6e88",fontWeight:700 }}>+{dayEntries.length-3}</span></div>}
+                        {dayEntries.length>3&&<div style={{ background:"#f7f7f7",display:"flex",alignItems:"center",justifyContent:"center",minHeight:"7px" }}><span style={{ fontSize:"6px",color:"#666666",fontWeight:700 }}>+{dayEntries.length-3}</span></div>}
                       </div>
                     </td>
                   );
@@ -3110,19 +3110,19 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
           </tbody>
         </table>
       </div>
-      <p style={{ fontSize:"11px",color:"#6e6e88",marginTop:"8px" }}>💡 Clique em célula colorida para editar/excluir · Clique em célula vazia para adicionar agenda · Colunas escuras = fim de semana</p>
+      <p style={{ fontSize:"11px",color:"#666666",marginTop:"8px" }}>💡 Clique em célula colorida para editar/excluir · Clique em célula vazia para adicionar agenda · Colunas escuras = fim de semana</p>
       {popup && (
-        <div onClick={e=>e.stopPropagation()} style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#18181f",border:"1px solid #6e6e88",borderRadius:"12px",zIndex:9000,width:"280px",boxShadow:"0 8px 32px rgba(0,0,0,0.6)",maxHeight:"80vh",display:"flex",flexDirection:"column" }}>
+        <div onClick={e=>e.stopPropagation()} style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#f0f0f0",border:"1px solid #6e6e88",borderRadius:"12px",zIndex:9000,width:"280px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",maxHeight:"80vh",display:"flex",flexDirection:"column" }}>
           {/* Header fixo + drag */}
           <div onMouseDown={startDrag} style={{ padding:"14px 16px 10px",borderBottom:"1px solid #2a2a3a",flexShrink:0,cursor:"grab",userSelect:"none" }}>
             <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start" }}>
               <div>
-                <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{popup.name.trim().split(" ")[0]}</div>
-                <div style={{ fontSize:"11px",color:"#6e6e88" }}>Dia {popup.day} · {calMes} {calAno} ({WEEKDAY_LABELS[getDayOfWeek(popup.day)]})</div>
+                <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{popup.name.trim().split(" ")[0]}</div>
+                <div style={{ fontSize:"11px",color:"#666666" }}>Dia {popup.day} · {calMes} {calAno} ({WEEKDAY_LABELS[getDayOfWeek(popup.day)]})</div>
               </div>
               <div style={{ display:"flex",gap:"6px",alignItems:"center" }}>
-                {!readonly && <button onMouseDown={e=>e.stopPropagation()} onClick={()=>{ onNewEntry({consultor:popup.name,month:calMes,day:popup.day}); setPopup(null); }} style={{ padding:"4px 8px",borderRadius:"6px",border:"1px solid #22c55e44",background:"#22d3a018",color:"#22d3a0",fontSize:"11px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap" }}>＋ Novo</button>}
-                <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setPopup(null)} style={{ background:"#2a2a3a",border:"none",color:"#6e6e88",borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
+                {!readonly && <button onMouseDown={e=>e.stopPropagation()} onClick={()=>{ onNewEntry({consultor:popup.name,month:calMes,day:popup.day}); setPopup(null); }} style={{ padding:"4px 8px",borderRadius:"6px",border:"1px solid #22c55e44",background:"#e6f4ee",color:"#2a7a5a",fontSize:"11px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap" }}>＋ Novo</button>}
+                <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setPopup(null)} style={{ background:"#e0e0e0",border:"none",color:"#666666",borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
               </div>
             </div>
           </div>
@@ -3132,7 +3132,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
               const color = getColor(entry);
               const TYPE_LABEL = {client:"👤 Cliente",vacation:"🏖 Férias",holiday:"🎉 Feriado",reserved:"🔒 Reservado",blocked:"⛔ Bloqueado"};
               return (
-                <div key={entry.id||ei} style={{ background:"#0d0d14",borderRadius:"8px",border:"1px solid #2a2a3a",overflow:"hidden" }}>
+                <div key={entry.id||ei} style={{ background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",overflow:"hidden" }}>
                   {/* Entry header bar */}
                   <div style={{ background:color,padding:"4px 10px",display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                     <span style={{ fontSize:"11px",fontWeight:800,color:"#fff",letterSpacing:"0.3px" }}>{entry.client||TYPE_LABEL[entry.type]||entry.type}</span>
@@ -3142,22 +3142,22 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                     </div>
                   </div>
                   {entry.atividades && (
-                    <div style={{ padding:"6px 10px 0",fontSize:"11px",color:"#6e6e88",lineHeight:"1.5",whiteSpace:"pre-wrap",borderBottom:"1px solid #18181f" }}>{entry.atividades}</div>
+                    <div style={{ padding:"6px 10px 0",fontSize:"11px",color:"#666666",lineHeight:"1.5",whiteSpace:"pre-wrap",borderBottom:"1px solid #18181f" }}>{entry.atividades}</div>
                   )}
                   {/* History */}
                   <div style={{ padding:"8px 10px" }}>
                     {(entry.historico||[]).length>0 ? (
                       <div style={{ display:"flex",flexDirection:"column",gap:"4px" }}>
                         {entry.historico.map((h,hi)=>(
-                          <div key={hi} style={{ fontSize:"10px",color:"#6e6e88" }}>
+                          <div key={hi} style={{ fontSize:"10px",color:"#666666" }}>
                             <span style={{ color:h.acao==="criado"?"#22c55e":h.acao==="alterado"?"#f59e0b":"#ef4444",marginRight:"4px" }}>{h.acao==="criado"?"＋":h.acao==="alterado"?"✎":"✕"}</span>
-                            <span style={{ color:"#6e6e88",fontWeight:600 }}>{h.por}</span>
-                            <span style={{ color:"#6e6e88" }}> · {formatDateTime(h.em)}</span>
+                            <span style={{ color:"#666666",fontWeight:600 }}>{h.por}</span>
+                            <span style={{ color:"#666666" }}> · {formatDateTime(h.em)}</span>
                             {h.alteracoes&&h.alteracoes.length>0&&(
                               <div style={{ marginTop:"2px",paddingLeft:"14px" }}>
                                 {h.alteracoes.map((a,ai)=>(
-                                  <div key={ai} style={{ fontSize:"9px",color:"#6e6e88" }}>
-                                    <span style={{ color:"#6e6e88" }}>{a.campo}:</span> <span style={{ textDecoration:"line-through",color:"#ef444488" }}>{a.de}</span> → <span style={{ color:"#22d3a0" }}>{a.para}</span>
+                                  <div key={ai} style={{ fontSize:"9px",color:"#666666" }}>
+                                    <span style={{ color:"#666666" }}>{a.campo}:</span> <span style={{ textDecoration:"line-through",color:"#ef444488" }}>{a.de}</span> → <span style={{ color:"#2a7a5a" }}>{a.para}</span>
                                   </div>
                                 ))}
                               </div>
@@ -3166,7 +3166,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                         ))}
                       </div>
                     ) : (
-                      <span style={{ fontSize:"10px",color:"#6e6e88",fontStyle:"italic" }}>Sem histórico</span>
+                      <span style={{ fontSize:"10px",color:"#666666",fontStyle:"italic" }}>Sem histórico</span>
                     )}
                     {/* OS aprovada — número + badge */}
                     {(()=>{
@@ -3175,12 +3175,12 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                         <>
                           {entry.osNumero && (
                             <div style={{ display:"flex",alignItems:"center",gap:"6px",marginTop:"6px",marginBottom:"2px" }}>
-                              <span style={{ fontSize:"10px",fontWeight:700,color:"#22d3a0" }}>📋 OS {entry.osNumero}</span>
-                              {osAprov && <span style={{ fontSize:"9px",padding:"1px 7px",borderRadius:"99px",background:"#22d3a018",border:"1px solid #22d3a033",color:"#22d3a0",fontWeight:700 }}>✅ Aprovada</span>}
+                              <span style={{ fontSize:"10px",fontWeight:700,color:"#2a7a5a" }}>📋 OS {entry.osNumero}</span>
+                              {osAprov && <span style={{ fontSize:"9px",padding:"1px 7px",borderRadius:"99px",background:"#e6f4ee",border:"1px solid #22d3a033",color:"#2a7a5a",fontWeight:700 }}>✅ Aprovada</span>}
                             </div>
                           )}
                           {osAprov && (
-                            <div style={{ fontSize:"10px",color:"#6e6e88",marginTop:"4px",padding:"4px 8px",background:"#22d3a00a",borderRadius:"6px",border:"1px solid #22d3a020" }}>
+                            <div style={{ fontSize:"10px",color:"#666666",marginTop:"4px",padding:"4px 8px",background:"#22d3a00a",borderRadius:"6px",border:"1px solid #22d3a020" }}>
                               🔒 Aprovada por <strong style={{ color:"#a0a0b0" }}>{entry.osAvaliadoPor}</strong> — somente leitura
                             </div>
                           )}
@@ -3188,11 +3188,11 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                           <div style={{ display:"flex",gap:"6px",marginTop:"8px",flexWrap:"wrap" }}>
                             {onOsClick && !osAprov && (
                               <button onClick={()=>{ onOsClick({...entry,consultor:popup.name,month:calMes}); setPopup(null); }}
-                                style={{ flex:1,padding:"5px 8px",borderRadius:"5px",border:"1px solid #22d3a044",background:"#22d3a015",color:"#22d3a0",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>📋 OS</button>
+                                style={{ flex:1,padding:"5px 8px",borderRadius:"5px",border:"1px solid #22d3a044",background:"#e6f4ee",color:"#2a7a5a",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>📋 OS</button>
                             )}
                             {!readonly && !osAprov && (
                               <>
-                                <button onClick={()=>{ onEdit({...entry,consultor:popup.name,month:calMes}); setPopup(null); }} style={{ flex:1,padding:"5px",borderRadius:"5px",border:"none",background:"#6c63ff",color:"#fff",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>✏️ Editar</button>
+                                <button onClick={()=>{ onEdit({...entry,consultor:popup.name,month:calMes}); setPopup(null); }} style={{ flex:1,padding:"5px",borderRadius:"5px",border:"none",background:"#2c2c2c",color:"#fff",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>✏️ Editar</button>
                                 <button onClick={()=>{ onDelete(popup.name,entry.id); setPopup(null); }} style={{ padding:"5px 10px",borderRadius:"5px",border:"1px solid #ef4444",background:"transparent",color:"#ef4444",fontSize:"11px",fontWeight:700,cursor:"pointer" }}>🗑</button>
                               </>
                             )}
@@ -3224,20 +3224,20 @@ function ConsultorCard({ name, entries, idx, onClick, selected }) {
   const hue = (idx * 47) % 360;
   const avatarGrad = `linear-gradient(135deg,hsl(${hue},65%,55%),hsl(${(hue+40)%360},70%,45%))`;
   return (
-    <div onClick={onClick} className="card-hover" style={{ background:selected?"#16102a":"#111118",border:"1px solid "+(selected?"#6c63ff66":"#1f1f2e"),borderRadius:"16px",padding:"20px 22px",cursor:"pointer",position:"relative",overflow:"hidden" }}>
+    <div onClick={onClick} className="card-hover" style={{ background:selected?"#16102a":"#ffffff",border:"1px solid "+(selected?"#6c63ff66":"#d8d8d8"),borderRadius:"16px",padding:"20px 22px",cursor:"pointer",position:"relative",overflow:"hidden" }}>
       {selected && <div style={{ position:"absolute",inset:0,background:"linear-gradient(135deg,#6c63ff08,#a78bfa05)",pointerEvents:"none" }}/>}
       {/* Accent line top */}
       {selected && <div style={{ position:"absolute",top:0,left:0,right:0,height:"2px",background:"linear-gradient(90deg,#6c63ff,#a78bfa)" }}/>}
       <div style={{ display:"flex",alignItems:"center",gap:"13px",marginBottom:"16px" }}>
         <div style={{ width:"44px",height:"44px",borderRadius:"14px",background:avatarGrad,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,fontSize:"14px",color:"#fff",flexShrink:0,boxShadow:`0 4px 12px hsl(${hue},60%,50%)44` }}>{getInitials(name)}</div>
         <div style={{ flex:1,minWidth:0 }}>
-          <div style={{ fontWeight:700,fontSize:"15px",color:"#f0f0fa",letterSpacing:"-0.2px",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis" }}>{name.trim()}</div>
-          <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"3px",display:"flex",gap:"10px" }}>
-            <span style={{ display:"flex",alignItems:"center",gap:"4px" }}><span style={{ color:"#22d3a0",fontWeight:700 }}>{total}</span> dias cliente</span>
-            {vacation>0 && <span style={{ display:"flex",alignItems:"center",gap:"4px" }}><span style={{ color:"#a78bfa",fontWeight:700 }}>{vacation}</span> férias</span>}
+          <div style={{ fontWeight:700,fontSize:"15px",color:"#111111",letterSpacing:"-0.2px",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis" }}>{name.trim()}</div>
+          <div style={{ fontSize:"11px",color:"#666666",marginTop:"3px",display:"flex",gap:"10px" }}>
+            <span style={{ display:"flex",alignItems:"center",gap:"4px" }}><span style={{ color:"#2a7a5a",fontWeight:700 }}>{total}</span> dias cliente</span>
+            {vacation>0 && <span style={{ display:"flex",alignItems:"center",gap:"4px" }}><span style={{ color:"#555555",fontWeight:700 }}>{vacation}</span> férias</span>}
           </div>
         </div>
-        {selected && <div style={{ width:"8px",height:"8px",borderRadius:"50%",background:"#6c63ff",boxShadow:"0 0 8px #6c63ff" }}/>}
+        {selected && <div style={{ width:"8px",height:"8px",borderRadius:"50%",background:"#2c2c2c",boxShadow:"0 0 8px #6c63ff" }}/>}
       </div>
       {topClients.length>0 && (
         <div style={{ display:"flex",flexDirection:"column",gap:"7px" }}>
@@ -3250,7 +3250,7 @@ function ConsultorCard({ name, entries, idx, onClick, selected }) {
                   <span style={{ fontSize:"11px",color:"#8888a8",fontWeight:500,letterSpacing:"0.2px" }}>{client}</span>
                   <span style={{ fontSize:"10px",color:"#4e4e66",fontWeight:600 }}>{pct}%</span>
                 </div>
-                <div style={{ height:"4px",background:"#1f1f2e",borderRadius:"99px",overflow:"hidden" }}>
+                <div style={{ height:"4px",background:"#e8e8e8",borderRadius:"99px",overflow:"hidden" }}>
                   <div style={{ height:"100%",width:pct+"%",background:`linear-gradient(90deg,${color},${color}bb)`,borderRadius:"99px",transition:"width .4s" }}/>
                 </div>
               </div>
@@ -3310,29 +3310,29 @@ function CalendarView({ consultant, month, byDay }) {
   const lastDay = [...currentWeek].reverse().find(d => d !== null);
   const weekLabel = firstDay && lastDay ? firstDay === lastDay ? `Dia ${firstDay}` : `${firstDay} – ${lastDay} de ${month}` : month;
 
-  const getColor = e => e.type==="vacation"?"#22c55e":e.type==="absence"?"#f04f5e":e.type==="holiday"?"#ef4444":e.type==="reserved"?"#6e6e88":e.type==="blocked"?"#6e6e88":getClientColor(e.client);
+  const getColor = e => e.type==="vacation"?"#22c55e":e.type==="absence"?"#c0392b":e.type==="holiday"?"#ef4444":e.type==="reserved"?"#666666":e.type==="blocked"?"#666666":getClientColor(e.client);
 
   return (
     <div onClick={()=>setPopup(null)}>
       {/* Header */}
       <div style={{ display:"flex",alignItems:"center",gap:"16px",marginBottom:"20px",flexWrap:"wrap" }}>
-        <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#f0f0fa",margin:0 }}>📅 {consultant} — {month} {year}</h2>
-        <div style={{ display:"flex",alignItems:"center",gap:"6px",background:"#18181f",borderRadius:"10px",padding:"4px 6px",border:"1px solid #2a2a3a" }}>
+        <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#111111",margin:0 }}>📅 {consultant} — {month} {year}</h2>
+        <div style={{ display:"flex",alignItems:"center",gap:"6px",background:"#f0f0f0",borderRadius:"10px",padding:"4px 6px",border:"1px solid #cccccc" }}>
           <button onClick={()=>setWeekIdx(w=>Math.max(0,w-1))} disabled={wi===0}
-            style={{ background:"none",border:"none",color:wi===0?"#2a2a3a":"#6e6e88",cursor:wi===0?"default":"pointer",fontWeight:700,fontSize:"16px",padding:"2px 8px",lineHeight:1 }}>‹</button>
-          <span style={{ fontSize:"12px",fontWeight:600,color:"#6e6e88",minWidth:"120px",textAlign:"center" }}>{weekLabel}</span>
+            style={{ background:"none",border:"none",color:wi===0?"#cccccc":"#666666",cursor:wi===0?"default":"pointer",fontWeight:700,fontSize:"16px",padding:"2px 8px",lineHeight:1 }}>‹</button>
+          <span style={{ fontSize:"12px",fontWeight:600,color:"#666666",minWidth:"120px",textAlign:"center" }}>{weekLabel}</span>
           <button onClick={()=>setWeekIdx(w=>Math.min(totalWeeks-1,w+1))} disabled={wi===totalWeeks-1}
-            style={{ background:"none",border:"none",color:wi===totalWeeks-1?"#2a2a3a":"#6e6e88",cursor:wi===totalWeeks-1?"default":"pointer",fontWeight:700,fontSize:"16px",padding:"2px 8px",lineHeight:1 }}>›</button>
+            style={{ background:"none",border:"none",color:wi===totalWeeks-1?"#cccccc":"#666666",cursor:wi===totalWeeks-1?"default":"pointer",fontWeight:700,fontSize:"16px",padding:"2px 8px",lineHeight:1 }}>›</button>
         </div>
-        <span style={{ fontSize:"12px",color:"#6e6e88" }}>Semana {wi+1} de {totalWeeks}</span>
+        <span style={{ fontSize:"12px",color:"#666666" }}>Semana {wi+1} de {totalWeeks}</span>
       </div>
 
       {/* Week grid */}
       <div style={{ display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"10px" }}>
         {wd.map((d,i)=>(
-          <div key={d} style={{ textAlign:"center",fontSize:"11px",fontWeight:700,color:"#6e6e88",padding:"8px 0",borderBottom:"1px solid #18181f" }}>
+          <div key={d} style={{ textAlign:"center",fontSize:"11px",fontWeight:700,color:"#666666",padding:"8px 0",borderBottom:"1px solid #18181f" }}>
             <div>{d}</div>
-            <div style={{ fontSize:"10px",fontWeight:400,color:"#2a2a3a",marginTop:"2px" }}>{WD_FULL[i]}</div>
+            <div style={{ fontSize:"10px",fontWeight:400,color:"#cccccc",marginTop:"2px" }}>{WD_FULL[i]}</div>
           </div>
         ))}
         {currentWeek.map((day,i)=>{
@@ -3341,10 +3341,10 @@ function CalendarView({ consultant, month, byDay }) {
           const isToday = (() => { const t=new Date(); return t.getDate()===day && t.getMonth()===monthIdx && t.getFullYear()===year; })();
           const ferNac = getFeriadoNacional(day, monthIdx+1, year);
           return (
-            <div key={day} onClick={e=>e.stopPropagation()} style={{ minHeight:"140px",borderRadius:"10px",background:ferNac?"#1a1408":isToday?"#16102a":"#18181f",border:"1px solid "+(ferNac?"#f59e0b44":isToday?"#3b82f6":"#2a2a3a"),padding:"10px",display:"flex",flexDirection:"column",gap:"6px" }}>
-              <div style={{ fontSize:"18px",fontWeight:700,color:ferNac?"#f59e0b":isToday?"#60a5fa":"#f0f0fa",marginBottom:"2px" }}>{day}</div>
+            <div key={day} onClick={e=>e.stopPropagation()} style={{ minHeight:"140px",borderRadius:"10px",background:ferNac?"#1a1408":isToday?"#16102a":"#e8e8e8",border:"1px solid "+(ferNac?"#f59e0b44":isToday?"#3b82f6":"#cccccc"),padding:"10px",display:"flex",flexDirection:"column",gap:"6px" }}>
+              <div style={{ fontSize:"18px",fontWeight:700,color:ferNac?"#f59e0b":isToday?"#60a5fa":"#111111",marginBottom:"2px" }}>{day}</div>
               {ferNac && <div style={{ fontSize:"9px",fontWeight:700,color:"#f59e0b",background:"#f59e0b18",borderRadius:"4px",padding:"2px 6px",marginBottom:"2px" }}>🎉 {ferNac}</div>}
-              {entries.length===0 && <div style={{ fontSize:"11px",color:"#2a2a3a",fontStyle:"italic" }}>—</div>}
+              {entries.length===0 && <div style={{ fontSize:"11px",color:"#cccccc",fontStyle:"italic" }}>—</div>}
               {entries.map((entry,ei)=>{
                 const color = getColor(entry);
                 return (
@@ -3354,7 +3354,7 @@ function CalendarView({ consultant, month, byDay }) {
                     onMouseLeave={e=>e.currentTarget.style.filter=""}>
                     <div style={{ fontSize:"11px",fontWeight:700,color:color,lineHeight:1.3 }}>{entry.client||TYPE_LABEL[entry.type]||entry.type}</div>
                     {(entry.horaInicio||entry.horaFim) && (
-                      <div style={{ fontSize:"10px",color:"#6e6e88",marginTop:"2px" }}>{entry.horaInicio||""}{entry.horaFim?" – "+entry.horaFim:""}</div>
+                      <div style={{ fontSize:"10px",color:"#666666",marginTop:"2px" }}>{entry.horaInicio||""}{entry.horaFim?" – "+entry.horaFim:""}</div>
                     )}
                   </div>
                 );
@@ -3367,15 +3367,15 @@ function CalendarView({ consultant, month, byDay }) {
       {/* POPUP — detail view on entry click */}
       {popup && (
         <div onClick={e=>e.stopPropagation()}
-          style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#18181f",border:"1px solid #6e6e88",borderRadius:"12px",zIndex:9000,width:"290px",boxShadow:"0 8px 32px rgba(0,0,0,0.6)",maxHeight:"80vh",display:"flex",flexDirection:"column" }}>
+          style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#f0f0f0",border:"1px solid #6e6e88",borderRadius:"12px",zIndex:9000,width:"290px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",maxHeight:"80vh",display:"flex",flexDirection:"column" }}>
           {/* Header fixo + drag */}
           <div onMouseDown={startDrag} style={{ padding:"14px 16px 12px",borderBottom:"1px solid #2a2a3a",flexShrink:0,cursor:"grab",userSelect:"none" }}>
             <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center" }}>
               <div>
-                <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{consultant.trim().split(" ")[0]}</div>
-                <div style={{ fontSize:"11px",color:"#6e6e88" }}>Dia {popup.day} · {month} {year} ({WD_FULL[(new Date(year,monthIdx,popup.day).getDay()+6)%7]})</div>
+                <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{consultant.trim().split(" ")[0]}</div>
+                <div style={{ fontSize:"11px",color:"#666666" }}>Dia {popup.day} · {month} {year} ({WD_FULL[(new Date(year,monthIdx,popup.day).getDay()+6)%7]})</div>
               </div>
-              <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setPopup(null)} style={{ background:"#2a2a3a",border:"none",color:"#6e6e88",borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
+              <button onMouseDown={e=>e.stopPropagation()} onClick={()=>setPopup(null)} style={{ background:"#e0e0e0",border:"none",color:"#666666",borderRadius:"8px",width:"28px",height:"28px",cursor:"pointer",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>✕</button>
             </div>
           </div>
           {/* Entries com scroll */}
@@ -3383,7 +3383,7 @@ function CalendarView({ consultant, month, byDay }) {
             {(popup.entries||[]).map((entry,ei)=>{
               const color = getColor(entry);
               return (
-                <div key={entry.id||ei} style={{ background:"#0d0d14",borderRadius:"8px",border:"1px solid #2a2a3a",overflow:"hidden" }}>
+                <div key={entry.id||ei} style={{ background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",overflow:"hidden" }}>
                   {/* Color bar header */}
                   <div style={{ background:color,padding:"6px 10px",display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                     <span style={{ fontSize:"12px",fontWeight:800,color:"#fff" }}>{entry.client||TYPE_LABEL[entry.type]||entry.type}</span>
@@ -3399,7 +3399,7 @@ function CalendarView({ consultant, month, byDay }) {
                   <div style={{ padding:"8px 10px",display:"flex",flexDirection:"column",gap:"6px" }}>
                     {/* Type badge + modalidade */}
                     <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
-                      <div style={{ fontSize:"11px",color:"#6e6e88" }}>{TYPE_LABEL[entry.type]||entry.type}</div>
+                      <div style={{ fontSize:"11px",color:"#666666" }}>{TYPE_LABEL[entry.type]||entry.type}</div>
                       {entry.modalidade && (
                         <div style={{ fontSize:"11px",fontWeight:600,padding:"2px 8px",borderRadius:"20px",
                           background:entry.modalidade==="remoto"?"#6366f122":"#10b98122",
@@ -3409,33 +3409,33 @@ function CalendarView({ consultant, month, byDay }) {
                     </div>
                     {/* Horário detail */}
                     {(entry.horaInicio||entry.horaFim||entry.intervalo) && (
-                      <div style={{ background:"#18181f",borderRadius:"6px",padding:"6px 8px",fontSize:"11px",color:"#6e6e88",display:"flex",gap:"12px",flexWrap:"wrap" }}>
-                        {entry.horaInicio && <span>🕐 Início: <strong style={{ color:"#f0f0fa" }}>{entry.horaInicio}</strong></span>}
-                        {entry.horaFim && <span>🕔 Fim: <strong style={{ color:"#f0f0fa" }}>{entry.horaFim}</strong></span>}
-                        {entry.intervalo && <span>☕ Intervalo: <strong style={{ color:"#f0f0fa" }}>{entry.intervalo}min</strong></span>}
+                      <div style={{ background:"#f0f0f0",borderRadius:"6px",padding:"6px 8px",fontSize:"11px",color:"#666666",display:"flex",gap:"12px",flexWrap:"wrap" }}>
+                        {entry.horaInicio && <span>🕐 Início: <strong style={{ color:"#111111" }}>{entry.horaInicio}</strong></span>}
+                        {entry.horaFim && <span>🕔 Fim: <strong style={{ color:"#111111" }}>{entry.horaFim}</strong></span>}
+                        {entry.intervalo && <span>☕ Intervalo: <strong style={{ color:"#111111" }}>{entry.intervalo}min</strong></span>}
                       </div>
                     )}
                     {/* Atividades */}
                     {entry.atividades && (
-                      <div style={{ background:"#18181f",borderRadius:"6px",padding:"6px 8px" }}>
-                        <div style={{ fontSize:"10px",fontWeight:700,color:"#6e6e88",marginBottom:"3px",textTransform:"uppercase",letterSpacing:"0.5px" }}>Atividades</div>
-                        <div style={{ fontSize:"11px",color:"#6e6e88",lineHeight:"1.6",whiteSpace:"pre-wrap" }}>{entry.atividades}</div>
+                      <div style={{ background:"#f0f0f0",borderRadius:"6px",padding:"6px 8px" }}>
+                        <div style={{ fontSize:"10px",fontWeight:700,color:"#666666",marginBottom:"3px",textTransform:"uppercase",letterSpacing:"0.5px" }}>Atividades</div>
+                        <div style={{ fontSize:"11px",color:"#666666",lineHeight:"1.6",whiteSpace:"pre-wrap" }}>{entry.atividades}</div>
                       </div>
                     )}
                     {/* Histórico */}
                     {(entry.historico||[]).length>0 && (
                       <div style={{ borderTop:"1px solid #18181f",paddingTop:"6px" }}>
-                        <div style={{ fontSize:"10px",fontWeight:700,color:"#6e6e88",marginBottom:"4px",textTransform:"uppercase",letterSpacing:"0.5px" }}>Histórico</div>
+                        <div style={{ fontSize:"10px",fontWeight:700,color:"#666666",marginBottom:"4px",textTransform:"uppercase",letterSpacing:"0.5px" }}>Histórico</div>
                         {entry.historico.map((h,hi)=>(
-                          <div key={hi} style={{ fontSize:"10px",color:"#6e6e88",marginBottom:"3px" }}>
+                          <div key={hi} style={{ fontSize:"10px",color:"#666666",marginBottom:"3px" }}>
                             <span style={{ color:h.acao==="criado"?"#22c55e":h.acao==="alterado"?"#f59e0b":"#ef4444",marginRight:"4px" }}>{h.acao==="criado"?"＋":h.acao==="alterado"?"✎":"✕"}</span>
-                            <span style={{ color:"#6e6e88",fontWeight:600 }}>{h.por}</span>
-                            <span style={{ color:"#6e6e88" }}> · {formatDateTime(h.em)}</span>
+                            <span style={{ color:"#666666",fontWeight:600 }}>{h.por}</span>
+                            <span style={{ color:"#666666" }}> · {formatDateTime(h.em)}</span>
                             {h.alteracoes&&h.alteracoes.length>0&&(
                               <div style={{ marginTop:"2px",paddingLeft:"14px" }}>
                                 {h.alteracoes.map((a,ai)=>(
-                                  <div key={ai} style={{ fontSize:"9px",color:"#6e6e88" }}>
-                                    <span style={{ color:"#6e6e88" }}>{a.campo}:</span> <span style={{ textDecoration:"line-through",color:"#ef444488" }}>{a.de}</span> → <span style={{ color:"#22d3a0" }}>{a.para}</span>
+                                  <div key={ai} style={{ fontSize:"9px",color:"#666666" }}>
+                                    <span style={{ color:"#666666" }}>{a.campo}:</span> <span style={{ textDecoration:"line-through",color:"#ef444488" }}>{a.de}</span> → <span style={{ color:"#2a7a5a" }}>{a.para}</span>
                                   </div>
                                 ))}
                               </div>
@@ -3473,14 +3473,14 @@ function TimelineView({ data, months }) {
       <table style={{ borderCollapse:"collapse",minWidth:"900px",width:"100%" }}>
         <thead>
           <tr>
-            <th style={{ padding:"10px 16px",textAlign:"left",fontSize:"12px",fontWeight:700,color:"#6e6e88",position:"sticky",left:0,background:"#0d0d14",zIndex:1 }}>Consultor</th>
-            {displayMonths.map(m=><th key={m} style={{ padding:"10px 8px",textAlign:"center",fontSize:"11px",fontWeight:600,color:"#6e6e88",minWidth:"80px" }}>{m.slice(0,3)}</th>)}
+            <th style={{ padding:"10px 16px",textAlign:"left",fontSize:"12px",fontWeight:700,color:"#666666",position:"sticky",left:0,background:"#f7f7f7",zIndex:1 }}>Consultor</th>
+            {displayMonths.map(m=><th key={m} style={{ padding:"10px 8px",textAlign:"center",fontSize:"11px",fontWeight:600,color:"#666666",minWidth:"80px" }}>{m.slice(0,3)}</th>)}
           </tr>
         </thead>
         <tbody>
           {consultores.map((name,idx)=>(
             <tr key={name} style={{ borderTop:"1px solid #18181f" }}>
-              <td style={{ padding:"10px 16px",fontSize:"13px",fontWeight:600,color:"#2a2a3a",position:"sticky",left:0,background:"#0d0d14",zIndex:1,whiteSpace:"nowrap" }}>
+              <td style={{ padding:"10px 16px",fontSize:"13px",fontWeight:600,color:"#cccccc",position:"sticky",left:0,background:"#f7f7f7",zIndex:1,whiteSpace:"nowrap" }}>
                 <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                   <div style={{ width:"28px",height:"28px",borderRadius:"50%",background:"hsl("+(idx*29%360)+",65%,50%)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                   {name.trim().split(" ").slice(0,2).join(" ")}
@@ -3488,11 +3488,11 @@ function TimelineView({ data, months }) {
               </td>
               {displayMonths.map(m=>{
                 const {total,top,vacation,absence} = getMonthSummary(name,m);
-                if (absence>0&&total===0) return <td key={m} style={{ padding:"4px" }}><div style={{ background:"#f04f5e22",border:"1px solid #f04f5e44",borderRadius:"6px",padding:"6px 4px",textAlign:"center" }}><div style={{ fontSize:"10px",color:"#f04f5e",fontWeight:600 }}>AFASTADO</div></div></td>;
-                if (vacation>0&&total===0) return <td key={m} style={{ padding:"4px" }}><div style={{ background:"#22c55e22",border:"1px solid #22c55e44",borderRadius:"6px",padding:"6px 4px",textAlign:"center" }}><div style={{ fontSize:"10px",color:"#22d3a0",fontWeight:600 }}>FÉRIAS</div></div></td>;
+                if (absence>0&&total===0) return <td key={m} style={{ padding:"4px" }}><div style={{ background:"#f04f5e22",border:"1px solid #f04f5e44",borderRadius:"6px",padding:"6px 4px",textAlign:"center" }}><div style={{ fontSize:"10px",color:"#c0392b",fontWeight:600 }}>AFASTADO</div></div></td>;
+                if (vacation>0&&total===0) return <td key={m} style={{ padding:"4px" }}><div style={{ background:"#22c55e22",border:"1px solid #22c55e44",borderRadius:"6px",padding:"6px 4px",textAlign:"center" }}><div style={{ fontSize:"10px",color:"#2a7a5a",fontWeight:600 }}>FÉRIAS</div></div></td>;
                 if (!total) return <td key={m} style={{ padding:"4px" }}><div style={{ height:"36px",borderRadius:"6px",background:"#18181f44" }}/></td>;
                 const color = top ? getClientColor(top[0]) : "#3b82f6";
-                return <td key={m} style={{ padding:"4px" }}><div style={{ background:color+"22",border:"1px solid "+color+"44",borderRadius:"6px",padding:"6px 4px",textAlign:"center" }}><div style={{ fontSize:"9px",color:color,fontWeight:700,lineHeight:1.2 }}>{top?.[0]?.slice(0,7)||""}</div><div style={{ fontSize:"10px",color:"#6e6e88",marginTop:"1px" }}>{total}d</div></div></td>;
+                return <td key={m} style={{ padding:"4px" }}><div style={{ background:color+"22",border:"1px solid "+color+"44",borderRadius:"6px",padding:"6px 4px",textAlign:"center" }}><div style={{ fontSize:"9px",color:color,fontWeight:700,lineHeight:1.2 }}>{top?.[0]?.slice(0,7)||""}</div><div style={{ fontSize:"10px",color:"#666666",marginTop:"1px" }}>{total}d</div></div></td>;
               })}
             </tr>
           ))}
@@ -3509,8 +3509,8 @@ function StatsView({ stats }) {
   const maxDays = Math.max(...stats.consultorStats.map(c=>c.working),1);
   return (
     <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"24px" }}>
-      <div style={{ background:"#18181f",borderRadius:"12px",padding:"24px",border:"1px solid #2a2a3a" }}>
-        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"15px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"20px" }}>🏆 Top Clientes por Dias</h3>
+      <div style={{ background:"#f0f0f0",borderRadius:"12px",padding:"24px",border:"1px solid #cccccc" }}>
+        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"15px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"20px" }}>🏆 Top Clientes por Dias</h3>
         <div style={{ display:"flex",flexDirection:"column",gap:"12px" }}>
           {stats.topClients.map(([client,days],i)=>{
             const color = getClientColor(client);
@@ -3518,10 +3518,10 @@ function StatsView({ stats }) {
             return (
               <div key={client}>
                 <div style={{ display:"flex",justifyContent:"space-between",marginBottom:"4px" }}>
-                  <span style={{ fontSize:"13px",color:"#2a2a3a",fontWeight:500 }}><span style={{ color:"#6e6e88",marginRight:"8px" }}>#{i+1}</span>{client}</span>
+                  <span style={{ fontSize:"13px",color:"#cccccc",fontWeight:500 }}><span style={{ color:"#666666",marginRight:"8px" }}>#{i+1}</span>{client}</span>
                   <span style={{ fontSize:"13px",color:color,fontWeight:700 }}>{days} dias</span>
                 </div>
-                <div style={{ height:"6px",background:"#2a2a3a",borderRadius:"3px",overflow:"hidden" }}>
+                <div style={{ height:"6px",background:"#e0e0e0",borderRadius:"3px",overflow:"hidden" }}>
                   <div style={{ height:"100%",width:pct+"%",background:color,borderRadius:"3px" }}/>
                 </div>
               </div>
@@ -3529,8 +3529,8 @@ function StatsView({ stats }) {
           })}
         </div>
       </div>
-      <div style={{ background:"#18181f",borderRadius:"12px",padding:"24px",border:"1px solid #2a2a3a" }}>
-        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"15px",fontWeight:700,color:"#f0f0fa",marginTop:0,marginBottom:"20px" }}>👥 Produtividade por Consultor</h3>
+      <div style={{ background:"#f0f0f0",borderRadius:"12px",padding:"24px",border:"1px solid #cccccc" }}>
+        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"15px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"20px" }}>👥 Produtividade por Consultor</h3>
         <div style={{ display:"flex",flexDirection:"column",gap:"10px" }}>
           {stats.consultorStats.filter(c=>c.working>0).map((c,i)=>{
             const pct = Math.round((c.working/maxDays)*100);
@@ -3538,13 +3538,13 @@ function StatsView({ stats }) {
             return (
               <div key={c.name}>
                 <div style={{ display:"flex",justifyContent:"space-between",marginBottom:"3px" }}>
-                  <span style={{ fontSize:"12px",color:"#2a2a3a" }}>{c.name.trim().split(" ").slice(0,2).join(" ")}</span>
+                  <span style={{ fontSize:"12px",color:"#cccccc" }}>{c.name.trim().split(" ").slice(0,2).join(" ")}</span>
                   <div style={{ display:"flex",gap:"8px" }}>
-                    <span style={{ fontSize:"12px",color:"#6e6e88" }}>{c.working}d</span>
-                    {c.vacation>0&&<span style={{ fontSize:"12px",color:"#22d3a0" }}>🏖 {c.vacation}d</span>}
+                    <span style={{ fontSize:"12px",color:"#666666" }}>{c.working}d</span>
+                    {c.vacation>0&&<span style={{ fontSize:"12px",color:"#2a7a5a" }}>🏖 {c.vacation}d</span>}
                   </div>
                 </div>
-                <div style={{ height:"5px",background:"#2a2a3a",borderRadius:"3px",overflow:"hidden" }}>
+                <div style={{ height:"5px",background:"#e0e0e0",borderRadius:"3px",overflow:"hidden" }}>
                   <div style={{ height:"100%",width:pct+"%",background:"hsl("+hue+",65%,55%)",borderRadius:"3px" }}/>
                 </div>
               </div>
@@ -3562,14 +3562,14 @@ function StatsView({ stats }) {
 
 const ROLE_BADGES = {
   admin:              { label:"Admin",              color:"#a855f7", bg:"#a855f718", nivel:99 },
-  editor:             { label:"Editor",             color:"#6c63ff", bg:"#6c63ff18", nivel:80 },
-  viewer:             { label:"Visualizador",       color:"#6e6e88", bg:"#6e6e8818", nivel:10 },
+  editor:             { label:"Editor",             color:"#2c2c2c", bg:"rgba(0,0,0,0.05)", nivel:80 },
+  viewer:             { label:"Visualizador",       color:"#666666", bg:"#6e6e8818", nivel:10 },
   consultor:          { label:"Consultor",          color:"#f59e0b", bg:"#f59e0b18", nivel:20 },
   diretor_executivo:  { label:"Diretor Executivo",  color:"#ec4899", bg:"#ec489918", nivel:90 },
   diretor:            { label:"Diretor",            color:"#f43f5e", bg:"#f43f5e18", nivel:80 },
   gerente_executivo:  { label:"Gerente Executivo",  color:"#f97316", bg:"#f9731618", nivel:70 },
   gerente:            { label:"Gerente",            color:"#eab308", bg:"#eab30818", nivel:60 },
-  coordenador:        { label:"Coordenador",        color:"#22d3a0", bg:"#22d3a018", nivel:50 },
+  coordenador:        { label:"Coordenador",        color:"#2a7a5a", bg:"#e6f4ee", nivel:50 },
   administrativo:     { label:"Administrativo",     color:"#64748b", bg:"#64748b18", nivel:30 },
 };
 
@@ -3613,87 +3613,83 @@ function LoginScreen({ onLogin }) {
     }
   };
 
-  const inp = { padding:"12px 16px", borderRadius:"12px", border:"1px solid #2a2a3a", background:"#0d0d14", color:"#c8c8d8", fontSize:"14px", width:"100%", boxSizing:"border-box", outline:"none", fontFamily:"inherit", transition:"border-color .15s,box-shadow .15s" };
+  const inp = { padding:"12px 16px", borderRadius:"10px", border:"1px solid #d0d0d0", background:"#ffffff", color:"#1a1a1a", fontSize:"14px", width:"100%", boxSizing:"border-box", outline:"none", fontFamily:"inherit", transition:"border-color .15s,box-shadow .15s" };
 
   return (
-    <div style={{ fontFamily:"'Outfit',sans-serif", background:"#09090f", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:"20px", position:"relative", overflow:"hidden" }}>
+    <div style={{ fontFamily:"'Outfit',sans-serif", background:"#f0f0f0", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:"20px", position:"relative", overflow:"hidden" }}>
       <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cabinet+Grotesk:wght@700;900&display=swap" rel="stylesheet"/>
       <style>{`
-        @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes orb{0%,100%{transform:scale(1) translate(0,0)}50%{transform:scale(1.1) translate(10px,-10px)}}
-        .login-inp:focus{border-color:#6c63ff!important;box-shadow:0 0 0 3px #6c63ff20!important;}
-        .login-btn:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 32px #6c63ff55!important;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .login-inp:focus{border-color:#555!important;box-shadow:0 0 0 3px rgba(0,0,0,0.08)!important;}
+        .login-btn:hover:not(:disabled){background:#111!important;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.2)!important;}
         .login-btn{transition:all .2s cubic-bezier(.4,0,.2,1);}
       `}</style>
 
-      {/* Background orbs */}
-      <div style={{ position:"absolute",top:"-160px",left:"-160px",width:"500px",height:"500px",borderRadius:"50%",background:"radial-gradient(circle,#6c63ff1a 0%,transparent 65%)",pointerEvents:"none",animation:"orb 8s ease-in-out infinite" }}/>
-      <div style={{ position:"absolute",bottom:"-120px",right:"-100px",width:"400px",height:"400px",borderRadius:"50%",background:"radial-gradient(circle,#a78bfa14 0%,transparent 65%)",pointerEvents:"none",animation:"orb 10s ease-in-out infinite reverse" }}/>
-      <div style={{ position:"absolute",top:"40%",right:"10%",width:"200px",height:"200px",borderRadius:"50%",background:"radial-gradient(circle,#22d3a00e 0%,transparent 70%)",pointerEvents:"none" }}/>
+      {/* Decorative background lines */}
+      <div style={{ position:"absolute",inset:0,backgroundImage:"linear-gradient(#d0d0d0 1px,transparent 1px),linear-gradient(90deg,#d0d0d0 1px,transparent 1px)",backgroundSize:"40px 40px",opacity:0.4,pointerEvents:"none" }}/>
 
-      <div style={{ width:"100%", maxWidth:"420px", animation:"fadeUp .45s cubic-bezier(.4,0,.2,1)" }}>
+      <div style={{ width:"100%", maxWidth:"420px", animation:"fadeUp .4s cubic-bezier(.4,0,.2,1)", position:"relative", zIndex:1 }}>
         {/* Logo */}
-        <div style={{ textAlign:"center", marginBottom:"40px" }}>
-          <div style={{ display:"inline-flex",alignItems:"center",justifyContent:"center",width:"68px",height:"68px",borderRadius:"20px",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",marginBottom:"22px",boxShadow:"0 0 48px #6c63ff55",animation:"float 5s ease-in-out infinite",fontSize:"30px" }}>◈</div>
-          <h1 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"26px", fontWeight:900, color:"#f0f0fa", margin:"0 0 4px", letterSpacing:"-0.7px" }}>GSC</h1>
-          <p style={{ color:"#a78bfa", fontSize:"14px", margin:"0 0 8px", fontWeight:600, letterSpacing:"0.3px" }}>Gestão de Serviços</p>
-          <p style={{ color:"#3e3e55", fontSize:"13px", margin:0, fontWeight:500 }}>Acesse sua conta para continuar</p>
+        <div style={{ textAlign:"center", marginBottom:"36px" }}>
+          <div style={{ display:"inline-flex",alignItems:"center",justifyContent:"center",width:"64px",height:"64px",borderRadius:"16px",background:"#1a1a1a",marginBottom:"20px",boxShadow:"0 8px 24px rgba(0,0,0,0.2)",fontSize:"26px" }}>◈</div>
+          <h1 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"30px", fontWeight:900, color:"#000000", margin:"0 0 4px", letterSpacing:"-1px" }}>GSC</h1>
+          <p style={{ color:"#444444", fontSize:"14px", margin:"0 0 6px", fontWeight:600, letterSpacing:"0.5px", textTransform:"uppercase" }}>Gestão de Serviços</p>
+          <p style={{ color:"#888888", fontSize:"13px", margin:0, fontWeight:400 }}>Acesse sua conta para continuar</p>
         </div>
 
         {!showReset ? (
-          <div style={{ background:"#111118", borderRadius:"22px", padding:"34px", border:"1px solid #1f1f2e", boxShadow:"0 32px 80px rgba(0,0,0,0.7)" }}>
+          <div style={{ background:"#ffffff", borderRadius:"18px", padding:"36px", border:"1px solid #d8d8d8", boxShadow:"0 8px 40px rgba(0,0,0,0.10)" }}>
             <div style={{ display:"flex", flexDirection:"column", gap:"18px" }}>
               <div>
-                <label style={{ fontSize:"11px", color:"#3e3e55", fontWeight:700, display:"block", marginBottom:"8px", letterSpacing:"1px", textTransform:"uppercase" }}>E-mail</label>
+                <label style={{ fontSize:"11px", color:"#555555", fontWeight:700, display:"block", marginBottom:"8px", letterSpacing:"1px", textTransform:"uppercase" }}>E-mail</label>
                 <input className="login-inp" type="email" value={email} onChange={e=>{ setEmail(e.target.value); setError(""); }} onKeyDown={e=>e.key==="Enter"&&handleSubmit()} placeholder="seu@email.com" style={inp} autoFocus />
               </div>
               <div>
-                <label style={{ fontSize:"11px", color:"#3e3e55", fontWeight:700, display:"block", marginBottom:"8px", letterSpacing:"1px", textTransform:"uppercase" }}>Senha</label>
+                <label style={{ fontSize:"11px", color:"#555555", fontWeight:700, display:"block", marginBottom:"8px", letterSpacing:"1px", textTransform:"uppercase" }}>Senha</label>
                 <div style={{ position:"relative" }}>
                   <input className="login-inp" type={showPass?"text":"password"} value={password} onChange={e=>{ setPassword(e.target.value); setError(""); }} onKeyDown={e=>e.key==="Enter"&&handleSubmit()} placeholder="••••••••" style={{...inp, paddingRight:"46px"}} />
-                  <button onClick={()=>setShowPass(!showPass)} style={{ position:"absolute", right:"14px", top:"50%", transform:"translateY(-50%)", background:"none", border:"none", color:"#3e3e55", cursor:"pointer", fontSize:"15px", padding:0 }}>{showPass?"🙈":"👁"}</button>
+                  <button onClick={()=>setShowPass(!showPass)} style={{ position:"absolute", right:"14px", top:"50%", transform:"translateY(-50%)", background:"none", border:"none", color:"#888888", cursor:"pointer", fontSize:"15px", padding:0 }}>{showPass?"🙈":"👁"}</button>
                 </div>
               </div>
               {error && (
-                <div style={{ padding:"11px 14px", borderRadius:"11px", background:"#f04f5e12", border:"1px solid #f04f5e30", color:"#f87171", fontSize:"13px", display:"flex",alignItems:"center",gap:"8px" }}>
+                <div style={{ padding:"11px 14px", borderRadius:"10px", background:"#fff0f0", border:"1px solid #ffcccc", color:"#c0392b", fontSize:"13px", display:"flex",alignItems:"center",gap:"8px" }}>
                   <span>⚠️</span>{error}
                 </div>
               )}
               <button className="login-btn" onClick={handleSubmit} disabled={loading}
-                style={{ padding:"14px", borderRadius:"12px", border:"none", background:loading?"#1f1f2e":`linear-gradient(135deg,#6c63ff,#a78bfa)`, color:loading?"#3e3e55":"#fff", fontWeight:700, fontSize:"14px", cursor:loading?"not-allowed":"pointer", boxShadow:loading?"none":"0 4px 24px #6c63ff44", marginTop:"4px", fontFamily:"inherit", letterSpacing:"0.3px" }}>
+                style={{ padding:"14px", borderRadius:"10px", border:"none", background:loading?"#e0e0e0":"#1a1a1a", color:loading?"#888888":"#ffffff", fontWeight:700, fontSize:"14px", cursor:loading?"not-allowed":"pointer", boxShadow:loading?"none":"0 4px 16px rgba(0,0,0,0.2)", marginTop:"4px", fontFamily:"inherit", letterSpacing:"0.5px" }}>
                 {loading ? "⏳ Verificando..." : "Entrar →"}
               </button>
               <button onClick={()=>{ setShowReset(true); setResetEmail(email); }}
-                style={{ background:"none", border:"none", color:"#3e3e55", fontSize:"12px", cursor:"pointer", padding:0, textAlign:"center", fontFamily:"inherit" }}>
+                style={{ background:"none", border:"none", color:"#888888", fontSize:"12px", cursor:"pointer", padding:0, textAlign:"center", fontFamily:"inherit", textDecoration:"underline" }}>
                 Esqueci minha senha
               </button>
             </div>
           </div>
         ) : (
-          <div style={{ background:"#111118", borderRadius:"22px", padding:"34px", border:"1px solid #1f1f2e", boxShadow:"0 32px 80px rgba(0,0,0,0.7)" }}>
-            <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"18px", fontWeight:900, color:"#f0f0fa", marginTop:0, marginBottom:"8px", letterSpacing:"-0.3px" }}>Recuperar senha</h2>
-            <p style={{ fontSize:"13px", color:"#3e3e55", marginBottom:"22px", lineHeight:"1.6" }}>Digite seu e-mail e enviaremos um link para redefinir sua senha.</p>
+          <div style={{ background:"#ffffff", borderRadius:"18px", padding:"36px", border:"1px solid #d8d8d8", boxShadow:"0 8px 40px rgba(0,0,0,0.10)" }}>
+            <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"18px", fontWeight:900, color:"#000000", marginTop:0, marginBottom:"8px", letterSpacing:"-0.3px" }}>Recuperar senha</h2>
+            <p style={{ fontSize:"13px", color:"#666666", marginBottom:"22px", lineHeight:"1.6" }}>Digite seu e-mail e enviaremos um link para redefinir sua senha.</p>
             <div style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
               <input className="login-inp" type="email" value={resetEmail} onChange={e=>setResetEmail(e.target.value)} placeholder="seu@email.com" style={inp} autoFocus />
               {resetMsg && (
-                <div style={{ padding:"11px 14px", borderRadius:"11px", background:resetMsg.startsWith("✅")?"#22d3a015":"#f04f5e12", border:"1px solid "+(resetMsg.startsWith("✅")?"#22d3a030":"#f04f5e30"), color:resetMsg.startsWith("✅")?"#34d399":"#f87171", fontSize:"13px" }}>
+                <div style={{ padding:"11px 14px", borderRadius:"10px", background:resetMsg.startsWith("✅")?"#f0fff8":"#fff0f0", border:"1px solid "+(resetMsg.startsWith("✅")?"#99ddbb":"#ffcccc"), color:resetMsg.startsWith("✅")?"#2a7a5a":"#c0392b", fontSize:"13px" }}>
                   {resetMsg}
                 </div>
               )}
               <button className="login-btn" onClick={handleReset}
-                style={{ padding:"13px", borderRadius:"12px", border:"none", background:"linear-gradient(135deg,#6c63ff,#a78bfa)", color:"#fff", fontWeight:700, fontSize:"13px", cursor:"pointer", fontFamily:"inherit", boxShadow:"0 4px 24px #6c63ff44" }}>
+                style={{ padding:"13px", borderRadius:"10px", border:"none", background:"#1a1a1a", color:"#ffffff", fontWeight:700, fontSize:"13px", cursor:"pointer", fontFamily:"inherit", boxShadow:"0 4px 16px rgba(0,0,0,0.2)" }}>
                 📧 Enviar link de recuperação
               </button>
               <button onClick={()=>{ setShowReset(false); setResetMsg(""); }}
-                style={{ background:"none", border:"none", color:"#3e3e55", fontSize:"12px", cursor:"pointer", padding:0, textAlign:"center", fontFamily:"inherit" }}>
+                style={{ background:"none", border:"none", color:"#888888", fontSize:"12px", cursor:"pointer", padding:0, textAlign:"center", fontFamily:"inherit", textDecoration:"underline" }}>
                 ← Voltar ao login
               </button>
             </div>
           </div>
         )}
 
-        <p style={{ textAlign:"center", fontSize:"11px", color:"#1f1f2e", marginTop:"24px", letterSpacing:"0.3px" }}>
+        <p style={{ textAlign:"center", fontSize:"11px", color:"#999999", marginTop:"24px", letterSpacing:"0.3px" }}>
           Desenvolvido por Marcelo Alexandre · Todos os direitos reservados
         </p>
       </div>
@@ -3713,6 +3709,7 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
   const [novoConsultor, setNovoConsultor] = useState("");
   const [novoNome, setNovoNome] = useState("");
   const [novoModulos, setNovoModulos] = useState(null); // null = todos
+  const [novaCorUsuario, setNovaCorUsuario] = useState("#555555");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [salvando, setSalvando] = useState(false);
@@ -3765,13 +3762,13 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
           }
         }
       }
-      const perfil = { email: novoEmail.trim(), nome: novoNome.trim(), role: novoRole, consultorName: novoRole === "consultor" ? novoConsultor : "", ...(uid ? { uid } : {}), ...(novoModulos ? { modulosHabilitados: novoModulos } : {}) };
+      const perfil = { email: novoEmail.trim(), nome: novoNome.trim(), role: novoRole, consultorName: novoRole === "consultor" ? novoConsultor : "", cor: novaCorUsuario, ...(uid ? { uid } : {}), ...(novoModulos ? { modulosHabilitados: novoModulos } : {}) };
       const ref = await addDoc(collection(db, "usuarios"), perfil);
       setUsuarios(prev => [...prev, { id: ref.id, ...perfil }]);
       if (novoRole === "consultor" && novoConsultor && !consultores.includes(novoConsultor)) {
         onAddConsultor && onAddConsultor({ name: novoConsultor, codigo:"", email: novoEmail.trim() });
       }
-      setNovoEmail(""); setNovaSenha(""); setNovoNome(""); setNovoConsultor(""); setNovoRole("viewer"); setNovoModulos(null);
+      setNovoEmail(""); setNovaSenha(""); setNovoNome(""); setNovoConsultor(""); setNovoRole("viewer"); setNovoModulos(null); setNovaCorUsuario("#555555");
       setSuccess("✅ Usuário criado com sucesso!" + aviso + (novoRole === "consultor" ? " Consultor " + novoConsultor + " vinculado à agenda." : ""));
     } catch(e) {
       setError("Erro ao criar usuário: " + e.message);
@@ -3789,7 +3786,7 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
 
   const handleEditStart = (u) => {
     setEditId(u.id);
-    setEditFields({ nome: u.nome || "", role: u.role || "viewer", consultorName: u.consultorName || "", modulosHabilitados: u.modulosHabilitados || null });
+    setEditFields({ nome: u.nome || "", role: u.role || "viewer", consultorName: u.consultorName || "", modulosHabilitados: u.modulosHabilitados || null, cor: u.cor || "#555555" });
   };
 
   const handleEditSave = async (u) => {
@@ -3852,7 +3849,7 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
     setSenhaAlterSaving(false);
   };
 
-  const inp = { padding:"8px 12px", borderRadius:"8px", border:"1px solid #2a2a3a", background:"#0d0d14", color:"#c8c8d8", fontSize:"13px", width:"100%", boxSizing:"border-box" };
+  const inp = { padding:"8px 12px", borderRadius:"8px", border:"1px solid #cccccc", background:"#f7f7f7", color:"#222222", fontSize:"13px", width:"100%", boxSizing:"border-box" };
 
   // Módulos disponíveis por perfil
   const MODULOS_GESTORES = [{ id:"home",icon:"⬡",label:"Dashboard"},{ id:"agenda",icon:"📅",label:"Agenda"},{ id:"os",icon:"📋",label:"Ordens de Serviço"},{ id:"viagens",icon:"🏨",label:"Viagem e Hospedagem"},{ id:"traslado",icon:"🚗",label:"Traslado"},{ id:"projetos",icon:"📁",label:"Projetos"},{ id:"grade",icon:"🎓",label:"Grade de Conhecimento"},{ id:"alcadas",icon:"🔀",label:"Alçadas de Aprovação"}];
@@ -3880,8 +3877,8 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
     return (
       <div>
         <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"8px" }}>
-          <label style={{ fontSize:"11px",color:"#6e6e88",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase" }}>Módulos habilitados</label>
-          <button onClick={()=>onChange(null)} style={{ fontSize:"10px",background:"none",border:"none",color:"#6c63ff",cursor:"pointer",fontWeight:600,fontFamily:"inherit" }}>
+          <label style={{ fontSize:"11px",color:"#666666",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase" }}>Módulos habilitados</label>
+          <button onClick={()=>onChange(null)} style={{ fontSize:"10px",background:"none",border:"none",color:"#2c2c2c",cursor:"pointer",fontWeight:600,fontFamily:"inherit" }}>
             {allOn?"✓ Todos":"Habilitar todos"}
           </button>
         </div>
@@ -3890,14 +3887,14 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
             const on = habilitados.includes(m.id);
             return (
               <button key={m.id} onClick={()=>toggle(m.id)}
-                style={{ padding:"5px 12px",borderRadius:"8px",border:"1px solid "+(on?"#6c63ff":"#2a2a3a"),background:on?"#6c63ff22":"transparent",color:on?"#a78bfa":"#6e6e88",fontSize:"12px",fontWeight:on?700:400,cursor:"pointer",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"5px",transition:"all .15s" }}>
+                style={{ padding:"5px 12px",borderRadius:"8px",border:"1px solid "+(on?"#2c2c2c":"#cccccc"),background:on?"rgba(0,0,0,0.06)":"transparent",color:on?"#555555":"#666666",fontSize:"12px",fontWeight:on?700:400,cursor:"pointer",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"5px",transition:"all .15s" }}>
                 <span>{m.icon}</span> {m.label}
-                {on && <span style={{ color:"#6c63ff",fontSize:"10px" }}>✓</span>}
+                {on && <span style={{ color:"#2c2c2c",fontSize:"10px" }}>✓</span>}
               </button>
             );
           })}
         </div>
-        {!allOn && <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"6px" }}>{habilitados.length} de {disponiveis.length} módulos habilitados</div>}
+        {!allOn && <div style={{ fontSize:"10px",color:"#888888",marginTop:"6px" }}>{habilitados.length} de {disponiveis.length} módulos habilitados</div>}
       </div>
     );
   };
@@ -3915,7 +3912,7 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
       const modBloq   = disponiveis.filter(m => !habilitados.includes(m.id));
       return (
         <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.85)", zIndex:3000, display:"flex", alignItems:"center", justifyContent:"center", padding:"20px" }}>
-          <div style={{ background:"#18181f", borderRadius:"16px", padding:"28px", width:"100%", maxWidth:"480px", border:"1px solid #2a2a3a", boxShadow:"0 20px 60px rgba(0,0,0,0.6)" }}>
+          <div style={{ background:"#f0f0f0", borderRadius:"16px", padding:"28px", width:"100%", maxWidth:"480px", border:"1px solid #cccccc", boxShadow:"0 20px 60px rgba(0,0,0,0.08)" }}>
             {/* Header */}
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:"20px" }}>
               <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
@@ -3923,49 +3920,49 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
                   {u.bloqueado ? "🔒" : "👤"}
                 </div>
                 <div>
-                  <div style={{ fontSize:"15px", fontWeight:700, color:"#f0f0fa" }}>{u.nome}</div>
-                  <div style={{ fontSize:"12px", color:"#6e6e88", marginTop:"2px" }}>{u.email}</div>
+                  <div style={{ fontSize:"15px", fontWeight:700, color:"#111111" }}>{u.nome}</div>
+                  <div style={{ fontSize:"12px", color:"#666666", marginTop:"2px" }}>{u.email}</div>
                 </div>
               </div>
-              <button onClick={()=>setPerfilModal(null)} style={{ background:"#2a2a3a", border:"none", color:"#6e6e88", borderRadius:"8px", width:"30px", height:"30px", cursor:"pointer", fontSize:"14px" }}>✕</button>
+              <button onClick={()=>setPerfilModal(null)} style={{ background:"#e0e0e0", border:"none", color:"#666666", borderRadius:"8px", width:"30px", height:"30px", cursor:"pointer", fontSize:"14px" }}>✕</button>
             </div>
 
             {/* Perfil e status */}
             <div style={{ display:"flex", gap:"8px", flexWrap:"wrap", marginBottom:"20px" }}>
               <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", fontWeight:700, color:badge.color, background:badge.bg, border:`1px solid ${badge.color}44` }}>{badge.label}</span>
-              {u.consultorName && <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", color:"#9090b0", background:"#1f1f2e", border:"1px solid #2a2a3a" }}>👤 {u.consultorName}</span>}
-              {u.bloqueado && <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", fontWeight:700, color:"#f04f5e", background:"#f04f5e18", border:"1px solid #f04f5e33" }}>🔒 Bloqueado</span>}
-              {!u.bloqueado && <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", fontWeight:700, color:"#22d3a0", background:"#22d3a018", border:"1px solid #22d3a033" }}>✅ Ativo</span>}
+              {u.consultorName && <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", color:"#9090b0", background:"#e8e8e8", border:"1px solid #cccccc" }}>👤 {u.consultorName}</span>}
+              {u.bloqueado && <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", fontWeight:700, color:"#c0392b", background:"#fff0f0", border:"1px solid #f04f5e33" }}>🔒 Bloqueado</span>}
+              {!u.bloqueado && <span style={{ padding:"4px 12px", borderRadius:"99px", fontSize:"12px", fontWeight:700, color:"#2a7a5a", background:"#e6f4ee", border:"1px solid #22d3a033" }}>✅ Ativo</span>}
             </div>
 
             {/* Módulos habilitados */}
             <div style={{ marginBottom:"16px" }}>
-              <div style={{ fontSize:"11px", color:"#6e6e88", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"10px" }}>
+              <div style={{ fontSize:"11px", color:"#666666", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"10px" }}>
                 Módulos habilitados ({modAtivos.length}/{disponiveis.length})
               </div>
               <div style={{ display:"flex", flexWrap:"wrap", gap:"6px" }}>
                 {modAtivos.map(m => (
-                  <span key={m.id} style={{ padding:"4px 10px", borderRadius:"8px", fontSize:"11px", fontWeight:600, background:"#22d3a015", border:"1px solid #22d3a033", color:"#22d3a0" }}>
+                  <span key={m.id} style={{ padding:"4px 10px", borderRadius:"8px", fontSize:"11px", fontWeight:600, background:"#e6f4ee", border:"1px solid #22d3a033", color:"#2a7a5a" }}>
                     {m.icon} {m.label}
                   </span>
                 ))}
                 {modBloq.map(m => (
-                  <span key={m.id} style={{ padding:"4px 10px", borderRadius:"8px", fontSize:"11px", fontWeight:600, background:"#1f1f2e", border:"1px solid #2a2a3a", color:"#3e3e55", textDecoration:"line-through" }}>
+                  <span key={m.id} style={{ padding:"4px 10px", borderRadius:"8px", fontSize:"11px", fontWeight:600, background:"#e8e8e8", border:"1px solid #cccccc", color:"#888888", textDecoration:"line-through" }}>
                     {m.icon} {m.label}
                   </span>
                 ))}
               </div>
-              {disponiveis.length === 0 && <div style={{ fontSize:"12px", color:"#3e3e55" }}>Nenhum módulo configurado para este perfil</div>}
+              {disponiveis.length === 0 && <div style={{ fontSize:"12px", color:"#888888" }}>Nenhum módulo configurado para este perfil</div>}
             </div>
 
             {/* Datas */}
-            <div style={{ background:"#0d0d14", borderRadius:"10px", padding:"12px 14px", fontSize:"12px" }}>
-              {u.senhaAlteradaEm && <div style={{ color:"#6e6e88", marginBottom:"4px" }}>🔑 Senha redefinida em: <span style={{ color:"#c8c8d8" }}>{new Date(u.senhaAlteradaEm).toLocaleString("pt-BR")}</span></div>}
-              {u.bloqueadoEm && u.bloqueado && <div style={{ color:"#f04f5e" }}>🔒 Bloqueado em: {new Date(u.bloqueadoEm).toLocaleString("pt-BR")}</div>}
+            <div style={{ background:"#f7f7f7", borderRadius:"10px", padding:"12px 14px", fontSize:"12px" }}>
+              {u.senhaAlteradaEm && <div style={{ color:"#666666", marginBottom:"4px" }}>🔑 Senha redefinida em: <span style={{ color:"#222222" }}>{new Date(u.senhaAlteradaEm).toLocaleString("pt-BR")}</span></div>}
+              {u.bloqueadoEm && u.bloqueado && <div style={{ color:"#c0392b" }}>🔒 Bloqueado em: {new Date(u.bloqueadoEm).toLocaleString("pt-BR")}</div>}
             </div>
 
             <div style={{ display:"flex", justifyContent:"flex-end", marginTop:"18px" }}>
-              <button onClick={()=>setPerfilModal(null)} style={{ padding:"8px 20px", borderRadius:"9px", border:"1px solid #2a2a3a", background:"transparent", color:"#6e6e88", cursor:"pointer", fontWeight:600, fontSize:"13px", fontFamily:"inherit" }}>Fechar</button>
+              <button onClick={()=>setPerfilModal(null)} style={{ padding:"8px 20px", borderRadius:"9px", border:"1px solid #cccccc", background:"transparent", color:"#666666", cursor:"pointer", fontWeight:600, fontSize:"13px", fontFamily:"inherit" }}>Fechar</button>
             </div>
           </div>
         </div>
@@ -3974,24 +3971,24 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
 
     {senhaModal && (
       <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.85)", zIndex:3000, display:"flex", alignItems:"center", justifyContent:"center", padding:"20px" }}>
-        <div style={{ background:"#18181f", borderRadius:"16px", padding:"28px", width:"100%", maxWidth:"420px", border:"1px solid #2a2a3a", boxShadow:"0 20px 60px rgba(0,0,0,0.6)" }}>
+        <div style={{ background:"#f0f0f0", borderRadius:"16px", padding:"28px", width:"100%", maxWidth:"420px", border:"1px solid #cccccc", boxShadow:"0 20px 60px rgba(0,0,0,0.08)" }}>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"20px" }}>
             <div>
-              <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"16px", fontWeight:800, color:"#f0f0fa", margin:0 }}>🔑 Alterar Senha</h3>
-              <div style={{ fontSize:"12px", color:"#6e6e88", marginTop:"3px" }}>{senhaModal.nome} · {senhaModal.email}</div>
+              <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"16px", fontWeight:800, color:"#111111", margin:0 }}>🔑 Alterar Senha</h3>
+              <div style={{ fontSize:"12px", color:"#666666", marginTop:"3px" }}>{senhaModal.nome} · {senhaModal.email}</div>
             </div>
-            <button onClick={()=>{setSenhaModal(null);setNovaSenhaAlter("");setError("");}} style={{ background:"#2a2a3a", border:"none", color:"#6e6e88", borderRadius:"8px", width:"30px", height:"30px", cursor:"pointer", fontSize:"14px" }}>✕</button>
+            <button onClick={()=>{setSenhaModal(null);setNovaSenhaAlter("");setError("");}} style={{ background:"#e0e0e0", border:"none", color:"#666666", borderRadius:"8px", width:"30px", height:"30px", cursor:"pointer", fontSize:"14px" }}>✕</button>
           </div>
           <div style={{ background:"#f5a62315", border:"1px solid #f5a62333", borderRadius:"10px", padding:"12px 14px", fontSize:"12px", color:"#f5a623", marginBottom:"18px", lineHeight:1.6 }}>
             ⚠️ Por segurança, o Firebase não permite que administradores definam senhas diretamente pelo app. Será enviado um <strong>link de redefinição</strong> para o e-mail do usuário para que ele defina a nova senha.
           </div>
-          <div style={{ fontSize:"13px", color:"#c8c8d8", marginBottom:"16px" }}>
-            Clique em confirmar para enviar o e-mail de redefinição para <strong style={{ color:"#a78bfa" }}>{senhaModal.email}</strong>.
+          <div style={{ fontSize:"13px", color:"#222222", marginBottom:"16px" }}>
+            Clique em confirmar para enviar o e-mail de redefinição para <strong style={{ color:"#555555" }}>{senhaModal.email}</strong>.
           </div>
           {error && <div style={{ padding:"8px 12px", borderRadius:"8px", background:"#ef444422", border:"1px solid #ef444444", color:"#ef4444", fontSize:"12px", marginBottom:"12px" }}>⚠️ {error}</div>}
           <div style={{ display:"flex", gap:"8px", justifyContent:"flex-end" }}>
             <button onClick={()=>{setSenhaModal(null);setNovaSenhaAlter("");setError("");}}
-              style={{ padding:"9px 18px", borderRadius:"9px", border:"1px solid #2a2a3a", background:"transparent", color:"#6e6e88", cursor:"pointer", fontWeight:600, fontSize:"13px", fontFamily:"inherit" }}>Cancelar</button>
+              style={{ padding:"9px 18px", borderRadius:"9px", border:"1px solid #cccccc", background:"transparent", color:"#666666", cursor:"pointer", fontWeight:600, fontSize:"13px", fontFamily:"inherit" }}>Cancelar</button>
             <button onClick={()=>handleAlterarSenha(senhaModal)} disabled={senhaAlterSaving}
               style={{ padding:"9px 22px", borderRadius:"9px", border:"none", background:"linear-gradient(135deg,#22d3a0,#10b981)", color:"#fff", cursor:"pointer", fontWeight:700, fontSize:"13px", fontFamily:"inherit", opacity:senhaAlterSaving?0.6:1 }}>
               {senhaAlterSaving ? "Enviando..." : "📧 Enviar link de redefinição"}
@@ -4002,52 +3999,53 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
     )}
 
     <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.75)", zIndex:2000, display:"flex", alignItems:"center", justifyContent:"center", padding:"20px" }}>
-      <div style={{ background:"#18181f", borderRadius:"16px", padding:"28px", width:"100%", maxWidth:"660px", border:"1px solid #2a2a3a", maxHeight:"90vh", overflowY:"auto", boxShadow:"0 20px 60px rgba(0,0,0,0.5)" }}>
+      <div style={{ background:"#f0f0f0", borderRadius:"16px", padding:"28px", width:"100%", maxWidth:"660px", border:"1px solid #cccccc", maxHeight:"90vh", overflowY:"auto", boxShadow:"0 20px 60px rgba(0,0,0,0.08)" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"24px" }}>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"18px", fontWeight:700, color:"#f0f0fa", margin:0 }}>👥 Gerenciar Usuários</h2>
-          <button onClick={onClose} style={{ background:"#2a2a3a", border:"none", color:"#6e6e88", borderRadius:"8px", width:"32px", height:"32px", cursor:"pointer", fontSize:"16px" }}>✕</button>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"18px", fontWeight:700, color:"#111111", margin:0 }}>👥 Gerenciar Usuários</h2>
+          <button onClick={onClose} style={{ background:"#e0e0e0", border:"none", color:"#666666", borderRadius:"8px", width:"32px", height:"32px", cursor:"pointer", fontSize:"16px" }}>✕</button>
         </div>
 
         {/* Lista de usuários */}
         <div style={{ marginBottom:"24px" }}>
-          <h3 style={{ fontSize:"13px", fontWeight:700, color:"#6e6e88", marginBottom:"10px", textTransform:"uppercase", letterSpacing:"0.05em" }}>Usuários cadastrados</h3>
-          {loading ? <p style={{ color:"#6e6e88", fontSize:"13px" }}>Carregando...</p> : (
+          <h3 style={{ fontSize:"13px", fontWeight:700, color:"#666666", marginBottom:"10px", textTransform:"uppercase", letterSpacing:"0.05em" }}>Usuários cadastrados</h3>
+          {loading ? <p style={{ color:"#666666", fontSize:"13px" }}>Carregando...</p> : (
             <div style={{ display:"flex", flexDirection:"column", gap:"8px" }}>
               {usuarios.map(u => {
                 const badge = ROLE_BADGES[u.role] || ROLE_BADGES.viewer;
                 const isEditing = editId === u.id;
                 const isBloqueado = !!u.bloqueado;
                 return (
-                  <div key={u.id} style={{ background:"#0d0d14", borderRadius:"10px", border:"1px solid " + (isBloqueado?"#f04f5e33":isEditing?"#3b82f6":"#18181f"), overflow:"hidden" }}>
+                  <div key={u.id} style={{ background:"#f7f7f7", borderRadius:"10px", border:"1px solid " + (isBloqueado?"#ffcccc":isEditing?"#3b82f6":"#e8e8e8"), overflow:"hidden" }}>
                     {/* Linha principal */}
                     <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"10px 14px" }}>
                       <div style={{ minWidth:0, flex:1 }}>
-                        <div style={{ fontSize:"13px", fontWeight:600, color: isBloqueado?"#6e6e88":"#f0f0fa", display:"flex", alignItems:"center", gap:"8px" }}>
+                        <div style={{ fontSize:"13px", fontWeight:600, color: isBloqueado?"#666666":"#111111", display:"flex", alignItems:"center", gap:"8px" }}>
+                          <div style={{ width:"12px", height:"12px", borderRadius:"50%", background:u.cor||"#555555", flexShrink:0, border:"1px solid rgba(255,255,255,0.15)" }}/>
                           {isBloqueado && <span style={{ fontSize:"12px" }}>🔒</span>}
-                          {u.nome} <span style={{ fontSize:"11px", color:"#6e6e88" }}>· {u.email}</span>
+                          {u.nome} <span style={{ fontSize:"11px", color:"#666666" }}>· {u.email}</span>
                         </div>
                         <div style={{ display:"flex", gap:"6px", marginTop:"3px", flexWrap:"wrap" }}>
                           <span style={{ fontSize:"11px", fontWeight:700, color:badge.color, background:badge.bg, padding:"1px 8px", borderRadius:"10px" }}>{badge.label}</span>
-                          {u.consultorName && <span style={{ fontSize:"11px", color:"#6e6e88" }}>{u.consultorName}</span>}
-                          {u.modulosHabilitados && <span style={{ fontSize:"10px", color:"#3e3e55", padding:"1px 7px", borderRadius:"99px", background:"#1f1f2e" }}>🔧 {u.modulosHabilitados.length} módulo{u.modulosHabilitados.length!==1?"s":""}</span>}
-                          {isBloqueado && <span style={{ fontSize:"10px", fontWeight:700, color:"#f04f5e", background:"#f04f5e18", padding:"1px 8px", borderRadius:"99px", border:"1px solid #f04f5e33" }}>🔒 Bloqueado</span>}
+                          {u.consultorName && <span style={{ fontSize:"11px", color:"#666666" }}>{u.consultorName}</span>}
+                          {u.modulosHabilitados && <span style={{ fontSize:"10px", color:"#888888", padding:"1px 7px", borderRadius:"99px", background:"#e8e8e8" }}>🔧 {u.modulosHabilitados.length} módulo{u.modulosHabilitados.length!==1?"s":""}</span>}
+                          {isBloqueado && <span style={{ fontSize:"10px", fontWeight:700, color:"#c0392b", background:"#fff0f0", padding:"1px 8px", borderRadius:"99px", border:"1px solid #f04f5e33" }}>🔒 Bloqueado</span>}
                         </div>
                       </div>
                       <div style={{ display:"flex", gap:"5px", flexShrink:0 }}>
                         <button onClick={()=>setPerfilModal(u)}
-                          style={{ background:"#6c63ff18", border:"1px solid #6c63ff44", color:"#a78bfa", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
+                          style={{ background:"rgba(0,0,0,0.05)", border:"1px solid #6c63ff44", color:"#555555", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
                           👁 Perfil
                         </button>
                         <button onClick={()=>isEditing ? setEditId(null) : handleEditStart(u)}
-                          style={{ background:isEditing?"#2a2a3a":"#6c63ff22", border:"1px solid "+(isEditing?"#6e6e88":"#6c63ff44"), color:isEditing?"#6e6e88":"#a78bfa", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
+                          style={{ background:isEditing?"#cccccc":"rgba(0,0,0,0.06)", border:"1px solid "+(isEditing?"#666666":"rgba(0,0,0,0.12)"), color:isEditing?"#666666":"#555555", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
                           {isEditing ? "✕" : "✏️ Editar"}
                         </button>
                         <button onClick={()=>setSenhaModal(u)}
-                          style={{ background:"#22d3a018", border:"1px solid #22d3a044", color:"#22d3a0", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
+                          style={{ background:"#e6f4ee", border:"1px solid #22d3a044", color:"#2a7a5a", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
                           🔑 Senha
                         </button>
                         <button onClick={()=>handleToggleBloqueio(u)}
-                          style={{ background:isBloqueado?"#22d3a018":"#f04f5e18", border:"1px solid "+(isBloqueado?"#22d3a044":"#f04f5e44"), color:isBloqueado?"#22d3a0":"#f04f5e", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
+                          style={{ background:isBloqueado?"#e6f4ee":"#fff0f0", border:"1px solid "+(isBloqueado?"#22d3a044":"#f04f5e44"), color:isBloqueado?"#2a7a5a":"#c0392b", borderRadius:"6px", padding:"4px 10px", cursor:"pointer", fontSize:"11px", fontWeight:600 }}>
                           {isBloqueado?"🔓 Desbloquear":"🔒 Bloquear"}
                         </button>
                         <button onClick={()=>handleDelete(u.id, u.email)}
@@ -4061,11 +4059,11 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
                       <div style={{ padding:"14px", borderTop:"1px solid #18181f", background:"#0a1628" }}>
                         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px", marginBottom:"10px" }}>
                           <div>
-                            <label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"4px" }}>Nome</label>
+                            <label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"4px" }}>Nome</label>
                             <input value={editFields.nome} onChange={e=>setEditFields(f=>({...f,nome:e.target.value}))} style={inp} />
                           </div>
                           <div>
-                            <label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"4px" }}>Perfil</label>
+                            <label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"4px" }}>Perfil</label>
                             <select value={editFields.role} onChange={e=>setEditFields(f=>({...f,role:e.target.value}))} style={inp}>
                               <option value="admin">Admin</option>
                               <option value="editor">Editor</option>
@@ -4081,25 +4079,34 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
                           </div>
                           {editFields.role === "consultor" && (
                             <div style={{ gridColumn:"1/-1" }}>
-                              <label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"4px" }}>Consultor vinculado</label>
+                              <label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"4px" }}>Consultor vinculado</label>
                               <select value={editFields.consultorName} onChange={e=>setEditFields(f=>({...f,consultorName:e.target.value}))} style={inp}>
                                 <option value="">Selecione...</option>
                                 {consultores.map(c=><option key={c} value={c}>{c}</option>)}
                               </select>
                             </div>
                           )}
-                          <div style={{ gridColumn:"1/-1",background:"#111118",borderRadius:"10px",border:"1px solid #1f1f2e",padding:"12px" }}>
+                          <div style={{ gridColumn:"1/-1",background:"#ffffff",borderRadius:"10px",border:"1px solid #d8d8d8",padding:"12px" }}>
                             <ModulosToggle
                               role={editFields.role}
                               value={editFields.modulosHabilitados}
                               onChange={v=>setEditFields(f=>({...f,modulosHabilitados:v}))}
                             />
                           </div>
+                          <div style={{ gridColumn:"1/-1" }}>
+                            <label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"6px" }}>Cor identificadora</label>
+                            <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
+                              <input type="color" value={editFields.cor||"#555555"} onChange={e=>setEditFields(f=>({...f,cor:e.target.value}))} style={{ width:"44px", height:"32px", borderRadius:"6px", border:"1px solid #cccccc", cursor:"pointer", padding:"2px" }}/>
+                              <div style={{ flex:1, height:"32px", borderRadius:"8px", background:editFields.cor||"#555555", display:"flex", alignItems:"center", justifyContent:"center" }}>
+                                <span style={{ fontSize:"11px", fontWeight:700, color:"#fff", textShadow:"0 1px 3px rgba(0,0,0,0.08)" }}>{editFields.nome||"PRÉVIA"}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div style={{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
-                          <button onClick={()=>handleEditSave(u)} disabled={editSaving} style={{ padding:"7px 16px", borderRadius:"8px", border:"none", background:"#22d3a0", color:"#fff", fontWeight:700, fontSize:"12px", cursor:"pointer" }}>{editSaving ? "Salvando..." : "💾 Salvar"}</button>
-                          <button onClick={()=>handleSendReset(u.email)} style={{ padding:"7px 16px", borderRadius:"8px", border:"1px solid #3b82f644", background:"#6c63ff22", color:"#6c63ff", fontWeight:600, fontSize:"12px", cursor:"pointer" }}>🔑 Reset de senha</button>
-                          <button onClick={()=>setEditId(null)} style={{ padding:"7px 16px", borderRadius:"8px", border:"1px solid #2a2a3a", background:"transparent", color:"#6e6e88", fontWeight:600, fontSize:"12px", cursor:"pointer" }}>Cancelar</button>
+                          <button onClick={()=>handleEditSave(u)} disabled={editSaving} style={{ padding:"7px 16px", borderRadius:"8px", border:"none", background:"#2a7a5a", color:"#fff", fontWeight:700, fontSize:"12px", cursor:"pointer" }}>{editSaving ? "Salvando..." : "💾 Salvar"}</button>
+                          <button onClick={()=>handleSendReset(u.email)} style={{ padding:"7px 16px", borderRadius:"8px", border:"1px solid #3b82f644", background:"rgba(0,0,0,0.06)", color:"#2c2c2c", fontWeight:600, fontSize:"12px", cursor:"pointer" }}>🔑 Reset de senha</button>
+                          <button onClick={()=>setEditId(null)} style={{ padding:"7px 16px", borderRadius:"8px", border:"1px solid #cccccc", background:"transparent", color:"#666666", fontWeight:600, fontSize:"12px", cursor:"pointer" }}>Cancelar</button>
                         </div>
                       </div>
                     )}
@@ -4112,12 +4119,12 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
 
         {/* Adicionar novo usuário */}
         <div style={{ borderTop:"1px solid #2a2a3a", paddingTop:"20px" }}>
-          <h3 style={{ fontSize:"13px", fontWeight:700, color:"#6e6e88", marginBottom:"14px", textTransform:"uppercase", letterSpacing:"0.05em" }}>➕ Novo usuário</h3>
+          <h3 style={{ fontSize:"13px", fontWeight:700, color:"#666666", marginBottom:"14px", textTransform:"uppercase", letterSpacing:"0.05em" }}>➕ Novo usuário</h3>
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"12px", marginBottom:"12px" }}>
-            <div><label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"5px" }}>Nome *</label><input value={novoNome} onChange={e=>setNovoNome(e.target.value)} placeholder="Nome completo" style={inp}/></div>
-            <div><label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"5px" }}>E-mail *</label><input type="email" value={novoEmail} onChange={e=>setNovoEmail(e.target.value)} placeholder="email@exemplo.com" style={inp}/></div>
-            <div><label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"5px" }}>Senha (mín. 6 caracteres)</label><input type="password" value={novaSenha} onChange={e=>setNovaSenha(e.target.value)} placeholder="••••••••" style={inp}/></div>
-            <div><label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"5px" }}>Perfil *</label>
+            <div><label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"5px" }}>Nome *</label><input value={novoNome} onChange={e=>setNovoNome(e.target.value)} placeholder="Nome completo" style={inp}/></div>
+            <div><label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"5px" }}>E-mail *</label><input type="email" value={novoEmail} onChange={e=>setNovoEmail(e.target.value)} placeholder="email@exemplo.com" style={inp}/></div>
+            <div><label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"5px" }}>Senha (mín. 6 caracteres)</label><input type="password" value={novaSenha} onChange={e=>setNovaSenha(e.target.value)} placeholder="••••••••" style={inp}/></div>
+            <div><label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"5px" }}>Perfil *</label>
               <select value={novoRole} onChange={e=>setNovoRole(e.target.value)} style={inp}>
                 <option value="admin">Admin</option>
                 <option value="editor">Editor</option>
@@ -4132,20 +4139,30 @@ function GerenciarUsuarios({ consultores, onAddConsultor, onClose }) {
               </select>
             </div>
             {novoRole === "consultor" && (
-              <div style={{ gridColumn:"1/-1" }}><label style={{ fontSize:"11px", color:"#6e6e88", fontWeight:600, display:"block", marginBottom:"5px" }}>Consultor vinculado *</label>
+              <div style={{ gridColumn:"1/-1" }}><label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"5px" }}>Consultor vinculado *</label>
                 <select value={novoConsultor} onChange={e=>setNovoConsultor(e.target.value)} style={inp}>
                   <option value="">Selecione o consultor...</option>
                   {consultores.map(c=><option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
             )}
-            <div style={{ gridColumn:"1/-1",background:"#111118",borderRadius:"10px",border:"1px solid #1f1f2e",padding:"12px" }}>
+            <div style={{ gridColumn:"1/-1",background:"#ffffff",borderRadius:"10px",border:"1px solid #d8d8d8",padding:"12px" }}>
               <ModulosToggle role={novoRole} value={novoModulos} onChange={setNovoModulos}/>
+            </div>
+            <div style={{ gridColumn:"1/-1" }}>
+              <label style={{ fontSize:"11px", color:"#666666", fontWeight:600, display:"block", marginBottom:"6px" }}>Cor identificadora do usuário</label>
+              <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
+                <input type="color" value={novaCorUsuario} onChange={e=>setNovaCorUsuario(e.target.value)} style={{ width:"48px", height:"36px", borderRadius:"8px", border:"1px solid #cccccc", background:"#f7f7f7", cursor:"pointer", padding:"2px" }}/>
+                <div style={{ flex:1, height:"36px", borderRadius:"8px", background:novaCorUsuario, display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <span style={{ fontSize:"12px", fontWeight:700, color:"#fff", textShadow:"0 1px 3px rgba(0,0,0,0.08)" }}>{novoNome||"PRÉVIA DO NOME"}</span>
+                </div>
+              </div>
+              <div style={{ fontSize:"10px", color:"#888888", marginTop:"5px" }}>Esta cor aparecerá no avatar e identificação do usuário no sistema</div>
             </div>
           </div>
           {error && <div style={{ padding:"8px 12px", borderRadius:"8px", background:"#ef444422", border:"1px solid #ef444444", color:"#ef4444", fontSize:"12px", marginBottom:"10px" }}>⚠️ {error}</div>}
-          {success && <div style={{ padding:"8px 12px", borderRadius:"8px", background:"#22c55e22", border:"1px solid #22c55e44", color:"#22d3a0", fontSize:"12px", marginBottom:"10px" }}>{success}</div>}
-          <button onClick={handleAdd} disabled={salvando} style={{ width:"100%", padding:"11px", borderRadius:"8px", border:"none", background:salvando?"#2a2a3a":"#22c55e", color:salvando?"#6e6e88":"#fff", fontWeight:700, fontSize:"14px", cursor:salvando?"not-allowed":"pointer" }}>
+          {success && <div style={{ padding:"8px 12px", borderRadius:"8px", background:"#22c55e22", border:"1px solid #22c55e44", color:"#2a7a5a", fontSize:"12px", marginBottom:"10px" }}>{success}</div>}
+          <button onClick={handleAdd} disabled={salvando} style={{ width:"100%", padding:"11px", borderRadius:"8px", border:"none", background:salvando?"#cccccc":"#22c55e", color:salvando?"#666666":"#fff", fontWeight:700, fontSize:"14px", cursor:salvando?"not-allowed":"pointer" }}>
             {salvando ? "Criando usuário..." : "✅ Criar usuário"}
           </button>
         </div>
@@ -4204,12 +4221,12 @@ function UploadReserva({ viagem, onUpdate }) {
   };
 
   return (
-    <div style={{ marginTop:"14px",background:"#0d0d14",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"14px 16px" }}>
-      <div style={{ fontSize:"10px",color:"#6c63ff",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>
+    <div style={{ marginTop:"14px",background:"#f7f7f7",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"14px 16px" }}>
+      <div style={{ fontSize:"10px",color:"#2c2c2c",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>
         📎 Documentos da Reserva
       </div>
       {erro && (
-        <div style={{ marginBottom:"10px",padding:"7px 12px",borderRadius:"8px",background:"#f04f5e15",border:"1px solid #f04f5e44",fontSize:"11px",color:"#f04f5e" }}>
+        <div style={{ marginBottom:"10px",padding:"7px 12px",borderRadius:"8px",background:"#fff0f0",border:"1px solid #f04f5e44",fontSize:"11px",color:"#c0392b" }}>
           ⚠️ {erro}
         </div>
       )}
@@ -4221,9 +4238,9 @@ function UploadReserva({ viagem, onUpdate }) {
             <div key={key} style={{ display:"flex",alignItems:"center",gap:"10px",flexWrap:"wrap" }}>
               {/* Info do arquivo */}
               <div style={{ flex:1,minWidth:0 }}>
-                <div style={{ fontSize:"12px",fontWeight:600,color:hasFile?"#f0f0fa":"#6e6e88" }}>{label}</div>
+                <div style={{ fontSize:"12px",fontWeight:600,color:hasFile?"#111111":"#666666" }}>{label}</div>
                 {hasFile && (
-                  <div style={{ fontSize:"10px",color:"#6e6e88",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>
+                  <div style={{ fontSize:"10px",color:"#666666",marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>
                     📄 {viagem[key+"Name"]||"arquivo.pdf"}
                   </div>
                 )}
@@ -4234,16 +4251,16 @@ function UploadReserva({ viagem, onUpdate }) {
                 {hasFile && (
                   <>
                     <a href={viagem[key]} target="_blank" rel="noreferrer"
-                      style={{ padding:"5px 12px",borderRadius:"8px",border:"1px solid #22d3a044",background:"#22d3a018",color:"#22d3a0",fontSize:"11px",fontWeight:700,textDecoration:"none",display:"flex",alignItems:"center",gap:"4px" }}>
+                      style={{ padding:"5px 12px",borderRadius:"8px",border:"1px solid #22d3a044",background:"#e6f4ee",color:"#2a7a5a",fontSize:"11px",fontWeight:700,textDecoration:"none",display:"flex",alignItems:"center",gap:"4px" }}>
                       👁 Visualizar
                     </a>
                     <button onClick={()=>handleRemove(key)}
-                      style={{ padding:"5px 10px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>
+                      style={{ padding:"5px 10px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>
                       🗑
                     </button>
                   </>
                 )}
-                <label style={{ padding:"5px 12px",borderRadius:"8px",border:"1px solid "+(hasFile?"#2a2a3a":"#6c63ff44"),background:hasFile?"transparent":"#6c63ff18",color:hasFile?"#6e6e88":"#a78bfa",fontSize:"11px",fontWeight:700,cursor:isUp?"not-allowed":"pointer",display:"flex",alignItems:"center",gap:"4px",opacity:isUp?0.6:1 }}>
+                <label style={{ padding:"5px 12px",borderRadius:"8px",border:"1px solid "+(hasFile?"#cccccc":"rgba(0,0,0,0.12)"),background:hasFile?"transparent":"rgba(0,0,0,0.05)",color:hasFile?"#666666":"#555555",fontSize:"11px",fontWeight:700,cursor:isUp?"not-allowed":"pointer",display:"flex",alignItems:"center",gap:"4px",opacity:isUp?0.6:1 }}>
                   {isUp ? "⏳ Enviando..." : hasFile ? "🔄 Substituir" : "📤 Upload PDF"}
                   <input type="file" accept="application/pdf" style={{ display:"none" }}
                     disabled={!!uploading}
@@ -4254,7 +4271,7 @@ function UploadReserva({ viagem, onUpdate }) {
           );
         })}
       </div>
-      <div style={{ marginTop:"10px",fontSize:"10px",color:"#3e3e55" }}>
+      <div style={{ marginTop:"10px",fontSize:"10px",color:"#888888" }}>
         Formatos aceitos: PDF · Tamanho máximo: 5MB por arquivo
       </div>
     </div>
@@ -4273,51 +4290,51 @@ function ViagemCard({ viagem, STATUS_CONFIG, canManage, onEdit, onStatusChange, 
   const temHosp = !!viagem.cidadeHospedagem;
 
   return (
-    <div style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",overflow:"hidden" }}>
+    <div style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",overflow:"hidden" }}>
       <div style={{ padding:"14px 20px",display:"flex",alignItems:"center",gap:"14px",flexWrap:"wrap",cursor:"pointer" }} onClick={()=>setExpandido(e=>!e)}>
         <div style={{ fontSize:"22px" }}>{temVoo?"✈️":"🏨"}</div>
         <div style={{ flex:1,minWidth:0 }}>
-          <div style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa" }}>
+          <div style={{ fontSize:"14px",fontWeight:700,color:"#111111" }}>
             {viagem.cliente||viagem.destino||"(sem cliente)"}
-            {viagem.consultor && <span style={{ fontSize:"11px",color:"#6e6e88",fontWeight:400,marginLeft:"8px" }}>— {viagem.consultor.split(" ")[0]}</span>}
+            {viagem.consultor && <span style={{ fontSize:"11px",color:"#666666",fontWeight:400,marginLeft:"8px" }}>— {viagem.consultor.split(" ")[0]}</span>}
           </div>
-          <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"2px",display:"flex",gap:"10px",flexWrap:"wrap" }}>
+          <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px",display:"flex",gap:"10px",flexWrap:"wrap" }}>
             <span>👤 {viagem.solicitante}</span>
             {viagem.checkIn && <span>🏨 {viagem.checkIn}{viagem.checkOut?" → "+viagem.checkOut:""}</span>}
             {temVoo && viagem.dataVooIda && <span>✈️ {viagem.dataVooIda}</span>}
             {viagem.motivo && <span>📌 {viagem.motivo}</span>}
           </div>
         </div>
-        {temVoo  && <span style={{ fontSize:"10px",padding:"2px 8px",borderRadius:"99px",background:"#6c63ff18",border:"1px solid #6c63ff33",color:"#a78bfa",fontWeight:700 }}>✈️ Voo</span>}
-        {temHosp && <span style={{ fontSize:"10px",padding:"2px 8px",borderRadius:"99px",background:"#22d3a018",border:"1px solid #22d3a033",color:"#22d3a0",fontWeight:700 }}>🏨 Hosp.</span>}
+        {temVoo  && <span style={{ fontSize:"10px",padding:"2px 8px",borderRadius:"99px",background:"rgba(0,0,0,0.05)",border:"1px solid #6c63ff33",color:"#555555",fontWeight:700 }}>✈️ Voo</span>}
+        {temHosp && <span style={{ fontSize:"10px",padding:"2px 8px",borderRadius:"99px",background:"#e6f4ee",border:"1px solid #22d3a033",color:"#2a7a5a",fontWeight:700 }}>🏨 Hosp.</span>}
         <span style={{ padding:"4px 12px",borderRadius:"99px",background:st.bg,border:"1px solid "+st.color+"44",fontSize:"11px",fontWeight:700,color:st.color,whiteSpace:"nowrap" }}>{st.label}</span>
-        <span style={{ color:"#3e3e55",fontSize:"12px" }}>{expandido?"▴":"▾"}</span>
+        <span style={{ color:"#888888",fontSize:"12px" }}>{expandido?"▴":"▾"}</span>
       </div>
 
       {expandido && (
         <div style={{ borderTop:"1px solid #1f1f2e",padding:"16px 20px" }}>
           <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"14px",marginBottom:"14px",fontSize:"12px" }}>
-            <div style={{ background:"#0d0d14",borderRadius:"10px",padding:"12px 14px" }}>
-              <div style={{ fontSize:"10px",color:"#6c63ff",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>Solicitação</div>
+            <div style={{ background:"#f7f7f7",borderRadius:"10px",padding:"12px 14px" }}>
+              <div style={{ fontSize:"10px",color:"#2c2c2c",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>Solicitação</div>
               {[["Solicitante",viagem.solicitante],["Setor",viagem.setor],["Consultor",viagem.consultor],["Cliente",viagem.cliente],["Endereço",viagem.enderecoCliente],["Motivo",viagem.motivo],["Cobrança",viagem.destinoCobranca],["Observações",viagem.observacoes]].filter(([,v])=>v).map(([k,v])=>(
-                <div key={k} style={{ marginBottom:"4px" }}><span style={{ color:"#6e6e88" }}>{k}: </span><span style={{ color:"#c8c8d8" }}>{v}</span></div>
+                <div key={k} style={{ marginBottom:"4px" }}><span style={{ color:"#666666" }}>{k}: </span><span style={{ color:"#222222" }}>{v}</span></div>
               ))}
             </div>
-            <div style={{ background:"#0d0d14",borderRadius:"10px",padding:"12px 14px" }}>
-              <div style={{ fontSize:"10px",color:"#22d3a0",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>🏨 Hospedagem</div>
+            <div style={{ background:"#f7f7f7",borderRadius:"10px",padding:"12px 14px" }}>
+              <div style={{ fontSize:"10px",color:"#2a7a5a",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>🏨 Hospedagem</div>
               {viagem.cidadeHospedagem
                 ? [["Cidade",viagem.cidadeHospedagem],["Check-in",viagem.checkIn],["Check-out",viagem.checkOut]].filter(([,v])=>v).map(([k,v])=>(
-                    <div key={k} style={{ marginBottom:"4px" }}><span style={{ color:"#6e6e88" }}>{k}: </span><span style={{ color:"#c8c8d8" }}>{v}</span></div>
+                    <div key={k} style={{ marginBottom:"4px" }}><span style={{ color:"#666666" }}>{k}: </span><span style={{ color:"#222222" }}>{v}</span></div>
                   ))
-                : <div style={{ color:"#3e3e55",fontSize:"11px" }}>Sem hospedagem</div>
+                : <div style={{ color:"#888888",fontSize:"11px" }}>Sem hospedagem</div>
               }
             </div>
             {temVoo && (
-              <div style={{ gridColumn:"1/-1",background:"#0d0d14",borderRadius:"10px",padding:"12px 14px" }}>
-                <div style={{ fontSize:"10px",color:"#a78bfa",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>✈️ Voo</div>
+              <div style={{ gridColumn:"1/-1",background:"#f7f7f7",borderRadius:"10px",padding:"12px 14px" }}>
+                <div style={{ fontSize:"10px",color:"#555555",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>✈️ Voo</div>
                 <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px" }}>
                   {[["Origem",viagem.aeroportoOrigem],["Destino",viagem.aeroportoDestino],["Data ida",viagem.dataVooIda],["Horário ida",viagem.horarioIda],["Data volta",viagem.dataVooVolta],["Horário volta",viagem.horarioVolta]].filter(([,v])=>v).map(([k,v])=>(
-                    <div key={k}><span style={{ color:"#6e6e88" }}>{k}: </span><span style={{ color:"#c8c8d8" }}>{v}</span></div>
+                    <div key={k}><span style={{ color:"#666666" }}>{k}: </span><span style={{ color:"#222222" }}>{v}</span></div>
                   ))}
                 </div>
               </div>
@@ -4328,27 +4345,27 @@ function ViagemCard({ viagem, STATUS_CONFIG, canManage, onEdit, onStatusChange, 
             {canManage && (
               <>
                 <button onClick={(e)=>{e.stopPropagation();onEdit(viagem);setExpandido(false);}}
-                  style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"12px",fontWeight:600,fontFamily:"inherit" }}>✏️ Editar</button>
-                {[{k:"aprovada",label:"✅ Aprovar",color:"#22d3a0"},{k:"rejeitada",label:"❌ Rejeitar",color:"#f04f5e"},{k:"realizada",label:"🏁 Realizada",color:"#6c63ff"}].filter(btn=>btn.k!==viagem.status).map(btn=>(
+                  style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"12px",fontWeight:600,fontFamily:"inherit" }}>✏️ Editar</button>
+                {[{k:"aprovada",label:"✅ Aprovar",color:"#2a7a5a"},{k:"rejeitada",label:"❌ Rejeitar",color:"#c0392b"},{k:"realizada",label:"🏁 Realizada",color:"#2c2c2c"}].filter(btn=>btn.k!==viagem.status).map(btn=>(
                   <button key={btn.k} onClick={(e)=>{e.stopPropagation();setAcaoAtiva(acaoAtiva===btn.k?null:btn.k);}}
                     style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid "+btn.color+"44",background:acaoAtiva===btn.k?btn.color+"22":"transparent",color:btn.color,cursor:"pointer",fontSize:"11px",fontWeight:600,fontFamily:"inherit" }}>
                     {btn.label}
                   </button>
                 ))}
                 <button onClick={(e)=>{e.stopPropagation();onDelete(viagem.id);}}
-                  style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:600,fontFamily:"inherit" }}>🗑</button>
+                  style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:600,fontFamily:"inherit" }}>🗑</button>
               </>
             )}
           </div>
 
           {acaoAtiva && (
-            <div style={{ marginTop:"12px",background:"#0d0d14",borderRadius:"10px",padding:"12px" }}>
+            <div style={{ marginTop:"12px",background:"#f7f7f7",borderRadius:"10px",padding:"12px" }}>
               <textarea value={comentario} onChange={e=>setComentario(e.target.value)} rows={2} placeholder="Comentário (opcional)..."
-                style={{ width:"100%",padding:"8px 12px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#111118",color:"#c8c8d8",fontSize:"12px",fontFamily:"inherit",resize:"none",outline:"none",boxSizing:"border-box" }}/>
+                style={{ width:"100%",padding:"8px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"#ffffff",color:"#222222",fontSize:"12px",fontFamily:"inherit",resize:"none",outline:"none",boxSizing:"border-box" }}/>
               <div style={{ display:"flex",gap:"8px",marginTop:"8px",justifyContent:"flex-end" }}>
-                <button onClick={()=>{setAcaoAtiva(null);setComentario("");}} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"11px",fontFamily:"inherit" }}>Cancelar</button>
+                <button onClick={()=>{setAcaoAtiva(null);setComentario("");}} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"11px",fontFamily:"inherit" }}>Cancelar</button>
                 <button onClick={(e)=>{e.stopPropagation();onStatusChange(viagem.id,acaoAtiva,comentario);setAcaoAtiva(null);setComentario("");}}
-                  style={{ padding:"6px 16px",borderRadius:"8px",border:"none",background:"#22d3a0",color:"#fff",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>Confirmar</button>
+                  style={{ padding:"6px 16px",borderRadius:"8px",border:"none",background:"#2a7a5a",color:"#fff",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>Confirmar</button>
               </div>
             </div>
           )}
@@ -4358,18 +4375,18 @@ function ViagemCard({ viagem, STATUS_CONFIG, canManage, onEdit, onStatusChange, 
 
           {/* PDFs de reserva — visualização para consultor, upload para gestor */}
           {viagem.status === "aprovada" && (viagem.pdfHotel || viagem.pdfVoo) && !canManage && (
-            <div style={{ marginTop:"14px",background:"#0d0d14",borderRadius:"12px",border:"1px solid #22d3a033",padding:"12px 16px" }}>
-              <div style={{ fontSize:"10px",color:"#22d3a0",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"10px" }}>📎 Documentos da Reserva</div>
+            <div style={{ marginTop:"14px",background:"#f7f7f7",borderRadius:"12px",border:"1px solid #22d3a033",padding:"12px 16px" }}>
+              <div style={{ fontSize:"10px",color:"#2a7a5a",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"10px" }}>📎 Documentos da Reserva</div>
               <div style={{ display:"flex",gap:"8px",flexWrap:"wrap" }}>
                 {viagem.pdfHotel && (
                   <a href={viagem.pdfHotel} target="_blank" rel="noreferrer"
-                    style={{ display:"flex",alignItems:"center",gap:"6px",padding:"7px 14px",borderRadius:"9px",border:"1px solid #22d3a044",background:"#22d3a018",color:"#22d3a0",fontSize:"12px",fontWeight:700,textDecoration:"none" }}>
+                    style={{ display:"flex",alignItems:"center",gap:"6px",padding:"7px 14px",borderRadius:"9px",border:"1px solid #22d3a044",background:"#e6f4ee",color:"#2a7a5a",fontSize:"12px",fontWeight:700,textDecoration:"none" }}>
                     🏨 {viagem.pdfHotelName||"Reserva Hotel.pdf"}
                   </a>
                 )}
                 {viagem.pdfVoo && (
                   <a href={viagem.pdfVoo} target="_blank" rel="noreferrer"
-                    style={{ display:"flex",alignItems:"center",gap:"6px",padding:"7px 14px",borderRadius:"9px",border:"1px solid #a78bfa44",background:"#a78bfa18",color:"#a78bfa",fontSize:"12px",fontWeight:700,textDecoration:"none" }}>
+                    style={{ display:"flex",alignItems:"center",gap:"6px",padding:"7px 14px",borderRadius:"9px",border:"1px solid #a78bfa44",background:"#a78bfa18",color:"#555555",fontSize:"12px",fontWeight:700,textDecoration:"none" }}>
                     ✈️ {viagem.pdfVooName||"Passagem.pdf"}
                   </a>
                 )}
@@ -4449,16 +4466,16 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
   const salvarUnidades = async (lista) => { setUnidades(lista); await setDoc(doc(db,"app_data","traslado_unidades"),{value:lista}); };
   const salvarRdas     = async (lista) => { setRdas(lista);     await setDoc(doc(db,"app_data","traslado_rdas"),    {value:lista}); };
 
-  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit",outline:"none" };
-  const lbl = { fontSize:"11px",color:"#6e6e88",fontWeight:700,display:"block",marginBottom:"5px",letterSpacing:"0.5px",textTransform:"uppercase" };
+  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit",outline:"none" };
+  const lbl = { fontSize:"11px",color:"#666666",fontWeight:700,display:"block",marginBottom:"5px",letterSpacing:"0.5px",textTransform:"uppercase" };
 
   // ── Formulário de Unidade do Cliente ──
   const FormUnidade = ({ inicial, onSalvar, onCancelar }) => {
     const [form, setForm] = useState(inicial || { cliente:"", nomeUnidade:"", endereco:"", cidade:"", estado:"", kmConsultoria:0, observacoes:"" });
     const set = (k,v) => setForm(p=>({...p,[k]:v}));
     return (
-      <div style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",padding:"22px",maxWidth:"640px",marginBottom:"20px" }}>
-        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"15px",fontWeight:900,color:"#f0f0fa",margin:"0 0 18px" }}>
+      <div style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",padding:"22px",maxWidth:"640px",marginBottom:"20px" }}>
+        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"15px",fontWeight:900,color:"#111111",margin:"0 0 18px" }}>
           {inicial?"✏️ Editar Unidade":"🏢 Cadastrar Unidade do Cliente"}
         </h3>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px" }}>
@@ -4502,7 +4519,7 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
           </div>
         </div>
         <div style={{ display:"flex",gap:"10px",marginTop:"16px",justifyContent:"flex-end" }}>
-          <button onClick={onCancelar} style={{ padding:"8px 18px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
+          <button onClick={onCancelar} style={{ padding:"8px 18px",borderRadius:"10px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
           <button onClick={()=>onSalvar(form)} disabled={!form.cliente||!form.nomeUnidade||!form.endereco}
             style={{ padding:"8px 22px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44",opacity:(!form.cliente||!form.nomeUnidade||!form.endereco)?0.5:1 }}>
             💾 Salvar
@@ -4554,40 +4571,40 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
     const totalGeral = form.itens.reduce((s,it)=>s+Number(it.total||0),0);
     const itensFiltrados = ITENS_DESPESA.filter(i=>!buscaItem||i.desc.includes(buscaItem.toUpperCase())||i.cod.includes(buscaItem));
 
-    const secHeader = (label, color="#6c63ff", icon="") => (
-      <div style={{ background:"#09090f",borderRadius:"10px 10px 0 0",padding:"10px 16px",display:"flex",alignItems:"center",gap:"8px",marginTop:"20px",marginBottom:0,border:"1px solid #2a2a3a",borderBottom:"none" }}>
+    const secHeader = (label, color="#2c2c2c", icon="") => (
+      <div style={{ background:"#f0f0f0",borderRadius:"10px 10px 0 0",padding:"10px 16px",display:"flex",alignItems:"center",gap:"8px",marginTop:"20px",marginBottom:0,border:"1px solid #cccccc",borderBottom:"none" }}>
         <span style={{ fontSize:"16px" }}>{icon}</span>
         <span style={{ fontSize:"12px",fontWeight:800,color:"#fff",letterSpacing:"1px",textTransform:"uppercase" }}>{label}</span>
       </div>
     );
-    const secBody = { background:"#111118",borderRadius:"0 0 10px 10px",border:"1px solid #2a2a3a",padding:"16px",marginBottom:"4px" };
+    const secBody = { background:"#ffffff",borderRadius:"0 0 10px 10px",border:"1px solid #cccccc",padding:"16px",marginBottom:"4px" };
 
     return (
       <div style={{ maxWidth:"900px" }}>
         <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"20px",flexWrap:"wrap",gap:"10px" }}>
-          <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#f0f0fa",margin:0 }}>
+          <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#111111",margin:0 }}>
             {inicial?"✏️ Editar RDA":"🚗 Nova RDA — Relatório de Despesas de Atendimento"}
           </h3>
           <div style={{ display:"flex",gap:"8px" }}>
-            <button onClick={onCancelar} style={{ padding:"8px 16px",borderRadius:"9px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit" }}>Cancelar</button>
+            <button onClick={onCancelar} style={{ padding:"8px 16px",borderRadius:"9px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit" }}>Cancelar</button>
             <button onClick={()=>onSalvar({...form,status:"rascunho"})}
-              style={{ padding:"8px 16px",borderRadius:"9px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontWeight:700,fontSize:"12px",fontFamily:"inherit" }}>💾 Salvar rascunho</button>
+              style={{ padding:"8px 16px",borderRadius:"9px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontWeight:700,fontSize:"12px",fontFamily:"inherit" }}>💾 Salvar rascunho</button>
             <button onClick={()=>onSalvar({...form,status:"enviada"})}
               style={{ padding:"8px 18px",borderRadius:"9px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"12px",fontFamily:"inherit",boxShadow:"0 4px 14px #6c63ff44" }}>✅ Enviar RDA</button>
           </div>
         </div>
 
         {/* Seção RDA */}
-        {secHeader("RDA — Relatório de Despesas de Atendimento","#6c63ff","🚗")}
+        {secHeader("RDA — Relatório de Despesas de Atendimento","#2c2c2c","🚗")}
         <div style={secBody}>
           <div style={{ display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"10px" }}>
             <div>
               <label style={lbl}>Código RDA</label>
-              <input value={form.codRda||"Gerado automaticamente"} readOnly style={{...inp,background:"#0a0a12",color:"#6e6e88"}}/>
+              <input value={form.codRda||"Gerado automaticamente"} readOnly style={{...inp,background:"#0a0a12",color:"#666666"}}/>
             </div>
             <div>
               <label style={lbl}>Data Emissão</label>
-              <input type="date" value={form.dataEmissao} readOnly style={{...inp,background:"#0a0a12",color:"#6e6e88"}}/>
+              <input type="date" value={form.dataEmissao} readOnly style={{...inp,background:"#0a0a12",color:"#666666"}}/>
             </div>
             <div>
               <label style={lbl}>Data Início *</label>
@@ -4601,7 +4618,7 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
           <div style={{ display:"grid",gridTemplateColumns:"160px 1fr 1fr",gap:"10px",marginTop:"10px" }}>
             <div>
               <label style={lbl}>Cód. Técnico</label>
-              <input value={form.codTecnico} readOnly style={{...inp,background:"#0a0a12",color:"#a78bfa",fontWeight:700}}/>
+              <input value={form.codTecnico} readOnly style={{...inp,background:"#0a0a12",color:"#555555",fontWeight:700}}/>
             </div>
             <div>
               <label style={lbl}>Nome Solicitante *</label>
@@ -4625,7 +4642,7 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
         </div>
 
         {/* Seção Cliente */}
-        {secHeader("CLIENTE","#22d3a0","🏢")}
+        {secHeader("CLIENTE","#2a7a5a","🏢")}
         <div style={secBody}>
           <div style={{ display:"grid",gridTemplateColumns:"1fr 120px 1fr",gap:"10px",marginBottom:"10px" }}>
             <div>
@@ -4682,9 +4699,9 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
                 if (valorKm > 0) set("valorTotalKm", (kmIda*2*valorKm).toFixed(2));
               }} placeholder="KM (ida)" style={inp}/>
               {form.kmDestino && (
-                <div style={{ fontSize:"10px",color:"#22d3a0",marginTop:"3px",lineHeight:1.6 }}>
+                <div style={{ fontSize:"10px",color:"#2a7a5a",marginTop:"3px",lineHeight:1.6 }}>
                   ↔ Total: <strong>{(Number(form.kmDestino)*2).toFixed(0)} km</strong>
-                  {form.valorTotalKm && <span style={{ marginLeft:"8px",color:"#a78bfa" }}>· R$ {form.valorTotalKm}</span>}
+                  {form.valorTotalKm && <span style={{ marginLeft:"8px",color:"#555555" }}>· R$ {form.valorTotalKm}</span>}
                 </div>
               )}
             </div>
@@ -4707,7 +4724,7 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
             </div>
             <div>
               <label style={lbl}>Nome Projeto</label>
-              <input value={form.nomeProjeto} onChange={e=>set("nomeProjeto",e.target.value)} style={{...inp,background:"#18181f",color:"#a78bfa"}} placeholder="Preenchido automaticamente"/>
+              <input value={form.nomeProjeto} onChange={e=>set("nomeProjeto",e.target.value)} style={{...inp,background:"#f0f0f0",color:"#555555"}} placeholder="Preenchido automaticamente"/>
             </div>
             <div>
               <label style={lbl}>Centro Custo *</label>
@@ -4724,7 +4741,7 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
         {secHeader("DECLARAÇÕES DE ITENS","#f5a623","$")}
         <div style={secBody}>
           {form.itens.map((item,idx)=>(
-            <div key={item.id||idx} style={{ background:"#0d0d14",borderRadius:"10px",border:"1px solid #2a2a3a",padding:"14px",marginBottom:"10px" }}>
+            <div key={item.id||idx} style={{ background:"#f7f7f7",borderRadius:"10px",border:"1px solid #cccccc",padding:"14px",marginBottom:"10px" }}>
               <div style={{ display:"grid",gridTemplateColumns:"160px 120px 1fr",gap:"10px",marginBottom:"10px",alignItems:"end" }}>
                 <div>
                   <label style={lbl}>Data Item *</label>
@@ -4732,30 +4749,30 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
                 </div>
                 <div>
                   <label style={lbl}>Cód. Item *</label>
-                  <input value={item.codItem} readOnly style={{...inp,background:"#18181f",color:"#a78bfa",fontWeight:700}}/>
+                  <input value={item.codItem} readOnly style={{...inp,background:"#f0f0f0",color:"#555555",fontWeight:700}}/>
                 </div>
                 <div style={{ position:"relative" }}>
                   <label style={lbl}>Descrição Item *</label>
                   <div style={{ display:"flex",gap:"6px" }}>
-                    <input value={item.descItem} readOnly placeholder="Selecione o item" style={{...inp,flex:1,background:"#18181f"}}/>
+                    <input value={item.descItem} readOnly placeholder="Selecione o item" style={{...inp,flex:1,background:"#f0f0f0"}}/>
                     <button onClick={()=>{ setShowBuscaItem(showBuscaItem===idx?null:idx); setBuscaItem(""); }}
-                      style={{ padding:"9px 12px",borderRadius:"9px",border:"1px solid #2a2a3a",background:"#18181f",color:"#6e6e88",cursor:"pointer",fontSize:"14px" }}>🔍</button>
+                      style={{ padding:"9px 12px",borderRadius:"9px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"14px" }}>🔍</button>
                   </div>
                   {showBuscaItem===idx && (
-                    <div style={{ position:"absolute",top:"100%",left:0,right:0,zIndex:200,background:"#111118",border:"1px solid #2a2a3a",borderRadius:"10px",boxShadow:"0 8px 32px rgba(0,0,0,0.6)",marginTop:"4px",maxHeight:"240px",overflowY:"auto" }}>
+                    <div style={{ position:"absolute",top:"100%",left:0,right:0,zIndex:200,background:"#ffffff",border:"1px solid #cccccc",borderRadius:"10px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",marginTop:"4px",maxHeight:"240px",overflowY:"auto" }}>
                       <div style={{ padding:"8px" }}>
                         <input value={buscaItem} onChange={e=>setBuscaItem(e.target.value)} placeholder="Buscando..." autoFocus style={{...inp,fontSize:"12px"}}/>
                       </div>
-                      <div style={{ padding:"4px 8px 8px",fontSize:"10px",color:"#3e3e55",fontWeight:700,letterSpacing:"0.5px",display:"grid",gridTemplateColumns:"100px 1fr",paddingLeft:"12px" }}>
+                      <div style={{ padding:"4px 8px 8px",fontSize:"10px",color:"#888888",fontWeight:700,letterSpacing:"0.5px",display:"grid",gridTemplateColumns:"100px 1fr",paddingLeft:"12px" }}>
                         <span>CÓDIGO</span><span>DESCRIÇÃO</span>
                       </div>
                       {itensFiltrados.map(it=>(
                         <div key={it.cod} onClick={()=>selecionarItem(idx,it)}
                           style={{ display:"grid",gridTemplateColumns:"100px 1fr",padding:"10px 12px",cursor:"pointer",borderTop:"1px solid #1f1f2e",transition:"background .1s" }}
-                          onMouseEnter={e=>e.currentTarget.style.background="#18181f"}
+                          onMouseEnter={e=>e.currentTarget.style.background="#e8e8e8"}
                           onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
-                          <span style={{ fontSize:"12px",fontWeight:700,color:"#a78bfa" }}>{it.cod}</span>
-                          <span style={{ fontSize:"12px",color:"#f0f0fa",fontWeight:700 }}>{it.desc}</span>
+                          <span style={{ fontSize:"12px",fontWeight:700,color:"#555555" }}>{it.cod}</span>
+                          <span style={{ fontSize:"12px",color:"#111111",fontWeight:700 }}>{it.desc}</span>
                         </div>
                       ))}
                     </div>
@@ -4781,53 +4798,53 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
                 </div>
                 <div>
                   <label style={lbl}>Total *</label>
-                  <input value={item.total?Number(item.total).toFixed(2):""} readOnly style={{...inp,background:"#18181f",color:"#22d3a0",fontWeight:800}}/>
+                  <input value={item.total?Number(item.total).toFixed(2):""} readOnly style={{...inp,background:"#f0f0f0",color:"#2a7a5a",fontWeight:800}}/>
                 </div>
               </div>
               <div style={{ display:"flex",gap:"8px",marginTop:"10px" }}>
-                <label style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#18181f",color:"#6e6e88",fontSize:"11px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
+                <label style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",fontSize:"11px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
                   📷 INSIRA FOTO
                   <input type="file" accept="image/*" style={{ display:"none" }} onChange={e=>setItem(idx,"foto",e.target.files[0]?.name||null)}/>
                 </label>
-                {item.foto && <span style={{ fontSize:"11px",color:"#22d3a0",alignSelf:"center" }}>📎 {item.foto}</span>}
-                <button onClick={()=>removeItem(idx)} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",fontSize:"11px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>REMOVER ITEM</button>
+                {item.foto && <span style={{ fontSize:"11px",color:"#2a7a5a",alignSelf:"center" }}>📎 {item.foto}</span>}
+                <button onClick={()=>removeItem(idx)} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",fontSize:"11px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>REMOVER ITEM</button>
               </div>
             </div>
           ))}
           <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginTop:"8px" }}>
-            <button onClick={addItem} style={{ padding:"9px 20px",borderRadius:"9px",border:"1px solid #2a2a3a",background:"#18181f",color:"#c8c8d8",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>+ NOVA DESPESA</button>
+            <button onClick={addItem} style={{ padding:"9px 20px",borderRadius:"9px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#222222",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>+ NOVA DESPESA</button>
             {(form.itens.length>0 || form.valorTotalKm) && (
-              <div style={{ fontSize:"14px",fontWeight:800,color:"#22d3a0" }}>
+              <div style={{ fontSize:"14px",fontWeight:800,color:"#2a7a5a" }}>
                 Total Geral: R$ {(totalGeral + Number(form.valorTotalKm||0)).toFixed(2)}
-                {form.valorTotalKm && form.itens.length>0 && <span style={{ fontSize:"11px",color:"#6e6e88",fontWeight:400,marginLeft:"8px" }}>(itens: R$ {totalGeral.toFixed(2)} + km: R$ {Number(form.valorTotalKm).toFixed(2)})</span>}
+                {form.valorTotalKm && form.itens.length>0 && <span style={{ fontSize:"11px",color:"#666666",fontWeight:400,marginLeft:"8px" }}>(itens: R$ {totalGeral.toFixed(2)} + km: R$ {Number(form.valorTotalKm).toFixed(2)})</span>}
               </div>
             )}
           </div>
         </div>
 
         {/* Seção Comprovantes */}
-        {secHeader("COMPROVANTES","#a78bfa","📎")}
+        {secHeader("COMPROVANTES","#555555","📎")}
         <div style={secBody}>
-          <div style={{ fontSize:"11px",color:"#6e6e88",marginBottom:"12px" }}>
+          <div style={{ fontSize:"11px",color:"#666666",marginBottom:"12px" }}>
             Anexe os comprovantes das despesas declaradas (imagens ou PDFs, máx. 5MB cada)
           </div>
           <div style={{ display:"flex",flexDirection:"column",gap:"8px" }}>
             {(form.comprovantes||[]).map((comp,idx)=>(
-              <div key={idx} style={{ display:"flex",alignItems:"center",gap:"10px",background:"#0d0d14",borderRadius:"8px",border:"1px solid #2a2a3a",padding:"9px 12px" }}>
+              <div key={idx} style={{ display:"flex",alignItems:"center",gap:"10px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",padding:"9px 12px" }}>
                 <span style={{ fontSize:"16px" }}>{comp.tipo==="pdf"?"📄":"🖼"}</span>
-                <span style={{ fontSize:"12px",color:"#c8c8d8",flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{comp.nome}</span>
+                <span style={{ fontSize:"12px",color:"#222222",flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{comp.nome}</span>
                 {comp.url && (
                   <a href={comp.url} target="_blank" rel="noreferrer"
-                    style={{ padding:"4px 10px",borderRadius:"7px",border:"1px solid #22d3a044",background:"#22d3a018",color:"#22d3a0",fontSize:"11px",fontWeight:700,textDecoration:"none" }}>
+                    style={{ padding:"4px 10px",borderRadius:"7px",border:"1px solid #22d3a044",background:"#e6f4ee",color:"#2a7a5a",fontSize:"11px",fontWeight:700,textDecoration:"none" }}>
                     👁 Ver
                   </a>
                 )}
                 <button onClick={()=>setForm(p=>({...p,comprovantes:p.comprovantes.filter((_,i)=>i!==idx)}))}
-                  style={{ padding:"4px 9px",borderRadius:"7px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✕</button>
+                  style={{ padding:"4px 9px",borderRadius:"7px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✕</button>
               </div>
             ))}
           </div>
-          <label style={{ display:"inline-flex",alignItems:"center",gap:"8px",marginTop:"10px",padding:"9px 18px",borderRadius:"10px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
+          <label style={{ display:"inline-flex",alignItems:"center",gap:"8px",marginTop:"10px",padding:"9px 18px",borderRadius:"10px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
             📎 Adicionar comprovante
             <input type="file" accept="image/*,application/pdf" multiple style={{ display:"none" }}
               onChange={async (e) => {
@@ -4847,17 +4864,17 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
                 e.target.value = "";
               }}/>
           </label>
-          <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"6px" }}>Formatos: imagens (JPG, PNG) e PDF · Máximo 5MB por arquivo</div>
+          <div style={{ fontSize:"10px",color:"#888888",marginTop:"6px" }}>Formatos: imagens (JPG, PNG) e PDF · Máximo 5MB por arquivo</div>
         </div>
       </div>
     );
   };
 
   const STATUS_RDA = {
-    rascunho: { label:"Rascunho", color:"#6e6e88", bg:"#6e6e8818" },
-    enviada:  { label:"Enviada",  color:"#6c63ff", bg:"#6c63ff18" },
-    aprovada: { label:"Aprovada", color:"#22d3a0", bg:"#22d3a018" },
-    rejeitada:{ label:"Rejeitada",color:"#f04f5e", bg:"#f04f5e18" },
+    rascunho: { label:"Rascunho", color:"#666666", bg:"#6e6e8818" },
+    enviada:  { label:"Enviada",  color:"#2c2c2c", bg:"rgba(0,0,0,0.05)" },
+    aprovada: { label:"Aprovada", color:"#2a7a5a", bg:"#e6f4ee" },
+    rejeitada:{ label:"Rejeitada",color:"#c0392b", bg:"#fff0f0" },
   };
 
   const rdasFiltradas = isConsultor
@@ -4871,14 +4888,14 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
       {/* Header */}
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 4px",letterSpacing:"-0.3px" }}>🚗 Traslado</h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0 }}>{rdasFiltradas.length} RDA{rdasFiltradas.length!==1?"s":""}</p>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>🚗 Traslado</h2>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>{rdasFiltradas.length} RDA{rdasFiltradas.length!==1?"s":""}</p>
         </div>
         <div style={{ display:"flex",gap:"6px",alignItems:"center" }}>
-          <div style={{ display:"flex",gap:"2px",background:"#0d0d14",borderRadius:"10px",padding:"3px",border:"1px solid #2a2a3a" }}>
+          <div style={{ display:"flex",gap:"2px",background:"#f7f7f7",borderRadius:"10px",padding:"3px",border:"1px solid #cccccc" }}>
             {[{id:"rda",l:"📄 RDAs"},{id:"cadastro",l:"🏢 Unidades"}].map(t=>(
               <button key={t.id} onClick={()=>setAba(t.id)}
-                style={{ padding:"6px 14px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:aba===t.id?"#6c63ff":"transparent",color:aba===t.id?"#fff":"#6e6e88" }}>{t.l}</button>
+                style={{ padding:"6px 14px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:aba===t.id?"#2c2c2c":"transparent",color:aba===t.id?"#fff":"#666666" }}>{t.l}</button>
             ))}
           </div>
           {aba==="rda" && <button onClick={()=>{setEditRda(null);setShowFormRda(true);}}
@@ -4912,9 +4929,9 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
             </select>
           </div>
           {unidades.length===0 && !showFormUn && (
-            <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+            <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
               <div style={{ fontSize:"40px",marginBottom:"12px" }}>🏢</div>
-              <div style={{ fontSize:"14px",color:"#3e3e55",marginBottom:"16px" }}>Nenhuma unidade cadastrada</div>
+              <div style={{ fontSize:"14px",color:"#888888",marginBottom:"16px" }}>Nenhuma unidade cadastrada</div>
               {(canManage||canApprove) && <button onClick={()=>setShowFormUn(true)} style={{ padding:"9px 20px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontFamily:"inherit" }}>Cadastrar primeira unidade</button>}
             </div>
           )}
@@ -4922,23 +4939,23 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
             {(filtroCliente?unidades.filter(u=>u.cliente===filtroCliente):unidades).map(un=>{
               const cli = (clientList||[]).find(c=>c.name===un.cliente);
               return (
-                <div key={un.id} style={{ background:"#111118",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"16px",position:"relative",overflow:"hidden" }}>
-                  <div style={{ position:"absolute",top:0,left:0,right:0,height:"3px",background:cli?.color||"#6c63ff" }}/>
+                <div key={un.id} style={{ background:"#ffffff",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"16px",position:"relative",overflow:"hidden" }}>
+                  <div style={{ position:"absolute",top:0,left:0,right:0,height:"3px",background:cli?.color||"#2c2c2c" }}/>
                   <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"8px" }}>
                     <div>
-                      <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{un.nomeUnidade}</div>
-                      <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"2px" }}>🏢 {un.cliente}</div>
+                      <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{un.nomeUnidade}</div>
+                      <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px" }}>🏢 {un.cliente}</div>
                     </div>
                     {(canManage||canApprove) && (
                       <div style={{ display:"flex",gap:"5px" }}>
-                        <button onClick={()=>{setEditUn(un);setShowFormUn(true);}} style={{ padding:"4px 9px",borderRadius:"7px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✏️</button>
-                        <button onClick={async()=>{ if(window.confirm("Excluir?")) await salvarUnidades(unidades.filter(u2=>u2.id!==un.id)); }} style={{ padding:"4px 9px",borderRadius:"7px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>🗑</button>
+                        <button onClick={()=>{setEditUn(un);setShowFormUn(true);}} style={{ padding:"4px 9px",borderRadius:"7px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✏️</button>
+                        <button onClick={async()=>{ if(window.confirm("Excluir?")) await salvarUnidades(unidades.filter(u2=>u2.id!==un.id)); }} style={{ padding:"4px 9px",borderRadius:"7px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>🗑</button>
                       </div>
                     )}
                   </div>
-                  <div style={{ fontSize:"12px",color:"#c8c8d8",marginBottom:"4px" }}>📍 {un.endereco}{un.cidade?", "+un.cidade:""}{un.estado?" / "+un.estado:""}</div>
-                  <div style={{ display:"flex",gap:"14px",fontSize:"11px",color:"#6e6e88",marginTop:"6px" }}>
-                    <span style={{ color:"#22d3a0",fontWeight:700 }}>🚗 {un.kmConsultoria} km</span>
+                  <div style={{ fontSize:"12px",color:"#222222",marginBottom:"4px" }}>📍 {un.endereco}{un.cidade?", "+un.cidade:""}{un.estado?" / "+un.estado:""}</div>
+                  <div style={{ display:"flex",gap:"14px",fontSize:"11px",color:"#666666",marginTop:"6px" }}>
+                    <span style={{ color:"#2a7a5a",fontWeight:700 }}>🚗 {un.kmConsultoria} km</span>
                     {un.valorKm && <span>R$ {Number(un.valorKm).toFixed(2)}/km</span>}
                     {un.observacoes && <span>💬 {un.observacoes}</span>}
                   </div>
@@ -4990,9 +5007,9 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
               )}
 
               {rdasFiltradas.length===0 && (
-                <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+                <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
                   <div style={{ fontSize:"40px",marginBottom:"12px" }}>🚗</div>
-                  <div style={{ fontSize:"14px",color:"#3e3e55",marginBottom:"16px" }}>Nenhuma RDA encontrada</div>
+                  <div style={{ fontSize:"14px",color:"#888888",marginBottom:"16px" }}>Nenhuma RDA encontrada</div>
                   <button onClick={()=>setShowFormRda(true)} style={{ padding:"9px 20px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontFamily:"inherit" }}>Criar primeira RDA</button>
                 </div>
               )}
@@ -5002,33 +5019,33 @@ function ModuloTraslado({ currentUser, canManage, canApprove, consultores, clien
                   const st = STATUS_RDA[rda.status]||STATUS_RDA.rascunho;
                   const total = (rda.itens||[]).reduce((s,it)=>s+Number(it.total||0),0);
                   return (
-                    <div key={rda.id} style={{ background:"#111118",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"14px 18px",display:"flex",alignItems:"center",gap:"14px",flexWrap:"wrap" }}>
+                    <div key={rda.id} style={{ background:"#ffffff",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"14px 18px",display:"flex",alignItems:"center",gap:"14px",flexWrap:"wrap" }}>
                       <div style={{ minWidth:"100px" }}>
-                        <div style={{ fontSize:"12px",fontWeight:800,color:"#a78bfa" }}>{rda.codRda||"—"}</div>
-                        <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"2px" }}>{rda.dataEmissao}</div>
+                        <div style={{ fontSize:"12px",fontWeight:800,color:"#555555" }}>{rda.codRda||"—"}</div>
+                        <div style={{ fontSize:"10px",color:"#888888",marginTop:"2px" }}>{rda.dataEmissao}</div>
                       </div>
                       <div style={{ flex:1,minWidth:0 }}>
-                        <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{rda.nomeCliente||"(sem cliente)"}</div>
-                        <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"2px",display:"flex",gap:"10px",flexWrap:"wrap" }}>
+                        <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{rda.nomeCliente||"(sem cliente)"}</div>
+                        <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px",display:"flex",gap:"10px",flexWrap:"wrap" }}>
                           <span>👤 {rda.nomeSolicitante}</span>
                           <span>📅 {rda.dataInicio}{rda.dataFinal?" → "+rda.dataFinal:""}</span>
                           <span>📌 {rda.motivo?.split(" - ")[1]||rda.motivo}</span>
-                          {total>0&&<span style={{ color:"#22d3a0",fontWeight:700 }}>R$ {total.toFixed(2)}</span>}
+                          {total>0&&<span style={{ color:"#2a7a5a",fontWeight:700 }}>R$ {total.toFixed(2)}</span>}
                         </div>
                       </div>
                       <span style={{ padding:"4px 12px",borderRadius:"99px",background:st.bg,border:"1px solid "+st.color+"44",fontSize:"11px",fontWeight:700,color:st.color,whiteSpace:"nowrap" }}>{st.label}</span>
                       <div style={{ display:"flex",gap:"6px" }}>
                         <button onClick={()=>{setEditRda(rda);setShowFormRda(true);}}
-                          style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>
+                          style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>
                           {rda.status==="rascunho"?"✏️ Editar":"👁 Ver"}
                         </button>
                         {(canManage||canApprove) && (
                           <>
-                            {rda.status==="enviada"&&<button onClick={async()=>{ await salvarRdas(rdas.map(r=>r.id===rda.id?{...r,status:"aprovada"}:r)); }} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #22d3a044",background:"#22d3a018",color:"#22d3a0",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✅ Aprovar</button>}
-                            {rda.status==="enviada"&&<button onClick={async()=>{ await salvarRdas(rdas.map(r=>r.id===rda.id?{...r,status:"rejeitada"}:r)); }} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>❌ Rejeitar</button>}
+                            {rda.status==="enviada"&&<button onClick={async()=>{ await salvarRdas(rdas.map(r=>r.id===rda.id?{...r,status:"aprovada"}:r)); }} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #22d3a044",background:"#e6f4ee",color:"#2a7a5a",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✅ Aprovar</button>}
+                            {rda.status==="enviada"&&<button onClick={async()=>{ await salvarRdas(rdas.map(r=>r.id===rda.id?{...r,status:"rejeitada"}:r)); }} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>❌ Rejeitar</button>}
                           </>
                         )}
-                        {rda.status==="rascunho"&&<button onClick={async()=>{ if(window.confirm("Excluir esta RDA?")) await salvarRdas(rdas.filter(r=>r.id!==rda.id)); }} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>🗑</button>}
+                        {rda.status==="rascunho"&&<button onClick={async()=>{ if(window.confirm("Excluir esta RDA?")) await salvarRdas(rdas.filter(r=>r.id!==rda.id)); }} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>🗑</button>}
                       </div>
                     </div>
                   );
@@ -5204,13 +5221,13 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
     return nivel.cargo === roleUsuario || nivel.cargo === currentUser.role;
   };
 
-  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit",outline:"none" };
-  const lbl = { fontSize:"11px",color:"#6e6e88",fontWeight:700,display:"block",marginBottom:"6px",letterSpacing:"0.5px",textTransform:"uppercase" };
+  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit",outline:"none" };
+  const lbl = { fontSize:"11px",color:"#666666",fontWeight:700,display:"block",marginBottom:"6px",letterSpacing:"0.5px",textTransform:"uppercase" };
 
   const STATUS_SOL = {
-    em_aprovacao: { label:"Em aprovação", color:"#6c63ff", bg:"#6c63ff18", icon:"⏳" },
-    aprovado:     { label:"Aprovado",     color:"#22d3a0", bg:"#22d3a018", icon:"✅" },
-    rejeitado:    { label:"Rejeitado",    color:"#f04f5e", bg:"#f04f5e18", icon:"❌" },
+    em_aprovacao: { label:"Em aprovação", color:"#2c2c2c", bg:"rgba(0,0,0,0.05)", icon:"⏳" },
+    aprovado:     { label:"Aprovado",     color:"#2a7a5a", bg:"#e6f4ee", icon:"✅" },
+    rejeitado:    { label:"Rejeitado",    color:"#c0392b", bg:"#fff0f0", icon:"❌" },
     devolvido:    { label:"Devolvido",    color:"#f5a623", bg:"#f5a62318", icon:"↩️" },
   };
 
@@ -5232,8 +5249,8 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
     };
 
     return (
-      <div style={{ background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e",padding:"24px",maxWidth:"620px",marginBottom:"24px" }}>
-        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"16px",fontWeight:900,color:"#f0f0fa",margin:"0 0 20px" }}>
+      <div style={{ background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8",padding:"24px",maxWidth:"620px",marginBottom:"24px" }}>
+        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"16px",fontWeight:900,color:"#111111",margin:"0 0 20px" }}>
           {inicial?"✏️ Editar Alçada":"🔀 Nova Alçada de Aprovação"}
         </h3>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px",marginBottom:"16px" }}>
@@ -5248,8 +5265,8 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
             </select>
           </div>
           <div style={{ display:"flex",alignItems:"center",gap:"10px",paddingTop:"22px" }}>
-            <input type="checkbox" id="ativa_check" checked={form.ativa} onChange={e=>set("ativa",e.target.checked)} style={{ width:"16px",height:"16px",accentColor:"#6c63ff" }}/>
-            <label htmlFor="ativa_check" style={{ fontSize:"13px",color:"#c8c8d8",cursor:"pointer" }}>Alçada ativa</label>
+            <input type="checkbox" id="ativa_check" checked={form.ativa} onChange={e=>set("ativa",e.target.checked)} style={{ width:"16px",height:"16px",accentColor:"#2c2c2c" }}/>
+            <label htmlFor="ativa_check" style={{ fontSize:"13px",color:"#222222",cursor:"pointer" }}>Alçada ativa</label>
           </div>
         </div>
 
@@ -5257,18 +5274,18 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
         <div style={{ marginBottom:"16px" }}>
           <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"10px" }}>
             <label style={lbl}>Hierarquia de aprovação</label>
-            <button onClick={addNivel} style={{ padding:"5px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"12px",fontWeight:700,fontFamily:"inherit" }}>+ Nível</button>
+            <button onClick={addNivel} style={{ padding:"5px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"12px",fontWeight:700,fontFamily:"inherit" }}>+ Nível</button>
           </div>
           {form.niveis.length === 0 && (
-            <div style={{ padding:"20px",textAlign:"center",background:"#0d0d14",borderRadius:"10px",border:"1px dashed #2a2a3a",color:"#3e3e55",fontSize:"12px" }}>
+            <div style={{ padding:"20px",textAlign:"center",background:"#f7f7f7",borderRadius:"10px",border:"1px dashed #2a2a3a",color:"#888888",fontSize:"12px" }}>
               Clique em "+ Nível" para definir a hierarquia de aprovação
             </div>
           )}
           <div style={{ display:"flex",flexDirection:"column",gap:"8px" }}>
             {form.niveis.map((n, idx) => (
-              <div key={n.id} style={{ background:"#0d0d14",borderRadius:"10px",border:"1px solid #2a2a3a",padding:"10px 12px",display:"flex",alignItems:"center",gap:"10px",flexWrap:"wrap" }}>
+              <div key={n.id} style={{ background:"#f7f7f7",borderRadius:"10px",border:"1px solid #cccccc",padding:"10px 12px",display:"flex",alignItems:"center",gap:"10px",flexWrap:"wrap" }}>
                 {/* Ordem */}
-                <div style={{ width:"24px",height:"24px",borderRadius:"6px",background:"#6c63ff22",border:"1px solid #6c63ff44",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",fontWeight:800,color:"#a78bfa",flexShrink:0 }}>
+                <div style={{ width:"24px",height:"24px",borderRadius:"6px",background:"rgba(0,0,0,0.06)",border:"1px solid #6c63ff44",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",fontWeight:800,color:"#555555",flexShrink:0 }}>
                   {idx+1}
                 </div>
                 {/* Cargo */}
@@ -5279,9 +5296,9 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                 <input value={n.label||""} onChange={e=>setNivel(idx,"label",e.target.value)} placeholder="Descrição (opcional)" style={{...inp,flex:1,minWidth:"140px"}}/>
                 {/* Mover + remover */}
                 <div style={{ display:"flex",gap:"4px",flexShrink:0 }}>
-                  <button onClick={()=>moveNivel(idx,-1)} disabled={idx===0} style={{ width:"26px",height:"26px",borderRadius:"6px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"12px" }}>↑</button>
-                  <button onClick={()=>moveNivel(idx,1)} disabled={idx===form.niveis.length-1} style={{ width:"26px",height:"26px",borderRadius:"6px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"12px" }}>↓</button>
-                  <button onClick={()=>removeNivel(idx)} style={{ width:"26px",height:"26px",borderRadius:"6px",border:"1px solid #f04f5e44",background:"transparent",color:"#f04f5e",cursor:"pointer",fontSize:"12px" }}>✕</button>
+                  <button onClick={()=>moveNivel(idx,-1)} disabled={idx===0} style={{ width:"26px",height:"26px",borderRadius:"6px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"12px" }}>↑</button>
+                  <button onClick={()=>moveNivel(idx,1)} disabled={idx===form.niveis.length-1} style={{ width:"26px",height:"26px",borderRadius:"6px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"12px" }}>↓</button>
+                  <button onClick={()=>removeNivel(idx)} style={{ width:"26px",height:"26px",borderRadius:"6px",border:"1px solid #f04f5e44",background:"transparent",color:"#c0392b",cursor:"pointer",fontSize:"12px" }}>✕</button>
                 </div>
               </div>
             ))}
@@ -5289,7 +5306,7 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
         </div>
 
         <div style={{ display:"flex",gap:"10px",justifyContent:"flex-end" }}>
-          <button onClick={onCancelar} style={{ padding:"9px 18px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
+          <button onClick={onCancelar} style={{ padding:"9px 18px",borderRadius:"10px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
           <button onClick={()=>onSalvar(form)} disabled={!form.nome.trim()||form.niveis.length===0}
             style={{ padding:"9px 24px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44",opacity:!form.nome.trim()||form.niveis.length===0?0.5:1 }}>
             💾 Salvar alçada
@@ -5308,9 +5325,9 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
 
   // Colunas do Kanban
   const KANBAN_COLS = [
-    { id:"em_aprovacao", label:"⏳ Em aprovação", color:"#6c63ff" },
-    { id:"aprovado",     label:"✅ Aprovado",     color:"#22d3a0" },
-    { id:"rejeitado",    label:"❌ Rejeitado",    color:"#f04f5e" },
+    { id:"em_aprovacao", label:"⏳ Em aprovação", color:"#2c2c2c" },
+    { id:"aprovado",     label:"✅ Aprovado",     color:"#2a7a5a" },
+    { id:"rejeitado",    label:"❌ Rejeitado",    color:"#c0392b" },
   ];
 
   if (loading) return (
@@ -5324,13 +5341,13 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
       {/* Header + abas */}
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 4px",letterSpacing:"-0.3px" }}>🔀 Alçadas de Aprovação</h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0 }}>{alcadas.filter(a=>a.ativa).length} alçada{alcadas.filter(a=>a.ativa).length!==1?"s":""} ativa{alcadas.filter(a=>a.ativa).length!==1?"s":""} · {solicitacoes.length} solicitaç{solicitacoes.length!==1?"ões":"ão"}</p>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>🔀 Alçadas de Aprovação</h2>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>{alcadas.filter(a=>a.ativa).length} alçada{alcadas.filter(a=>a.ativa).length!==1?"s":""} ativa{alcadas.filter(a=>a.ativa).length!==1?"s":""} · {solicitacoes.length} solicitaç{solicitacoes.length!==1?"ões":"ão"}</p>
         </div>
         <div style={{ display:"flex",gap:"6px" }}>
           {[{id:"kanban",label:"📊 Kanban"},{id:"cadastro",label:"⚙️ Cadastro"}].map(t=>(
             <button key={t.id} onClick={()=>setAba(t.id)}
-              style={{ padding:"7px 16px",borderRadius:"9px",border:"1px solid "+(aba===t.id?"#6c63ff":"#2a2a3a"),background:aba===t.id?"#6c63ff22":"transparent",color:aba===t.id?"#a78bfa":"#6e6e88",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
+              style={{ padding:"7px 16px",borderRadius:"9px",border:"1px solid "+(aba===t.id?"#2c2c2c":"#cccccc"),background:aba===t.id?"rgba(0,0,0,0.06)":"transparent",color:aba===t.id?"#555555":"#666666",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
               {t.label}
             </button>
           ))}
@@ -5364,9 +5381,9 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
           )}
 
           {alcadas.length===0 && !showFormAlc && (
-            <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+            <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
               <div style={{ fontSize:"40px",marginBottom:"12px" }}>🔀</div>
-              <div style={{ fontSize:"14px",color:"#3e3e55",marginBottom:"16px" }}>Nenhuma alçada cadastrada</div>
+              <div style={{ fontSize:"14px",color:"#888888",marginBottom:"16px" }}>Nenhuma alçada cadastrada</div>
               {canManage && <button onClick={()=>setShowFormAlc(true)} style={{ padding:"9px 20px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontFamily:"inherit" }}>Criar primeira alçada</button>}
             </div>
           )}
@@ -5375,27 +5392,27 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
             {alcadas.map(alc=>{
               const tipo = TIPOS_SOLICITACAO.find(t=>t.id===alc.tipo);
               return (
-                <div key={alc.id} style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",padding:"16px 20px" }}>
+                <div key={alc.id} style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",padding:"16px 20px" }}>
                   <div style={{ display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:"12px",flexWrap:"wrap" }}>
                     <div style={{ flex:1,minWidth:0 }}>
                       <div style={{ display:"flex",alignItems:"center",gap:"10px",marginBottom:"8px" }}>
                         <span style={{ fontSize:"18px" }}>{tipo?.icon||"📋"}</span>
-                        <span style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa" }}>{alc.nome}</span>
-                        <span style={{ padding:"2px 10px",borderRadius:"99px",fontSize:"10px",fontWeight:700,background:alc.ativa?"#22d3a018":"#2a2a3a",color:alc.ativa?"#22d3a0":"#6e6e88",border:"1px solid "+(alc.ativa?"#22d3a033":"#2a2a3a") }}>
+                        <span style={{ fontSize:"14px",fontWeight:700,color:"#111111" }}>{alc.nome}</span>
+                        <span style={{ padding:"2px 10px",borderRadius:"99px",fontSize:"10px",fontWeight:700,background:alc.ativa?"#e6f4ee":"#cccccc",color:alc.ativa?"#2a7a5a":"#666666",border:"1px solid "+(alc.ativa?"#22d3a033":"#cccccc") }}>
                           {alc.ativa?"● Ativa":"○ Inativa"}
                         </span>
                       </div>
-                      <div style={{ fontSize:"11px",color:"#6e6e88",marginBottom:"10px" }}>{tipo?.label} · {alc.niveis?.length||0} nível{(alc.niveis?.length||0)!==1?"is":""} de aprovação</div>
+                      <div style={{ fontSize:"11px",color:"#666666",marginBottom:"10px" }}>{tipo?.label} · {alc.niveis?.length||0} nível{(alc.niveis?.length||0)!==1?"is":""} de aprovação</div>
                       {/* Fluxo visual */}
                       <div style={{ display:"flex",alignItems:"center",gap:"4px",flexWrap:"wrap" }}>
                         {(alc.niveis||[]).map((n,i)=>{
                           const badge = ROLE_BADGES[n.cargo];
                           return (
                             <React.Fragment key={n.id}>
-                              <div style={{ padding:"4px 10px",borderRadius:"8px",background:badge?.bg||"#2a2a3a",border:"1px solid "+(badge?.color||"#6e6e88")+"44",fontSize:"11px",fontWeight:700,color:badge?.color||"#6e6e88" }}>
+                              <div style={{ padding:"4px 10px",borderRadius:"8px",background:badge?.bg||"#cccccc",border:"1px solid "+(badge?.color||"#666666")+"44",fontSize:"11px",fontWeight:700,color:badge?.color||"#666666" }}>
                                 {i+1}. {n.label||ROLES_LABELS[n.cargo]||n.cargo}
                               </div>
-                              {i<alc.niveis.length-1 && <span style={{ color:"#3e3e55",fontSize:"14px" }}>→</span>}
+                              {i<alc.niveis.length-1 && <span style={{ color:"#888888",fontSize:"14px" }}>→</span>}
                             </React.Fragment>
                           );
                         })}
@@ -5404,9 +5421,9 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                     {canManage && (
                       <div style={{ display:"flex",gap:"6px",flexShrink:0 }}>
                         <button onClick={()=>{setEditAlcada(alc);setShowFormAlc(true);}}
-                          style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✏️</button>
+                          style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>✏️</button>
                         <button onClick={async()=>{ if(window.confirm("Excluir esta alçada?")) await salvarAlcadas(alcadas.filter(a=>a.id!==alc.id)); }}
-                          style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#f04f5e18",color:"#f04f5e",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>🗑</button>
+                          style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #f04f5e44",background:"#fff0f0",color:"#c0392b",cursor:"pointer",fontSize:"11px",fontWeight:700,fontFamily:"inherit" }}>🗑</button>
                       </div>
                     )}
                   </div>
@@ -5432,16 +5449,16 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
             </select>
             {(filtroTipo||filtroStatus) && (
               <button onClick={()=>{setFiltroTipo("");setFiltroStatus("");}}
-                style={{ padding:"7px 12px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"11px",fontFamily:"inherit" }}>✕ Limpar</button>
+                style={{ padding:"7px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"11px",fontFamily:"inherit" }}>✕ Limpar</button>
             )}
-            <span style={{ fontSize:"11px",color:"#3e3e55",marginLeft:"auto" }}>{solFiltradas.length} solicitaç{solFiltradas.length!==1?"ões":"ão"}</span>
+            <span style={{ fontSize:"11px",color:"#888888",marginLeft:"auto" }}>{solFiltradas.length} solicitaç{solFiltradas.length!==1?"ões":"ão"}</span>
           </div>
 
           {solicitacoes.length===0 && (
-            <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+            <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
               <div style={{ fontSize:"40px",marginBottom:"12px" }}>📊</div>
-              <div style={{ fontSize:"14px",color:"#3e3e55" }}>Nenhuma solicitação em andamento</div>
-              <div style={{ fontSize:"12px",color:"#3e3e55",marginTop:"6px" }}>As solicitações de viagem e OS aparecerão aqui quando submetidas para aprovação</div>
+              <div style={{ fontSize:"14px",color:"#888888" }}>Nenhuma solicitação em andamento</div>
+              <div style={{ fontSize:"12px",color:"#888888",marginTop:"6px" }}>As solicitações de viagem e OS aparecerão aqui quando submetidas para aprovação</div>
             </div>
           )}
 
@@ -5450,7 +5467,7 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
             {KANBAN_COLS.map(col => {
               const cards = solFiltradas.filter(s=>s.status===col.id);
               return (
-                <div key={col.id} style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",minHeight:"200px" }}>
+                <div key={col.id} style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",minHeight:"200px" }}>
                   {/* Header coluna */}
                   <div style={{ padding:"12px 16px",borderBottom:"1px solid #1f1f2e",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
                     <span style={{ fontSize:"13px",fontWeight:700,color:col.color }}>{col.label}</span>
@@ -5467,23 +5484,23 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                       const isSel = acaoSel?.solId === sol.id;
 
                       return (
-                        <div key={sol.id} style={{ background:"#18181f",borderRadius:"10px",border:"1px solid "+(podeAct?"#6c63ff44":"#2a2a3a"),padding:"12px 14px",transition:"border-color .2s" }}>
+                        <div key={sol.id} style={{ background:"#f0f0f0",borderRadius:"10px",border:"1px solid "+(podeAct?"rgba(0,0,0,0.12)":"#cccccc"),padding:"12px 14px",transition:"border-color .2s" }}>
                           {/* Tipo + ID */}
                           <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"6px" }}>
                             <div style={{ display:"flex",alignItems:"center",gap:"6px" }}>
                               <span style={{ fontSize:"14px" }}>{tipo?.icon||"📋"}</span>
-                              <span style={{ fontSize:"11px",fontWeight:700,color:"#a78bfa" }}>#{sol.id.slice(-4).toUpperCase()}</span>
+                              <span style={{ fontSize:"11px",fontWeight:700,color:"#555555" }}>#{sol.id.slice(-4).toUpperCase()}</span>
                             </div>
-                            <span style={{ fontSize:"10px",color:"#3e3e55" }}>
+                            <span style={{ fontSize:"10px",color:"#888888" }}>
                               {new Date(sol.criadoEm).toLocaleDateString("pt-BR")}
                             </span>
                           </div>
 
                           {/* Dados principais */}
-                          <div style={{ fontSize:"12px",fontWeight:600,color:"#f0f0fa",marginBottom:"4px" }}>
+                          <div style={{ fontSize:"12px",fontWeight:600,color:"#111111",marginBottom:"4px" }}>
                             {sol.dados?.cliente||sol.dados?.titulo||tipo?.label}
                           </div>
-                          <div style={{ fontSize:"11px",color:"#6e6e88",marginBottom:"8px" }}>
+                          <div style={{ fontSize:"11px",color:"#666666",marginBottom:"8px" }}>
                             👤 {sol.criadoPor}
                             {sol.dados?.motivo && <span> · {sol.dados.motivo}</span>}
                           </div>
@@ -5491,7 +5508,7 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                           {/* Nível atual */}
                           {sol.status==="em_aprovacao" && nivelAtual && (
                             <div style={{ marginBottom:"8px" }}>
-                              <div style={{ fontSize:"9px",color:"#3e3e55",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px" }}>Aguardando aprovação de:</div>
+                              <div style={{ fontSize:"9px",color:"#888888",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:"4px" }}>Aguardando aprovação de:</div>
                               {/* Fluxo de níveis */}
                               <div style={{ display:"flex",alignItems:"center",gap:"3px",flexWrap:"wrap",marginBottom:"6px" }}>
                                 {sol.niveis.map((n,i)=>{
@@ -5501,12 +5518,12 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                                   return (
                                     <React.Fragment key={n.id||i}>
                                       <div style={{ padding:"2px 7px",borderRadius:"6px",fontSize:"9px",fontWeight:700,
-                                        background:passou?"#22d3a018":atual?badge?.bg||"#6c63ff18":"transparent",
-                                        color:passou?"#22d3a0":atual?badge?.color||"#a78bfa":"#3e3e55",
-                                        border:"1px solid "+(passou?"#22d3a033":atual?(badge?.color||"#6c63ff")+"44":"#2a2a3a") }}>
+                                        background:passou?"#e6f4ee":atual?badge?.bg||"rgba(0,0,0,0.05)":"transparent",
+                                        color:passou?"#2a7a5a":atual?badge?.color||"#555555":"#888888",
+                                        border:"1px solid "+(passou?"#22d3a033":atual?(badge?.color||"#2c2c2c")+"44":"#cccccc") }}>
                                         {passou?"✓ ":atual?"● ":""}{n.label||ROLES_LABELS[n.cargo]||n.cargo}
                                       </div>
-                                      {i<sol.niveis.length-1 && <span style={{ color:"#2a2a3a",fontSize:"10px" }}>›</span>}
+                                      {i<sol.niveis.length-1 && <span style={{ color:"#cccccc",fontSize:"10px" }}>›</span>}
                                     </React.Fragment>
                                   );
                                 })}
@@ -5516,14 +5533,14 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
 
                           {/* Histórico resumido */}
                           {sol.historico?.length > 1 && (
-                            <div style={{ fontSize:"10px",color:"#3e3e55",marginBottom:"8px",borderTop:"1px solid #1f1f2e",paddingTop:"6px" }}>
+                            <div style={{ fontSize:"10px",color:"#888888",marginBottom:"8px",borderTop:"1px solid #1f1f2e",paddingTop:"6px" }}>
                               {sol.historico.slice(-2).map((h,i)=>(
                                 <div key={i} style={{ marginBottom:"2px" }}>
-                                  <span style={{ color:h.acao==="aprovado"?"#22d3a0":h.acao==="rejeitado"?"#f04f5e":"#6e6e88" }}>
+                                  <span style={{ color:h.acao==="aprovado"?"#2a7a5a":h.acao==="rejeitado"?"#c0392b":"#666666" }}>
                                     {h.acao==="aprovado"?"✓":h.acao==="rejeitado"?"✕":h.acao==="devolvido"?"↩":"·"} 
                                   </span>
                                   {" "}{h.nivel||""} {h.por&&`(${h.por.split(" ")[0]})`}
-                                  {h.obs && <span style={{ color:"#6e6e88" }}> — {h.obs.slice(0,40)}{h.obs.length>40?"...":""}</span>}
+                                  {h.obs && <span style={{ color:"#666666" }}> — {h.obs.slice(0,40)}{h.obs.length>40?"...":""}</span>}
                                 </div>
                               ))}
                             </div>
@@ -5533,8 +5550,8 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                           {podeAct && (
                             <div style={{ display:"flex",gap:"5px",flexWrap:"wrap" }}>
                               {[
-                                {a:"aprovado",  l:"✅ Aprovar",  c:"#22d3a0"},
-                                {a:"rejeitado", l:"❌ Rejeitar", c:"#f04f5e"},
+                                {a:"aprovado",  l:"✅ Aprovar",  c:"#2a7a5a"},
+                                {a:"rejeitado", l:"❌ Rejeitar", c:"#c0392b"},
                                 {a:"devolvido", l:"↩ Devolver",  c:"#f5a623"},
                               ].map(btn=>(
                                 <button key={btn.a}
@@ -5548,15 +5565,15 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
 
                           {/* Painel de confirmação */}
                           {isSel && (
-                            <div style={{ marginTop:"8px",background:"#0d0d14",borderRadius:"8px",padding:"10px",border:"1px solid #2a2a3a" }}>
+                            <div style={{ marginTop:"8px",background:"#f7f7f7",borderRadius:"8px",padding:"10px",border:"1px solid #cccccc" }}>
                               <textarea value={comentario} onChange={e=>setComentario(e.target.value)} rows={2}
                                 placeholder={acaoSel.acao==="aprovado"?"Observação (opcional)...":"Motivo (recomendado)..."}
-                                style={{ width:"100%",padding:"7px 10px",borderRadius:"7px",border:"1px solid #2a2a3a",background:"#111118",color:"#c8c8d8",fontSize:"11px",fontFamily:"inherit",resize:"none",outline:"none",boxSizing:"border-box",marginBottom:"7px",lineHeight:1.5 }}/>
+                                style={{ width:"100%",padding:"7px 10px",borderRadius:"7px",border:"1px solid #cccccc",background:"#ffffff",color:"#222222",fontSize:"11px",fontFamily:"inherit",resize:"none",outline:"none",boxSizing:"border-box",marginBottom:"7px",lineHeight:1.5 }}/>
                               <div style={{ display:"flex",gap:"6px",justifyContent:"flex-end" }}>
-                                <button onClick={()=>{setAcaoSel(null);setComentario("");}} style={{ padding:"4px 10px",borderRadius:"6px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"10px",fontFamily:"inherit" }}>Cancelar</button>
+                                <button onClick={()=>{setAcaoSel(null);setComentario("");}} style={{ padding:"4px 10px",borderRadius:"6px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"10px",fontFamily:"inherit" }}>Cancelar</button>
                                 <button onClick={()=>processarAcao(sol.id,acaoSel.acao,comentario)}
                                   style={{ padding:"4px 12px",borderRadius:"6px",border:"none",
-                                    background:acaoSel.acao==="aprovado"?"#22d3a0":acaoSel.acao==="rejeitado"?"#f04f5e":"#f5a623",
+                                    background:acaoSel.acao==="aprovado"?"#2a7a5a":acaoSel.acao==="rejeitado"?"#c0392b":"#f5a623",
                                     color:"#fff",cursor:"pointer",fontSize:"10px",fontWeight:700,fontFamily:"inherit" }}>
                                   Confirmar
                                 </button>
@@ -5567,7 +5584,7 @@ function ModuloAlcadas({ currentUser, canManage, canApprove, consultores, usuari
                       );
                     })}
                     {cards.length===0 && (
-                      <div style={{ textAlign:"center",padding:"24px",color:"#3e3e55",fontSize:"11px" }}>Nenhuma solicitação</div>
+                      <div style={{ textAlign:"center",padding:"24px",color:"#888888",fontSize:"11px" }}>Nenhuma solicitação</div>
                     )}
                   </div>
                 </div>
@@ -5602,12 +5619,12 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
   const [emailStatus,  setEmailStatus]  = useState(null);
 
   const OS_STATUS = {
-    em_andamento: { label:"Em andamento", color:"#6c63ff", bg:"#6c63ff18", icon:"⚙️" },
-    concluida:    { label:"Concluída",    color:"#22d3a0", bg:"#22d3a018", icon:"✅" },
+    em_andamento: { label:"Em andamento", color:"#2c2c2c", bg:"rgba(0,0,0,0.05)", icon:"⚙️" },
+    concluida:    { label:"Concluída",    color:"#2a7a5a", bg:"#e6f4ee", icon:"✅" },
     pendente:     { label:"Pendente",     color:"#f5a623", bg:"#f5a62318", icon:"⏳" },
-    cancelada:    { label:"Cancelada",    color:"#f04f5e", bg:"#f04f5e18", icon:"❌" },
-    aprovada:     { label:"Aprovada",     color:"#22d3a0", bg:"#22d3a018", icon:"👍" },
-    rejeitada:    { label:"Rejeitada",    color:"#f04f5e", bg:"#f04f5e18", icon:"👎" },
+    cancelada:    { label:"Cancelada",    color:"#c0392b", bg:"#fff0f0", icon:"❌" },
+    aprovada:     { label:"Aprovada",     color:"#2a7a5a", bg:"#e6f4ee", icon:"👍" },
+    rejeitada:    { label:"Rejeitada",    color:"#c0392b", bg:"#fff0f0", icon:"👎" },
     contestada:   { label:"Contestada",   color:"#f5a623", bg:"#f5a62318", icon:"⚠️" },
   };
 
@@ -5783,10 +5800,10 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
   const consultoresUnicos = [...new Set(allOS.map(o=>o.consultor).filter(Boolean))].sort();
   const projetosUnicos = [...new Set(allOS.map(o=>o.osSistema).filter(Boolean))].sort();
 
-  const inp = { padding:"8px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"12px",fontFamily:"inherit",outline:"none" };
+  const inp = { padding:"8px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none" };
 
   if (loading) return (
-    <div style={{ textAlign:"center",padding:"60px",color:"#3e3e55" }}>
+    <div style={{ textAlign:"center",padding:"60px",color:"#888888" }}>
       <div style={{ width:"28px",height:"28px",border:"3px solid #1f1f2e",borderTop:"3px solid #6c63ff",borderRadius:"50%",animation:"spin .7s linear infinite",margin:"0 auto 12px" }}/>
     </div>
   );
@@ -5796,15 +5813,15 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
       {/* Header */}
       <div style={{ display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 4px",letterSpacing:"-0.3px" }}>📋 Ordens de Serviço</h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0,display:"flex",alignItems:"center",gap:"10px" }}>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>📋 Ordens de Serviço</h2>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0,display:"flex",alignItems:"center",gap:"10px" }}>
             {loading ? "Carregando..." : `${allOS.length} OS registradas · ${osFiltradas.length} exibidas`}
-            {totalHorasStr && <span style={{ color:"#22d3a0",fontWeight:700 }}>⏱ {totalHorasStr} no período</span>}
+            {totalHorasStr && <span style={{ color:"#2a7a5a",fontWeight:700 }}>⏱ {totalHorasStr} no período</span>}
           </p>
         </div>
         <div style={{ display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center" }}>
           <button onClick={()=>{ setLoading(true); setAllOS([]); setRefreshTick(t=>t+1); }}
-            style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"#111118",color:loading?"#3e3e55":"#6e6e88",cursor:loading?"wait":"pointer",fontSize:"12px",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"6px" }}>
+            style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid #cccccc",background:"#ffffff",color:loading?"#888888":"#666666",cursor:loading?"wait":"pointer",fontSize:"12px",fontFamily:"inherit",display:"flex",alignItems:"center",gap:"6px" }}>
             <span style={{ display:"inline-block",animation:loading?"spin .7s linear infinite":"none" }}>🔄</span>
             {loading?"Atualizando...":"Atualizar"}
           </button>
@@ -5813,7 +5830,7 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
             if (!n) return null;
             return (
               <button key={k} onClick={()=>setFiltroStatus(filtroStatus===k?"":k)}
-                style={{ padding:"5px 12px",borderRadius:"99px",border:"1px solid "+(filtroStatus===k?v.color:"#2a2a3a"),background:filtroStatus===k?v.bg:"transparent",color:filtroStatus===k?v.color:"#6e6e88",fontSize:"11px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
+                style={{ padding:"5px 12px",borderRadius:"99px",border:"1px solid "+(filtroStatus===k?v.color:"#cccccc"),background:filtroStatus===k?v.bg:"transparent",color:filtroStatus===k?v.color:"#666666",fontSize:"11px",fontWeight:700,cursor:"pointer",fontFamily:"inherit" }}>
                 {v.icon} {v.label} <span style={{ opacity:0.7 }}>({n})</span>
               </button>
             );
@@ -5822,10 +5839,10 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
       </div>
 
       {/* Filtros */}
-      <div style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",padding:"14px 16px",marginBottom:"16px",display:"flex",gap:"10px",flexWrap:"wrap",alignItems:"center" }}>
+      <div style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",padding:"14px 16px",marginBottom:"16px",display:"flex",gap:"10px",flexWrap:"wrap",alignItems:"center" }}>
         {/* Busca */}
         <div style={{ position:"relative",flex:1,minWidth:"180px" }}>
-          <span style={{ position:"absolute",left:"10px",top:"50%",transform:"translateY(-50%)",fontSize:"12px",color:"#3e3e55",pointerEvents:"none" }}>🔍</span>
+          <span style={{ position:"absolute",left:"10px",top:"50%",transform:"translateY(-50%)",fontSize:"12px",color:"#888888",pointerEvents:"none" }}>🔍</span>
           <input value={busca} onChange={e=>setBusca(e.target.value)} placeholder="Buscar por nº OS, cliente, consultor..."
             style={{...inp,width:"100%",boxSizing:"border-box",paddingLeft:"30px"}}/>
         </div>
@@ -5846,22 +5863,22 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
           {projetosUnicos.map(p=><option key={p} value={p}>{p}</option>)}
         </select>
         <div style={{ display:"flex",alignItems:"center",gap:"6px" }}>
-          <span style={{ fontSize:"11px",color:"#6e6e88",whiteSpace:"nowrap" }}>De:</span>
+          <span style={{ fontSize:"11px",color:"#666666",whiteSpace:"nowrap" }}>De:</span>
           <input type="date" value={filtroDataDe} onChange={e=>setFiltroDataDe(e.target.value)} style={{...inp,width:"130px"}}/>
-          <span style={{ fontSize:"11px",color:"#6e6e88" }}>Até:</span>
+          <span style={{ fontSize:"11px",color:"#666666" }}>Até:</span>
           <input type="date" value={filtroDataAte} onChange={e=>setFiltroDataAte(e.target.value)} style={{...inp,width:"130px"}}/>
         </div>
         {(busca||filtroConsult||filtroCliente||filtroStatus||filtroProjeto||filtroDataDe||filtroDataAte) && (
           <button onClick={()=>{setBusca("");setFiltroConsult("");setFiltroCliente("");setFiltroStatus("");setFiltroProjeto("");setFiltroDataDe("");setFiltroDataAte("");}}
-            style={{ padding:"7px 12px",borderRadius:"9px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"11px",fontFamily:"inherit" }}>✕ Limpar</button>
+            style={{ padding:"7px 12px",borderRadius:"9px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"11px",fontFamily:"inherit" }}>✕ Limpar</button>
         )}
       </div>
 
       {/* Lista de OS */}
       {osFiltradas.length===0 && (
-        <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+        <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
           <div style={{ fontSize:"40px",marginBottom:"12px" }}>📋</div>
-          <div style={{ fontSize:"14px",color:"#3e3e55" }}>Nenhuma OS encontrada para os filtros selecionados</div>
+          <div style={{ fontSize:"14px",color:"#888888" }}>Nenhuma OS encontrada para os filtros selecionados</div>
         </div>
       )}
 
@@ -5878,35 +5895,35 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
             return `${Math.floor(t/60)}h${t%60>0?" "+t%60+"min":""}`;
           })();
           return (
-            <div key={os.id+os.consultor} style={{ background:"#111118",borderRadius:"14px",border:"1px solid "+(isSel?"#6c63ff44":"#1f1f2e"),overflow:"hidden",transition:"border-color .15s" }}>
+            <div key={os.id+os.consultor} style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid "+(isSel?"rgba(0,0,0,0.12)":"#d8d8d8"),overflow:"hidden",transition:"border-color .15s" }}>
               {/* Linha principal */}
               <div style={{ padding:"14px 18px",display:"flex",alignItems:"center",gap:"14px",flexWrap:"wrap",cursor:"pointer" }}
                 onClick={()=>{ setOsSelecionada(isSel?null:os); setAcao(null); setComentario(""); setEmailStatus(null); }}>
                 {/* Nº OS */}
                 <div style={{ minWidth:"90px" }}>
-                  <div style={{ fontSize:"12px",fontWeight:800,color:"#a78bfa" }}>{os.osNumero}</div>
-                  <div style={{ fontSize:"10px",color:"#3e3e55",marginTop:"1px" }}>Dia {os.day} {os.month} {os.year||""}</div>
+                  <div style={{ fontSize:"12px",fontWeight:800,color:"#555555" }}>{os.osNumero}</div>
+                  <div style={{ fontSize:"10px",color:"#888888",marginTop:"1px" }}>Dia {os.day} {os.month} {os.year||""}</div>
                 </div>
                 {/* Cliente */}
                 <div style={{ flex:1,minWidth:"120px" }}>
-                  <div style={{ fontSize:"13px",fontWeight:700,color:"#f0f0fa" }}>{os.client||"—"}</div>
-                  <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"1px" }}>
+                  <div style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>{os.client||"—"}</div>
+                  <div style={{ fontSize:"11px",color:"#666666",marginTop:"1px" }}>
                     {os.osSistema && <span>🖥 {os.osSistema} · </span>}
                     👤 {os.consultor?.split(" ")[0]}
                   </div>
                 </div>
                 {/* Horário */}
                 {(os.horaInicio||os.horaFim) && (
-                  <div style={{ fontSize:"11px",color:"#6e6e88",whiteSpace:"nowrap" }}>
+                  <div style={{ fontSize:"11px",color:"#666666",whiteSpace:"nowrap" }}>
                     🕐 {os.horaInicio||"?"}{os.horaFim?" → "+os.horaFim:""}
-                    {dur && <span style={{ color:"#22d3a0",marginLeft:"6px" }}>({dur})</span>}
+                    {dur && <span style={{ color:"#2a7a5a",marginLeft:"6px" }}>({dur})</span>}
                   </div>
                 )}
                 {/* Status */}
                 <span style={{ padding:"4px 12px",borderRadius:"99px",background:st.bg,border:"1px solid "+st.color+"44",fontSize:"11px",fontWeight:700,color:st.color,whiteSpace:"nowrap" }}>
                   {st.icon} {st.label}
                 </span>
-                <span style={{ color:"#3e3e55",fontSize:"12px" }}>{isSel?"▴":"▾"}</span>
+                <span style={{ color:"#888888",fontSize:"12px" }}>{isSel?"▴":"▾"}</span>
               </div>
 
               {/* Painel expandido */}
@@ -5915,21 +5932,21 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
                   <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"16px",marginBottom:"16px" }}>
                     {/* Detalhes */}
                     <div>
-                      <div style={{ fontSize:"10px",color:"#3e3e55",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>Detalhes</div>
+                      <div style={{ fontSize:"10px",color:"#888888",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>Detalhes</div>
                       <div style={{ display:"flex",flexDirection:"column",gap:"5px",fontSize:"12px" }}>
-                        {os.osDescricao && <div><span style={{ color:"#6e6e88" }}>Descrição: </span><span style={{ color:"#c8c8d8" }}>{os.osDescricao}</span></div>}
-                        <div><span style={{ color:"#6e6e88" }}>Consultor: </span><span style={{ color:"#c8c8d8" }}>{os.consultor}</span></div>
-                        <div><span style={{ color:"#6e6e88" }}>Modalidade: </span><span style={{ color:"#c8c8d8" }}>{os.modalidade==="remoto"?"💻 Remoto":"🏢 Presencial"}</span></div>
-                        {os.osEmailDest && <div><span style={{ color:"#6e6e88" }}>E-mail: </span><span style={{ color:"#c8c8d8" }}>{os.osEmailDest}</span></div>}
-                        {os.osPreenchidaEm && <div><span style={{ color:"#6e6e88" }}>Preenchida em: </span><span style={{ color:"#3e3e55" }}>{new Date(os.osPreenchidaEm).toLocaleString("pt-BR")}</span></div>}
-                        {os.osAvaliadoPor && <div><span style={{ color:"#6e6e88" }}>Avaliada por: </span><span style={{ color:"#c8c8d8" }}>{os.osAvaliadoPor} em {os.osAvaliadoEm?new Date(os.osAvaliadoEm).toLocaleString("pt-BR"):""}</span></div>}
+                        {os.osDescricao && <div><span style={{ color:"#666666" }}>Descrição: </span><span style={{ color:"#222222" }}>{os.osDescricao}</span></div>}
+                        <div><span style={{ color:"#666666" }}>Consultor: </span><span style={{ color:"#222222" }}>{os.consultor}</span></div>
+                        <div><span style={{ color:"#666666" }}>Modalidade: </span><span style={{ color:"#222222" }}>{os.modalidade==="remoto"?"💻 Remoto":"🏢 Presencial"}</span></div>
+                        {os.osEmailDest && <div><span style={{ color:"#666666" }}>E-mail: </span><span style={{ color:"#222222" }}>{os.osEmailDest}</span></div>}
+                        {os.osPreenchidaEm && <div><span style={{ color:"#666666" }}>Preenchida em: </span><span style={{ color:"#888888" }}>{new Date(os.osPreenchidaEm).toLocaleString("pt-BR")}</span></div>}
+                        {os.osAvaliadoPor && <div><span style={{ color:"#666666" }}>Avaliada por: </span><span style={{ color:"#222222" }}>{os.osAvaliadoPor} em {os.osAvaliadoEm?new Date(os.osAvaliadoEm).toLocaleString("pt-BR"):""}</span></div>}
                       </div>
                     </div>
                     {/* Atividades */}
                     <div>
-                      <div style={{ fontSize:"10px",color:"#3e3e55",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>Atividades realizadas</div>
-                      <div style={{ fontSize:"12px",color:"#c8c8d8",lineHeight:1.6,whiteSpace:"pre-wrap",maxHeight:"140px",overflowY:"auto" }}>
-                        {os.atividades||<span style={{ color:"#3e3e55" }}>Não preenchido</span>}
+                      <div style={{ fontSize:"10px",color:"#888888",fontWeight:700,letterSpacing:"0.8px",textTransform:"uppercase",marginBottom:"8px" }}>Atividades realizadas</div>
+                      <div style={{ fontSize:"12px",color:"#222222",lineHeight:1.6,whiteSpace:"pre-wrap",maxHeight:"140px",overflowY:"auto" }}>
+                        {os.atividades||<span style={{ color:"#888888" }}>Não preenchido</span>}
                       </div>
                     </div>
                   </div>
@@ -5938,15 +5955,15 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
                   {os.osComentarioGestor && (
                     <div style={{ background:st.bg,borderRadius:"10px",border:"1px solid "+st.color+"33",padding:"10px 14px",marginBottom:"14px",fontSize:"12px" }}>
                       <span style={{ color:st.color,fontWeight:700 }}>{st.icon} Comentário do gestor: </span>
-                      <span style={{ color:"#c8c8d8" }}>{os.osComentarioGestor}</span>
+                      <span style={{ color:"#222222" }}>{os.osComentarioGestor}</span>
                     </div>
                   )}
 
                   {/* Botões de ação */}
                   <div style={{ display:"flex",gap:"8px",flexWrap:"wrap",marginBottom: acao?"14px":"0" }}>
                     {[
-                      { id:"aprovar",   label:"👍 Aprovar",    color:"#22d3a0", bg:"#22d3a018", border:"#22d3a044" },
-                      { id:"rejeitar",  label:"👎 Rejeitar",   color:"#f04f5e", bg:"#f04f5e18", border:"#f04f5e44" },
+                      { id:"aprovar",   label:"👍 Aprovar",    color:"#2a7a5a", bg:"#e6f4ee", border:"#22d3a044" },
+                      { id:"rejeitar",  label:"👎 Rejeitar",   color:"#c0392b", bg:"#fff0f0", border:"#f04f5e44" },
                       { id:"contestar", label:"⚠️ Contestar",  color:"#f5a623", bg:"#f5a62318", border:"#f5a62344" },
                     ].map(btn=>(
                       <button key={btn.id} onClick={()=>setAcao(acao===btn.id?null:btn.id)}
@@ -5958,7 +5975,7 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
                     {os.osEmailDest && (
                       <button onClick={async()=>{ setEnviandoEmail(true); await enviarEmailNotificacao(os, os.osStatus||"em_andamento",""); setEnviandoEmail(false); }}
                         disabled={enviandoEmail}
-                        style={{ padding:"8px 18px",borderRadius:"10px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit",marginLeft:"auto" }}>
+                        style={{ padding:"8px 18px",borderRadius:"10px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",fontSize:"12px",fontWeight:700,cursor:"pointer",fontFamily:"inherit",marginLeft:"auto" }}>
                         {enviandoEmail?"⏳":"📧"} Enviar e-mail
                       </button>
                     )}
@@ -5966,18 +5983,18 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
 
                   {/* Painel de comentário */}
                   {acao && (
-                    <div style={{ background:"#0d0d14",borderRadius:"12px",border:"1px solid #2a2a3a",padding:"14px",marginBottom:"12px" }}>
-                      <div style={{ fontSize:"11px",color:"#6e6e88",fontWeight:700,marginBottom:"8px",textTransform:"uppercase",letterSpacing:"0.5px" }}>
+                    <div style={{ background:"#f7f7f7",borderRadius:"12px",border:"1px solid #cccccc",padding:"14px",marginBottom:"12px" }}>
+                      <div style={{ fontSize:"11px",color:"#666666",fontWeight:700,marginBottom:"8px",textTransform:"uppercase",letterSpacing:"0.5px" }}>
                         {acao==="aprovar"?"👍 Aprovar OS":acao==="rejeitar"?"👎 Rejeitar OS":"⚠️ Contestar OS"} — Comentário {acao!=="aprovar"?"(obrigatório)":"(opcional)"}
                       </div>
                       <textarea value={comentario} onChange={e=>setComentario(e.target.value)} rows={3}
                         placeholder={acao==="aprovar"?"Observações sobre a aprovação (opcional)...":acao==="rejeitar"?"Descreva o motivo da rejeição...":"Descreva o ponto de contestação..."}
-                        style={{ width:"100%",padding:"9px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#111118",color:"#c8c8d8",fontSize:"12px",fontFamily:"inherit",outline:"none",resize:"vertical",lineHeight:1.5,boxSizing:"border-box" }}/>
+                        style={{ width:"100%",padding:"9px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#ffffff",color:"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none",resize:"vertical",lineHeight:1.5,boxSizing:"border-box" }}/>
                       {(acao==="rejeitar"||acao==="contestar") && !comentario.trim() && (
                         <div style={{ fontSize:"10px",color:"#f5a623",marginTop:"5px" }}>⚠️ Comentário obrigatório para {acao==="rejeitar"?"rejeição":"contestação"}</div>
                       )}
                       <div style={{ display:"flex",gap:"8px",marginTop:"10px",justifyContent:"flex-end" }}>
-                        <button onClick={()=>{setAcao(null);setComentario("");}} style={{ padding:"8px 16px",borderRadius:"9px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit" }}>Cancelar</button>
+                        <button onClick={()=>{setAcao(null);setComentario("");}} style={{ padding:"8px 16px",borderRadius:"9px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit" }}>Cancelar</button>
                         <button onClick={handleAcao}
                           disabled={salvando||((acao==="rejeitar"||acao==="contestar")&&!comentario.trim())}
                           style={{ padding:"8px 20px",borderRadius:"9px",border:"none",
@@ -5989,8 +6006,8 @@ function ModuloOrdemServico({ consultores, clientList, scheduleData, setSchedule
                     </div>
                   )}
 
-                  {emailStatus==="ok" && <div style={{ padding:"8px 12px",borderRadius:"8px",background:"#22d3a015",border:"1px solid #22d3a044",fontSize:"11px",color:"#22d3a0",fontWeight:600 }}>✅ E-mail enviado!</div>}
-                  {emailStatus==="erro" && <div style={{ padding:"8px 12px",borderRadius:"8px",background:"#f04f5e15",border:"1px solid #f04f5e44",fontSize:"11px",color:"#f04f5e" }}>❌ Falha ao enviar e-mail</div>}
+                  {emailStatus==="ok" && <div style={{ padding:"8px 12px",borderRadius:"8px",background:"#e6f4ee",border:"1px solid #22d3a044",fontSize:"11px",color:"#2a7a5a",fontWeight:600 }}>✅ E-mail enviado!</div>}
+                  {emailStatus==="erro" && <div style={{ padding:"8px 12px",borderRadius:"8px",background:"#fff0f0",border:"1px solid #f04f5e44",fontSize:"11px",color:"#c0392b" }}>❌ Falha ao enviar e-mail</div>}
                 </div>
               )}
             </div>
@@ -6015,9 +6032,9 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
 
   const STATUS_CONFIG = {
     pendente:  { label:"Pendente",   color:"#f5a623", bg:"#f5a62318" },
-    aprovada:  { label:"Aprovada",   color:"#22d3a0", bg:"#22d3a018" },
-    rejeitada: { label:"Rejeitada",  color:"#f04f5e", bg:"#f04f5e18" },
-    realizada: { label:"Realizada",  color:"#6c63ff", bg:"#6c63ff18" },
+    aprovada:  { label:"Aprovada",   color:"#2a7a5a", bg:"#e6f4ee" },
+    rejeitada: { label:"Rejeitada",  color:"#c0392b", bg:"#fff0f0" },
+    realizada: { label:"Realizada",  color:"#2c2c2c", bg:"rgba(0,0,0,0.05)" },
   };
 
   useEffect(() => {
@@ -6055,8 +6072,8 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
     ? viagens.filter(v => v.consultor===nomeLogado || v.solicitante===nomeLogado)
     : viagens;
 
-  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit" };
-  const lbl = { fontSize:"11px",color:"#6e6e88",fontWeight:700,display:"block",marginBottom:"6px",letterSpacing:"0.5px",textTransform:"uppercase" };
+  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit" };
+  const lbl = { fontSize:"11px",color:"#666666",fontWeight:700,display:"block",marginBottom:"6px",letterSpacing:"0.5px",textTransform:"uppercase" };
 
   const FormViagem = ({ inicial, onSalvar, onCancelar }) => {
     const vazio = {
@@ -6080,17 +6097,17 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
     const noites = form.checkIn&&form.checkOut ? Math.round((new Date(form.checkOut)-new Date(form.checkIn))/86400000) : 0;
 
     return (
-      <div style={{ background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e",padding:"24px",maxWidth:"720px",marginBottom:"24px" }}>
-        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#f0f0fa",margin:"0 0 20px",letterSpacing:"-0.3px" }}>
+      <div style={{ background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8",padding:"24px",maxWidth:"720px",marginBottom:"24px" }}>
+        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#111111",margin:"0 0 20px",letterSpacing:"-0.3px" }}>
           {inicial?"✏️ Editar Solicitação":"🏨 Nova Solicitação de Viagem e Hospedagem"}
         </h3>
 
         {/* Solicitação */}
-        <div style={{ fontSize:"11px",color:"#6c63ff",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>Solicitação</div>
+        <div style={{ fontSize:"11px",color:"#2c2c2c",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>Solicitação</div>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px",marginBottom:"20px" }}>
           <div>
             <label style={lbl}>Solicitante</label>
-            <div style={{...inp,background:"#18181f",color:"#6e6e88",cursor:"default",display:"flex",alignItems:"center" }}>{form.solicitante}</div>
+            <div style={{...inp,background:"#f0f0f0",color:"#666666",cursor:"default",display:"flex",alignItems:"center" }}>{form.solicitante}</div>
           </div>
           <div>
             <label style={lbl}>Setor</label>
@@ -6101,7 +6118,7 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
           <div>
             <label style={lbl}>Consultor</label>
             {isConsultor
-              ? <div style={{...inp,background:"#18181f",color:"#6e6e88",cursor:"default",display:"flex",alignItems:"center"}}>{nomeLogado}</div>
+              ? <div style={{...inp,background:"#f0f0f0",color:"#666666",cursor:"default",display:"flex",alignItems:"center"}}>{nomeLogado}</div>
               : <select value={form.consultor} onChange={e=>set("consultor",e.target.value)} style={inp}>
                   <option value="">Selecione...</option>
                   {consultores.map(c=><option key={c} value={c}>{c}</option>)}
@@ -6139,7 +6156,7 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
         </div>
 
         {/* Hospedagem */}
-        <div style={{ fontSize:"11px",color:"#22d3a0",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>🏨 Hospedagem</div>
+        <div style={{ fontSize:"11px",color:"#2a7a5a",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"12px" }}>🏨 Hospedagem</div>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",marginBottom:"20px" }}>
           <div style={{ gridColumn:"1/-1" }}>
             <label style={lbl}>Cidade da hospedagem</label>
@@ -6154,22 +6171,22 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
             <input type="date" value={form.checkOut} onChange={e=>set("checkOut",e.target.value)} style={inp}/>
           </div>
           <div style={{ display:"flex",alignItems:"center",paddingTop:"22px" }}>
-            {noites>0 && <span style={{ fontSize:"12px",color:"#22d3a0",fontWeight:600 }}>🌙 {noites} noite{noites>1?"s":""}</span>}
+            {noites>0 && <span style={{ fontSize:"12px",color:"#2a7a5a",fontWeight:600 }}>🌙 {noites} noite{noites>1?"s":""}</span>}
           </div>
         </div>
 
         {/* Voo */}
         <div style={{ display:"flex",alignItems:"center",gap:"14px",marginBottom:"12px" }}>
-          <div style={{ fontSize:"11px",color:"#a78bfa",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase" }}>✈️ Deseja incluir voo?</div>
+          <div style={{ fontSize:"11px",color:"#555555",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase" }}>✈️ Deseja incluir voo?</div>
           <div style={{ display:"flex",gap:"6px" }}>
             {[{v:false,l:"Não"},{v:true,l:"Sim"}].map(opt=>(
               <button key={String(opt.v)} onClick={()=>set("incluirVoo",opt.v)}
-                style={{ padding:"4px 16px",borderRadius:"99px",border:"1px solid "+(form.incluirVoo===opt.v?"#a78bfa":"#2a2a3a"),background:form.incluirVoo===opt.v?"#a78bfa22":"transparent",color:form.incluirVoo===opt.v?"#a78bfa":"#6e6e88",fontSize:"12px",fontWeight:form.incluirVoo===opt.v?700:400,cursor:"pointer",fontFamily:"inherit" }}>{opt.l}</button>
+                style={{ padding:"4px 16px",borderRadius:"99px",border:"1px solid "+(form.incluirVoo===opt.v?"#555555":"#cccccc"),background:form.incluirVoo===opt.v?"#a78bfa22":"transparent",color:form.incluirVoo===opt.v?"#555555":"#666666",fontSize:"12px",fontWeight:form.incluirVoo===opt.v?700:400,cursor:"pointer",fontFamily:"inherit" }}>{opt.l}</button>
             ))}
           </div>
         </div>
         {form.incluirVoo && (
-          <div style={{ background:"#0d0d14",borderRadius:"12px",border:"1px solid #2a2a3a",padding:"14px",marginBottom:"20px" }}>
+          <div style={{ background:"#f7f7f7",borderRadius:"12px",border:"1px solid #cccccc",padding:"14px",marginBottom:"20px" }}>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px" }}>
               <div>
                 <label style={lbl}>Aeroporto de origem</label>
@@ -6209,7 +6226,7 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
         )}
 
         <div style={{ display:"flex",gap:"10px",justifyContent:"flex-end" }}>
-          <button onClick={onCancelar} style={{ padding:"9px 18px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
+          <button onClick={onCancelar} style={{ padding:"9px 18px",borderRadius:"10px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
           <button onClick={()=>onSalvar(form)} style={{ padding:"9px 24px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44" }}>
             {inicial?"💾 Salvar alterações":"✅ Enviar solicitação"}
           </button>
@@ -6225,8 +6242,8 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
     <div>
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 4px",letterSpacing:"-0.3px" }}>🏨 Viagem e Hospedagem</h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0 }}>{viagensFiltradas.length} solicitação{viagensFiltradas.length!==1?"ões":""}</p>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>🏨 Viagem e Hospedagem</h2>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>{viagensFiltradas.length} solicitação{viagensFiltradas.length!==1?"ões":""}</p>
         </div>
         <div style={{ display:"flex",gap:"8px",alignItems:"center",flexWrap:"wrap" }}>
           {Object.entries(STATUS_CONFIG).map(([k,v])=>{ const qtd=viagensFiltradas.filter(vi=>vi.status===k).length; if(!qtd)return null; return <div key={k} style={{ padding:"4px 10px",borderRadius:"99px",background:v.bg,border:"1px solid "+v.color+"44",fontSize:"11px",fontWeight:700,color:v.color }}>{qtd} {v.label}</div>; })}
@@ -6271,9 +6288,9 @@ function ModuloViagens({ currentUser, canEdit, canManage, consultores, clientLis
       )}
 
       {viagensFiltradas.length===0 && !showForm && (
-        <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e" }}>
+        <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8" }}>
           <div style={{ fontSize:"48px",marginBottom:"14px" }}>🏨</div>
-          <div style={{ fontSize:"14px",color:"#3e3e55",marginBottom:"16px" }}>Nenhuma solicitação encontrada</div>
+          <div style={{ fontSize:"14px",color:"#888888",marginBottom:"16px" }}>Nenhuma solicitação encontrada</div>
           <button onClick={()=>setShowForm(true)} style={{ padding:"9px 22px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit" }}>Criar primeira solicitação</button>
         </div>
       )}
@@ -6323,13 +6340,13 @@ function PainelOSConsultor({ consultorName, scheduleData, setScheduleData, setSc
   const [recarregando, setRecarregando] = React.useState(false);
 
   const OS_STATUS = {
-    em_andamento: { label:"Em andamento", color:"#6c63ff", bg:"#6c63ff18", icon:"⚙️", desc:"OS em execução pelo consultor" },
+    em_andamento: { label:"Em andamento", color:"#2c2c2c", bg:"rgba(0,0,0,0.05)", icon:"⚙️", desc:"OS em execução pelo consultor" },
     pendente:     { label:"Pendente",     color:"#f5a623", bg:"#f5a62318", icon:"⏳", desc:"Aguardando revisão ou aprovação" },
-    concluida:    { label:"Concluída",    color:"#22d3a0", bg:"#22d3a018", icon:"✅", desc:"Atividade finalizada" },
-    aprovada:     { label:"Aprovada",     color:"#22d3a0", bg:"#22d3a018", icon:"👍", desc:"Aprovada por gestor — não editável" },
+    concluida:    { label:"Concluída",    color:"#2a7a5a", bg:"#e6f4ee", icon:"✅", desc:"Atividade finalizada" },
+    aprovada:     { label:"Aprovada",     color:"#2a7a5a", bg:"#e6f4ee", icon:"👍", desc:"Aprovada por gestor — não editável" },
     contestada:   { label:"Contestada",   color:"#f5a623", bg:"#f5a62318", icon:"⚠️", desc:"Gestor solicitou ajuste" },
-    rejeitada:    { label:"Rejeitada",    color:"#f04f5e", bg:"#f04f5e18", icon:"👎", desc:"Reprovada pelo gestor" },
-    cancelada:    { label:"Cancelada",    color:"#f04f5e", bg:"#f04f5e18", icon:"❌", desc:"OS cancelada" },
+    rejeitada:    { label:"Rejeitada",    color:"#c0392b", bg:"#fff0f0", icon:"👎", desc:"Reprovada pelo gestor" },
+    cancelada:    { label:"Cancelada",    color:"#c0392b", bg:"#fff0f0", icon:"❌", desc:"OS cancelada" },
   };
 
   const osBloquada = (os) => os.osStatus === "aprovada" && !!os.osAvaliadoPor;
@@ -6511,7 +6528,7 @@ function PainelOSConsultor({ consultorName, scheduleData, setScheduleData, setSc
                       onClick={()=>!editarBloqueado && setOsEntry(os)}
                       disabled={editarBloqueado}
                       title={bloqueada?"OS aprovada por gestor — não pode ser editada":"Editar OS"}
-                      style={{ padding:"7px 16px",borderRadius:"8px",border:"none",background:editarBloqueado?"#1f1f2e":"linear-gradient(135deg,#6c63ff,#a78bfa)",color:editarBloqueado?T.text3:"#fff",cursor:editarBloqueado?"not-allowed":"pointer",fontWeight:700,fontSize:"12px",fontFamily:"inherit",flexShrink:0,opacity:editarBloqueado?0.5:1 }}>
+                      style={{ padding:"7px 16px",borderRadius:"8px",border:"none",background:editarBloqueado?"#d8d8d8":"linear-gradient(135deg,#6c63ff,#a78bfa)",color:editarBloqueado?T.text3:"#fff",cursor:editarBloqueado?"not-allowed":"pointer",fontWeight:700,fontSize:"12px",fontFamily:"inherit",flexShrink:0,opacity:editarBloqueado?0.5:1 }}>
                       {bloqueada?"🔒 Bloqueada":"✏️ Editar"}
                     </button>
                   )}
@@ -6590,14 +6607,14 @@ function KanbanBoard({ tarefas, canEditProj, COLUNAS, COL_LABELS, PRIORIDADES, m
             onDragOver={canEditProj ? e => onDragOver(e, col) : undefined}
             onDragLeave={canEditProj ? () => setDragOver(null) : undefined}
             onDrop={canEditProj ? e => onDrop(e, col) : undefined}
-            style={{ background: isOver ? "#1a1a2e" : "#111118", borderRadius: "12px", border: "1px solid " + (isOver ? "#6c63ff" : "#1f1f2e"), minHeight: "200px", transition: "background .15s,border-color .15s" }}>
+            style={{ background: isOver ? "#1a1a2e" : "#ffffff", borderRadius: "12px", border: "1px solid " + (isOver ? "#2c2c2c" : "#d8d8d8"), minHeight: "200px", transition: "background .15s,border-color .15s" }}>
             <div style={{ padding: "12px 14px", borderBottom: "1px solid #1f1f2e", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: "12px", fontWeight: 700, color: "#c8c8d8" }}>{COL_LABELS[col]}</span>
-              <span style={{ fontSize: "10px", background: "#1f1f2e", color: "#6e6e88", padding: "1px 7px", borderRadius: "99px", fontWeight: 700 }}>{tarefasCol.length}</span>
+              <span style={{ fontSize: "12px", fontWeight: 700, color: "#222222" }}>{COL_LABELS[col]}</span>
+              <span style={{ fontSize: "10px", background: "#d8d8d8", color: "#666666", padding: "1px 7px", borderRadius: "99px", fontWeight: 700 }}>{tarefasCol.length}</span>
             </div>
             <div style={{ padding: "8px", minHeight: "100px" }}>
               {isOver && dragId && tarefas.find(t => t.id === dragId)?.coluna !== col && (
-                <div style={{ height: "4px", background: "#6c63ff", borderRadius: "99px", marginBottom: "6px", opacity: 0.8 }} />
+                <div style={{ height: "4px", background: "#2c2c2c", borderRadius: "99px", marginBottom: "6px", opacity: 0.8 }} />
               )}
               {tarefasCol.map(t => {
                 const pr = PRIORIDADES[t.prioridade] || PRIORIDADES.media;
@@ -6607,17 +6624,17 @@ function KanbanBoard({ tarefas, canEditProj, COLUNAS, COL_LABELS, PRIORIDADES, m
                     draggable={canEditProj}
                     onDragStart={canEditProj ? e => onDragStart(e, t.id) : undefined}
                     onDragEnd={canEditProj ? onDragEnd : undefined}
-                    style={{ background: "#18181f", borderRadius: "8px", border: "1px solid " + (isDragging ? "#6c63ff44" : "#2a2a3a"), padding: "10px 12px", marginBottom: "6px", cursor: canEditProj ? "grab" : "default", userSelect: "none", transition: "box-shadow .15s", boxShadow: isDragging ? "0 4px 20px rgba(108,99,255,0.3)" : "none" }}>
+                    style={{ background: "#e8e8e8", borderRadius: "8px", border: "1px solid " + (isDragging ? "rgba(0,0,0,0.12)" : "#cccccc"), padding: "10px 12px", marginBottom: "6px", cursor: canEditProj ? "grab" : "default", userSelect: "none", transition: "box-shadow .15s", boxShadow: isDragging ? "0 4px 20px rgba(108,99,255,0.3)" : "none" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "6px", marginBottom: "6px" }}>
-                      {canEditProj && <span style={{ fontSize: "11px", color: "#3e3e55", flexShrink: 0, marginTop: 1, cursor: "grab" }}>⠿</span>}
-                      <span style={{ fontSize: "12px", fontWeight: 600, color: "#c8c8d8", lineHeight: 1.4, flex: 1 }}>{t.nome}</span>
+                      {canEditProj && <span style={{ fontSize: "11px", color: "#888888", flexShrink: 0, marginTop: 1, cursor: "grab" }}>⠿</span>}
+                      <span style={{ fontSize: "12px", fontWeight: 600, color: "#222222", lineHeight: 1.4, flex: 1 }}>{t.nome}</span>
                       <span style={{ fontSize: "9px", padding: "2px 6px", borderRadius: "99px", background: pr.color + "18", color: pr.color, fontWeight: 700, whiteSpace: "nowrap" }}>{pr.label}</span>
                     </div>
-                    {t.responsavel && <div style={{ fontSize: "10px", color: "#6e6e88", marginBottom: "6px" }}>👤 {t.responsavel}</div>}
-                    {t.dataInicio && <div style={{ fontSize: "9px", color: "#3e3e55", marginBottom: "6px" }}>📅 {t.dataInicio}{t.dataFim ? " → " + t.dataFim : ""}</div>}
+                    {t.responsavel && <div style={{ fontSize: "10px", color: "#666666", marginBottom: "6px" }}>👤 {t.responsavel}</div>}
+                    {t.dataInicio && <div style={{ fontSize: "9px", color: "#888888", marginBottom: "6px" }}>📅 {t.dataInicio}{t.dataFim ? " → " + t.dataFim : ""}</div>}
                     {typeof t.progresso === "number" && t.progresso > 0 && (
                       <div style={{ marginBottom: "6px" }}>
-                        <div style={{ height: "3px", background: "#1f1f2e", borderRadius: "99px", overflow: "hidden" }}>
+                        <div style={{ height: "3px", background: "#d8d8d8", borderRadius: "99px", overflow: "hidden" }}>
                           <div style={{ height: "100%", width: t.progresso + "%", background: pr.color, borderRadius: "99px" }} />
                         </div>
                       </div>
@@ -6625,18 +6642,18 @@ function KanbanBoard({ tarefas, canEditProj, COLUNAS, COL_LABELS, PRIORIDADES, m
                     <div style={{ display: "flex", gap: "4px", flexWrap: "wrap", marginTop: "4px" }}>
                       {canEditProj && COLUNAS.filter(c => c !== col).map(c => (
                         <button key={c} onClick={() => moverTarefa(t.id, c)} title={"Mover para " + COL_LABELS[c]}
-                          style={{ fontSize: "9px", padding: "2px 7px", borderRadius: "99px", border: "1px solid #2a2a3a", background: "transparent", color: "#6e6e88", cursor: "pointer", fontFamily: "inherit" }}>
+                          style={{ fontSize: "9px", padding: "2px 7px", borderRadius: "99px", border: "1px solid #2a2a3a", background: "transparent", color: "#666666", cursor: "pointer", fontFamily: "inherit" }}>
                           → {COL_LABELS[c].split(" ")[1]}
                         </button>
                       ))}
                       {canEditProj && <button onClick={() => removerTarefa(t.id)}
-                        style={{ fontSize: "9px", padding: "2px 7px", borderRadius: "99px", border: "1px solid #f04f5e44", background: "transparent", color: "#f04f5e", cursor: "pointer", fontFamily: "inherit" }}>✕</button>}
+                        style={{ fontSize: "9px", padding: "2px 7px", borderRadius: "99px", border: "1px solid #f04f5e44", background: "transparent", color: "#c0392b", cursor: "pointer", fontFamily: "inherit" }}>✕</button>}
                     </div>
                   </div>
                 );
               })}
               {canEditProj && <button onClick={() => addTarefa(col)}
-                style={{ width: "100%", padding: "7px", borderRadius: "8px", border: "1px dashed #2a2a3a", background: "transparent", color: "#3e3e55", cursor: "pointer", fontSize: "12px", fontFamily: "inherit", marginTop: "4px" }}>
+                style={{ width: "100%", padding: "7px", borderRadius: "8px", border: "1px dashed #2a2a3a", background: "transparent", color: "#888888", cursor: "pointer", fontSize: "12px", fontFamily: "inherit", marginTop: "4px" }}>
                 + Adicionar
               </button>}
             </div>
@@ -6797,18 +6814,18 @@ function AbaImportarMSProject({ proj, consultores, atualizarProjeto, onSaveEntry
 
   if (importStep === "upload") return (
     <div style={{ maxWidth: "600px" }}>
-      <div style={{ background: "#111118", borderRadius: "14px", border: "1px solid #1f1f2e", padding: "28px", marginBottom: "16px" }}>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#f0f0fa", margin: "0 0 6px" }}>📥 Importar do MS Project</h3>
-        <p style={{ fontSize: "12px", color: "#6e6e88", margin: "0 0 20px", lineHeight: 1.6 }}>Suporte a <strong style={{ color: "#a78bfa" }}>XML</strong> (recomendado) e <strong style={{ color: "#a78bfa" }}>CSV</strong>. Para XML, use <em>Arquivo → Salvar como → XML</em> no MS Project.</p>
-        <label style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px", border: "2px dashed #2a2a3a", borderRadius: "12px", padding: "36px", cursor: "pointer", background: "#0d0d14" }}>
+      <div style={{ background: "#ffffff", borderRadius: "14px", border: "1px solid #1f1f2e", padding: "28px", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#111111", margin: "0 0 6px" }}>📥 Importar do MS Project</h3>
+        <p style={{ fontSize: "12px", color: "#666666", margin: "0 0 20px", lineHeight: 1.6 }}>Suporte a <strong style={{ color: "#555555" }}>XML</strong> (recomendado) e <strong style={{ color: "#555555" }}>CSV</strong>. Para XML, use <em>Arquivo → Salvar como → XML</em> no MS Project.</p>
+        <label style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px", border: "2px dashed #2a2a3a", borderRadius: "12px", padding: "36px", cursor: "pointer", background: "#f7f7f7" }}>
           <div style={{ fontSize: "40px" }}>📂</div>
-          <div style={{ fontSize: "14px", fontWeight: 600, color: "#c8c8d8" }}>Arraste o arquivo aqui ou clique para selecionar</div>
-          <div style={{ fontSize: "11px", color: "#3e3e55" }}>.xml · .csv · .xlsx (exportar como CSV)</div>
+          <div style={{ fontSize: "14px", fontWeight: 600, color: "#222222" }}>Arraste o arquivo aqui ou clique para selecionar</div>
+          <div style={{ fontSize: "11px", color: "#888888" }}>.xml · .csv · .xlsx (exportar como CSV)</div>
           <input type="file" accept=".xml,.csv,.xlsx,.xls,.mpp" onChange={handleFile} style={{ display: "none" }} />
         </label>
       </div>
-      <div style={{ background: "#0d0d14", borderRadius: "12px", border: "1px solid #1f1f2e", padding: "16px", fontSize: "12px", color: "#6e6e88", lineHeight: 1.8 }}>
-        <strong style={{ color: "#a78bfa", display: "block", marginBottom: "6px" }}>📋 Campos capturados automaticamente:</strong>
+      <div style={{ background: "#f7f7f7", borderRadius: "12px", border: "1px solid #1f1f2e", padding: "16px", fontSize: "12px", color: "#666666", lineHeight: 1.8 }}>
+        <strong style={{ color: "#555555", display: "block", marginBottom: "6px" }}>📋 Campos capturados automaticamente:</strong>
         Nome da tarefa · Data início/fim · Recursos (consultores) · % concluído · Predecessoras · Milestones
       </div>
     </div>
@@ -6816,22 +6833,22 @@ function AbaImportarMSProject({ proj, consultores, atualizarProjeto, onSaveEntry
 
   if (importStep === "mapeamento") return (
     <div style={{ maxWidth: "640px" }}>
-      <div style={{ background: "#111118", borderRadius: "14px", border: "1px solid #1f1f2e", padding: "24px", marginBottom: "16px" }}>
-        <h3 style={{ fontSize: "15px", fontWeight: 700, color: "#f0f0fa", margin: "0 0 4px" }}>👥 Mapeamento de Recursos → Consultores GSC</h3>
-        <p style={{ fontSize: "12px", color: "#6e6e88", margin: "0 0 18px" }}>Foram encontrados <strong style={{ color: "#a78bfa" }}>{recursosUnicos.length}</strong> recurso(s). Vincule cada um ao consultor do GSC.</p>
+      <div style={{ background: "#ffffff", borderRadius: "14px", border: "1px solid #1f1f2e", padding: "24px", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "15px", fontWeight: 700, color: "#111111", margin: "0 0 4px" }}>👥 Mapeamento de Recursos → Consultores GSC</h3>
+        <p style={{ fontSize: "12px", color: "#666666", margin: "0 0 18px" }}>Foram encontrados <strong style={{ color: "#555555" }}>{recursosUnicos.length}</strong> recurso(s). Vincule cada um ao consultor do GSC.</p>
         {recursosUnicos.length === 0
-          ? <div style={{ fontSize: "12px", color: "#6e6e88", padding: "12px", background: "#0d0d14", borderRadius: "8px" }}>Nenhum recurso encontrado — a agenda não será gerada automaticamente.</div>
+          ? <div style={{ fontSize: "12px", color: "#666666", padding: "12px", background: "#f7f7f7", borderRadius: "8px" }}>Nenhum recurso encontrado — a agenda não será gerada automaticamente.</div>
           : recursosUnicos.map(recurso => (
-            <div key={recurso} style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px", background: "#0d0d14", borderRadius: "10px", padding: "10px 14px" }}>
-              <div style={{ flex: 1, fontSize: "13px", color: "#c8c8d8", fontWeight: 600 }}>
-                <span style={{ fontSize: "10px", color: "#6e6e88", display: "block", marginBottom: "2px" }}>Recurso MS Project</span>
+            <div key={recurso} style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px", background: "#f7f7f7", borderRadius: "10px", padding: "10px 14px" }}>
+              <div style={{ flex: 1, fontSize: "13px", color: "#222222", fontWeight: 600 }}>
+                <span style={{ fontSize: "10px", color: "#666666", display: "block", marginBottom: "2px" }}>Recurso MS Project</span>
                 {recurso}
               </div>
-              <div style={{ fontSize: "18px", color: "#3e3e55" }}>→</div>
+              <div style={{ fontSize: "18px", color: "#888888" }}>→</div>
               <div style={{ flex: 1 }}>
-                <span style={{ fontSize: "10px", color: "#6e6e88", display: "block", marginBottom: "4px" }}>Consultor GSC</span>
+                <span style={{ fontSize: "10px", color: "#666666", display: "block", marginBottom: "4px" }}>Consultor GSC</span>
                 <select value={mapeamento[recurso] || ""} onChange={e => setMapeamento(p => ({ ...p, [recurso]: e.target.value }))}
-                  style={{ padding: "7px 10px", borderRadius: "8px", border: "1px solid #2a2a3a", background: "#111118", color: "#c8c8d8", fontSize: "12px", width: "100%", fontFamily: "inherit" }}>
+                  style={{ padding: "7px 10px", borderRadius: "8px", border: "1px solid #2a2a3a", background: "#ffffff", color: "#222222", fontSize: "12px", width: "100%", fontFamily: "inherit" }}>
                   <option value="">— Não mapear —</option>
                   {consultores.map(c => {
                     const meta = consultoresMeta.find(m => m.name === c);
@@ -6842,24 +6859,24 @@ function AbaImportarMSProject({ proj, consultores, atualizarProjeto, onSaveEntry
             </div>
           ))
         }
-        <div style={{ marginTop: "16px", padding: "12px 14px", background: "#0d0d14", borderRadius: "10px", border: "1px solid #1f1f2e", display: "flex", alignItems: "center", gap: "10px" }}>
-          <input type="checkbox" id="gerarAgendaChk" checked={gerarAgenda} onChange={e => setGerarAgenda(e.target.checked)} style={{ accentColor: "#6c63ff", width: "16px", height: "16px" }} />
-          <label htmlFor="gerarAgendaChk" style={{ fontSize: "13px", color: "#c8c8d8", cursor: "pointer" }}>📅 Gerar agenda automaticamente para consultores mapeados</label>
+        <div style={{ marginTop: "16px", padding: "12px 14px", background: "#f7f7f7", borderRadius: "10px", border: "1px solid #1f1f2e", display: "flex", alignItems: "center", gap: "10px" }}>
+          <input type="checkbox" id="gerarAgendaChk" checked={gerarAgenda} onChange={e => setGerarAgenda(e.target.checked)} style={{ accentColor: "#2c2c2c", width: "16px", height: "16px" }} />
+          <label htmlFor="gerarAgendaChk" style={{ fontSize: "13px", color: "#222222", cursor: "pointer" }}>📅 Gerar agenda automaticamente para consultores mapeados</label>
         </div>
       </div>
-      <div style={{ background: "#111118", borderRadius: "12px", border: "1px solid #1f1f2e", padding: "16px", marginBottom: "16px", maxHeight: "220px", overflowY: "auto" }}>
-        <div style={{ fontSize: "11px", color: "#6e6e88", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px" }}>Preview — {importTarefas.length} tarefa(s)</div>
+      <div style={{ background: "#ffffff", borderRadius: "12px", border: "1px solid #1f1f2e", padding: "16px", marginBottom: "16px", maxHeight: "220px", overflowY: "auto" }}>
+        <div style={{ fontSize: "11px", color: "#666666", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "10px" }}>Preview — {importTarefas.length} tarefa(s)</div>
         {importTarefas.map((t, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "6px 0", borderBottom: "1px solid #1a1a28" }}>
-            <span style={{ fontSize: "11px", color: t.isMilestone ? "#f04f5e" : t.isSummary ? "#f5a623" : "#c8c8d8", flex: 1 }}>{t.isMilestone ? "🔷 " : t.isSummary ? "📁 " : ""}{t.nome}</span>
-            <span style={{ fontSize: "10px", color: "#6e6e88", whiteSpace: "nowrap" }}>{t.dataInicio || "?"} → {t.dataFim || "?"}</span>
-            <span style={{ fontSize: "10px", color: "#6c63ff", whiteSpace: "nowrap" }}>{t.progresso}%</span>
-            <span style={{ fontSize: "10px", color: "#22d3a0", whiteSpace: "nowrap" }}>{t.recursos.map(r => mapeamento[r] ? mapeamento[r].split(" ")[0] : r).join(", ") || "—"}</span>
+            <span style={{ fontSize: "11px", color: t.isMilestone ? "#c0392b" : t.isSummary ? "#f5a623" : "#222222", flex: 1 }}>{t.isMilestone ? "🔷 " : t.isSummary ? "📁 " : ""}{t.nome}</span>
+            <span style={{ fontSize: "10px", color: "#666666", whiteSpace: "nowrap" }}>{t.dataInicio || "?"} → {t.dataFim || "?"}</span>
+            <span style={{ fontSize: "10px", color: "#2c2c2c", whiteSpace: "nowrap" }}>{t.progresso}%</span>
+            <span style={{ fontSize: "10px", color: "#2a7a5a", whiteSpace: "nowrap" }}>{t.recursos.map(r => mapeamento[r] ? mapeamento[r].split(" ")[0] : r).join(", ") || "—"}</span>
           </div>
         ))}
       </div>
       <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
-        <button onClick={() => setImportStep("upload")} style={{ padding: "9px 18px", borderRadius: "10px", border: "1px solid #2a2a3a", background: "transparent", color: "#6e6e88", cursor: "pointer", fontWeight: 600, fontSize: "13px", fontFamily: "inherit" }}>← Voltar</button>
+        <button onClick={() => setImportStep("upload")} style={{ padding: "9px 18px", borderRadius: "10px", border: "1px solid #2a2a3a", background: "transparent", color: "#666666", cursor: "pointer", fontWeight: 600, fontSize: "13px", fontFamily: "inherit" }}>← Voltar</button>
         <button onClick={executarImportacao} disabled={importing} style={{ padding: "9px 24px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg,#6c63ff,#a78bfa)", color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: "13px", fontFamily: "inherit", opacity: importing ? 0.6 : 1 }}>
           {importing ? "⏳ Importando..." : "✅ Importar e gerar agenda"}
         </button>
@@ -6869,12 +6886,12 @@ function AbaImportarMSProject({ proj, consultores, atualizarProjeto, onSaveEntry
 
   if (importStep === "done") return (
     <div style={{ maxWidth: "560px" }}>
-      <div style={{ background: "#111118", borderRadius: "14px", border: "1px solid #22d3a033", padding: "28px", textAlign: "center" }}>
+      <div style={{ background: "#ffffff", borderRadius: "14px", border: "1px solid #22d3a033", padding: "28px", textAlign: "center" }}>
         <div style={{ fontSize: "48px", marginBottom: "12px" }}>✅</div>
-        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#22d3a0", margin: "0 0 16px" }}>Importação concluída!</h3>
-        {importLog.map((l, i) => <div key={i} style={{ fontSize: "13px", color: "#c8c8d8", marginBottom: "8px", textAlign: "left", background: "#0d0d14", borderRadius: "8px", padding: "10px 14px" }}>{l}</div>)}
+        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#2a7a5a", margin: "0 0 16px" }}>Importação concluída!</h3>
+        {importLog.map((l, i) => <div key={i} style={{ fontSize: "13px", color: "#222222", marginBottom: "8px", textAlign: "left", background: "#f7f7f7", borderRadius: "8px", padding: "10px 14px" }}>{l}</div>)}
         <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "20px" }}>
-          <button onClick={() => { setImportStep("upload"); setImportTarefas([]); setImportLog([]); }} style={{ padding: "9px 18px", borderRadius: "10px", border: "1px solid #2a2a3a", background: "transparent", color: "#6e6e88", cursor: "pointer", fontWeight: 600, fontSize: "13px", fontFamily: "inherit" }}>Nova importação</button>
+          <button onClick={() => { setImportStep("upload"); setImportTarefas([]); setImportLog([]); }} style={{ padding: "9px 18px", borderRadius: "10px", border: "1px solid #2a2a3a", background: "transparent", color: "#666666", cursor: "pointer", fontWeight: 600, fontSize: "13px", fontFamily: "inherit" }}>Nova importação</button>
           <button onClick={() => setAbaProj("gantt")} style={{ padding: "9px 22px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg,#6c63ff,#a78bfa)", color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: "13px", fontFamily: "inherit" }}>Ver Gantt →</button>
         </div>
       </div>
@@ -6892,13 +6909,13 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
   const [editandoProj, setEditandoProj] = useState(null);
   const [abaProj, setAbaProj] = useState("kanban"); // kanban | cronograma | horas
 
-  const STATUS_PROJ = { planejamento:{label:"Planejamento",color:"#6e6e88"},andamento:{label:"Em andamento",color:"#6c63ff"},concluido:{label:"Concluído",color:"#22d3a0"},pausado:{label:"Pausado",color:"#f5a623"},cancelado:{label:"Cancelado",color:"#f04f5e"}};
+  const STATUS_PROJ = { planejamento:{label:"Planejamento",color:"#666666"},andamento:{label:"Em andamento",color:"#2c2c2c"},concluido:{label:"Concluído",color:"#2a7a5a"},pausado:{label:"Pausado",color:"#f5a623"},cancelado:{label:"Cancelado",color:"#c0392b"}};
   const COLUNAS = ["backlog","em_progresso","revisao","concluido"];
   const COL_LABELS = { backlog:"📋 Backlog", em_progresso:"⚙️ Em progresso", revisao:"👁 Revisão", concluido:"✅ Concluído" };
-  const PRIORIDADES = { alta:{label:"Alta",color:"#f04f5e"}, media:{label:"Média",color:"#f5a623"}, baixa:{label:"Baixa",color:"#22d3a0"} };
+  const PRIORIDADES = { alta:{label:"Alta",color:"#c0392b"}, media:{label:"Média",color:"#f5a623"}, baixa:{label:"Baixa",color:"#2a7a5a"} };
 
-  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"#0d0d14",color:"#c8c8d8",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit" };
-  const lbl = { fontSize:"11px",color:"#6e6e88",fontWeight:700,display:"block",marginBottom:"6px",letterSpacing:"0.5px",textTransform:"uppercase" };
+  const inp = { padding:"9px 13px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"inherit" };
+  const lbl = { fontSize:"11px",color:"#666666",fontWeight:700,display:"block",marginBottom:"6px",letterSpacing:"0.5px",textTransform:"uppercase" };
 
   useEffect(() => {
     const load = async () => {
@@ -6932,7 +6949,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
     const togglePerm = (campo, nome) => setForm(p=>({...p,[campo]:p[campo]?.includes(nome)?p[campo].filter(x=>x!==nome):[...(p[campo]||[]),nome]}));
     return (
       <div style={{ background:T.surface,borderRadius:"16px",border:"1px solid "+T.border,padding:"24px",maxWidth:"680px",marginBottom:"24px" }}>
-        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#f0f0fa",margin:"0 0 20px",letterSpacing:"-0.3px" }}>{inicial?"✏️ Editar Projeto":"📋 Novo Projeto"}</h3>
+        <h3 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"17px",fontWeight:900,color:"#111111",margin:"0 0 20px",letterSpacing:"-0.3px" }}>{inicial?"✏️ Editar Projeto":"📋 Novo Projeto"}</h3>
         <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:"14px" }}>
           <div style={{ gridColumn:"1/-1" }}>
             <label style={lbl}>Nome do projeto</label>
@@ -6968,18 +6985,18 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
             <div style={{ display:"flex",flexWrap:"wrap",gap:"6px" }}>
               {consultores.map(c=>{
                 const sel = form.consultores.includes(c);
-                return <button key={c} onClick={()=>toggleCons(c)} style={{ padding:"5px 12px",borderRadius:"99px",border:"1px solid "+(sel?"#6c63ff":"#2a2a3a"),background:sel?"#6c63ff22":"transparent",color:sel?"#a78bfa":"#6e6e88",cursor:"pointer",fontSize:"12px",fontWeight:sel?700:400,fontFamily:"inherit" }}>{c.split(" ")[0]}</button>;
+                return <button key={c} onClick={()=>toggleCons(c)} style={{ padding:"5px 12px",borderRadius:"99px",border:"1px solid "+(sel?"#2c2c2c":"#cccccc"),background:sel?"rgba(0,0,0,0.06)":"transparent",color:sel?"#555555":"#666666",cursor:"pointer",fontSize:"12px",fontWeight:sel?700:400,fontFamily:"inherit" }}>{c.split(" ")[0]}</button>;
               })}
             </div>
           </div>
           <div style={{ gridColumn:"1/-1" }}>
             <label style={lbl}>Progresso ({form.progresso}%)</label>
-            <input type="range" min={0} max={100} value={form.progresso} onChange={e=>set("progresso",Number(e.target.value))} style={{ width:"100%",accentColor:"#6c63ff" }}/>
+            <input type="range" min={0} max={100} value={form.progresso} onChange={e=>set("progresso",Number(e.target.value))} style={{ width:"100%",accentColor:"#2c2c2c" }}/>
           </div>
 
           {/* Permissões */}
-          <div style={{ gridColumn:"1/-1", background:"#0d0d14", borderRadius:"12px", border:"1px solid #2a2a3a", padding:"14px 16px" }}>
-            <div style={{ fontSize:"11px", color:"#6c63ff", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"12px" }}>🔐 Permissões de acesso</div>
+          <div style={{ gridColumn:"1/-1", background:"#f7f7f7", borderRadius:"12px", border:"1px solid #cccccc", padding:"14px 16px" }}>
+            <div style={{ fontSize:"11px", color:"#2c2c2c", fontWeight:700, letterSpacing:"0.8px", textTransform:"uppercase", marginBottom:"12px" }}>🔐 Permissões de acesso</div>
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"12px" }}>
               <div>
                 <label style={lbl}>Visibilidade</label>
@@ -6990,7 +7007,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                   <option value="publico">🌐 Público — todos os usuários</option>
                 </select>
               </div>
-              <div style={{ fontSize:"11px", color:"#6e6e88", paddingTop:"20px", lineHeight:1.6 }}>
+              <div style={{ fontSize:"11px", color:"#666666", paddingTop:"20px", lineHeight:1.6 }}>
                 {form.visibilidade==="privado" && "Apenas você pode visualizar e editar este projeto."}
                 {form.visibilidade==="equipe" && "Consultores adicionados ao projeto podem visualizar. Você controla quem pode editar."}
                 {form.visibilidade==="gestores" && "Visível para todos os gestores (admin, editor, diretores)."}
@@ -7003,7 +7020,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                 <div style={{ display:"flex", flexWrap:"wrap", gap:"6px" }}>
                   {consultores.map(c=>{
                     const sel = (form.editores||[]).includes(c);
-                    return <button key={c} onClick={()=>togglePerm("editores",c)} style={{ padding:"4px 10px", borderRadius:"8px", border:"1px solid "+(sel?"#22d3a0":"#2a2a3a"), background:sel?"#22d3a018":"transparent", color:sel?"#22d3a0":"#6e6e88", cursor:"pointer", fontSize:"11px", fontWeight:sel?700:400, fontFamily:"inherit" }}>{sel?"✓ ":""}{c.split(" ")[0]}</button>;
+                    return <button key={c} onClick={()=>togglePerm("editores",c)} style={{ padding:"4px 10px", borderRadius:"8px", border:"1px solid "+(sel?"#2a7a5a":"#cccccc"), background:sel?"#e6f4ee":"transparent", color:sel?"#2a7a5a":"#666666", cursor:"pointer", fontSize:"11px", fontWeight:sel?700:400, fontFamily:"inherit" }}>{sel?"✓ ":""}{c.split(" ")[0]}</button>;
                   })}
                 </div>
               </div>
@@ -7011,7 +7028,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
           </div>
         </div>
         <div style={{ display:"flex",gap:"10px",marginTop:"20px",justifyContent:"flex-end" }}>
-          <button onClick={onCancelar} style={{ padding:"9px 18px",borderRadius:"10px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
+          <button onClick={onCancelar} style={{ padding:"9px 18px",borderRadius:"10px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontWeight:600,fontSize:"13px",fontFamily:"inherit" }}>Cancelar</button>
           <button onClick={()=>onSalvar(form)} style={{ padding:"9px 22px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44" }}>
             {inicial?"💾 Salvar":"✅ Criar projeto"}
           </button>
@@ -7020,7 +7037,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
     );
   };
 
-  if (loading) return <div style={{ textAlign:"center",padding:"60px",color:"#3e3e55" }}><div style={{ width:"28px",height:"28px",border:"3px solid #1f1f2e",borderTop:"3px solid #6c63ff",borderRadius:"50%",animation:"spin .7s linear infinite",margin:"0 auto 12px" }}/></div>;
+  if (loading) return <div style={{ textAlign:"center",padding:"60px",color:"#888888" }}><div style={{ width:"28px",height:"28px",border:"3px solid #1f1f2e",borderTop:"3px solid #6c63ff",borderRadius:"50%",animation:"spin .7s linear infinite",margin:"0 auto 12px" }}/></div>;
 
   // Visão de detalhe do projeto
   if (proj) {
@@ -7056,14 +7073,14 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
       <div>
         {/* Header do projeto */}
         <div style={{ display:"flex",alignItems:"center",gap:"12px",marginBottom:"20px",flexWrap:"wrap" }}>
-          <button onClick={()=>setProjetoAtivo(null)} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #2a2a3a",background:"transparent",color:"#6e6e88",cursor:"pointer",fontSize:"12px",fontFamily:"inherit" }}>← Voltar</button>
+          <button onClick={()=>setProjetoAtivo(null)} style={{ padding:"6px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"transparent",color:"#666666",cursor:"pointer",fontSize:"12px",fontFamily:"inherit" }}>← Voltar</button>
           <div style={{ flex:1,minWidth:0 }}>
             <div style={{ display:"flex",alignItems:"center",gap:"10px",flexWrap:"wrap" }}>
-              <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:0,letterSpacing:"-0.3px" }}>{proj.nome}</h2>
+              <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:0,letterSpacing:"-0.3px" }}>{proj.nome}</h2>
               <span style={{ padding:"4px 12px",borderRadius:"99px",background:st.color+"18",border:"1px solid "+st.color+"44",fontSize:"11px",fontWeight:700,color:st.color }}>{st.label}</span>
-              {!canEditProj && <span style={{ fontSize:"10px",color:"#6e6e88",background:"#1f1f2e",padding:"2px 8px",borderRadius:"99px" }}>👁 Somente leitura</span>}
+              {!canEditProj && <span style={{ fontSize:"10px",color:"#666666",background:"#e8e8e8",padding:"2px 8px",borderRadius:"99px" }}>👁 Somente leitura</span>}
             </div>
-            <div style={{ fontSize:"12px",color:"#6e6e88",marginTop:"4px",display:"flex",gap:"12px",flexWrap:"wrap" }}>
+            <div style={{ fontSize:"12px",color:"#666666",marginTop:"4px",display:"flex",gap:"12px",flexWrap:"wrap" }}>
               {proj.cliente && <span>🏢 {proj.cliente}</span>}
               {proj.dataInicio && <span>📅 {proj.dataInicio}{proj.dataFim?" → "+proj.dataFim:""}</span>}
               {proj.consultores?.length>0 && <span>👥 {proj.consultores.map(c=>c.split(" ")[0]).join(", ")}</span>}
@@ -7071,22 +7088,22 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
             </div>
           </div>
           {canEditProj && <button onClick={()=>{setEditandoProj(proj);setShowForm(true);setProjetoAtivo(null);}}
-            style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"#6c63ff18",color:"#a78bfa",cursor:"pointer",fontSize:"12px",fontWeight:600,fontFamily:"inherit" }}>✏️ Editar</button>}
+            style={{ padding:"7px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"12px",fontWeight:600,fontFamily:"inherit" }}>✏️ Editar</button>}
         </div>
 
         {/* Barra de progresso */}
-        <div style={{ background:"#111118",borderRadius:"10px",border:"1px solid #1f1f2e",padding:"12px 16px",marginBottom:"16px",display:"flex",alignItems:"center",gap:"14px" }}>
-          <span style={{ fontSize:"12px",color:"#6e6e88",whiteSpace:"nowrap" }}>Progresso:</span>
-          <div style={{ flex:1,height:"8px",background:"#1f1f2e",borderRadius:"99px",overflow:"hidden" }}>
+        <div style={{ background:"#ffffff",borderRadius:"10px",border:"1px solid #d8d8d8",padding:"12px 16px",marginBottom:"16px",display:"flex",alignItems:"center",gap:"14px" }}>
+          <span style={{ fontSize:"12px",color:"#666666",whiteSpace:"nowrap" }}>Progresso:</span>
+          <div style={{ flex:1,height:"8px",background:"#e8e8e8",borderRadius:"99px",overflow:"hidden" }}>
             <div style={{ height:"100%",width:(proj.progresso||0)+"%",background:"linear-gradient(90deg,#6c63ff,#a78bfa)",borderRadius:"99px",transition:"width .4s" }}/>
           </div>
-          <span style={{ fontSize:"13px",fontWeight:700,color:"#a78bfa",minWidth:"40px" }}>{proj.progresso||0}%</span>
+          <span style={{ fontSize:"13px",fontWeight:700,color:"#555555",minWidth:"40px" }}>{proj.progresso||0}%</span>
         </div>
 
         {/* Abas */}
-        <div style={{ display:"flex",gap:"2px",background:"#0d0d14",borderRadius:"10px",padding:"3px",border:"1px solid #2a2a3a",marginBottom:"20px",flexWrap:"wrap" }}>
+        <div style={{ display:"flex",gap:"2px",background:"#f7f7f7",borderRadius:"10px",padding:"3px",border:"1px solid #cccccc",marginBottom:"20px",flexWrap:"wrap" }}>
           {[["kanban","📋 Kanban"],["gantt","📊 Gantt"],["importar","📥 Importar MS Project"],["cronograma","📈 Cronograma"],["horas","⏱ Horas"]].map(([v,l])=>(
-            <button key={v} onClick={()=>setAbaProj(v)} style={{ padding:"6px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:abaProj===v?"#6c63ff":"transparent",color:abaProj===v?"#fff":"#6e6e88" }}>{l}</button>
+            <button key={v} onClick={()=>setAbaProj(v)} style={{ padding:"6px 16px",borderRadius:"8px",border:"none",cursor:"pointer",fontWeight:600,fontSize:"12px",fontFamily:"inherit",background:abaProj===v?"#2c2c2c":"transparent",color:abaProj===v?"#fff":"#666666" }}>{l}</button>
           ))}
         </div>
 
@@ -7106,10 +7123,10 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
 
         {/* Cronograma */}
         {abaProj==="cronograma" && (
-          <div style={{ background:"#111118",borderRadius:"12px",border:"1px solid #1f1f2e",padding:"20px" }}>
-            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",margin:"0 0 16px" }}>📊 Linha do tempo</h3>
+          <div style={{ background:"#ffffff",borderRadius:"12px",border:"1px solid #d8d8d8",padding:"20px" }}>
+            <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",margin:"0 0 16px" }}>📊 Linha do tempo</h3>
             {(!proj.dataInicio||!proj.dataFim) ? (
-              <div style={{ textAlign:"center",padding:"32px",color:"#3e3e55",fontSize:"13px" }}>Defina as datas de início e fim do projeto para ver o cronograma.</div>
+              <div style={{ textAlign:"center",padding:"32px",color:"#888888",fontSize:"13px" }}>Defina as datas de início e fim do projeto para ver o cronograma.</div>
             ) : (
               <div>
                 {/* Timeline visual */}
@@ -7121,33 +7138,33 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                   const pct = total>0?Math.round((elapsed/total)*100):0;
                   return (
                     <div>
-                      <div style={{ display:"flex",justifyContent:"space-between",fontSize:"11px",color:"#6e6e88",marginBottom:"6px" }}>
+                      <div style={{ display:"flex",justifyContent:"space-between",fontSize:"11px",color:"#666666",marginBottom:"6px" }}>
                         <span>🚀 {proj.dataInicio}</span>
                         <span>🏁 {proj.dataFim}</span>
                       </div>
-                      <div style={{ height:"16px",background:"#1f1f2e",borderRadius:"99px",overflow:"hidden",position:"relative",marginBottom:"8px" }}>
+                      <div style={{ height:"16px",background:"#e8e8e8",borderRadius:"99px",overflow:"hidden",position:"relative",marginBottom:"8px" }}>
                         <div style={{ height:"100%",width:pct+"%",background:"linear-gradient(90deg,#6c63ff,#a78bfa)",borderRadius:"99px" }}/>
-                        <div style={{ position:"absolute",top:0,left:(proj.progresso||0)+"%",width:"2px",height:"100%",background:"#22d3a0" }}/>
+                        <div style={{ position:"absolute",top:0,left:(proj.progresso||0)+"%",width:"2px",height:"100%",background:"#2a7a5a" }}/>
                       </div>
-                      <div style={{ display:"flex",gap:"16px",fontSize:"11px",color:"#6e6e88" }}>
-                        <span>⏳ Tempo decorrido: <strong style={{ color:"#a78bfa" }}>{pct}%</strong></span>
-                        <span>📈 Progresso real: <strong style={{ color:"#22d3a0" }}>{proj.progresso||0}%</strong></span>
-                        <span>📅 Duração total: <strong style={{ color:"#c8c8d8" }}>{total} dias</strong></span>
+                      <div style={{ display:"flex",gap:"16px",fontSize:"11px",color:"#666666" }}>
+                        <span>⏳ Tempo decorrido: <strong style={{ color:"#555555" }}>{pct}%</strong></span>
+                        <span>📈 Progresso real: <strong style={{ color:"#2a7a5a" }}>{proj.progresso||0}%</strong></span>
+                        <span>📅 Duração total: <strong style={{ color:"#222222" }}>{total} dias</strong></span>
                       </div>
                     </div>
                   );
                 })()}
                 <div style={{ marginTop:"20px" }}>
-                  <div style={{ fontSize:"11px",color:"#6e6e88",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",marginBottom:"10px" }}>Tarefas por fase</div>
+                  <div style={{ fontSize:"11px",color:"#666666",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",marginBottom:"10px" }}>Tarefas por fase</div>
                   {COLUNAS.map(col=>{
                     const n = tarefas.filter(t=>t.coluna===col).length;
                     return n>0?(
                       <div key={col} style={{ display:"flex",alignItems:"center",gap:"12px",marginBottom:"6px" }}>
-                        <span style={{ fontSize:"12px",color:"#c8c8d8",minWidth:"140px" }}>{COL_LABELS[col]}</span>
-                        <div style={{ flex:1,height:"6px",background:"#1f1f2e",borderRadius:"99px",overflow:"hidden" }}>
-                          <div style={{ height:"100%",width:(n/tarefas.length*100)+"%",background:"#6c63ff",borderRadius:"99px" }}/>
+                        <span style={{ fontSize:"12px",color:"#222222",minWidth:"140px" }}>{COL_LABELS[col]}</span>
+                        <div style={{ flex:1,height:"6px",background:"#e8e8e8",borderRadius:"99px",overflow:"hidden" }}>
+                          <div style={{ height:"100%",width:(n/tarefas.length*100)+"%",background:"#2c2c2c",borderRadius:"99px" }}/>
                         </div>
-                        <span style={{ fontSize:"11px",color:"#6e6e88",minWidth:"20px" }}>{n}</span>
+                        <span style={{ fontSize:"11px",color:"#666666",minWidth:"20px" }}>{n}</span>
                       </div>
                     ):null;
                   })}
@@ -7161,22 +7178,22 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
         {abaProj==="horas" && (
           <div>
             <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"14px" }}>
-              <div style={{ fontSize:"13px",color:"#c8c8d8" }}>Total: <strong style={{ color:"#22d3a0",fontSize:"18px" }}>{totalHoras}h</strong></div>
+              <div style={{ fontSize:"13px",color:"#222222" }}>Total: <strong style={{ color:"#2a7a5a",fontSize:"18px" }}>{totalHoras}h</strong></div>
               {canEditProj && <button onClick={addHora} style={{ padding:"7px 16px",borderRadius:"8px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"12px",fontFamily:"inherit" }}>+ Registrar horas</button>}
             </div>
-            {horas.length===0 && <div style={{ textAlign:"center",padding:"32px",background:"#111118",borderRadius:"12px",border:"1px solid #1f1f2e",color:"#3e3e55",fontSize:"13px" }}>Nenhuma hora registrada</div>}
+            {horas.length===0 && <div style={{ textAlign:"center",padding:"32px",background:"#ffffff",borderRadius:"12px",border:"1px solid #d8d8d8",color:"#888888",fontSize:"13px" }}>Nenhuma hora registrada</div>}
             <div style={{ display:"flex",flexDirection:"column",gap:"6px" }}>
               {horas.sort((a,b)=>b.data?.localeCompare(a.data||"")).map((h,i)=>(
-                <div key={h.id||i} style={{ background:"#111118",borderRadius:"10px",border:"1px solid #1f1f2e",padding:"12px 16px",display:"flex",alignItems:"center",gap:"14px" }}>
-                  <div style={{ width:"42px",height:"42px",borderRadius:"10px",background:"#22d3a018",border:"1px solid #22d3a033",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>
-                    <span style={{ fontSize:"13px",fontWeight:800,color:"#22d3a0" }}>{h.horas}h</span>
+                <div key={h.id||i} style={{ background:"#ffffff",borderRadius:"10px",border:"1px solid #d8d8d8",padding:"12px 16px",display:"flex",alignItems:"center",gap:"14px" }}>
+                  <div style={{ width:"42px",height:"42px",borderRadius:"10px",background:"#e6f4ee",border:"1px solid #22d3a033",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>
+                    <span style={{ fontSize:"13px",fontWeight:800,color:"#2a7a5a" }}>{h.horas}h</span>
                   </div>
                   <div style={{ flex:1,minWidth:0 }}>
-                    <div style={{ fontSize:"13px",fontWeight:600,color:"#c8c8d8" }}>{h.consultor}</div>
-                    <div style={{ fontSize:"11px",color:"#6e6e88",marginTop:"2px" }}>{h.desc||"—"}</div>
+                    <div style={{ fontSize:"13px",fontWeight:600,color:"#222222" }}>{h.consultor}</div>
+                    <div style={{ fontSize:"11px",color:"#666666",marginTop:"2px" }}>{h.desc||"—"}</div>
                   </div>
-                  <div style={{ fontSize:"11px",color:"#3e3e55" }}>{h.data}</div>
-                  {canEditProj && <button onClick={()=>atualizarProjeto({...proj,horas:horas.filter((_,j)=>j!==i)})} style={{ background:"none",border:"none",color:"#f04f5e",cursor:"pointer",fontSize:"13px" }}>✕</button>}
+                  <div style={{ fontSize:"11px",color:"#888888" }}>{h.data}</div>
+                  {canEditProj && <button onClick={()=>atualizarProjeto({...proj,horas:horas.filter((_,j)=>j!==i)})} style={{ background:"none",border:"none",color:"#c0392b",cursor:"pointer",fontSize:"13px" }}>✕</button>}
                 </div>
               ))}
             </div>
@@ -7187,10 +7204,10 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
         {abaProj==="gantt" && (()=>{
           const tarefasGantt = (proj.tarefas||[]).filter(t=>t.dataInicio&&t.dataFim);
           if (tarefasGantt.length===0) return (
-            <div style={{ textAlign:"center",padding:"48px",background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e" }}>
+            <div style={{ textAlign:"center",padding:"48px",background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8" }}>
               <div style={{ fontSize:"40px",marginBottom:"12px" }}>📊</div>
-              <div style={{ fontSize:"14px",color:"#3e3e55",marginBottom:"8px" }}>Nenhuma tarefa com datas definidas</div>
-              <div style={{ fontSize:"12px",color:"#3e3e55" }}>Importe do MS Project ou adicione datas nas tarefas do Kanban</div>
+              <div style={{ fontSize:"14px",color:"#888888",marginBottom:"8px" }}>Nenhuma tarefa com datas definidas</div>
+              <div style={{ fontSize:"12px",color:"#888888" }}>Importe do MS Project ou adicione datas nas tarefas do Kanban</div>
             </div>
           );
 
@@ -7207,7 +7224,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
           const ROW_H = 42;
           const HEAD_H = 52; // cabeçalho duplo: mês (24px) + dias (28px)
           const LABEL_W = 220;
-          const COR = { concluido:"#22d3a0", em_progresso:"#6c63ff", revisao:"#f5a623", backlog:"#475569", milestone:"#f04f5e", summary:"#94a3b8" };
+          const COR = { concluido:"#2a7a5a", em_progresso:"#2c2c2c", revisao:"#f5a623", backlog:"#475569", milestone:"#c0392b", summary:"#94a3b8" };
 
           // dias do período
           const dias = Array.from({length:totalDias},(_,i)=>{ const d=new Date(minDate); d.setDate(d.getDate()+i); return d; });
@@ -7230,27 +7247,27 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
           const gridH = tarefasGantt.length*ROW_H;
 
           return (
-            <div style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",overflow:"hidden",fontFamily:"inherit" }}>
+            <div style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",overflow:"hidden",fontFamily:"inherit" }}>
 
               {/* ── Cabeçalho fixo ── */}
               <div style={{ padding:"12px 18px 10px",borderBottom:"1px solid #1f1f2e",display:"flex",alignItems:"center",gap:"10px",flexWrap:"wrap" }}>
-                <span style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa" }}>📊 Gráfico de Gantt</span>
-                <span style={{ fontSize:"11px",color:"#6e6e88",background:"#1f1f2e",padding:"2px 8px",borderRadius:"99px" }}>{tarefasGantt.length} tarefas</span>
-                <span style={{ fontSize:"11px",color:"#6e6e88",marginLeft:"auto" }}>
+                <span style={{ fontSize:"14px",fontWeight:700,color:"#111111" }}>📊 Gráfico de Gantt</span>
+                <span style={{ fontSize:"11px",color:"#666666",background:"#e8e8e8",padding:"2px 8px",borderRadius:"99px" }}>{tarefasGantt.length} tarefas</span>
+                <span style={{ fontSize:"11px",color:"#666666",marginLeft:"auto" }}>
                   {proj.dataInicio&&proj.dataFim ? `${proj.dataInicio} → ${proj.dataFim}` : ""}
                 </span>
               </div>
 
               {/* ── Legenda ── */}
               <div style={{ padding:"6px 18px",borderBottom:"1px solid #1a1a28",display:"flex",gap:"14px",flexWrap:"wrap" }}>
-                {[["Concluído","#22d3a0"],["Em progresso","#6c63ff"],["Revisão","#f5a623"],["Backlog","#475569"],["Milestone","#f04f5e"]].map(([l,c])=>(
-                  <span key={l} style={{ display:"flex",alignItems:"center",gap:"5px",fontSize:"10px",color:"#6e6e88" }}>
+                {[["Concluído","#2a7a5a"],["Em progresso","#2c2c2c"],["Revisão","#f5a623"],["Backlog","#475569"],["Milestone","#c0392b"]].map(([l,c])=>(
+                  <span key={l} style={{ display:"flex",alignItems:"center",gap:"5px",fontSize:"10px",color:"#666666" }}>
                     <span style={{ width:l==="Milestone"?10:12,height:l==="Milestone"?10:8,borderRadius:l==="Milestone"?"50%":3,background:c,display:"inline-block",flexShrink:0 }}/>
                     {l}
                   </span>
                 ))}
-                {mostrarHoje && <span style={{ display:"flex",alignItems:"center",gap:"5px",fontSize:"10px",color:"#22d3a0" }}>
-                  <span style={{ width:2,height:10,background:"#22d3a0",display:"inline-block" }}/>Hoje
+                {mostrarHoje && <span style={{ display:"flex",alignItems:"center",gap:"5px",fontSize:"10px",color:"#2a7a5a" }}>
+                  <span style={{ width:2,height:10,background:"#2a7a5a",display:"inline-block" }}/>Hoje
                 </span>}
               </div>
 
@@ -7259,17 +7276,17 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                 <div style={{ display:"flex",minWidth:LABEL_W+gridW+"px" }}>
 
                   {/* Coluna de nomes — sticky left */}
-                  <div style={{ width:LABEL_W,flexShrink:0,borderRight:"1px solid #2a2a3a",position:"sticky",left:0,zIndex:10,background:"#111118" }}>
+                  <div style={{ width:LABEL_W,flexShrink:0,borderRight:"1px solid #2a2a3a",position:"sticky",left:0,zIndex:10,background:"#ffffff" }}>
                     {/* espaço do cabeçalho */}
-                    <div style={{ height:HEAD_H,borderBottom:"1px solid #2a2a3a",background:"#0d0d14" }}/>
+                    <div style={{ height:HEAD_H,borderBottom:"1px solid #2a2a3a",background:"#f7f7f7" }}/>
                     {/* linhas de nome */}
                     {tarefasGantt.map((t,i)=>(
-                      <div key={t.id||i} style={{ height:ROW_H,display:"flex",alignItems:"center",padding:"0 10px 0 14px",borderBottom:"1px solid #1a1a28",background:t.isSummary?"#0f1a2e":i%2===0?"#111118":"#0f0f1a",gap:6 }}>
+                      <div key={t.id||i} style={{ height:ROW_H,display:"flex",alignItems:"center",padding:"0 10px 0 14px",borderBottom:"1px solid #1a1a28",background:t.isSummary?"#0f1a2e":i%2===0?"#ffffff":"#0f0f1a",gap:6 }}>
                         {t.isMilestone && <span style={{ fontSize:10,flexShrink:0 }}>🔷</span>}
                         {t.isSummary  && <span style={{ fontSize:10,flexShrink:0 }}>📁</span>}
                         <div style={{ minWidth:0 }}>
-                          <div style={{ fontSize:11,fontWeight:t.isSummary?700:500,color:t.isSummary?"#a78bfa":t.isMilestone?"#f04f5e":"#c8c8d8",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",maxWidth:LABEL_W-36 }}>{t.nome}</div>
-                          {t.responsavel && <div style={{ fontSize:9,color:"#3e3e55",marginTop:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>👤 {t.responsavel}</div>}
+                          <div style={{ fontSize:11,fontWeight:t.isSummary?700:500,color:t.isSummary?"#555555":t.isMilestone?"#c0392b":"#222222",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",maxWidth:LABEL_W-36 }}>{t.nome}</div>
+                          {t.responsavel && <div style={{ fontSize:9,color:"#888888",marginTop:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>👤 {t.responsavel}</div>}
                         </div>
                       </div>
                     ))}
@@ -7279,10 +7296,10 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                   <div style={{ flex:1,position:"relative",minWidth:gridW }}>
 
                     {/* ── Cabeçalho: linha de meses ── */}
-                    <div style={{ height:24,display:"flex",background:"#0d0d14",borderBottom:"1px solid #1f1f2e",position:"sticky",top:0,zIndex:9 }}>
+                    <div style={{ height:24,display:"flex",background:"#f7f7f7",borderBottom:"1px solid #1f1f2e",position:"sticky",top:0,zIndex:9 }}>
                       {meses.map(m=>(
                         <div key={m.key} style={{ width:m.span*PX,flexShrink:0,borderRight:"1px solid #2a2a3a",padding:"0 6px",display:"flex",alignItems:"center",overflow:"hidden" }}>
-                          <span style={{ fontSize:10,fontWeight:700,color:"#6e6e88",whiteSpace:"nowrap",textTransform:"uppercase",letterSpacing:"0.5px" }}>{m.label}</span>
+                          <span style={{ fontSize:10,fontWeight:700,color:"#666666",whiteSpace:"nowrap",textTransform:"uppercase",letterSpacing:"0.5px" }}>{m.label}</span>
                         </div>
                       ))}
                     </div>
@@ -7294,7 +7311,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                         const isHoje = d.getTime()===hoje.getTime();
                         return (
                           <div key={i} style={{ width:PX,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",background:isHoje?"#22d3a022":isWknd?"#06060d":"transparent",borderRight:"1px solid #1a1a28" }}>
-                            <span style={{ fontSize:9,color:isHoje?"#22d3a0":isWknd?"#2a2a3a":"#3e3e55",fontWeight:isHoje?800:400 }}>{d.getDate()}</span>
+                            <span style={{ fontSize:9,color:isHoje?"#2a7a5a":isWknd?"#cccccc":"#888888",fontWeight:isHoje?800:400 }}>{d.getDate()}</span>
                           </div>
                         );
                       })}
@@ -7317,8 +7334,8 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
 
                       {/* Linha de hoje */}
                       {mostrarHoje && (
-                        <div style={{ position:"absolute",top:0,left:xHoje+PX/2,width:2,height:"100%",background:"#22d3a0",opacity:0.7,pointerEvents:"none",zIndex:4 }}>
-                          <div style={{ position:"absolute",top:-4,left:-18,width:38,height:14,background:"#22d3a0",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center" }}>
+                        <div style={{ position:"absolute",top:0,left:xHoje+PX/2,width:2,height:"100%",background:"#2a7a5a",opacity:0.7,pointerEvents:"none",zIndex:4 }}>
+                          <div style={{ position:"absolute",top:-4,left:-18,width:38,height:14,background:"#2a7a5a",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center" }}>
                             <span style={{ fontSize:8,fontWeight:800,color:"#000" }}>HOJE</span>
                           </div>
                         </div>
@@ -7352,7 +7369,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                         const w = barW(t.dataInicio,t.dataFim);
                         const pct = Math.min(100,Math.max(0,t.progresso||0));
                         const top = i*ROW_H;
-                        const cor = t.isMilestone ? COR.milestone : t.isSummary ? COR.summary : (COR[t.coluna]||"#6c63ff");
+                        const cor = t.isMilestone ? COR.milestone : t.isSummary ? COR.summary : (COR[t.coluna]||"#2c2c2c");
 
                         if (t.isMilestone) return (
                           <div key={t.id||i} title={t.nome} style={{ position:"absolute",top:top+ROW_H/2-9,left:x+PX/2-9,width:18,height:18,background:cor,transform:"rotate(45deg)",borderRadius:3,zIndex:2,boxShadow:`0 0 8px ${cor}88` }}/>
@@ -7373,7 +7390,7 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
                             {/* texto */}
                             {w>48 && (
                               <div style={{ position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center" }}>
-                                <span style={{ fontSize:10,fontWeight:700,color:"#fff",textShadow:"0 1px 3px rgba(0,0,0,0.7)",whiteSpace:"nowrap" }}>{pct}%</span>
+                                <span style={{ fontSize:10,fontWeight:700,color:"#fff",textShadow:"0 1px 3px rgba(0,0,0,0.10)",whiteSpace:"nowrap" }}>{pct}%</span>
                               </div>
                             )}
                           </div>
@@ -7418,8 +7435,8 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
     <div>
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"24px",flexWrap:"wrap",gap:"12px" }}>
         <div>
-          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#f0f0fa",margin:"0 0 4px",letterSpacing:"-0.3px" }}>📋 Gestão de Projetos</h2>
-          <p style={{ fontSize:"12px",color:"#3e3e55",margin:0 }}>{projetosVisiveis.length} projeto{projetosVisiveis.length!==1?"s":""} visível{projetosVisiveis.length!==1?"is":""}</p>
+          <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:900,color:"#111111",margin:"0 0 4px",letterSpacing:"-0.3px" }}>📋 Gestão de Projetos</h2>
+          <p style={{ fontSize:"12px",color:"#888888",margin:0 }}>{projetosVisiveis.length} projeto{projetosVisiveis.length!==1?"s":""} visível{projetosVisiveis.length!==1?"is":""}</p>
         </div>
         {canEdit && <button onClick={()=>{setEditandoProj(null);setShowForm(true);}} style={{ padding:"8px 18px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",fontWeight:700,fontSize:"12px",cursor:"pointer",fontFamily:"inherit",boxShadow:"0 4px 16px #6c63ff44" }}>+ Novo Projeto</button>}
       </div>
@@ -7441,9 +7458,9 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
       )}
 
       {projetosVisiveis.length===0 && !showForm && (
-        <div style={{ textAlign:"center",padding:"60px",background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e" }}>
+        <div style={{ textAlign:"center",padding:"60px",background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8" }}>
           <div style={{ fontSize:"48px",marginBottom:"14px" }}>📋</div>
-          <div style={{ fontSize:"14px",color:"#3e3e55",marginBottom:"16px" }}>Nenhum projeto cadastrado</div>
+          <div style={{ fontSize:"14px",color:"#888888",marginBottom:"16px" }}>Nenhum projeto cadastrado</div>
           {canEdit && <button onClick={()=>setShowForm(true)} style={{ padding:"9px 22px",borderRadius:"10px",border:"none",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",color:"#fff",cursor:"pointer",fontWeight:700,fontSize:"13px",fontFamily:"inherit" }}>Criar primeiro projeto</button>}
         </div>
       )}
@@ -7460,17 +7477,17 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
           const visIcons = { privado:"🔒", equipe:"👥", gestores:"🏢", publico:"🌐" };
           return (
             <div key={p.id} className="card-hover" onClick={()=>setProjetoAtivo(p.id)}
-              style={{ background:"#111118",borderRadius:"14px",border:"1px solid #1f1f2e",padding:"18px 20px",cursor:"pointer",position:"relative",overflow:"hidden" }}>
+              style={{ background:"#ffffff",borderRadius:"14px",border:"1px solid #d8d8d8",padding:"18px 20px",cursor:"pointer",position:"relative",overflow:"hidden" }}>
               <div style={{ position:"absolute",top:0,left:0,right:0,height:"3px",background:st.color }}/>
               <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:"10px" }}>
-                <div style={{ fontSize:"14px",fontWeight:700,color:"#f0f0fa",lineHeight:1.3,flex:1,marginRight:"10px" }}>{p.nome}</div>
+                <div style={{ fontSize:"14px",fontWeight:700,color:"#111111",lineHeight:1.3,flex:1,marginRight:"10px" }}>{p.nome}</div>
                 <span style={{ padding:"3px 10px",borderRadius:"99px",background:st.color+"18",border:"1px solid "+st.color+"44",fontSize:"10px",fontWeight:700,color:st.color,whiteSpace:"nowrap" }}>{st.label}</span>
               </div>
-              {p.cliente && <div style={{ fontSize:"11px",color:"#6e6e88",marginBottom:"8px" }}>🏢 {p.cliente}</div>}
-              <div style={{ height:"4px",background:"#1f1f2e",borderRadius:"99px",overflow:"hidden",marginBottom:"10px" }}>
+              {p.cliente && <div style={{ fontSize:"11px",color:"#666666",marginBottom:"8px" }}>🏢 {p.cliente}</div>}
+              <div style={{ height:"4px",background:"#e8e8e8",borderRadius:"99px",overflow:"hidden",marginBottom:"10px" }}>
                 <div style={{ height:"100%",width:(p.progresso||0)+"%",background:"linear-gradient(90deg,#6c63ff,#a78bfa)",borderRadius:"99px" }}/>
               </div>
-              <div style={{ display:"flex",gap:"10px",fontSize:"11px",color:"#6e6e88",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center" }}>
+              <div style={{ display:"flex",gap:"10px",fontSize:"11px",color:"#666666",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center" }}>
                 <div style={{ display:"flex",gap:"10px" }}>
                   <span>📈 {p.progresso||0}%</span>
                   {totalTar>0 && <span>📋 {concluidas}/{totalTar} tarefas</span>}
@@ -7495,8 +7512,8 @@ function ModuloProjetos({ currentUser, canEdit, canManage, isGestor, consultores
 
 // Estilos compartilhados fora do componente para evitar re-criação a cada render
 const _MAN_P    = { color:"#9090b0", margin:"0 0 12px", lineHeight:1.7 };
-const _MAN_H4   = { fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"14px", fontWeight:700, color:"#f0f0fa", margin:"0 0 4px" };
-const _MAN_SNUM = { width:"28px", height:"28px", borderRadius:"8px", background:"#7c6ff720", border:"1px solid #7c6ff744", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"12px", fontWeight:800, color:"#a78bfa", flexShrink:0 };
+const _MAN_H4   = { fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"14px", fontWeight:700, color:"#111111", margin:"0 0 4px" };
+const _MAN_SNUM = { width:"28px", height:"28px", borderRadius:"8px", background:"#7c6ff720", border:"1px solid #7c6ff744", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"12px", fontWeight:800, color:"#555555", flexShrink:0 };
 
 function ManualStepItem({ num, title, desc }) {
   return (
@@ -7513,8 +7530,8 @@ function ManualStepItem({ num, title, desc }) {
 function ManualFieldItem({ field, req, desc }) {
   return (
     <tr>
-      <td style={{ padding:"9px 12px", color:"#f0f0fa", fontWeight:600, fontSize:"13px", borderBottom:"1px solid #1a1a28", whiteSpace:"nowrap" }}>
-        {field}{req && <span style={{ color:"#f04f5e", fontSize:"11px", marginLeft:"3px" }}>*</span>}
+      <td style={{ padding:"9px 12px", color:"#111111", fontWeight:600, fontSize:"13px", borderBottom:"1px solid #1a1a28", whiteSpace:"nowrap" }}>
+        {field}{req && <span style={{ color:"#c0392b", fontSize:"11px", marginLeft:"3px" }}>*</span>}
       </td>
       <td style={{ padding:"9px 12px", color:"#9090b0", fontSize:"13px", borderBottom:"1px solid #1a1a28", lineHeight:1.5 }} dangerouslySetInnerHTML={{ __html: desc }}/>
     </tr>
@@ -7537,7 +7554,7 @@ function ManualConsultor({ theme: T }) {
 
   const s    = { color:"#e8e8f5", fontFamily:"'DM Sans',sans-serif", fontSize:"14px", lineHeight:1.75 };
   const h2   = { fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"22px", fontWeight:900, color:"#fff", letterSpacing:"-0.3px", margin:"0 0 8px" };
-  const h3   = { fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"16px", fontWeight:800, color:"#f0f0fa", margin:"20px 0 8px" };
+  const h3   = { fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"16px", fontWeight:800, color:"#111111", margin:"20px 0 8px" };
   const h4   = _MAN_H4;
   const p    = _MAN_P;
   const card = { background:"#13131e", border:"1px solid #1e1e2e", borderRadius:"12px", padding:"18px 20px", marginBottom:"12px" };
@@ -7558,7 +7575,7 @@ function ManualConsultor({ theme: T }) {
     intro: (
       <div style={s}>
         <div style={{ marginBottom:"28px" }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:"8px", background:"#7c6ff715", border:"1px solid #7c6ff733", borderRadius:"99px", padding:"4px 14px", fontSize:"11px", color:"#a78bfa", fontWeight:700, letterSpacing:"0.5px", textTransform:"uppercase", marginBottom:"16px" }}>📖 Manual de Operação</div>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:"8px", background:"#7c6ff715", border:"1px solid #7c6ff733", borderRadius:"99px", padding:"4px 14px", fontSize:"11px", color:"#555555", fontWeight:700, letterSpacing:"0.5px", textTransform:"uppercase", marginBottom:"16px" }}>📖 Manual de Operação</div>
           <div style={h2}>Guia do <span style={{ color:"#7c6ff7" }}>Consultor</span></div>
           <div style={{ ...p, fontSize:"15px", fontWeight:300 }}>Tudo que você precisa saber para utilizar o GSC — Gestão de Serviços Consultores — de forma eficiente no seu dia a dia.</div>
           <div style={{ width:"40px", height:"3px", background:"linear-gradient(90deg,#7c6ff7,#22d3a0)", borderRadius:"2px", margin:"20px 0 24px" }}/>
@@ -7582,7 +7599,7 @@ function ManualConsultor({ theme: T }) {
         <Step num={1} title="Abra o navegador" desc="Acesse o endereço do GSC fornecido pelo administrador."/>
         <Step num={2} title="Informe seu e-mail e senha" desc="Use as credenciais criadas pelo administrador. Se não lembrar a senha, clique em <strong style='color:#f0f0fa'>Esqueci minha senha</strong> para receber o link de redefinição."/>
         <Step num={3} title="Navegue pelo menu lateral" desc="Após o login, use o menu à esquerda para acessar os módulos: Agenda, Ordens de Serviço, Grade de Conhecimento, Viagem e Hospedagem e Traslado."/>
-        {tip("#a78bfa","#7c6ff710","#7c6ff7","ℹ️","<strong>Seu perfil:</strong> Como consultor, você acessa apenas os módulos relacionados ao seu trabalho. Ações administrativas são exclusivas de gestores.")}
+        {tip("#555555","#7c6ff710","#7c6ff7","ℹ️","<strong>Seu perfil:</strong> Como consultor, você acessa apenas os módulos relacionados ao seu trabalho. Ações administrativas são exclusivas de gestores.")}
       </div>
     ),
 
@@ -7604,7 +7621,7 @@ function ManualConsultor({ theme: T }) {
         <Step num={1} title="Clique em qualquer entrada" desc="Na visão Grade, Calendário ou Semanal, clique em uma entrada para abrir o painel de detalhes."/>
         <Step num={2} title="Veja os detalhes do atendimento" desc="O painel exibe cliente, modalidade (presencial/remoto), horários, atividades e status da OS."/>
         <Step num={3} title="Preencha a OS se necessário" desc="Se o atendimento não tiver OS, clique em <strong style='color:#f0f0fa'>📋 Preencher OS</strong> para criar a ordem de serviço."/>
-        {tip("#22d3a0","#22d3a010","#22d3a0","✅","<strong>Dica:</strong> Use a visualização <strong style='color:#f0f0fa'>Semanal</strong> para uma visão rápida da semana com horários e clientes. O mês atual é carregado automaticamente ao abrir o módulo.")}
+        {tip("#2a7a5a","#22d3a010","#2a7a5a","✅","<strong>Dica:</strong> Use a visualização <strong style='color:#f0f0fa'>Semanal</strong> para uma visão rápida da semana com horários e clientes. O mês atual é carregado automaticamente ao abrir o módulo.")}
       </div>
     ),
 
@@ -7625,7 +7642,7 @@ function ManualConsultor({ theme: T }) {
               <th style={{ padding:"10px 12px", fontSize:"10px", fontWeight:700, letterSpacing:"1px", textTransform:"uppercase", color:"#454560", textAlign:"left" }}>Descrição</th>
             </tr></thead>
             <tbody>
-              <FieldRow field="Nº OS" desc={`${tag("Auto","#22d3a0","#22d3a018")} Gerado automaticamente (ex: OS-0001). Não editável.`}/>
+              <FieldRow field="Nº OS" desc={`${tag("Auto","#2a7a5a","#e6f4ee")} Gerado automaticamente (ex: OS-0001). Não editável.`}/>
               <FieldRow field="Sistema" req desc="Sistema TOTVS atendido: Protheus, RM, Datasul ou Fluig."/>
               <FieldRow field="Descrição" desc="Breve descrição do tipo de atendimento."/>
               <FieldRow field="Status" req desc="Em andamento · Concluída · Pendente · Cancelada."/>
@@ -7658,10 +7675,10 @@ function ManualConsultor({ theme: T }) {
         <div style={{ ...card, padding:0, overflow:"hidden" }}>
           <table style={{ width:"100%", borderCollapse:"collapse" }}>
             <tbody>
-              {[["Especialista",["#f04f5e","#f04f5e18"],"Domínio avançado. Configura, implanta e resolve situações complexas de forma autônoma."],
+              {[["Especialista",["#c0392b","#fff0f0"],"Domínio avançado. Configura, implanta e resolve situações complexas de forma autônoma."],
                 ["Sênior",["#f5a623","#f5a62318"],"Amplo conhecimento prático. Atua com independência em implantações e suporte avançado."],
-                ["Pleno",["#a78bfa","#7c6ff718"],"Conhecimento funcional sólido. Realiza atendimentos com pouca supervisão."],
-                ["Júnior",["#22d3a0","#22d3a018"],"Conhecimento básico ou em desenvolvimento. Realiza tarefas simples com apoio."]].map(([nivel,[color,bg],desc])=>(
+                ["Pleno",["#555555","#7c6ff718"],"Conhecimento funcional sólido. Realiza atendimentos com pouca supervisão."],
+                ["Júnior",["#2a7a5a","#e6f4ee"],"Conhecimento básico ou em desenvolvimento. Realiza tarefas simples com apoio."]].map(([nivel,[color,bg],desc])=>(
                 <tr key={nivel}>
                   <td style={{ padding:"10px 12px", borderBottom:"1px solid #1a1a28", whiteSpace:"nowrap" }}>{tag(nivel,color,bg)}</td>
                   <td style={{ padding:"10px 12px", color:"#9090b0", fontSize:"13px", borderBottom:"1px solid #1a1a28", lineHeight:1.5 }}>{desc}</td>
@@ -7674,7 +7691,7 @@ function ManualConsultor({ theme: T }) {
         <Step num={1} title="Selecione o produto" desc="Escolha entre Protheus, RM, Datasul ou Fluig na parte superior da tela."/>
         <Step num={2} title="Percorra os módulos" desc="A tabela exibe todos os módulos agrupados por área. Clique no nível desejado para cada módulo que você domina."/>
         <Step num={3} title="Salve sua grade" desc="Clique em <strong style='color:#f0f0fa'>💾 Salvar Grade</strong>. As informações ficam visíveis para a gestão."/>
-        {tip("#22d3a0","#22d3a010","#22d3a0","✅","<strong>Seja honesto:</strong> A grade é usada para alocação correta em projetos. Declarar nível acima do real pode comprometer a qualidade do atendimento.")}
+        {tip("#2a7a5a","#22d3a010","#2a7a5a","✅","<strong>Seja honesto:</strong> A grade é usada para alocação correta em projetos. Declarar nível acima do real pode comprometer a qualidade do atendimento.")}
       </div>
     ),
 
@@ -7684,7 +7701,7 @@ function ManualConsultor({ theme: T }) {
         <div style={{ ...p, marginBottom:"20px" }}>Solicite viagens com hospedagem e/ou passagem aérea. As solicitações passam por fluxo de aprovação hierárquica antes de serem confirmadas.</div>
         <div style={h3}>Fluxo de aprovação</div>
         <div style={{ display:"flex", alignItems:"center", gap:"8px", flexWrap:"wrap", margin:"14px 0 20px" }}>
-          {[["⏳ Pendente","#a78bfa","#7c6ff718"],["→","#454560"],["🔀 Em aprovação","#a78bfa","#6c63ff18"],["→","#454560"],["✅ Aprovada","#22d3a0","#22d3a018"],["→","#454560"],["❌ Rejeitada","#f04f5e","#f04f5e18"]].map((item,i)=>
+          {[["⏳ Pendente","#555555","#7c6ff718"],["→","#454560"],["🔀 Em aprovação","#555555","rgba(0,0,0,0.05)"],["→","#454560"],["✅ Aprovada","#2a7a5a","#e6f4ee"],["→","#454560"],["❌ Rejeitada","#c0392b","#fff0f0"]].map((item,i)=>
             Array.isArray(item)
               ? <div key={i} style={{ padding:"5px 14px", borderRadius:"99px", background:item[2], border:`1px solid ${item[1]}44`, fontSize:"11px", fontWeight:700, color:item[1] }}>{item[0]}</div>
               : <span key={i} style={{ color:item[1], fontSize:"14px" }}>{item}</span>
@@ -7699,8 +7716,8 @@ function ManualConsultor({ theme: T }) {
         <div style={h3}>Documentos após aprovação</div>
         <div style={{ ...p }}>Quando aprovada e os documentos forem anexados, você verá ao expandir o card:</div>
         <div style={{ display:"flex", gap:"10px", flexWrap:"wrap", margin:"10px 0 16px" }}>
-          <div style={{ padding:"7px 14px", borderRadius:"9px", background:"#22d3a018", border:"1px solid #22d3a044", fontSize:"12px", fontWeight:700, color:"#22d3a0" }}>🏨 Reserva Hotel.pdf</div>
-          <div style={{ padding:"7px 14px", borderRadius:"9px", background:"#a78bfa18", border:"1px solid #a78bfa44", fontSize:"12px", fontWeight:700, color:"#a78bfa" }}>✈️ Passagem.pdf</div>
+          <div style={{ padding:"7px 14px", borderRadius:"9px", background:"#e6f4ee", border:"1px solid #22d3a044", fontSize:"12px", fontWeight:700, color:"#2a7a5a" }}>🏨 Reserva Hotel.pdf</div>
+          <div style={{ padding:"7px 14px", borderRadius:"9px", background:"#a78bfa18", border:"1px solid #a78bfa44", fontSize:"12px", fontWeight:700, color:"#555555" }}>✈️ Passagem.pdf</div>
         </div>
         {tip("#f5a623","#f5a62310","#f5a623","⚠️","<strong>Importante:</strong> Solicitações aprovadas não podem ser editadas. Para alterações, entre em contato com o responsável pela aprovação.")}
       </div>
@@ -7732,7 +7749,7 @@ function ManualConsultor({ theme: T }) {
         <Step num={4} title="Adicione as despesas" desc="Clique em <strong style='color:#f0f0fa'>+ Nova Despesa</strong>, selecione o tipo pelo 🔍, preencha data, quantidade e valor."/>
         <Step num={5} title="Anexe comprovantes" desc="Na seção <strong style='color:#f0f0fa'>📎 Comprovantes</strong>, faça upload das fotos ou PDFs dos recibos."/>
         <Step num={6} title="Salve ou envie" desc="Use <strong style='color:#f0f0fa'>💾 Salvar rascunho</strong> para continuar depois, ou <strong style='color:#f0f0fa'>✅ Enviar RDA</strong> para submeter."/>
-        {tip("#22d3a0","#22d3a010","#22d3a0","✅","<strong>Dica de KM:</strong> O campo KM IDA e VOLTA recebe o valor de ida. O sistema dobra automaticamente e calcula o valor de reembolso com base no valor/km cadastrado na unidade.")}
+        {tip("#2a7a5a","#22d3a010","#2a7a5a","✅","<strong>Dica de KM:</strong> O campo KM IDA e VOLTA recebe o valor de ida. O sistema dobra automaticamente e calcula o valor de reembolso com base no valor/km cadastrado na unidade.")}
       </div>
     ),
 
@@ -7755,7 +7772,7 @@ function ManualConsultor({ theme: T }) {
             </div>
           ))}
         </div>
-        {tip("#a78bfa","#7c6ff710","#7c6ff7","💬","<strong>Precisa de ajuda?</strong> Em caso de dúvidas sobre o sistema, entre em contato com o administrador do GSC ou com o responsável pela sua equipe.")}
+        {tip("#555555","#7c6ff710","#7c6ff7","💬","<strong>Precisa de ajuda?</strong> Em caso de dúvidas sobre o sistema, entre em contato com o administrador do GSC ou com o responsável pela sua equipe.")}
         <div style={{ marginTop:"40px", background:"#13131e", border:"1px solid #1e1e2e", borderRadius:"16px", padding:"28px", textAlign:"center" }}>
           <div style={{ fontSize:"28px", marginBottom:"10px" }}>⬡</div>
           <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"16px", fontWeight:800, color:"#fff", marginBottom:"4px" }}>GSC — Gestão de Serviços Consultores</div>
@@ -7772,7 +7789,7 @@ function ManualConsultor({ theme: T }) {
         <div style={{ fontSize:"9px", color:"#454560", fontWeight:700, letterSpacing:"1.5px", textTransform:"uppercase", padding:"0 8px 10px" }}>Conteúdo</div>
         {SECOES.map(sec=>(
           <button key={sec.id} onClick={()=>setSecaoAtiva(sec.id)}
-            style={{ display:"flex", alignItems:"center", gap:"8px", padding:"8px 10px", borderRadius:"9px", border:"none", cursor:"pointer", fontFamily:"inherit", fontSize:"12px", fontWeight:secaoAtiva===sec.id?700:500, textAlign:"left", marginBottom:"2px", background:secaoAtiva===sec.id?"#7c6ff720":"transparent", color:secaoAtiva===sec.id?"#a78bfa":"#6e6e88", transition:"all .15s" }}>
+            style={{ display:"flex", alignItems:"center", gap:"8px", padding:"8px 10px", borderRadius:"9px", border:"none", cursor:"pointer", fontFamily:"inherit", fontSize:"12px", fontWeight:secaoAtiva===sec.id?700:500, textAlign:"left", marginBottom:"2px", background:secaoAtiva===sec.id?"#7c6ff720":"transparent", color:secaoAtiva===sec.id?"#555555":"#666666", transition:"all .15s" }}>
             <span style={{ fontSize:"14px", flexShrink:0, width:"18px", textAlign:"center" }}>{sec.icon}</span>
             {sec.label}
           </button>
@@ -7809,11 +7826,11 @@ export default function ConsultorDashboard() {
   }, []);
 
   if (!authChecked) return (
-    <div style={{ fontFamily:"'DM Sans',sans-serif", background:"#0d0d14", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"20px" }}>
+    <div style={{ fontFamily:"'DM Sans',sans-serif", background:"#f7f7f7", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"20px" }}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet"/>
       <div style={{ fontSize:"48px" }}>📅</div>
-      <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:700, color:"#f0f0fa" }}>Agenda de Consultores</div>
-      <div style={{ display:"flex", alignItems:"center", gap:"12px", color:"#6e6e88", fontSize:"14px" }}>
+      <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:700, color:"#111111" }}>Agenda de Consultores</div>
+      <div style={{ display:"flex", alignItems:"center", gap:"12px", color:"#666666", fontSize:"14px" }}>
         <div style={{ width:"20px", height:"20px", border:"3px solid #2a2a3a", borderTop:"3px solid #3b82f6", borderRadius:"50%", animation:"spin 0.8s linear infinite" }}/>
         Verificando sessão...
       </div>
@@ -7856,7 +7873,7 @@ function Dashboard({ currentUser, onLogout }) {
   const [osEntry, setOsEntry] = useState(null); // entrada selecionada para OS
   const [toast, setToast] = useState(null);
   const [showUserMgmt, setShowUserMgmt] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [activeModule, setActiveModule] = useState(isConsultor ? "agenda" : "home");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [viaCount, setViaCount] = useState(0); // contador de solicitações de viagem
@@ -7867,35 +7884,35 @@ function Dashboard({ currentUser, onLogout }) {
 
   const isDark = theme === "dark";
   const T = {
-    bg:              isDark ? "#09090f"   : "#f5f5f7",
-    surface:         isDark ? "#111118"   : "#ffffff",
-    surface2:        isDark ? "#0d0d14"   : "#fafafa",
-    surfaceHover:    isDark ? "#18181f"   : "#f0f0f5",
-    border:          isDark ? "#1f1f2e"   : "#e4e4ea",
-    border2:         isDark ? "#2a2a3a"   : "#d0d0da",
-    text:            isDark ? "#c8c8d8"   : "#222233",
-    text2:           isDark ? "#6e6e88"   : "#666677",
-    text3:           isDark ? "#3e3e55"   : "#aaaabc",
-    heading:         isDark ? "#f0f0fa"   : "#09090f",
-    accent:          "#6c63ff",
-    accentAlt:       "#a78bfa",
-    accentHover:     "#5a52ee",
-    accentGlow:      isDark ? "0 0 28px #6c63ff44" : "0 4px 16px #6c63ff33",
-    success:         "#22d3a0",
-    warning:         "#f5a623",
-    danger:          "#f04f5e",
+    bg:              isDark ? "#09090f"   : "#f0f0f0",
+    surface:         isDark ? "#ffffff"   : "#ffffff",
+    surface2:        isDark ? "#f7f7f7"   : "#f7f7f7",
+    surfaceHover:    isDark ? "#e8e8e8"   : "#ececec",
+    border:          isDark ? "#d8d8d8"   : "#d0d0d0",
+    border2:         isDark ? "#cccccc"   : "#bbbbbb",
+    text:            isDark ? "#222222"   : "#1a1a1a",
+    text2:           isDark ? "#666666"   : "#444444",
+    text3:           isDark ? "#888888"   : "#888888",
+    heading:         isDark ? "#111111"   : "#000000",
+    accent:          isDark ? "#2c2c2c"   : "#2c2c2c",
+    accentAlt:       isDark ? "#555555"   : "#555555",
+    accentHover:     isDark ? "#5a52ee"   : "#111111",
+    accentGlow:      isDark ? "0 0 28px #6c63ff44" : "0 4px 12px rgba(0,0,0,0.15)",
+    success:         isDark ? "#2a7a5a"   : "#2a7a5a",
+    warning:         isDark ? "#f5a623"   : "#b07800",
+    danger:          isDark ? "#c0392b"   : "#c0392b",
     headerBg:        isDark ? "#0c0c14"   : "#ffffff",
-    headerBorder:    isDark ? "#1a1a28"   : "#e0e0ea",
-    btnInactive:     isDark ? "#111118"   : "#f0f0f5",
-    btnInactiveText: isDark ? "#6e6e88"   : "#555566",
-    filterBg:        isDark ? "#111118"   : "#ffffff",
-    inputBg:         isDark ? "#0d0d14"   : "#fafafa",
-    inputBorder:     isDark ? "#2a2a3a"   : "#d0d0da",
-    inputColor:      isDark ? "#c8c8d8"   : "#222233",
-    cardBg:          isDark ? "#111118"   : "#ffffff",
-    cardBorder:      isDark ? "#1f1f2e"   : "#e4e4ea",
-    shadow:          isDark ? "0 2px 16px rgba(0,0,0,0.6)" : "0 2px 16px rgba(0,0,0,0.07)",
-    shadowLg:        isDark ? "0 8px 48px rgba(0,0,0,0.8)" : "0 8px 48px rgba(0,0,0,0.12)",
+    headerBorder:    isDark ? "#1a1a28"   : "#d0d0d0",
+    btnInactive:     isDark ? "#ffffff"   : "#ebebeb",
+    btnInactiveText: isDark ? "#666666"   : "#555555",
+    filterBg:        isDark ? "#ffffff"   : "#ffffff",
+    inputBg:         isDark ? "#f7f7f7"   : "#ffffff",
+    inputBorder:     isDark ? "#cccccc"   : "#c0c0c0",
+    inputColor:      isDark ? "#222222"   : "#1a1a1a",
+    cardBg:          isDark ? "#ffffff"   : "#ffffff",
+    cardBorder:      isDark ? "#d8d8d8"   : "#d8d8d8",
+    shadow:          isDark ? "0 2px 16px rgba(0,0,0,0.08)" : "0 2px 12px rgba(0,0,0,0.08)",
+    shadowLg:        isDark ? "0 8px 48px rgba(0,0,0,0.12)" : "0 8px 32px rgba(0,0,0,0.12)",
   };
 
   // ── Carregar dados do Firestore na inicialização ──
@@ -8387,7 +8404,7 @@ function Dashboard({ currentUser, onLogout }) {
       totalInseridos > 0
         ? `🎉 ${totalInseridos} feriado(s) inserido(s) em ${consultores.length} consultor(es)`
         : `✅ Feriados já estavam atualizados`,
-      "#22d3a0"
+      "#2a7a5a"
     );
   };
 
@@ -8550,12 +8567,12 @@ function Dashboard({ currentUser, onLogout }) {
 
   // Tela de carregamento enquanto busca dados do Firestore
   if (!dbLoaded) return (
-    <div style={{ fontFamily:"'Outfit',sans-serif", background:"#09090f", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"20px" }}>
+    <div style={{ fontFamily:"'Outfit',sans-serif", background:"#f0f0f0", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"20px" }}>
       <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Cabinet+Grotesk:wght@900&display=swap" rel="stylesheet"/>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}} @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}`}</style>
       <div style={{ width:"54px",height:"54px",borderRadius:"16px",background:"linear-gradient(135deg,#6c63ff,#a78bfa)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"26px",boxShadow:"0 0 40px #6c63ff55" }}>◈</div>
-      <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:900, color:"#f0f0fa", letterSpacing:"-0.5px" }}>Agenda de Consultores</div>
-      <div style={{ display:"flex", alignItems:"center", gap:"10px", color:"#3e3e55", fontSize:"13px" }}>
+      <div style={{ fontFamily:"'Cabinet Grotesk',sans-serif", fontSize:"20px", fontWeight:900, color:"#111111", letterSpacing:"-0.5px" }}>Agenda de Consultores</div>
+      <div style={{ display:"flex", alignItems:"center", gap:"10px", color:"#888888", fontSize:"13px" }}>
         <div style={{ width:"16px", height:"16px", border:"2px solid #1f1f2e", borderTop:"2px solid #6c63ff", borderRadius:"50%", animation:"spin 0.7s linear infinite" }}/>
         Carregando dados...
       </div>
@@ -8792,11 +8809,11 @@ function Dashboard({ currentUser, onLogout }) {
             {/* Cards de módulos */}
             <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",gap:"16px",marginBottom:"32px" }}>
               {[
-                { id:"agenda",   icon:"📅", label:"Agenda de Consultores", desc:"Gerencie as agendas e cronogramas dos consultores",  color:"#6c63ff", stat:Object.values(scheduleData).flat().filter(e=>e.type==="client").length, statLabel:"dias agendados" },
-                { id:"os",       icon:"📋", label:"Ordens de Serviço",     desc:"Consulte, aprove ou rejeite as OS dos consultores",   color:"#a78bfa", stat:Object.values(scheduleData).flat().filter(e=>e.osNumero).length, statLabel:"OS registradas" },
-                { id:"viagens",  icon:"🏨", label:"Viagem e Hospedagem",   desc:"Solicitações de viagem, hospedagem e voos", color:"#22d3a0", stat:viaCount, statLabel:"solicitações" },
+                { id:"agenda",   icon:"📅", label:"Agenda de Consultores", desc:"Gerencie as agendas e cronogramas dos consultores",  color:"#2c2c2c", stat:Object.values(scheduleData).flat().filter(e=>e.type==="client").length, statLabel:"dias agendados" },
+                { id:"os",       icon:"📋", label:"Ordens de Serviço",     desc:"Consulte, aprove ou rejeite as OS dos consultores",   color:"#555555", stat:Object.values(scheduleData).flat().filter(e=>e.osNumero).length, statLabel:"OS registradas" },
+                { id:"viagens",  icon:"🏨", label:"Viagem e Hospedagem",   desc:"Solicitações de viagem, hospedagem e voos", color:"#2a7a5a", stat:viaCount, statLabel:"solicitações" },
                 { id:"projetos", icon:"📋", label:"Gestão de Projetos",    desc:"Acompanhe projetos, tarefas e horas trabalhadas",    color:"#f5a623", stat:projCount, statLabel:"projetos ativos" },
-                ...(canManage?[{ id:"cadastros",icon:"🗂", label:"Cadastros", desc:"Consultores, clientes, projetos e configurações", color:"#a78bfa", stat:consultores.length, statLabel:"consultores" }]:[]),
+                ...(canManage?[{ id:"cadastros",icon:"🗂", label:"Cadastros", desc:"Consultores, clientes, projetos e configurações", color:"#555555", stat:consultores.length, statLabel:"consultores" }]:[]),
               ].map(mod=>(
                 <div key={mod.id} className="card-hover" onClick={()=>{ setSelectedConsultor(isConsultor?currentUser.consultorName:null); setSelectedMonth("Todos"); setActiveModule(mod.id); }}
                   style={{ background:T.surface,borderRadius:"16px",border:"1px solid "+T.border,padding:"22px",cursor:"pointer",position:"relative",overflow:"hidden" }}>
@@ -9039,10 +9056,10 @@ function Dashboard({ currentUser, onLogout }) {
               </div>
 
               {/* Nome do sistema */}
-              <h1 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"28px",fontWeight:900,color:"#f0f0fa",margin:"0 0 6px",letterSpacing:"-0.5px" }}>
+              <h1 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"28px",fontWeight:900,color:"#111111",margin:"0 0 6px",letterSpacing:"-0.5px" }}>
                 GSC
               </h1>
-              <p style={{ fontSize:"13px",color:"#6e6e88",margin:"0 0 32px",letterSpacing:"1px",textTransform:"uppercase" }}>
+              <p style={{ fontSize:"13px",color:"#666666",margin:"0 0 32px",letterSpacing:"1px",textTransform:"uppercase" }}>
                 Gestão de Serviços Consultores
               </p>
 
@@ -9050,27 +9067,27 @@ function Dashboard({ currentUser, onLogout }) {
               <div style={{ width:"40px",height:"2px",background:"linear-gradient(90deg,#6c63ff,#a78bfa)",margin:"0 auto 32px",borderRadius:"2px" }}/>
 
               {/* Créditos */}
-              <div style={{ background:"#111118",borderRadius:"16px",border:"1px solid #1f1f2e",padding:"28px 32px",marginBottom:"20px" }}>
-                <div style={{ fontSize:"11px",color:"#3e3e55",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"16px" }}>
+              <div style={{ background:"#ffffff",borderRadius:"16px",border:"1px solid #d8d8d8",padding:"28px 32px",marginBottom:"20px" }}>
+                <div style={{ fontSize:"11px",color:"#888888",fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"16px" }}>
                   Desenvolvido por
                 </div>
-                <div style={{ fontSize:"20px",fontWeight:800,color:"#f0f0fa",fontFamily:"'Cabinet Grotesk',sans-serif",marginBottom:"4px" }}>
+                <div style={{ fontSize:"20px",fontWeight:800,color:"#111111",fontFamily:"'Cabinet Grotesk',sans-serif",marginBottom:"4px" }}>
                   Marcelo Alexandre
                 </div>
-                <div style={{ fontSize:"12px",color:"#6e6e88" }}>
+                <div style={{ fontSize:"12px",color:"#666666" }}>
                   Desenvolvimento de Sistemas
                 </div>
               </div>
 
               {/* Direitos */}
-              <div style={{ fontSize:"12px",color:"#3e3e55",lineHeight:1.7 }}>
+              <div style={{ fontSize:"12px",color:"#888888",lineHeight:1.7 }}>
                 © {new Date().getFullYear()} · Todos os direitos reservados
               </div>
 
               {/* Versão */}
               <div style={{ marginTop:"24px",display:"inline-flex",alignItems:"center",gap:"6px",padding:"4px 14px",borderRadius:"99px",background:"#6c63ff12",border:"1px solid #6c63ff22" }}>
-                <span style={{ width:"6px",height:"6px",borderRadius:"50%",background:"#22d3a0",display:"inline-block" }}/>
-                <span style={{ fontSize:"11px",color:"#6e6e88",fontWeight:600 }}>Versão 1.0.0</span>
+                <span style={{ width:"6px",height:"6px",borderRadius:"50%",background:"#2a7a5a",display:"inline-block" }}/>
+                <span style={{ fontSize:"11px",color:"#666666",fontWeight:600 }}>Versão 1.0.0</span>
               </div>
             </div>
           </div>
@@ -9086,8 +9103,8 @@ function Dashboard({ currentUser, onLogout }) {
 
       {/* TOAST */}
       {toast && (
-        <div style={{ position:"fixed",bottom:"24px",right:"24px",background:isDark?"#18181f":"#ffffff",color:T.heading,padding:"12px 18px",borderRadius:"14px",fontWeight:600,fontSize:"13px",zIndex:9999,boxShadow:"0 8px 40px rgba(0,0,0,0.5)",animation:"fadeUp .25s cubic-bezier(.4,0,.2,1)",display:"flex",alignItems:"center",gap:"10px",maxWidth:"360px",border:"1px solid "+(isDark?"#2a2a3a":"#e4e4ea"),borderLeft:"3px solid "+(toast.color||"#6c63ff") }}>
-          <div style={{ width:"8px",height:"8px",borderRadius:"50%",background:toast.color||"#6c63ff",flexShrink:0 }}/>{toast.msg}
+        <div style={{ position:"fixed",bottom:"24px",right:"24px",background:isDark?"#e8e8e8":"#ffffff",color:T.heading,padding:"12px 18px",borderRadius:"14px",fontWeight:600,fontSize:"13px",zIndex:9999,boxShadow:"0 8px 40px rgba(0,0,0,0.08)",animation:"fadeUp .25s cubic-bezier(.4,0,.2,1)",display:"flex",alignItems:"center",gap:"10px",maxWidth:"360px",border:"1px solid "+(isDark?"#cccccc":"#e4e4ea"),borderLeft:"3px solid "+(toast.color||"#2c2c2c") }}>
+          <div style={{ width:"8px",height:"8px",borderRadius:"50%",background:toast.color||"#2c2c2c",flexShrink:0 }}/>{toast.msg}
         </div>
       )}
 
