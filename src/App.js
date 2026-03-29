@@ -3043,7 +3043,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
             </tr>
             {/* Feriados nacionais row */}
             <tr style={{ background:isDark?"#28283a":"#f0f0f0" }}>
-              <th style={{ padding:"3px 16px",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:2,borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0")",fontSize:"9px",color:"#f59e0b",fontWeight:700 }}>🇧🇷 Feriados</th>
+              <th style={{ padding:"3px 16px",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:2,borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0"),fontSize:"9px",color:"#f59e0b",fontWeight:700 }}>🇧🇷 Feriados</th>
               {allDays.map(d=>{
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
