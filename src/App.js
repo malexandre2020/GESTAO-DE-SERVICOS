@@ -2900,13 +2900,13 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
         <h2 style={{ fontFamily:"'Cabinet Grotesk',sans-serif",fontSize:"20px",fontWeight:700,color:"#111111",margin:0 }}>📆 Calendário Mensal</h2>
         <div style={{ display:"flex",gap:"6px",flexWrap:"wrap" }}>
           {monthsAvail.map(m=>(
-            <button key={m} onClick={()=>setCalMes(m)} style={{ padding:"5px 12px",borderRadius:"16px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:calMes===m?"#3b82f6":"#e8e8e8",color:calMes===m?"#fff":"#666666" }}>{m.slice(0,3)}</button>
+            <button key={m} onClick={()=>setCalMes(m)} style={{ padding:"5px 12px",borderRadius:"16px",border:"none",cursor:"pointer",fontSize:"12px",fontWeight:600,background:calMes===m?"#3b82f6":isDark?"#2e2e40":"#e8e8e8",color:calMes===m?"#fff":isDark?"#aaaaaa":"#666666" }}>{m.slice(0,3)}</button>
           ))}
         </div>
         <div style={{ display:"flex",alignItems:"center",gap:"4px" }}>
-          <button onClick={()=>setCalAno(a=>a-1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>‹</button>
-          <span style={{ padding:"4px 14px",borderRadius:"8px",background:"#f0f0f0",border:"1px solid #cccccc",fontSize:"13px",fontWeight:700,color:"#111111",minWidth:"62px",textAlign:"center" }}>{calAno}</span>
-          <button onClick={()=>setCalAno(a=>a+1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>›</button>
+          <button onClick={()=>setCalAno(a=>a-1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),background:isDark?"#2e2e40":"#f0f0f0",color:isDark?"#aaaaaa":"#666666",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>‹</button>
+          <span style={{ padding:"4px 14px",borderRadius:"8px",background:isDark?"#2e2e40":"#f0f0f0",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),fontSize:"13px",fontWeight:700,color:isDark?"#eeeeee":"#111111",minWidth:"62px",textAlign:"center" }}>{calAno}</span>
+          <button onClick={()=>setCalAno(a=>a+1)} style={{ padding:"4px 8px",borderRadius:"8px",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),background:isDark?"#2e2e40":"#f0f0f0",color:isDark?"#aaaaaa":"#666666",cursor:"pointer",fontSize:"13px",fontWeight:700,lineHeight:1 }}>›</button>
         </div>
       </div>
 
@@ -2915,13 +2915,13 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
 
         {/* ── CONSULTOR FILTER ── */}
         <div style={{ position:"relative" }}>
-          <button onClick={()=>{ setShowFilter(!showFilter); setShowClientFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showFilter?"#3b82f6":"#cccccc"),background:showFilter?"#16102a":"#e8e8e8",color:showFilter?"#60a5fa":"#666666",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
+          <button onClick={()=>{ setShowFilter(!showFilter); setShowClientFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showFilter?"#3b82f6":"#cccccc"),background:showFilter?(isDark?"#1a1a2e":"#16102a"):isDark?"#2e2e40":"#e8e8e8",color:showFilter?"#60a5fa":isDark?"#aaaaaa":"#666666",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
             👥 Consultores
             <span style={{ background:selectedConsultores.size<consultores.length?"#f59e0b":"#3b82f6",color:"#fff",borderRadius:"12px",padding:"1px 8px",fontSize:"11px",fontWeight:700 }}>{selectedConsultores.size}/{consultores.length}</span>
             <span style={{ fontSize:"10px" }}>{showFilter?"▲":"▼"}</span>
           </button>
           {showFilter && (
-            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:"#f0f0f0",border:"1px solid #cccccc",borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"300px",maxWidth:"440px",boxShadow:"0 12px 40px rgba(0,0,0,0.08)" }}>
+            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:isDark?"#252535":"#f0f0f0",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"300px",maxWidth:"440px",boxShadow:"0 12px 40px rgba(0,0,0,0.08)" }}>
               <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"12px" }}>
                 <span style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>Filtrar consultores</span>
                 <div style={{ display:"flex",gap:"6px" }}>
@@ -2934,7 +2934,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const isSelected = selectedConsultores.has(name);
                   const hasData = allConsultoresWithData.includes(name);
                   return (
-                    <button key={name} onClick={()=>toggleConsultor(name)} style={{ display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?"#2c2c2c":"#cccccc"),background:isSelected?"#16102a":"#f7f7f7",cursor:"pointer",textAlign:"left",opacity:hasData?1:0.45 }}>
+                    <button key={name} onClick={()=>toggleConsultor(name)} style={{ display:"flex",alignItems:"center",gap:"8px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?"#2c2c2c":"#cccccc"),background:isSelected?(isDark?"#1a1a2e":"#16102a"):isDark?"#2e2e40":"#f7f7f7",cursor:"pointer",textAlign:"left",opacity:hasData?1:0.45 }}>
                       <div style={{ width:"26px",height:"26px",borderRadius:"50%",background:"hsl("+(i*29%360)+",65%,"+(isSelected?"55%":"30%")+")",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px",fontWeight:700,color:"#fff",flexShrink:0 }}>{getInitials(name)}</div>
                       <div style={{ flex:1,minWidth:0 }}>
                         <div style={{ fontSize:"12px",fontWeight:600,color:isSelected?"#111111":"#666666",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap" }}>{name.trim().split(" ")[0]}</div>
@@ -2951,13 +2951,13 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
 
         {/* ── CLIENT FILTER ── */}
         <div style={{ position:"relative" }}>
-          <button onClick={()=>{ setShowClientFilter(!showClientFilter); setShowFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showClientFilter?"#f59e0b":clientFilterActive?"#f59e0b44":"#cccccc"),background:showClientFilter?"#1f1a0e":clientFilterActive?"#1f1a0e":"#e8e8e8",color:showClientFilter||clientFilterActive?"#f59e0b":"#666666",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
+          <button onClick={()=>{ setShowClientFilter(!showClientFilter); setShowFilter(false); }} style={{ padding:"7px 16px",borderRadius:"8px",border:"1px solid "+(showClientFilter?"#f59e0b":clientFilterActive?"#f59e0b44":"#cccccc"),background:showClientFilter?"#1f1a0e":clientFilterActive?"#1f1a0e":isDark?"#2e2e40":"#e8e8e8",color:showClientFilter||clientFilterActive?"#f59e0b":isDark?"#aaaaaa":"#666666",fontSize:"13px",fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:"8px",whiteSpace:"nowrap" }}>
             🏢 Clientes
             <span style={{ background:clientFilterActive?"#f59e0b":"#cccccc",color:clientFilterActive?"#000":"#666666",borderRadius:"12px",padding:"1px 8px",fontSize:"11px",fontWeight:700 }}>{selectedClients.size}/{allClientsInMonth.length}</span>
             <span style={{ fontSize:"10px" }}>{showClientFilter?"▲":"▼"}</span>
           </button>
           {showClientFilter && (
-            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:"#f0f0f0",border:"1px solid #cccccc",borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"280px",maxWidth:"400px",boxShadow:"0 12px 40px rgba(0,0,0,0.08)" }}>
+            <div style={{ position:"absolute",top:"calc(100% + 8px)",left:0,background:isDark?"#252535":"#f0f0f0",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),borderRadius:"12px",padding:"16px",zIndex:500,minWidth:"280px",maxWidth:"400px",boxShadow:"0 12px 40px rgba(0,0,0,0.08)" }}>
               <div style={{ display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"12px" }}>
                 <span style={{ fontSize:"13px",fontWeight:700,color:"#111111" }}>Filtrar por cliente</span>
                 <div style={{ display:"flex",gap:"6px" }}>
@@ -2971,7 +2971,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                   const isSelected = selectedClients.has(clientName);
                   const color = getClientColor(clientName);
                   return (
-                    <button key={clientName} onClick={()=>toggleClient(clientName)} style={{ display:"flex",alignItems:"center",gap:"10px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?color+"66":"#cccccc"),background:isSelected?color+"18":"#f7f7f7",cursor:"pointer",textAlign:"left" }}>
+                    <button key={clientName} onClick={()=>toggleClient(clientName)} style={{ display:"flex",alignItems:"center",gap:"10px",padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isSelected?color+"66":"#cccccc"),background:isSelected?color+"18":isDark?"#2e2e40":"#f7f7f7",cursor:"pointer",textAlign:"left" }}>
                       <div style={{ width:"10px",height:"10px",borderRadius:"3px",background:isSelected?color:"#666666",flexShrink:0,transition:"background 0.2s" }}/>
                       <span style={{ fontSize:"13px",fontWeight:600,color:isSelected?color:"#666666",flex:1 }}>{clientName}</span>
                       {isSelected && <span style={{ color:color,fontSize:"14px" }}>✓</span>}
@@ -3010,7 +3010,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
       </div>
 
       {/* TABLE */}
-      <div style={{ overflowX:"auto",borderRadius:"12px",border:"1px solid #cccccc" }}>
+      <div style={{ overflowX:"auto",borderRadius:"12px",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc") }}>
         <table style={{ borderCollapse:"collapse",width:"100%",minWidth:(daysInMonth*34+160)+"px" }}>
           <thead>
             {/* Weekday row */}
@@ -3047,7 +3047,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
               {allDays.map(d=>{
                 const ferNac = getFeriadoNacional(d, monthNum, guessYear);
                 return (
-                  <td key={d} title={ferNac||undefined} style={{ padding:"2px",textAlign:"center",background:ferNac?"#f59e0b15":"#e8e8e8",borderLeft:"1px solid #0d0d14",borderBottom:"1px solid #2a2a3a" }}>
+                  <td key={d} title={ferNac||undefined} style={{ padding:"2px",textAlign:"center",background:ferNac?"#f59e0b15":isDark?"#2e2e40":"#e8e8e8",borderLeft:"1px solid "+(isDark?"#3a3a4e":"#d8d8d8"),borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0") }}>
                     {ferNac && <div style={{ fontSize:"7px",fontWeight:700,color:"#f59e0b",lineHeight:1.2,maxWidth:"32px",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis",margin:"0 auto" }} title={ferNac}>🎉</div>}
                   </td>
                 );
@@ -3100,7 +3100,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
                             </div>
                           );
                         })}
-                        {dayEntries.length>3&&<div style={{ background:"#e8e8e8",display:"flex",alignItems:"center",justifyContent:"center",minHeight:"10px",borderRadius:"4px" }}><span style={{ fontSize:"8px",color:"#444444",fontWeight:700 }}>+{dayEntries.length-3}</span></div>}
+                        {dayEntries.length>3&&<div style={{ background:isDark?"#3a3a4e":"#e8e8e8",display:"flex",alignItems:"center",justifyContent:"center",minHeight:"10px",borderRadius:"4px" }}><span style={{ fontSize:"8px",color:"#444444",fontWeight:700 }}>+{dayEntries.length-3}</span></div>}
                       </div>
                     </td>
                   );
@@ -3112,7 +3112,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
       </div>
       <p style={{ fontSize:"11px",color:"#666666",marginTop:"8px" }}>💡 Clique em célula colorida para editar/excluir · Clique em célula vazia para adicionar agenda · Colunas escuras = fim de semana</p>
       {popup && (
-        <div onClick={e=>e.stopPropagation()} style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:"#f0f0f0",border:"1px solid #6e6e88",borderRadius:"12px",zIndex:9000,width:"280px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",maxHeight:"80vh",display:"flex",flexDirection:"column" }}>
+        <div onClick={e=>e.stopPropagation()} style={{ position:"fixed",left:popupPos.x+"px",top:popupPos.y+"px",background:isDark?"#252535":"#f0f0f0",border:"1px solid "+(isDark?"#3a3a4e":"#aaaaaa"),borderRadius:"12px",zIndex:9000,width:"280px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",maxHeight:"80vh",display:"flex",flexDirection:"column" }}>
           {/* Header fixo + drag */}
           <div onMouseDown={startDrag} style={{ padding:"14px 16px 10px",borderBottom:"1px solid #2a2a3a",flexShrink:0,cursor:"grab",userSelect:"none" }}>
             <div style={{ display:"flex",justifyContent:"space-between",alignItems:"flex-start" }}>
@@ -3132,7 +3132,7 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
               const color = getColor(entry);
               const TYPE_LABEL = {client:"👤 Cliente",vacation:"🏖 Férias",holiday:"🎉 Feriado",reserved:"🔒 Reservado",blocked:"⛔ Bloqueado"};
               return (
-                <div key={entry.id||ei} style={{ background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",overflow:"hidden" }}>
+                <div key={entry.id||ei} style={{ background:isDark?"#2e2e40":"#f7f7f7",borderRadius:"8px",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),overflow:"hidden" }}>
                   {/* Entry header bar */}
                   <div style={{ background:color,padding:"4px 10px",display:"flex",alignItems:"center",justifyContent:"space-between" }}>
                     <span style={{ fontSize:"11px",fontWeight:800,color:"#fff",letterSpacing:"0.3px" }}>{entry.client||TYPE_LABEL[entry.type]||entry.type}</span>
