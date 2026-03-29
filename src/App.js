@@ -379,7 +379,7 @@ function AgendaModal({ consultores, clients, months, editEntry, onSave, onClose 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURAÇÃO DE E-MAIL (tab dentro de Cadastros)
 // ─────────────────────────────────────────────────────────────────────────────
-function EmailConfigTab({ emailConfig, onSave }) {
+function EmailConfigTab({ emailConfig, onSave, isDark }) {
   const [publicKey,  setPublicKey]  = useState(emailConfig.publicKey  || "");
   const [serviceId,  setServiceId]  = useState(emailConfig.serviceId  || "");
   const [templateId, setTemplateId] = useState(emailConfig.templateId || "");
@@ -387,9 +387,9 @@ function EmailConfigTab({ emailConfig, onSave }) {
   const [fromName,   setFromName]   = useState(emailConfig.fromName   || "GSC - Gestão Serviço Consultor");
   const [testStatus, setTestStatus] = useState(null); // null | "sending" | "ok" | "err"
 
-  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"monospace" };
-  const lbl = { fontSize:"12px",color:"#666666",fontWeight:600,display:"block",marginBottom:"6px" };
-  const card = { background:"#f0f0f0",borderRadius:"12px",padding:"20px",border:"1px solid #cccccc" };
+  const inp = { padding:"8px 12px",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"),background:isDark?"#0d0d14":"#ffffff",color:isDark?"#c8c8d8":"#222222",fontSize:"13px",width:"100%",boxSizing:"border-box",fontFamily:"monospace" };
+  const lbl = { fontSize:"12px",color:isDark?"#8888a8":"#555555",fontWeight:600,display:"block",marginBottom:"6px" };
+  const card = { background:isDark?"#111118":"#ffffff",borderRadius:"12px",padding:"20px",border:"1px solid "+(isDark?"#1f1f2e":"#d8d8d8"),boxShadow:isDark?"0 2px 12px rgba(0,0,0,0.4)":"0 2px 8px rgba(0,0,0,0.06)" };
 
   const isConfigured = publicKey.trim() && serviceId.trim() && templateId.trim();
 
@@ -437,7 +437,7 @@ function EmailConfigTab({ emailConfig, onSave }) {
           </p>
 
           {/* Enable toggle */}
-          <div style={{ display:"flex",alignItems:"center",gap:"12px",padding:"10px 14px",background:"#f7f7f7",borderRadius:"8px",border:"1px solid #cccccc",marginBottom:"16px",cursor:"pointer" }} onClick={()=>setEnabled(e=>!e)}>
+          <div style={{ display:"flex",alignItems:"center",gap:"12px",padding:"10px 14px",background:isDark?"#0d0d14":"#f7f7f7",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"),marginBottom:"16px",cursor:"pointer" }} onClick={()=>setEnabled(e=>!e)}>
             <div style={{ width:"40px",height:"22px",borderRadius:"11px",background:enabled?"#22c55e":"#cccccc",position:"relative",transition:"background .2s",flexShrink:0 }}>
               <div style={{ position:"absolute",top:"3px",left:enabled?"21px":"3px",width:"16px",height:"16px",borderRadius:"50%",background:"#fff",transition:"left .2s" }}/>
             </div>
@@ -475,7 +475,7 @@ function EmailConfigTab({ emailConfig, onSave }) {
             <button
               onClick={handleTestSend}
               disabled={!isConfigured || testStatus==="sending"}
-              style={{ padding:"10px 20px",borderRadius:"8px",border:"1px solid #cccccc",background:"transparent",color:isConfigured?"#666666":"#cccccc",fontWeight:600,fontSize:"13px",cursor:isConfigured?"pointer":"default" }}>
+              style={{ padding:"10px 20px",borderRadius:"8px",border:"1px solid "+(isDark?"#2a2a3a":"#cccccc"),background:"transparent",color:isConfigured?(isDark?"#a0a0c0":"#666666"):(isDark?"#3a3a4e":"#cccccc"),fontWeight:600,fontSize:"13px",cursor:isConfigured?"pointer":"default" }}>
               {testStatus==="sending"?"⏳ Enviando...":"📧 Enviar e-mail de teste"}
             </button>
             {testStatus==="ok"  && <span style={{ fontSize:"12px",color:"#2a7a5a",fontWeight:600 }}>✅ E-mail de teste enviado!</span>}
@@ -487,22 +487,22 @@ function EmailConfigTab({ emailConfig, onSave }) {
       {/* RIGHT – instructions */}
       <div style={{ display:"flex",flexDirection:"column",gap:"16px" }}>
         <div style={card}>
-          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"12px" }}>📋 Como configurar (passo a passo)</h3>
+          <h3 style={{ fontSize:"14px",fontWeight:700,color:isDark?"#f0f0fa":"#111111",marginTop:0,marginBottom:"12px" }}>📋 Como configurar (passo a passo)</h3>
           <ol style={{ margin:0,paddingLeft:"18px",display:"flex",flexDirection:"column",gap:"10px" }}>
             {[
               <>Acesse <a href="https://www.emailjs.com" target="_blank" rel="noreferrer" style={{color:"#2c2c2c"}}>emailjs.com</a> e crie uma conta grátis.</>,
-              <>Vá em <strong style={{color:"#111111"}}>Email Services</strong> → conecte seu Gmail ou Outlook → copie o <code style={{color:"#f59e0b",background:"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Service ID</code>.</>,
-              <>Vá em <strong style={{color:"#111111"}}>Email Templates</strong> → crie um novo template com as variáveis ao lado → copie o <code style={{color:"#f59e0b",background:"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Template ID</code>.</>,
-              <>Vá em <strong style={{color:"#111111"}}>Account → API Keys</strong> → copie a <code style={{color:"#f59e0b",background:"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Public Key</code>.</>,
+              <>Vá em <strong style={{color:"#111111"}}>Email Services</strong> → conecte seu Gmail ou Outlook → copie o <code style={{color:"#f59e0b",background:isDark?"#1a1a28":"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Service ID</code>.</>,
+              <>Vá em <strong style={{color:"#111111"}}>Email Templates</strong> → crie um novo template com as variáveis ao lado → copie o <code style={{color:"#f59e0b",background:isDark?"#1a1a28":"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Template ID</code>.</>,
+              <>Vá em <strong style={{color:"#111111"}}>Account → API Keys</strong> → copie a <code style={{color:"#f59e0b",background:isDark?"#1a1a28":"#f0f0f0",padding:"1px 5px",borderRadius:"4px"}}>Public Key</code>.</>,
               <>Preencha os campos ao lado, ative o envio e clique em <strong style={{color:"#111111"}}>Salvar</strong>.</>,
             ].map((step,i)=>(
-              <li key={i} style={{ fontSize:"12px",color:"#666666",lineHeight:"1.6" }}>{step}</li>
+              <li key={i} style={{ fontSize:"12px",color:isDark?"#a0a0c0":"#666666",lineHeight:"1.6" }}>{step}</li>
             ))}
           </ol>
         </div>
 
         <div style={card}>
-          <h3 style={{ fontSize:"14px",fontWeight:700,color:"#111111",marginTop:0,marginBottom:"12px" }}>📄 Template sugerido no EmailJS</h3>
+          <h3 style={{ fontSize:"14px",fontWeight:700,color:isDark?"#f0f0fa":"#111111",marginTop:0,marginBottom:"12px" }}>📄 Template sugerido no EmailJS</h3>
           <p style={{ fontSize:"11px",color:"#666666",marginTop:0,marginBottom:"10px" }}>Configure seu template com estes campos:</p>
           <div style={{ display:"flex",flexDirection:"column",gap:"8px" }}>
             {[
@@ -511,16 +511,16 @@ function EmailConfigTab({ emailConfig, onSave }) {
               ["Subject",   "{{assunto}}",   "Assunto gerado automaticamente pelo sistema"],
               ["Content",   "{{corpo}}",     "Corpo HTML gerado automaticamente"],
             ].map(([field,variable,desc])=>(
-              <div key={field} style={{ padding:"8px 10px",background:"#f7f7f7",borderRadius:"6px",border:"1px solid #e0e0e0" }}>
+              <div key={field} style={{ padding:"8px 10px",background:isDark?"#0d0d14":"#f7f7f7",borderRadius:"6px",border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
                 <div style={{ display:"flex",justifyContent:"space-between",marginBottom:"2px" }}>
-                  <span style={{ fontSize:"11px",fontWeight:700,color:"#111111" }}>{field}</span>
-                  <code style={{ fontSize:"11px",color:"#f59e0b",background:"#f0f0f0",padding:"1px 6px",borderRadius:"4px" }}>{variable}</code>
+                  <span style={{ fontSize:"11px",fontWeight:700,color:isDark?"#e0e0e0":"#111111" }}>{field}</span>
+                  <code style={{ fontSize:"11px",color:"#f59e0b",background:isDark?"#1a1a28":"#f0f0f0",padding:"1px 6px",borderRadius:"4px" }}>{variable}</code>
                 </div>
-                <span style={{ fontSize:"10px",color:"#666666" }}>{desc}</span>
+                <span style={{ fontSize:"10px",color:isDark?"#6e6e88":"#666666" }}>{desc}</span>
               </div>
             ))}
           </div>
-          <div style={{ marginTop:"12px",padding:"8px 10px",background:"#f7f7f7",borderRadius:"6px",border:"1px solid #e0e0e0" }}>
+          <div style={{ marginTop:"12px",padding:"8px 10px",background:isDark?"#0d0d14":"#f7f7f7",borderRadius:"6px",border:"1px solid "+(isDark?"#2a2a3a":"#e0e0e0") }}>
             <p style={{ fontSize:"11px",color:"#666666",margin:0,lineHeight:"1.6" }}>
               <strong style={{color:"#f59e0b"}}>Assunto gerado:</strong> "Agenda incluída: Dia 17 — VEDACIT (Março 2026)"<br/>
               <strong style={{color:"#f59e0b"}}>Corpo:</strong> tabela HTML com dia, horário, cliente e atividades.
@@ -807,7 +807,7 @@ function CadastrosView({ consultores, clients, projects, onAddConsultor, onRemov
 
       {/* ─────────── E-MAIL ─────────── */}
       {tab==="email" && (
-        <EmailConfigTab emailConfig={emailConfig||{}} onSave={onSaveEmailConfig}/>
+        <EmailConfigTab emailConfig={emailConfig||{}} onSave={onSaveEmailConfig} isDark={isDark}/>
       )}
     </div>
   );
