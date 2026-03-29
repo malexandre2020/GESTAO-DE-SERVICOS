@@ -2405,7 +2405,8 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
     return n;
   });
 
-  const dropStyle = { position:"absolute",top:"calc(100% + 6px)",left:0,zIndex:500,background:"#ffffff",border:"1px solid #cccccc",borderRadius:"12px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",minWidth:"200px",maxHeight:"260px",overflowY:"auto",padding:"6px" };
+  const isDarkT = T && T.bg && !T.bg.includes("#f");
+  const dropStyle = { position:"absolute",top:"calc(100% + 6px)",left:0,zIndex:500,background:isDarkT?"#252535":"#ffffff",border:"1px solid "+(isDarkT?"#3a3a4e":"#cccccc"),borderRadius:"12px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",minWidth:"200px",maxHeight:"260px",overflowY:"auto",padding:"6px" };
   const chipActive = { padding:"5px 12px",borderRadius:"99px",border:"1px solid #6c63ff",background:"rgba(0,0,0,0.06)",color:"#555555",fontSize:"12px",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap" };
   const chipInactive = { padding:"5px 12px",borderRadius:"99px",border:"1px solid #cccccc",background:"transparent",color:"#666666",fontSize:"12px",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap" };
 
@@ -2434,7 +2435,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           <input
             value={search} onChange={e=>setSearch(e.target.value)}
             placeholder="Buscar consultor ou cliente..."
-            style={{ width:"100%",padding:"8px 12px 8px 32px",borderRadius:"10px",border:"1px solid #cccccc",background:"#f7f7f7",color:"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none" }}
+            style={{ width:"100%",padding:"8px 12px 8px 32px",borderRadius:"10px",border:"1px solid "+(isDarkT?"#3a3a4e":"#cccccc"),background:isDarkT?"#2e2e40":"#f7f7f7",color:isDarkT?"#dddddd":"#222222",fontSize:"12px",fontFamily:"inherit",outline:"none" }}
           />
           {search && <button onClick={()=>setSearch("")} style={{ position:"absolute",right:"8px",background:"none",border:"none",color:"#888888",cursor:"pointer",fontSize:"14px",lineHeight:1 }}>✕</button>}
         </div>
@@ -2457,7 +2458,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                 return (
                   <div key={name} onClick={()=>toggleSet(selConsultores,setSelConsultores,name)}
                     style={{ display:"flex",alignItems:"center",gap:"8px",padding:"7px 10px",borderRadius:"8px",cursor:"pointer",background:sel?"rgba(0,0,0,0.05)":"transparent" }}
-                    onMouseEnter={e=>!sel&&(e.currentTarget.style.background="#e8e8e8")}
+                    onMouseEnter={e=>!sel&&(e.currentTarget.style.background=isDarkT?"#3a3a4e":"#e8e8e8")}
                     onMouseLeave={e=>!sel&&(e.currentTarget.style.background="transparent")}>
                     <div style={{ width:"22px",height:"22px",borderRadius:"50%",background:`hsl(${i*37%360},55%,48%)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"9px",fontWeight:800,color:"#fff",flexShrink:0 }}>
                       {name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase()}
@@ -2520,13 +2521,13 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
 
         {/* Spacer + navegação semana */}
         <div style={{ marginLeft:"auto",display:"flex",alignItems:"center",gap:"8px" }}>
-          <button onClick={()=>setOffset(o=>o-1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>‹</button>
+          <button onClick={()=>setOffset(o=>o-1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid "+(isDarkT?"#3a3a4e":"#cccccc"),background:isDarkT?"#2e2e40":"#f0f0f0",color:isDarkT?"#aaaaaa":"#666666",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>‹</button>
           <div style={{ textAlign:"center",minWidth:"200px" }}>
-            <div style={{ fontSize:"15px",fontWeight:700,color:"#111111" }}>{fmtRange()}</div>
+            <div style={{ fontSize:"15px",fontWeight:700,color:isDarkT?"#eeeeee":"#111111" }}>{fmtRange()}</div>
             {offset!==0 && <div style={{ fontSize:"10px",color:"#888888",marginTop:"1px" }}>{offset>0?`+${offset}`:`${offset}`} semana{Math.abs(offset)>1?"s":""} da atual</div>}
           </div>
-          <button onClick={()=>setOffset(o=>o+1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid #cccccc",background:"#f0f0f0",color:"#666666",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>›</button>
-          <button onClick={()=>setOffset(0)} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid #6c63ff44",background:"rgba(0,0,0,0.05)",color:"#555555",cursor:"pointer",fontSize:"11px",fontWeight:700,opacity:offset===0?0.35:1,whiteSpace:"nowrap" }} disabled={offset===0}>
+          <button onClick={()=>setOffset(o=>o+1)} style={{ width:"32px",height:"32px",borderRadius:"8px",border:"1px solid "+(isDarkT?"#3a3a4e":"#cccccc"),background:isDarkT?"#2e2e40":"#f0f0f0",color:isDarkT?"#aaaaaa":"#666666",cursor:"pointer",fontSize:"18px",lineHeight:1,display:"flex",alignItems:"center",justifyContent:"center" }}>›</button>
+          <button onClick={()=>setOffset(0)} style={{ padding:"6px 14px",borderRadius:"8px",border:"1px solid "+(isDarkT?"#4a4a5e":"#6c63ff44"),background:isDarkT?"#2e2e40":"rgba(0,0,0,0.05)",color:isDarkT?"#aaaaaa":"#555555",cursor:"pointer",fontSize:"11px",fontWeight:700,opacity:offset===0?0.35:1,whiteSpace:"nowrap" }} disabled={offset===0}>
             📍 Hoje
           </button>
         </div>
@@ -2541,12 +2542,12 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
           </colgroup>
           <thead>
             <tr>
-              <th style={{ padding:"8px 12px",textAlign:"left",fontSize:"11px",color:"#666666",fontWeight:700,background:"#f7f7f7",borderBottom:"2px solid #2a2a3a",letterSpacing:"0.5px" }}>CONSULTOR</th>
+              <th style={{ padding:"8px 12px",textAlign:"left",fontSize:"11px",color:isDarkT?"#aaaaaa":"#666666",fontWeight:700,background:isDarkT?"#28283a":"#f7f7f7",borderBottom:"2px solid "+(isDarkT?"#3a3a4e":"#cccccc"),letterSpacing:"0.5px" }}>CONSULTOR</th>
               {days.map((d,i)=>{
                 const isToday = d.getTime()===today.getTime();
                 const isWknd = i>=5;
                 return (
-                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isWknd?"#e8e8e8":"#f7f7f7",borderBottom:"2px solid "+(isToday?"#2c2c2c":"#cccccc"),color:isToday?"#2c2c2c":isWknd?"#aaaaaa":"#555555",minWidth:"90px" }}>
+                  <th key={i} style={{ padding:"8px 6px",textAlign:"center",fontSize:"11px",fontWeight:700,background:isDarkT?(isWknd?"#242435":"#28283a"):(isWknd?"#e8e8e8":"#f7f7f7"),borderBottom:"2px solid "+(isToday?"#2c2c2c":isDarkT?"#3a3a4e":"#cccccc"),color:isToday?(isDarkT?"#eeeeee":"#2c2c2c"):isWknd?"#aaaaaa":isDarkT?"#cccccc":"#555555",minWidth:"90px" }}>
                     <div style={{ letterSpacing:"0.5px" }}>{WD_SHORT[i]}</div>
                     <div style={{ fontSize:"18px",fontWeight:800,color:isToday?"#111111":isWknd?"#aaaaaa":"#111111",marginTop:"2px" }}>{d.getDate()}</div>
                     <div style={{ fontSize:"10px",color:isWknd?"#bbbbbb":"#888888",marginTop:"1px" }}>{d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")}</div>
@@ -2565,12 +2566,12 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
               const origIdx = allConsultores.findIndex(c=>c.name===name);
               return (
                 <tr key={name} style={{ borderBottom:"1px solid #18181f" }}>
-                  <td style={{ padding:"8px 10px",verticalAlign:"middle",background:"#f7f7f7",borderRight:"2px solid #18181f" }}>
+                  <td style={{ padding:"8px 10px",verticalAlign:"middle",background:isDarkT?"#28283a":"#f7f7f7",borderRight:"2px solid "+(isDarkT?"#3a3a4e":"#d8d8d8") }}>
                     <div style={{ display:"flex",alignItems:"center",gap:"8px" }}>
                       <div style={{ width:"28px",height:"28px",borderRadius:"9px",background:`hsl(${origIdx*37%360},55%,48%)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"10px",fontWeight:800,color:"#fff",flexShrink:0 }}>
                         {name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase()}
                       </div>
-                      <span style={{ fontSize:"12px",fontWeight:600,color:"#222222" }}>{name.split(" ")[0]}</span>
+                      <span style={{ fontSize:"12px",fontWeight:600,color:isDarkT?"#dddddd":"#222222" }}>{name.split(" ")[0]}</span>
                     </div>
                   </td>
                   {cells.map((entries,ci)=>{
@@ -2582,7 +2583,7 @@ function WeeklyGlobalView({ weeklyData, offset, setOffset, clientColorMap, canEd
                     return (
                       <td key={ci}
                         onClick={()=>{ if(canEdit&&onNewEntry&&entries.length===0) onNewEntry({consultor:name,month:mName,day:d.getDate(),year:yr}); }}
-                        style={{ padding:"4px",verticalAlign:"top",background:isToday?"rgba(0,0,0,0.04)":isWknd?"#ececec":"transparent",borderLeft:"1px solid #18181f",cursor:(canEdit&&entries.length===0)?"pointer":"default",minHeight:"64px" }}>
+                        style={{ padding:"4px",verticalAlign:"top",background:isToday?(isDarkT?"rgba(255,255,255,0.05)":"rgba(0,0,0,0.04)"):isWknd?(isDarkT?"#242435":"#ececec"):"transparent",borderLeft:"1px solid #18181f",cursor:(canEdit&&entries.length===0)?"pointer":"default",minHeight:"64px" }}>
                         {entries.length===0 && canEdit && (
                           <div style={{ display:"flex",alignItems:"center",justifyContent:"center",height:"56px",opacity:0.1,fontSize:"20px",color:"#666666" }}>+</div>
                         )}
