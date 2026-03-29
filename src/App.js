@@ -3323,12 +3323,12 @@ function CalendarioMensal({ data, selectedMonth, allMonths, consultores, clientC
       </div>
 
       {/* TABLE */}
-      <div style={{ overflowX:"auto",borderRadius:"12px",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc") }}>
+      <div style={{ overflow:"auto",borderRadius:"12px",border:"1px solid "+(isDark?"#3a3a4e":"#cccccc"),maxHeight:"calc(100vh - 280px)" }}>
         <table style={{ borderCollapse:"collapse",width:"100%",minWidth:(daysInMonth*34+160)+"px" }}>
-          <thead>
+          <thead style={{ position:"sticky",top:0,zIndex:4 }}>
             {/* Weekday row */}
             <tr style={{ background:isDark?"#28283a":"#f0f0f0" }}>
-              <th style={{ padding:"8px 16px",textAlign:"left",fontSize:"11px",fontWeight:700,color:isDark?"#aaaaaa":"#666666",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:2,minWidth:"150px",borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0") }}>Consultor</th>
+              <th style={{ padding:"8px 16px",textAlign:"left",fontSize:"11px",fontWeight:700,color:isDark?"#aaaaaa":"#666666",position:"sticky",left:0,background:isDark?"#28283a":"#f0f0f0",zIndex:5,minWidth:"150px",borderBottom:"1px solid "+(isDark?"#3a3a4e":"#d0d0d0") }}>Consultor</th>
               {allDays.map(d=>{
                 const dow = getDayOfWeek(d);
                 const isWeekend = dow === 0 || dow === 6;
@@ -8963,7 +8963,7 @@ function Dashboard({ currentUser, onLogout }) {
       `}</style>
 
       {/* ── SIDEBAR ── */}
-      <aside style={{ width:SIDEBAR_W+"px",minHeight:"100vh",background:T.headerBg,borderRight:"1px solid "+T.headerBorder,display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,zIndex:100,flexShrink:0,transition:SIDEBAR_TRANS,overflow:"hidden" }}>
+      <aside style={{ width:SIDEBAR_W+"px",height:"100vh",background:T.headerBg,borderRight:"1px solid "+T.headerBorder,display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,zIndex:100,flexShrink:0,transition:SIDEBAR_TRANS,overflowX:"hidden",overflowY:"auto" }}>
         {/* Logo + toggle */}
         <div style={{ padding:"14px 12px",borderBottom:"1px solid "+T.border,flexShrink:0 }}>
           <div style={{ display:"flex",alignItems:"center",gap:"10px",minWidth:0 }}>
@@ -9074,7 +9074,7 @@ function Dashboard({ currentUser, onLogout }) {
       </aside>
 
       {/* ── MAIN CONTENT ── */}
-      <div style={{ marginLeft:SIDEBAR_W+"px",flex:1,display:"flex",flexDirection:"column",minHeight:"100vh",transition:SIDEBAR_TRANS }}>
+      <div style={{ marginLeft:SIDEBAR_W+"px",flex:1,display:"flex",flexDirection:"column",height:"100vh",overflow:"hidden",transition:SIDEBAR_TRANS }}>
 
         {/* Top bar */}
         <header style={{ background:T.headerBg,borderBottom:"1px solid "+T.headerBorder,padding:"0 28px",height:"56px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:50,backdropFilter:"blur(12px)" }}>
@@ -9155,9 +9155,9 @@ function Dashboard({ currentUser, onLogout }) {
 
         {/* ── MODULE: AGENDA ── */}
         {activeModule==="agenda" && (
-          <div style={{ display:"flex",flexDirection:"column",flex:1 }}>
+          <div style={{ display:"flex",flexDirection:"column",flex:1,minHeight:0,overflow:"hidden" }}>
             {/* Filtros */}
-            <div style={{ background:T.surface,padding:"10px 28px",display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center",borderBottom:"1px solid "+T.border }}>
+            <div style={{ background:T.surface,padding:"8px 16px",display:"flex",gap:"6px",flexWrap:"wrap",alignItems:"center",borderBottom:"1px solid "+T.border,position:"sticky",top:0,zIndex:10 }}>
               {!isConsultor && (
                 <select value={selectedConsultor||""} onChange={e=>setSelectedConsultor(e.target.value||null)}
                   style={{ padding:"7px 12px",borderRadius:"10px",border:"1px solid "+T.inputBorder,background:T.inputBg,color:T.inputColor,fontSize:"12px",cursor:"pointer",minWidth:"168px",fontFamily:"inherit",fontWeight:500 }}>
@@ -9200,7 +9200,7 @@ function Dashboard({ currentUser, onLogout }) {
             </div>
 
             {/* Content area */}
-            <div style={{ padding:"24px 28px",flex:1 }}>
+            <div style={{ padding:"16px 20px",flex:1,overflow:"auto",minHeight:0 }}>
               {view==="grid" && (
                 selectedConsultor
                   ? consultorViewMode==="semanal"
